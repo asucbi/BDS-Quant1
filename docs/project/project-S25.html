@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>BDS Quant 1 Final Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="project-S25_files/libs/clipboard/clipboard.min.js"></script>
+<script src="project-S25_files/libs/quarto-html/quarto.js"></script>
+<script src="project-S25_files/libs/quarto-html/popper.min.js"></script>
+<script src="project-S25_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="project-S25_files/libs/quarto-html/anchor.min.js"></script>
+<link href="project-S25_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="project-S25_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="project-S25_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="project-S25_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="project-S25_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">BDS Quant 1 Final Project</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/project-image.png" class="img-fluid quarto-figure quarto-figure-center figure-img" data-fig_height="4" data-fig_width="8"></p>
+</figure>
+</div>
+<section id="final-project-overview" class="level1">
+<h1>Final Project Overview</h1>
+<p>In the final project for this course, you will choose a dataset to analyze and produce the following three deliverables:</p>
+<ol type="1">
+<li>Data Analysis Plan</li>
+<li>APA-Style Analysis Report</li>
+<li>Brief (5-minute) Results Presentation</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>See “Course Schedule” in Canvas for all due dates</p>
+</div>
+</div>
+<p>As in BDS 1, the goal of this project is for you to demonstrate proficiency in the techniques we have covered in this class (Quant 1) and apply them to a novel dataset in a meaningful way. While final projects for the two classes are intentionally similar, there are some important differences that reflect your increasing data analytic skills. Please make sure to pay careful attention to the instructions.</p>
+<section id="step-1-find-a-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-find-a-dataset">Step 1: Find a Dataset</h2>
+<p>The dataset should be publicly available and related in some way to Behavioral Science. It should not be a dataset that you have already collected or worked with in your own independent research or that we are using in class (labs, homework, etc). If you would like to continue building on the dataset that you used in BDS 1, you MUST: (a) ensure that the analyses and visualizations are meaningfully different than your BDS 1 submission and (b) check in with me <em>before starting</em> your data analysis plan.</p>
+<p>Your dataset should be large enough that multiple relationships can be explored. One rule of thumb is that the dataset should include at least 50 observations and 10 to 20 variables. However, this is very flexible and I am open to discussing.</p>
+</section>
+<section id="step-2-identify-2-3-specific-novel-research-questions-that-this-data-can-help-you-answer." class="level2">
+<h2 class="anchored" data-anchor-id="step-2-identify-2-3-specific-novel-research-questions-that-this-data-can-help-you-answer.">Step 2: Identify 2-3 specific <em>novel</em> research questions that this data can help you answer.</h2>
+<p>Each of your 2-3 questions must be motivated by theory (i.e., you should be able to tell me <em>why</em> this is an interesting question based on prior research). You should be able to answer each of your questions with a statistical test that was covered in this class.</p>
+<p><strong>IMPORTANT: At least one of your research questions must be about an <em>interaction</em> between two variables.</strong></p>
+</section>
+<section id="step-3-construct-your-data-analysis-plan" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-construct-your-data-analysis-plan">Step 3: Construct your Data Analysis Plan</h2>
+<p>Your data analysis plan should include:</p>
+<ul>
+<li>An introduction to your data (where it comes from, how it was collected, what it represents)</li>
+<li>A clear description of each of the variables that you are using in your analyses, making sure to specify which are independent and dependent variables</li>
+<li>A <code>glimpse()</code>, <code>skim()</code>, or other visualization of your dataset (that you have read into R) to show the dimensions of the dataset and variables you are interested in</li>
+<li>A thorough description of how you will address each research question, including:
+<ul>
+<li>A clear statement of the research question</li>
+<li>Your hypotheses as related to this research question</li>
+<li>The model that you plan to use to test your hypotheses, including any planned comparisons</li>
+<li>A description of any model assumptions that you plan to check and plans for addressing any violations that you find</li>
+<li>A description of any plans for controlling for multiple comparisons</li>
+<li>Predictions for each variable in the model (significance, direction of effects, etc)</li>
+<li>Interpretations of each coefficient in the model, written as if your predictions are correct</li>
+<li>A description of your visualizations for this analysis (can include sketches or figures created with toy data)</li>
+<li>Repeat the sections above for each research question</li>
+</ul></li>
+</ul>
+</section>
+<section id="step-4-carry-out-your-planned-analyses" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-carry-out-your-planned-analyses">Step 4: Carry out your Planned Analyses</h2>
+<p>Treat your Data Analysis Plan as a Preregistration. This means you should not begin working on your analyses until you have submitted and received feedback on your Data Analysis Plan. (Though it would be fine to begin working on other sections of the report, like the introduction and method.)</p>
+<p>Make sure that you are doing all analyses exactly as specified in your data analysis plan. If you would like to add additional analyses, that is fine. However, make sure to mention in your report that these analyses were not previously specified and explain why you want to do them (e.g., to further explore a significant effect that you found). Do not omit any analyses that are specified in your Data Analysis Plan.</p>
+</section>
+<section id="step-5-write-an-apa-style-research-report" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-write-an-apa-style-research-report">Step 5: Write an APA-Style Research Report</h2>
+<p>After carrying your your planned analyses, write up a final report. The final report should be written in the style of a journal article, but with a <strong>brief</strong> introduction, methods, and discussion and a <strong>comprehensive</strong> results section. The report should be written in an RMarkdown Notebook and submitted to Canvas as a PDF.</p>
+<p>Your report should include:</p>
+<ul>
+<li>A 1 paragraph introduction to your project, briefly discussing the theory that motivates your research questions</li>
+<li>A 1 paragraph summary of the methods use to collect the data</li>
+<li>A 1 paragraph summary of your research questions and predictions</li>
+<li>A comprehensive results section (the bulk of your report), which includes:
+<ul>
+<li>Descriptive statistics and visualizations to summarize your variables of interest
+<ul>
+<li>Note that here your goal is to describe the data, you are not reporting analyses until the next step</li>
+</ul></li>
+<li>Results of the models you described in your data analysis plan, including for each model:
+<ul>
+<li>A description of the model that you tested</li>
+<li>Any assumptions that you tested, what you found, how you addressed them</li>
+<li>Results of the statistical analysis, written out in APA Style
+<ul>
+<li>This should include coefficients, <em>p</em>-values, effect sizes, etc.</li>
+</ul></li>
+<li>Interpretations of each coefficient in the model, written based on your actual results</li>
+</ul></li>
+<li>At least one visualization per analysis that showcases your results</li>
+</ul></li>
+<li>A 1 paragraph discussion summarizing what you are taking away from your results
+<ul>
+<li>Here you might also briefly discuss ideas about why your predicted and actual results differ (if they do)</li>
+</ul></li>
+<li>An APA-Style reference section that cites your dataset (at minimum) and any other references that you used (e.g., to motivate your research question)</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are no official requirements about report length as long as each of the above points are adequately addressed. However, I don’t think it would be possible to adequately address each of these points in less than about 4 or 5 pages. I would say 6-8 pages is likely a reasonable length, but don’t get stuck on that!</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before you finalize your presentation and submit it as a PDF, make sure your chunks are turned off with <code>echo = FALSE</code>.</p>
+</div>
+</div>
+</section>
+<section id="step-6-generate-a-brief-research-presentation" class="level2">
+<h2 class="anchored" data-anchor-id="step-6-generate-a-brief-research-presentation">Step 6: Generate a Brief Research Presentation</h2>
+<p>Finally, you will create a 5-minute presentation in which you summarize your Research Report, including the following:</p>
+<ul>
+<li>Introduce your dataset and briefly describe the theory that motivates your research questions (introduction)</li>
+<li>Briefly describe how the data was collected (methods)</li>
+<li>Present your most important analyses and finding (results)
+<ul>
+<li>Most of your time should be spent here. However, you do not need to present <em>all</em> of your analyses.</li>
+<li>Make sure to thoroughly interpret each statistical model that you present.</li>
+<li>Walk through at least one visualization that illustrates your results.</li>
+</ul></li>
+<li>Conclude by briefly summarizing your results and what we can take away from these analyses.</li>
+</ul>
+<p>After each presentation, we will take time for 1-2 questions from your classmates.</p>
+</section>
+<section id="step-7-participate-in-research-presentations" class="level2">
+<h2 class="anchored" data-anchor-id="step-7-participate-in-research-presentations">Step 7: Participate in Research Presentations</h2>
+<p>Research presentations will take place the final week of class (April 29th and May 1st).</p>
+<p>Showing up and attending to your classmates presentations is part of the Research Presentation assignment. Thus, your Research Presentation grade will include a Participation component that requires your attendance at the presentations and participating in the Q&amp;A portion of another student’s presentation at least once (i.e., asking a question).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Additional details about grading will be available soon.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Below is a list of data repositories that might be helpful. You’re not limited to these resources, and in fact you’re encouraged to venture beyond them. But you might find something interesting here:</p>
+<section id="collection-of-data-sets" class="level4">
+<h4 class="anchored" data-anchor-id="collection-of-data-sets">Collection of Data Sets</h4>
+<ul>
+<li><a href="https://guides.library.ucla.edu/psychology/data">UCLA Library Psychology Data Set and Repository Lists</a></li>
+<li><a href="https://openpsychologydata.metajnl.com/articles">Journal of Open Psychology Data</a></li>
+<li><a href="https://nimh-dsst.github.io/OpenCogData/">Niv Lab Open Datasets</a></li>
+<li><a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a></li>
+<li><a href="https://datasetsearch.research.google.com/">Google Dataset Search</a></li>
+<li><a href="https://www.kaggle.com/datasets">Kaggle Datasets</a></li>
+<li><a href="https://dataverse.harvard.edu/">Harvard Dataverse</a></li>
+<li><a href="https://github.com/awesomedata/awesome-public-datasets">Awesome public datasets</a></li>
+</ul>
+</section>
+<section id="examples-of-individual-data-sets" class="level4">
+<h4 class="anchored" data-anchor-id="examples-of-individual-data-sets">Examples of Individual Data Sets</h4>
+<ul>
+<li><a href="https://www.icpsr.umich.edu/web/RCMD/studies/35525">Project STRIDE</a></li>
+<li><a href="https://www.nlsinfo.org/content/getting-started/topics-covered-in-nls-surveys">U.S. Bureau of Labor Statistics National Longitudinal Surveys</a></li>
+<li><a href="https://www.oecd.org/en/about/programmes/piaac/piaac-data.html">Organisation for Economic Co-operation and Development (OECD)</a></li>
+<li><a href="https://chronicdata.cdc.gov/Youth-Risk-Behaviors/DASH-Youth-Risk-Behavior-Surveillance-System-YRBSS/q6p7-56au/about_data">Youth Risk Behavior Surveillance System (YRBSS)</a></li>
+<li><a href="https://data.ub.uni-muenchen.de/244/">Diefenbach, S. &amp; Anders, L. (2021). The Psychology of Likes: Relevance of Feedback on Instagram and Relationship to Self-esteem and Social Status. Psychology of Popular Media</a></li>
+</ul>
+</section>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,137 @@
+---
+title: "BDS Quant 1 Final Project"
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
+![](img/project-image.png){fig-align="center" fig_height=4 fig_width=8}
+
+# Final Project Overview
+
+In the final project for this course, you will choose a dataset to analyze and produce the following three deliverables:
+
+1. Data Analysis Plan
+2. APA-Style Analysis Report
+3. Brief (5-minute) Results Presentation
+
+:::callout-important
+See "Course Schedule" in Canvas for all due dates
+:::
+
+As in BDS 1, the goal of this project is for you to demonstrate proficiency in the techniques we have covered in this class (Quant 1) and apply them to a novel dataset in a meaningful way. While final projects for the two classes are intentionally similar, there are some important differences that reflect your increasing data analytic skills. Please make sure to pay careful attention to the instructions.
+
+## Step 1: Find a Dataset
+
+The dataset should be publicly available and related in some way to Behavioral Science. It should not be a dataset that you have already collected or worked with in your own independent research or that we are using in class (labs, homework, etc). If you would like to continue building on the dataset that you used in BDS 1, you MUST: (a) ensure that the analyses and visualizations are meaningfully different than your BDS 1 submission and (b) check in with me _before starting_ your data analysis plan.
+
+Your dataset should be large enough that multiple relationships can be explored. One rule of thumb is that the dataset should include at least 50 observations and 10 to 20 variables. However, this is very flexible and I am open to discussing.
+
+## Step 2: Identify 2-3 specific *novel* research questions that this data can help you answer.
+
+Each of your 2-3 questions must be motivated by theory (i.e., you should be able to tell me _why_ this is an interesting question based on prior research). You should be able to answer each of your questions with a statistical test that was covered in this class. 
+
+**IMPORTANT: At least one of your research questions must be about an _interaction_ between two variables.** 
+
+## Step 3: Construct your Data Analysis Plan
+
+Your data analysis plan should include:
+
+-   An introduction to your data (where it comes from, how it was collected, what it represents)
+-   A clear description of each of the variables that you are using in your analyses, making sure to specify which are independent and dependent variables
+-   A `glimpse()`, `skim()`, or other visualization of your dataset (that you have read into R) to show the dimensions of the dataset and variables you are interested in
+-   A thorough description of how you will address each research question, including:
+    -   A clear statement of the research question 
+    -   Your hypotheses as related to this research question
+    -   The model that you plan to use to test your hypotheses, including any planned comparisons
+    -   A description of any model assumptions that you plan to check and plans for addressing any violations that you find
+    -   A description of any plans for controlling for multiple comparisons
+    -   Predictions for each variable in the model (significance, direction of effects, etc)
+    -   Interpretations of each coefficient in the model, written as if your predictions are correct
+    -   A description of your visualizations for this analysis (can include sketches or figures created with toy data)
+    -   Repeat the sections above for each research question
+    
+## Step 4: Carry out your Planned Analyses
+
+Treat your Data Analysis Plan as a Preregistration. This means you should not begin working on your analyses until you have submitted and received feedback on your Data Analysis Plan. (Though it would be fine to begin working on other sections of the report, like the introduction and method.)
+
+Make sure that you are doing all analyses exactly as specified in your data analysis plan. If you would like to add additional analyses, that is fine. However, make sure to mention in your report that these analyses were not previously specified and explain why you want to do them (e.g., to further explore a significant effect that you found). Do not omit any analyses that are specified in your Data Analysis Plan.
+    
+## Step 5: Write an APA-Style Research Report
+
+After carrying your your planned analyses, write up a final report. The final report should be written in the style of a journal article, but with a **brief** introduction, methods, and discussion and a **comprehensive** results section. The report should be written in an RMarkdown Notebook and submitted to Canvas as a PDF. 
+
+Your report should include:
+
+-   A 1 paragraph introduction to your project, briefly discussing the theory that motivates your research questions 
+-   A 1 paragraph summary of the methods use to collect the data
+-   A 1 paragraph summary of your research questions and predictions
+-   A comprehensive results section (the bulk of your report), which includes:
+    -   Descriptive statistics and visualizations to summarize your variables of interest 
+        -   Note that here your goal is to describe the data, you are not reporting analyses until the next step
+    -   Results of the models you described in your data analysis plan, including for each model:
+        -   A description of the model that you tested
+        -   Any assumptions that you tested, what you found, how you addressed them
+        -   Results of the statistical analysis, written out in APA Style
+            -   This should include coefficients, _p_-values, effect sizes, etc.
+        -   Interpretations of each coefficient in the model, written based on your actual results
+       -   At least one visualization per analysis that showcases your results
+-   A 1 paragraph discussion summarizing what you are taking away from your results 
+    -   Here you might also briefly discuss ideas about why your predicted and actual results differ (if they do)
+-   An APA-Style reference section that cites your dataset (at minimum) and any other references that you used (e.g., to motivate your research question)
+
+:::callout-note
+There are no official requirements about report length as long as each of the above points are adequately addressed. However, I don't think it would be possible to adequately address each of these points in less than about 4 or 5 pages. I would say 6-8 pages is likely a reasonable length, but don't get stuck on that!
+:::
+
+:::callout-important
+Before you finalize your presentation and submit it as a PDF, make sure your chunks are turned off with `echo = FALSE`. 
+:::
+
+## Step 6: Generate a Brief Research Presentation
+
+Finally, you will create a 5-minute presentation in which you summarize your Research Report, including the following:
+
+-   Introduce your dataset and briefly describe the theory that motivates your research questions (introduction)
+-   Briefly describe how the data was collected (methods)
+-   Present your most important analyses and finding (results)
+    -   Most of your time should be spent here. However, you do not need to present _all_ of your analyses.
+    -   Make sure to thoroughly interpret each statistical model that you present.
+    -   Walk through at least one visualization that illustrates your results.
+-   Conclude by briefly summarizing your results and what we can take away from these analyses.
+
+After each presentation, we will take time for 1-2 questions from your classmates.
+
+## Step 7: Participate in Research Presentations
+
+Research presentations will take place the final week of class (April 29th and May 1st).
+
+Showing up and attending to your classmates presentations is part of the Research Presentation assignment. Thus, your Research Presentation grade will include a Participation component that requires your attendance at the presentations and participating in the Q&A portion of another student's presentation at least once (i.e., asking a question).
+
+:::callout-note
+Additional details about grading will be available soon.
+:::
+
+
+:::callout-tip
+Below is a list of data repositories that might be helpful. You’re not limited to these resources, and in fact you’re encouraged to venture beyond them. But you might find something interesting here:
+
+#### Collection of Data Sets 
+
+- [UCLA Library Psychology Data Set and Repository Lists](https://guides.library.ucla.edu/psychology/data)
+- [Journal of Open Psychology Data](https://openpsychologydata.metajnl.com/articles)
+- [Niv Lab Open Datasets](https://nimh-dsst.github.io/OpenCogData/)
+- [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
+- [Google Dataset Search](https://datasetsearch.research.google.com/)
+- [Kaggle Datasets](https://www.kaggle.com/datasets)
+- [Harvard Dataverse](https://dataverse.harvard.edu/)
+- [Awesome public datasets](https://github.com/awesomedata/awesome-public-datasets)
+
+#### Examples of Individual Data Sets 
+
+- [Project STRIDE](https://www.icpsr.umich.edu/web/RCMD/studies/35525)
+- [U.S. Bureau of Labor Statistics National Longitudinal Surveys](https://www.nlsinfo.org/content/getting-started/topics-covered-in-nls-surveys)
+- [Organisation for Economic Co-operation and Development (OECD)](https://www.oecd.org/en/about/programmes/piaac/piaac-data.html)
+- [Youth Risk Behavior Surveillance System (YRBSS)](https://chronicdata.cdc.gov/Youth-Risk-Behaviors/DASH-Youth-Risk-Behavior-Surveillance-System-YRBSS/q6p7-56au/about_data)
+- [Diefenbach, S. & Anders, L. (2021). The Psychology of Likes: Relevance of Feedback on Instagram and Relationship to Self-esteem and Social Status. Psychology of Popular Media](https://data.ub.uni-muenchen.de/244/)
+:::
