@@ -37,22 +37,28 @@ Each of your 2-3 questions must be motivated by theory (i.e., you should be able
 
 Your data analysis plan should include:
 
--   An introduction to your data (where it comes from, how it was collected, what it represents, how many participants and observations are included)
--   A clear description of each of the variables that you are using in your analyses
--   A `glimpse()`, `skim()`, or other visualization of your dataset (that you have read into R) to show the dimensions of the dataset and variables you are interested in
--   A thorough description of how you will address each research question, including:
-    -   A clear statement of the research question 
-    -   Your hypotheses as related to this research question
-    -   The model that you plan to use to test your hypotheses, including any planned comparisons
-    -   A description of any model assumptions that you plan to check and plans for addressing any violations that you find
+-   **Introduction to Data:** 
+    -   Where the data came from, how it was collected, what it represents, how many participants and observations are included
+    -   A clear description of each of the variables that you are using in your analyses
+    -   A `glimpse()`, `skim()`, or other visualization of your dataset (that you have read into R) to show the dimensions of the dataset and variables you are interested in
+-   **Research Questions and Hypotheses:**
+    -   A clear statement of each research question 
+    -   Your hypotheses for each research question
+-   **Data Modifications:**
+    -   A description of any model assumptions that you plan to check and how you will address any violations that you find
     -   Describe any other transformations that you plan to make to the data (e.g., centering, recoding factors, etc.)
     -   A description of any plans for controlling for multiple comparisons
     -   Any criteria for data exclusion
+-   **Model Specification, Predictions, and Interpretation (for each hypothesis):**
+    -   The model that you plan to use to test your hypothesis
+    -   Any planned comparisons
     -   Predictions for each variable in the model (significance, direction of effects, etc)
     -   Interpretations of each coefficient in the model, written as if your predictions are correct
+-   **Planned Visualizations (for each hypothesis):**
     -   A description of your visualizations for this analysis (can include sketches or figures created with toy data)
-    -   Repeat the sections above for each research question
-    
+
+
+
 ## Step 4: Carry out your Planned Analyses
 
 Treat your Data Analysis Plan as a Preregistration. This means you should not begin working on your analyses until you have submitted and received feedback on your Data Analysis Plan. (Though it would be fine to begin working on other sections of the report, like the introduction and method.)
@@ -61,7 +67,7 @@ Treating your Data Analysis Plan and a Preregistration also means that you shoul
     
 ## Step 5: Write an APA-Style Research Report
 
-After carrying your your planned analyses, write up a final report. The final report should be written in the style of a journal article, but with a **brief** introduction, methods, and discussion and a **comprehensive** results section. The report should be written in an RMarkdown Notebook and submitted to Canvas as a PDF. 
+After carrying your your planned analyses, write up a final report. The final report should be written in the general style of a journal article, but with a **brief** introduction, methods, and discussion and a **comprehensive** results section. The report should be written in an RMarkdown Notebook and submitted to Canvas as a PDF. 
 
 Your report should include:
 
@@ -82,6 +88,8 @@ Your report should include:
     -   Here you might also briefly discuss ideas about why your predicted and actual results differ (if they do)
 -   An APA-Style reference section that cites your dataset (at minimum) and any other references that you used (e.g., to motivate your research question)
 
+Analysis Reports will additionally be graded for "Creativity, Clarity, and Critical Thought." This is assessed based on the following considerations: Is the project carefully thought out? Are limitations carefully considered? Does it appear that time and effort went into the planning and implementation of the project? Is the report well-organized and readable?
+
 :::callout-note
 There are no official requirements about report length as long as each of the above points are adequately addressed. However, I don't think it would be possible to adequately address each of these points in less than about 4 or 5 pages. I would say 6-8 pages is likely a reasonable length, but don't get stuck on that!
 :::
@@ -98,9 +106,12 @@ Finally, you will create a 5-minute presentation in which you summarize your Res
 -   Briefly describe how the data was collected (methods)
 -   Present your most important analyses and finding (results)
     -   Most of your time should be spent here. However, you do not need to present _all_ of your analyses.
-    -   Make sure to thoroughly interpret each statistical model that you present.
+    -   Introduce your research question(s) and hypotheses.
+    -   Thoroughly interpret each statistical model that you present.
     -   Walk through at least one visualization that illustrates your results.
 -   Conclude by briefly summarizing your results and what we can take away from these analyses.
+
+Research Presentations will also additionally be graded for "Creativity, Clarity, and Critical Thought." This is assessed based on the following considerations: Is the presentation carefully thought out? Does it appear that time and effort went into the planning and implementation of the presentation? Is the presentation well-organized? Are the data and visualizations presented in a way that is easy to follow?
 
 After each presentation, we will take time for 1-2 questions from your classmates.
 
@@ -122,6 +133,8 @@ Below is a list of data repositories that might be helpful. You’re not limited
 
 #### Collection of Data Sets 
 
+- The OSF [OSF.io](https://osf.io/) contains many repositories of open data that are part of published papers.
+- Some journals, including [Psychological Science](https://journals.sagepub.com/home/pss), put badges on papers with open data. Look for the blue open-data badge. You will usually find the link to the open-data in the paper.
 - [UCLA Library Psychology Data Set and Repository Lists](https://guides.library.ucla.edu/psychology/data)
 - [Journal of Open Psychology Data](https://openpsychologydata.metajnl.com/articles)
 - [Niv Lab Open Datasets](https://nimh-dsst.github.io/OpenCogData/)
@@ -133,6 +146,7 @@ Below is a list of data repositories that might be helpful. You’re not limited
 
 #### Examples of Individual Data Sets 
 
+- Many of the [ManyBabies](https://manybabies.org/) projects have open datasets. If one of these projects interests you, let me know and I can help you find the data.
 - [Project STRIDE](https://www.icpsr.umich.edu/web/RCMD/studies/35525)
 - [U.S. Bureau of Labor Statistics National Longitudinal Surveys](https://www.nlsinfo.org/content/getting-started/topics-covered-in-nls-surveys)
 - [Organisation for Economic Co-operation and Development (OECD)](https://www.oecd.org/en/about/programmes/piaac/piaac-data.html)

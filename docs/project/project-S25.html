@@ -103,22 +103,34 @@ Important
 <h2 class="anchored" data-anchor-id="step-3-construct-your-data-analysis-plan">Step 3: Construct your Data Analysis Plan</h2>
 <p>Your data analysis plan should include:</p>
 <ul>
-<li>An introduction to your data (where it comes from, how it was collected, what it represents, how many participants and observations are included)</li>
+<li><strong>Introduction to Data:</strong>
+<ul>
+<li>Where the data came from, how it was collected, what it represents, how many participants and observations are included</li>
 <li>A clear description of each of the variables that you are using in your analyses</li>
 <li>A <code>glimpse()</code>, <code>skim()</code>, or other visualization of your dataset (that you have read into R) to show the dimensions of the dataset and variables you are interested in</li>
-<li>A thorough description of how you will address each research question, including:
+</ul></li>
+<li><strong>Research Questions and Hypotheses:</strong>
 <ul>
-<li>A clear statement of the research question</li>
-<li>Your hypotheses as related to this research question</li>
-<li>The model that you plan to use to test your hypotheses, including any planned comparisons</li>
-<li>A description of any model assumptions that you plan to check and plans for addressing any violations that you find</li>
+<li>A clear statement of each research question</li>
+<li>Your hypotheses for each research question</li>
+</ul></li>
+<li><strong>Data Modifications:</strong>
+<ul>
+<li>A description of any model assumptions that you plan to check and how you will address any violations that you find</li>
 <li>Describe any other transformations that you plan to make to the data (e.g., centering, recoding factors, etc.)</li>
 <li>A description of any plans for controlling for multiple comparisons</li>
 <li>Any criteria for data exclusion</li>
+</ul></li>
+<li><strong>Model Specification, Predictions, and Interpretation (for each hypothesis):</strong>
+<ul>
+<li>The model that you plan to use to test your hypothesis</li>
+<li>Any planned comparisons</li>
 <li>Predictions for each variable in the model (significance, direction of effects, etc)</li>
 <li>Interpretations of each coefficient in the model, written as if your predictions are correct</li>
+</ul></li>
+<li><strong>Planned Visualizations (for each hypothesis):</strong>
+<ul>
 <li>A description of your visualizations for this analysis (can include sketches or figures created with toy data)</li>
-<li>Repeat the sections above for each research question</li>
 </ul></li>
 </ul>
 </section>
@@ -129,7 +141,7 @@ Important
 </section>
 <section id="step-5-write-an-apa-style-research-report" class="level2">
 <h2 class="anchored" data-anchor-id="step-5-write-an-apa-style-research-report">Step 5: Write an APA-Style Research Report</h2>
-<p>After carrying your your planned analyses, write up a final report. The final report should be written in the style of a journal article, but with a <strong>brief</strong> introduction, methods, and discussion and a <strong>comprehensive</strong> results section. The report should be written in an RMarkdown Notebook and submitted to Canvas as a PDF.</p>
+<p>After carrying your your planned analyses, write up a final report. The final report should be written in the general style of a journal article, but with a <strong>brief</strong> introduction, methods, and discussion and a <strong>comprehensive</strong> results section. The report should be written in an RMarkdown Notebook and submitted to Canvas as a PDF.</p>
 <p>Your report should include:</p>
 <ul>
 <li>A 1 paragraph introduction to your project, briefly discussing the theory that motivates your research questions</li>
@@ -159,6 +171,7 @@ Important
 </ul></li>
 <li>An APA-Style reference section that cites your dataset (at minimum) and any other references that you used (e.g., to motivate your research question)</li>
 </ul>
+<p>Analysis Reports will additionally be graded for “Creativity, Clarity, and Critical Thought.” This is assessed based on the following considerations: Is the project carefully thought out? Are limitations carefully considered? Does it appear that time and effort went into the planning and implementation of the project? Is the report well-organized and readable?</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -195,11 +208,13 @@ Important
 <li>Present your most important analyses and finding (results)
 <ul>
 <li>Most of your time should be spent here. However, you do not need to present <em>all</em> of your analyses.</li>
-<li>Make sure to thoroughly interpret each statistical model that you present.</li>
+<li>Introduce your research question(s) and hypotheses.</li>
+<li>Thoroughly interpret each statistical model that you present.</li>
 <li>Walk through at least one visualization that illustrates your results.</li>
 </ul></li>
 <li>Conclude by briefly summarizing your results and what we can take away from these analyses.</li>
 </ul>
+<p>Research Presentations will also additionally be graded for “Creativity, Clarity, and Critical Thought.” This is assessed based on the following considerations: Is the presentation carefully thought out? Does it appear that time and effort went into the planning and implementation of the presentation? Is the presentation well-organized? Are the data and visualizations presented in a way that is easy to follow?</p>
 <p>After each presentation, we will take time for 1-2 questions from your classmates.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -233,6 +248,8 @@ Tip
 <section id="collection-of-data-sets" class="level4">
 <h4 class="anchored" data-anchor-id="collection-of-data-sets">Collection of Data Sets</h4>
 <ul>
+<li>The OSF <a href="https://osf.io/">OSF.io</a> contains many repositories of open data that are part of published papers.</li>
+<li>Some journals, including <a href="https://journals.sagepub.com/home/pss">Psychological Science</a>, put badges on papers with open data. Look for the blue open-data badge. You will usually find the link to the open-data in the paper.</li>
 <li><a href="https://guides.library.ucla.edu/psychology/data">UCLA Library Psychology Data Set and Repository Lists</a></li>
 <li><a href="https://openpsychologydata.metajnl.com/articles">Journal of Open Psychology Data</a></li>
 <li><a href="https://nimh-dsst.github.io/OpenCogData/">Niv Lab Open Datasets</a></li>
@@ -246,6 +263,7 @@ Tip
 <section id="examples-of-individual-data-sets" class="level4">
 <h4 class="anchored" data-anchor-id="examples-of-individual-data-sets">Examples of Individual Data Sets</h4>
 <ul>
+<li>Many of the <a href="https://manybabies.org/">ManyBabies</a> projects have open datasets. If one of these projects interests you, let me know and I can help you find the data.</li>
 <li><a href="https://www.icpsr.umich.edu/web/RCMD/studies/35525">Project STRIDE</a></li>
 <li><a href="https://www.nlsinfo.org/content/getting-started/topics-covered-in-nls-surveys">U.S. Bureau of Labor Statistics National Longitudinal Surveys</a></li>
 <li><a href="https://www.oecd.org/en/about/programmes/piaac/piaac-data.html">Organisation for Economic Co-operation and Development (OECD)</a></li>
