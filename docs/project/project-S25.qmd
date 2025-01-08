@@ -16,7 +16,7 @@ In the final project for this course, you will choose a dataset to analyze and p
 3. Brief (5-minute) Results Presentation
 
 :::callout-important
-See "Course Schedule" in Canvas for all due dates
+See "Course Schedule" in Canvas for all due dates. Grading rubrics for each component are also available in the relevant Modules on Canvas.
 :::
 
 Like BDS 1 last semester, the goal of this project is for you to demonstrate proficiency in the techniques we have covered in this class (Quant 1) and apply them to a novel dataset in a meaningful way. While final projects for the two classes are intentionally similar, there are some important differences that reflect your increasing data analytic skills. Please make sure to pay careful attention to the instructions.
@@ -37,15 +37,17 @@ Each of your 2-3 questions must be motivated by theory (i.e., you should be able
 
 Your data analysis plan should include:
 
--   An introduction to your data (where it comes from, how it was collected, what it represents)
--   A clear description of each of the variables that you are using in your analyses, making sure to specify which are independent and dependent variables
+-   An introduction to your data (where it comes from, how it was collected, what it represents, how many participants and observations are included)
+-   A clear description of each of the variables that you are using in your analyses
 -   A `glimpse()`, `skim()`, or other visualization of your dataset (that you have read into R) to show the dimensions of the dataset and variables you are interested in
 -   A thorough description of how you will address each research question, including:
     -   A clear statement of the research question 
     -   Your hypotheses as related to this research question
     -   The model that you plan to use to test your hypotheses, including any planned comparisons
     -   A description of any model assumptions that you plan to check and plans for addressing any violations that you find
+    -   Describe any other transformations that you plan to make to the data (e.g., centering, recoding factors, etc.)
     -   A description of any plans for controlling for multiple comparisons
+    -   Any criteria for data exclusion
     -   Predictions for each variable in the model (significance, direction of effects, etc)
     -   Interpretations of each coefficient in the model, written as if your predictions are correct
     -   A description of your visualizations for this analysis (can include sketches or figures created with toy data)
@@ -55,7 +57,7 @@ Your data analysis plan should include:
 
 Treat your Data Analysis Plan as a Preregistration. This means you should not begin working on your analyses until you have submitted and received feedback on your Data Analysis Plan. (Though it would be fine to begin working on other sections of the report, like the introduction and method.)
 
-Make sure that you are doing all analyses exactly as specified in your data analysis plan. If you would like to add additional analyses, that is fine. However, make sure to mention in your report that these analyses were not previously specified and explain why you want to do them (e.g., to further explore a significant effect that you found). Do not omit any analyses that are specified in your Data Analysis Plan.
+Treating your Data Analysis Plan and a Preregistration also means that you should do all analyses in your data analysis plan, exactly as they are specified in your data analysis plan. If you would like to add additional analyses, that is fine and encouraged. However, make sure to mention in your report that these analyses were not previously specified and explain why you are doing them (e.g., to further explore a significant effect that you found, additional exploratory analyses that you find interesting). However, you should not omit any analyses that are specified in your Data Analysis Plan.
     
 ## Step 5: Write an APA-Style Research Report
 
