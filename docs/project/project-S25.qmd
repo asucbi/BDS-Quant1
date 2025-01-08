@@ -12,7 +12,7 @@ editor:
 In the final project for this course, you will choose a dataset to analyze and produce the following three deliverables:
 
 1. Data Analysis Plan
-2. APA-Style Analysis Report
+2. APA-Style Research Report
 3. Brief (5-minute) Results Presentation
 
 :::callout-important
