@@ -13,7 +13,7 @@ In the final project for this course, you will choose a dataset to analyze and p
 
 1. Data Analysis Plan
 2. APA-Style Research Report
-3. Brief (5-minute) Results Presentation
+3. Brief (5-minute) Research Presentation
 
 :::callout-important
 See "Course Schedule" in Canvas for all due dates. Grading rubrics for each component are also available in the relevant Modules on Canvas.
