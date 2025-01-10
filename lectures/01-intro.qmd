@@ -1,0 +1,513 @@
+---
+title: "PSY515: Module 1 Lecture"
+format: 
+  revealjs:
+    multiplex: true
+    slide-number: true
+    theme: simple
+    touch: true
+editor: visual
+---
+
+# Welcome to Quant 1 <br> (aka Statistical Methods) {.center}
+
+::: notes
+Who am I?
+Who are you?
+:::
+------------------------------------------------------------------------
+
+## Goals of this course
+
+::: incremental
+-   Understand the basic principles that underlie the type of statistical models that are widely used in Cognitive Science
+
+-   Learn how to select, implement, and interpret these statistical models 
+
+-   Communicate the results of statistical analyses (through text and visualization)
+
+-   Incorporate best practices for open and reproducible research
+
+:::
+
+::: notes
+
+Touched on statistics in BDS1 but mostly focused on examining data visually. Now we're going to learn about the statistics that you'll do to better understand your data and when effects are significant versus simply different due to chance.
+
+*   Learn to select the models that are most appropriate to answer the questions that you have about your data
+*   Learn to implement these models in R
+*   And, once you've implemented the models, learn how to interpret each of the resulting parameters of the model
+
+Whether you're in academia or industry, being able to communicate the results of your analyses is an important skill. We'll practice this through text, visualizations, and an oral presentation at the end of the course.
+
+Transparent & Reproducible: Using R, creating a Data Analysis Plan (specify in advance how you'll analyze data), open data
+
+Homeworks, quizzes, and final project are all designed with these goals in mind.
+:::
+
+------------------------------------------------------------------------
+
+## Format
+
+::::::: columns
+:::: {.column width="50%"}
+::: incremental
+-   **Learn**
+    -   Lectures
+    -   Labs
+    -   Readings
+-   **Practice**
+    -   Weekly Quizzes 
+    -   Homework 
+:::
+::::
+
+:::: {.column width="50%"}
+::: incremental
+-   **Demonstrate Mastery**
+    -   Final Project
+-   **Get Support**
+    -   Journal Entries 
+:::
+::::
+:::::::
+
+::: notes
+There will be some overlap between the readings, lectures, and lab. This is because I find that in statistics especially, hearing the same thing multiple times and in multiple different ways and both learning about them and then implementing them in R is helpful for learning.
+
+Quizzes are meant to test and practice what you've learned during lecture and reading. They will be given on Thursdays at the start of lab and will be very short. We will discuss quizzes immediately as a way to summarize what we learned in lecture at the beginning of lab. This means there is no opportunity to make up missed quizzes if you're late or absent. However, I will drop the lowest 2 quiz scores (missed or just lowest scores if you take them all). 
+
+Homeworks are meant to practice everything. This is where you're really going to show me that you're able to implement the analyses, interpret them, and communicate. That's why they're worth the bulk of the points in class. You can work together on homework, but anything you submit must be your own work. You can also ask for my feedback on homework. 
+
+Another way you're going to demonstrate mastery of the things you learned in class is through the final project. There is info on Canvas, and we'll go over it more thoroughly later. As in BDS 1, you will choose a dataset to analyze and it's similar in a lot of ways -- because this is the kind of thing you'll likely have do a lot in academia or industry -- but also tailored to what you will learn in this class. Our project for this class three parts: a data analysis plan where you will specify in advance how you are going to analyze your data; a research report where you motivate, carry out, and interpret these analyses; and a research presentation where you (briefly, 5min) present your findings to your classmates. 
+
+I also want to build in opportunities to get support. So, I am going to ask you to complete weekly "journal entries" where you communicate with me and tell me how things are going, what questions you have, ways that you think I might be able to support the class, or just something random. You just have to write 100 words each week, ideally about something related to class. These are graded only for completeness and you can again miss 2 entries without losing points.
+
+:::
+
+------------------------------------------------------------------------
+
+## My Goals
+
+::: incremental
+-   Prepare you to both understand statistical analyses in the research you read and produce statistical analyses yourselves
+
+-   Create situations in which you can practice these skills that will help you throughout your career
+
+-   Challenge you to learn new things in a supportive environment
+
+-   Work together with you to make this a high-quality learning experience
+
+-   Give everyone an A
+:::
+
+::: notes
+We talked about goals for this course, but my goals in particular:
+
+*   prepare you to be good consumers and producers of statistical analyses
+*   give you opportunities to practice these skills, in ways that will prepare you for your future careers
+*   challenge you to learn new things and understand statistics, but I understand that statistics can be intimidating -- though noone here should feel intimidated, I want you to know that my goal is to support you as you learn -- communication is important!
+*   with that said, we do have a Slack for this course where you can communicate with me and your fellow students -- link in sidebar on Canvas
+*   similarly, while I've taught stats a lot, this is the first time that this particular version of this class has been taught, so I hope we can work together to make it a good experience for you and for future students
+-   ultimately, my goal is to prepare you and support you through this class so that I can give everyone an A at the end 
+
+:::
+
+------------------------------------------------------------------------
+
+# Questions?
+
+::: incremental
+-   Please read the rest of the syllabus on your own.
+:::
+
+::: incremental
+-   For the rest of today:
+
+    -   Descriptive Statistics, Models, and Distributions
+:::
+
+::: notes
+Read the rest of the syllabus and let me know if you have any questions (email, slack, journal entry, beginning/end of next class)
+
+For the rest of today we'll start with our first module: Descriptive Statistics, Models, and Distributions
+
+:::
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)  # for pipes and plots
+library(psych)      # for several useful functions, including describe
+library(here)       # for working directory
+
+world <- read_csv(here("data/world_happiness_2015.csv"))
+```
+
+------------------------------------------------------------------------
+
+## Why do we describe data?
+
+::: incremental
+
+-   Find errors in data entry or collection
+
+-   Understand your data
+    
+-   Explore descriptive research questions
+
+Overall, there's a lot to learn from descriptive statistics.
+:::
+
+::: notes
+Find errors. In my own work, for example, I was analyzing some data for a ManyBabies project and combining a bunch of data from labs around the world. There was a variable in the data that was supposed to code how long infants looked at the screen during a trial. The trial was 20 seconds long, and most of the values for this variable ranged from 0 to 20. However, I noticed that some values were much higher -- closer to 20,000. Why might this have happened?
+
+It turned out that, while we expected labs to report how many seconds infants spent looking, some labs reported this value in milliseconds. We adjusted for that, and all was well, but if we hadn't looked at the data this could have had a huge effect.
+
+Understand your data. What's a typical value for a variable? Are the data biased in some way? In BDS 1 you learned about assumptions for statistical tests - describing your data can help you understand if these assumptions are violated.
+
+But there's a lot of value in just describing things as well. I'm interested in the features of infants' everyday environment that influence learning and how caregivers use multimodal communication (gestures, actions, touch in addition to speech). In one of my papers, I just reported how much of the communication infants encountered was multimodal. No statistical tests, just a number and the variation around that number. And that's useful to know independently of any kind of statistical model.
+
+But, overall, there is a lot to learn from descriptive statistics.
+
+:::
+
+------------------------------------------------------------------------
+
+## Happiness
+
+Examples today are based on data from the [2015 World Happiness Report](https://worldhappiness.report/ed/2015/), which is an annual survey part of the [Gallup World Poll](https://www.gallup.com/178667/gallup-world-poll-work.aspx).
+
+
+------------------------------------------------------------------------
+
+## Distributions
+
+A **distribution** is a description of the \[relative\] number of times a variable X will take each of its unique values.
+
+```{r, fig.height=4}
+hist(world$Happiness, breaks = 30, 
+     main = "Distribution of happiness scores", 
+     xlab = "Happiness")
+```
+
+::: notes
+
+And we're typically not describing one observation. We want to describe a group of observations or a distribution of observations. 
+
+So, here, on the x axis (across the bottom) we have people's ratings of how happy feel. And, on the y axis (on the side) we have the frequency of each rating. So, about 14 people rated their happiness between 5 and 5.2. As an aside, how much data is in that bar (e.g., whether it's between 5 and 5.2 or 5 and 6 or whatever) is going to depend on the number of "breaks" that you set in your code. 
+
+If you sum up the bars, you will get the total number of observations in the dataset. Here that is 136. This is the distribution on happiness ratings in the dataset.
+
+Our goal is statistics is to model or summarize this distribution in a meaningful way.
+:::
+
+------------------------------------------------------------------------
+
+## Thinking of the Mean as a Model
+
+If I know nothing about a participant in this survey, but I had to guess their Happiness rating, what would be the _best_ number to guess?
+
+------------------------------------------------------------------------
+
+## Thinking of the Mean as a Model
+
+If I know nothing about a participant in this survey, but I had to guess their Happiness rating, what would be the _best_ number to guess?
+
+::: {style="font-size: 4em; color: red;"}
+  
+The Mean!
+
+:::
+
+::: notes
+
+So, if our goal in creating a statistical model is to summarize the data in a meaningful way,t then the mean might be the best "model" or summary of the data when you don't have any other information.
+
+:::
+
+------------------------------------------------------------------------
+
+## Mean, $\mu$
+
+::: nonincremental
+-   The **mean** is the average. The population mean is represented by the Greek symbol $\mu$.
+
+-   Example: a set of numbers is: `7, 5, 8, 4, 9, 3`.
+:::
+
+For a vector $x$ with length $N$, the mean $(\mu)$ of $x$ is:
+
+$$\mu = \frac{\Sigma(x_i)}{N}=\frac{7+5+8+4+9+3}{6}=\frac{`r sum(c(7,5,8,4,9,3))`}{6}=`r mean(c(7,5,8,4,9,3))`$$
+
+------------------------------------------------------------------------
+
+## Properties of the mean
+
+Example: a set of numbers is: `7, 5, 8, 4, 9, 3`. The mean of these numbers is 6.
+
+::: incremental
+-   The mean can take a value not found in the dataset.
+
+-   Fulcrum of the data
+
+:::
+
+::: notes
+Mean can take a value not found in the dataset - 6 is the mean, but it's not in the dataset.
+
+:::
+
+------------------------------------------------------------------------
+
+## The mean is the fulcrum of the data
+
+
+![](images/seesaw.png){width="80%}
+
+
+::: notes
+The mean is the fulcrum or the balancing point of the data. For example, you can think of a seesaw like this. If there's more weight on one side, then it gets off balance. So, we're trying to balance on that fulcrum.
+
+Draw a fulcrum on the board, put 6 in the fulcrum and 3,4,5,7,8,9 across the top. Show that distance to the left and distance to the right balances out.
+
+Now, turn the 9 into a 15. The mean becomes 7 (3+4+5+7+8+15). Now 7 is the fulcrum with 3,4,5 to the left and 8,15 to the right. Show distance to right and left. Now there's more needed on the left to balance out the right. 
+
+So, the farther a data point is from the mean, the greater 'weight' it has. It pulls the mean in that direction. Eventually, the further it gets pulled, it's not going to do a great job as that model or summary of the data. Because it's going to get pulled closer to the outlier and away from the bulk of the data.
+:::
+
+------------------------------------------------------------------------
+
+## Properties of the mean
+
+Example: a set of numbers is: `7, 5, 8, 4, 9, 3`. The mean of these numbers is 6.
+
+-   The mean can take a value not found in the dataset.
+
+-   Fulcrum of the data
+
+::: incremental
+-   The mean is strongly influenced by outliers.
+
+-   Deviations from the mean sum to 0
+
+:::
+
+::: notes
+Again, show on the board that deviations sum to zero. 
+:::
+
+------------------------------------------------------------------------
+
+It's important to remember that the mean of a population (or group) may not represent well some (or any) members of the population.
+
+Example: [André-François Raffray](https://www.nytimes.com/1995/12/29/world/a-120-year-lease-on-life-outlasts-apartment-heir.html) and the French apartment
+
+![](images/apartment.jpg){fig-align="center"}
+
+::: notes
+lawyer André-François Raffray in 1965
+
+Agreed to pay Jeanne Calment, who was 90 years old at the time, \$2500 francs (or $500 USD) each month and when she died, he would take possession of the apartment.
+
+He thought he'd only have to pay for a little while because the life expectancy of French women at that time was 74.5. She was well over that. 
+
+Andre was only 45 years old. He thought he'd have to pay for a few years and then get a really good deal on the apartment. 
+
+Jeanne lived another 32 years to become the oldest person on record at 122, outliving Andre by two years. He died at 77. But, by the time he died, had paid more than twice the market value for the apartment.
+
+So what's the lesson here? He put too much faith in the average life expectancy and it wasn't a good model or estimate for 
+:::
+
+------------------------------------------------------------------------
+
+## Other measures of central tendency
+
+::: incremental
+-   The **Mean** only one measure of _central tendency_
+
+-   **Median** -- the middle point of the data
+    -   e.g., in the set of numbers `7, 10, 8, 3, 9, 3, 12`, the median number is 8.
+    -   You can see this if you write them in order: 3   3   7    **8**   9   10    12
+
+-   **Mode** -- the number that most commonly occurs in the distribution.
+    -   e.g., in the set of numbers above, the mode is 3 because it occurs twice.
+
+:::
+
+------------------------------------------------------------------------
+
+## Center and spread
+
+-   Distributions are most often described by their first two moments, mean and **variance**.
+
+-   Typically, these moments are the two used in common inferential techniques.
+
+-   The mean represents the average score in a distribution. A good measure of spread will tell us something about how the typical score deviates from the mean.
+
+-   Why can't we use the average deviation?
+
+------------------------------------------------------------------------
+
+## Average deviation
+
+```{r}
+x = c(7,7,8,3,9,2)
+mean(x)
+
+x - mean(x)
+
+sum(x - mean(x))
+
+sum(x - mean(x))/length(x)
+```
+
+------------------------------------------------------------------------
+
+## Sums of squares
+
+Our solution is to square deviations.
+
+```{r}
+x = c(7,7,8,3,9,2)
+mean(x)
+deviation = x - mean(x)
+deviation^2
+sum(deviation^2)
+```
+
+The sum of squared deviations is referred to as **the Sum of Squares (SS)**.
+
+::: notes
+For those familiar with ANOVA (PSY 612), sums of squares may sound familiar.
+
+As we talk about total variability in a construct, this will be our measure.
+:::
+
+------------------------------------------------------------------------
+
+## Variance
+
+We calculate the average squared deviation: this is our variance, $\sigma^2$:
+
+```{r}
+sum((x - mean(x))^2)/length(x)
+```
+
+------------------------------------------------------------------------
+
+## Variance
+
+### Good things about variance:
+
+-   It's additive.
+    -   Given two variables X and Y, if I create $Z = X + Y$ then $Var(Z) = Var(X) + Var(Y)$
+-   It can be calculated using expected values.
+    -   $\sigma^2 = E(X^2) - (E(X))^2$
+-   Represents all values in a dataset
+
+------------------------------------------------------------------------
+
+## Variance
+
+### Bad things about variance:
+
+-   What the heck does it mean?
+
+------------------------------------------------------------------------
+
+**Standard deviation** $\sigma$ is the square root of the variance.
+
+```{r}
+sqrt(sum(deviation^2)/length(deviation))
+```
+
+------------------------------------------------------------------------
+
+```{r, warning = FALSE, message = FALSE}
+#| code-fold: true
+#| 
+
+# world %>% ggplot(aes(x = Happiness)) + 
+#   geom_histogram(fill = "gray") +
+#   geom_vline(aes(xintercept = mean(Happiness))) +
+#   geom_vline(aes(xintercept = median(Happiness))) + 
+#   geom_label(aes(x = mean(Happiness), y = maxFreq(Happiness)), 
+#              label = "mean") +
+#   geom_label(aes(x = median(Happiness), y = maxFreq(Happiness)*2), 
+#              label = "median") +
+#   labs(y = "Frequency") +
+#   theme_bw()
+```
+
+In a normal distribution, the mean, median, and mode are all relatively equal.
+
+------------------------------------------------------------------------
+
+```{r, warning = FALSE, message = FALSE}
+#| code-fold: true
+#| 
+
+# world %>% ggplot(aes(x = Corruption)) + 
+#   geom_histogram(fill = "gray") +
+#   geom_vline(aes(xintercept = mean(Corruption, na.rm=T))) +
+#   geom_vline(aes(xintercept = median(Corruption, na.rm=T))) + 
+#   geom_label(aes(x = mean(Corruption, na.rm=T), y = maxFreq(Corruption)), label = "mean") +
+#   geom_label(aes(x = median(Corruption, na.rm=T), y = maxFreq(Corruption)*2), label = "median") +
+#   labs(y = "Frequency") +
+#   theme_bw()
+```
+
+In a skewed distribution, both the mean and median get pulled away from the mode. The mean is pulled further.
+
+------------------------------------------------------------------------
+
+## Skew and Kurtosis
+
+Moments 3 and 4 of a distribution are **skew** and **kurtosis**.
+
+::: nonincremental
+-   Skewness = asymmetry
+
+-   Kurtosis = pointyness.
+:::
+
+Most inferential statistics assume distributions are not skewed and are mesokurtic.
+
+::: notes
+-   platykurtic: too flat, negative kurtosis
+-   leptokurtic: too pointy, positive kurtosis
+:::
+
+------------------------------------------------------------------------
+
+```{r, warning = FALSE, message=FALSE}
+#| code-fold: true
+#| 
+world %>% ggplot(aes(x = Corruption)) +
+    geom_histogram(aes(y = ..density..)) +
+    stat_function(fun = dnorm, 
+        args = list(mean = mean(world$Corruption, na.rm = TRUE), 
+                    sd = sd(world$Corruption, na.rm = TRUE)), 
+        colour = 'black', size = 1) +
+    labs(
+      title = "Negative skew",
+      y = NULL)  + 
+  theme_bw()
+
+```
+
+
+
+::: notes
+1.  Mean
+2.  Variance
+3.  Skew
+4.  Kurtosis
+The first two moments (mean and variance) will be central to many inferential procedures (e.g., ANOVA). We will make assumptions about the other two moments (skew and kurtosis) in order to use some statistical procedures.
+:::
+------------------------------------------------------------------------
+
+## Next time...
+
+describing relationships
+
+Before class, please download and install R and RStudio.
