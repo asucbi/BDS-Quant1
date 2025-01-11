@@ -28,6 +28,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="01-intro_files/libs/revealjs/dist/theme/quarto.css">
   <link href="01-intro_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -468,13 +533,28 @@
 
 </section></section>
 <section>
+<section id="when-are-office-hours" class="title-slide slide level1 center">
+<h1>When are office hours?</h1>
+<p>You tell me!</p>
+<p>Factors to consider:</p>
+<div>
+<ul>
+<li class="fragment"><p>Lab sessions (that will prepare you for the homework) are on Thursdays.</p></li>
+<li class="fragment"><p>Homework is due on Tuesdays.</p></li>
+<li class="fragment"><p>It seems like Friday or Monday would be optimal, but I know that folks might not be on campus.</p></li>
+<li class="fragment"><p>I can hold office hours in person and/or virtually on Mondays or virtually (only) on Fridays.</p></li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
 <section id="questions" class="title-slide slide level1 center">
 <h1>Questions?</h1>
-<div>
 <ul>
 <li class="fragment">Please read the rest of the syllabus on your own.</li>
 </ul>
-</div>
 <div>
 <ul>
 <li class="fragment"><p>For the rest of today:</p>
@@ -533,7 +613,15 @@
 <section id="distributions" class="slide level2">
 <h2>Distributions</h2>
 <p>A <strong>distribution</strong> is a description of the [relative] number of times a variable X will take each of its unique values.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">hist</span>(world<span class="sc">$</span>Happiness, <span class="at">breaks =</span> <span class="dv">30</span>, </span>
+<span id="cb1-2"><a href=""></a>     <span class="at">main =</span> <span class="st">"Distribution of happiness scores"</span>, </span>
+<span id="cb1-3"><a href=""></a>     <span class="at">xlab =</span> <span class="st">"Happiness"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 
+</div>
 <img data-src="01-intro_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"><aside class="notes">
 <p>And we’re typically not describing one observation. We want to describe a group of observations or a distribution of observations.</p>
 <p>So, here, on the x axis (across the bottom) we have people’s ratings of how happy feel. And, on the y axis (on the side) we have the frequency of each rating. So, about 14 people rated their happiness between 5 and 5.2. As an aside, how much data is in that bar (e.g., whether it’s between 5 and 5.2 or 5 and 6 or whatever) is going to depend on the number of “breaks” that you set in your code.</p>
@@ -632,10 +720,12 @@
 <section id="properties-of-the-mean-1" class="slide level2">
 <h2>Properties of the mean</h2>
 <p>Example: a set of numbers is: <code>7, 5, 8, 4, 9, 3</code>. The mean of these numbers is 6.</p>
+<div>
 <ul>
 <li><p>The mean can take a value not found in the dataset.</p></li>
 <li><p>Fulcrum of the data</p></li>
 </ul>
+</div>
 <div>
 <ul>
 <li class="fragment"><p>The mean is strongly influenced by outliers.</p></li>
@@ -699,48 +789,57 @@
 </section>
 <section id="center-and-spread" class="slide level2">
 <h2>Center and spread</h2>
+<div>
 <ul>
-<li><p>Distributions are most often described by their first two moments, mean and <strong>variance</strong>.</p></li>
-<li><p>Typically, these moments are the two used in common inferential techniques.</p></li>
-<li><p>The mean represents the average score in a distribution. A good measure of spread will tell us something about how the typical score deviates from the mean.</p></li>
-<li><p>Why can’t we use the average deviation?</p></li>
+<li class="fragment"><p>Distributions are most often described by their mean and <strong>variance</strong>.</p></li>
+<li class="fragment"><p>Typically, these two parameters are used in common inferential techniques.</p></li>
+<li class="fragment"><p>The mean represents the average score in a distribution. A good measure of spread will tell us something about how the typical score deviates from the mean.</p></li>
+<li class="fragment"><p>Why can’t we use the average deviation?</p></li>
 </ul>
-</section>
-<section id="average-deviation" class="slide level2">
-<h2>Average deviation</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 6</code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  1  1  2 -3  3 -4</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
-</div>
-</div>
+<aside class="notes">
+<p>We’ve already talked about center or central tendency. Most commonly, people report the mean. But we also care about the variance of a distribution because it tells us how much a typical score deviates from the mean.</p>
+<p>Draw two distributions on the board, one tight and one wide, label them A and B. Here are two distributions of data, and I want to guess someone’s score. Because I have no other information I’m going to guess that their score is the mean. When am I more likely to be right or get close to their actual score? The tighter distribution, because more of the data is close to the mean – there’s less variance.</p>
+<p>So, to measure spread, it seems like it would make sense to just ask how far each score is from the mean and average those values? Then I could know, on average, how far scores are from the mean. Why doesn’t that work? Because of one of the properties of the mean that we discussed (look at fulcrum drawing) That is, that the deviations from the mean sum to 0, so averaging those deviations we’d get 0 and it doesn’t actually tell us anything about the spread.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="sums-of-squares" class="slide level2">
 <h2>Sums of squares</h2>
 <p>Our solution is to square deviations.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">3</span>)</span>
+<span id="cb2-2"><a href=""></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 6</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>(<span class="at">deviation =</span> x <span class="sc">-</span> <span class="fu">mean</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  1  1  4  9  9 16</code></pre>
+<pre><code>[1]  1 -1  2 -2  3 -3</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>deviation<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 40</code></pre>
+<pre><code>[1] 1 1 4 4 9 9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">sum</span>(deviation<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 28</code></pre>
 </div>
 </div>
 <p>The sum of squared deviations is referred to as <strong>the Sum of Squares (SS)</strong>.</p>
 <aside class="notes">
-<p>For those familiar with ANOVA (PSY 612), sums of squares may sound familiar.</p>
-<p>As we talk about total variability in a construct, this will be our measure.</p>
+<p>Instead of summing the deviations, we take the sum of the <em>squared</em> deviations.</p>
+<p>Walk through code chunks.</p>
+<p>If you’ve taken a stats class before, sums of squares may sound familiar.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -757,65 +856,43 @@
 <h2>Variance</h2>
 <p>We calculate the average squared deviation: this is our variance, <span class="math inline">\(\sigma^2\)</span>:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">sum</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="fu">length</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 6.666667</code></pre>
+<pre><code>[1] 4.666667</code></pre>
 </div>
 </div>
 </section>
-<section id="variance-1" class="slide level2">
-<h2>Variance</h2>
-<h3 id="good-things-about-variance">Good things about variance:</h3>
-<ul>
-<li>It’s additive.
-<ul>
-<li>Given two variables X and Y, if I create <span class="math inline">\(Z = X + Y\)</span> then <span class="math inline">\(Var(Z) = Var(X) + Var(Y)\)</span></li>
-</ul></li>
-<li>It can be calculated using expected values.
-<ul>
-<li><span class="math inline">\(\sigma^2 = E(X^2) - (E(X))^2\)</span></li>
-</ul></li>
-<li>Represents all values in a dataset</li>
-</ul>
-</section>
-<section id="variance-2" class="slide level2">
-<h2>Variance</h2>
-<h3 id="bad-things-about-variance">Bad things about variance:</h3>
-<ul>
-<li>What the heck does it mean?</li>
-</ul>
-</section>
-<section class="slide level2">
-
+<section id="standard-deviation" class="slide level2">
+<h2>Standard Deviation</h2>
 <p><strong>Standard deviation</strong> <span class="math inline">\(\sigma\)</span> is the square root of the variance.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">sqrt</span>(<span class="fu">sum</span>(deviation<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="fu">length</span>(deviation))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.581989</code></pre>
+<pre><code>[1] 2.160247</code></pre>
 </div>
 </div>
-</section>
-<section class="slide level2">
-
-<p>In a normal distribution, the mean, median, and mode are all relatively equal.</p>
-</section>
-<section class="slide level2">
-
-<p>In a skewed distribution, both the mean and median get pulled away from the mode. The mean is pulled further.</p>
-</section>
-<section id="skew-and-kurtosis" class="slide level2">
-<h2>Skew and Kurtosis</h2>
-<p>Moments 3 and 4 of a distribution are <strong>skew</strong> and <strong>kurtosis</strong>.</p>
-<div>
-<ul>
-<li><p>Skewness = asymmetry</p></li>
-<li><p>Kurtosis = pointyness.</p></li>
-</ul>
-</div>
-<p>Most inferential statistics assume distributions are not skewed and are mesokurtic.</p>
+<p>The standard deviation is more interpretable than the variance. It can be thought of as the average distance of scores from the mean.</p>
 <aside class="notes">
-<ul>
-<li>platykurtic: too flat, negative kurtosis</li>
-<li>leptokurtic: too pointy, positive kurtosis</li>
-</ul>
+<p>Go back to distributions I drew on the board. Ask which one has the larger standard deviation (the fatter one!). It has less precision. On average, individual scores are farther away from the mean.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="skew" class="slide level2">
+<h2>Skew</h2>
+<p>Skewness characterizes <strong>symmetry</strong> of a distribution.</p>
+
+<img data-src="images/skewness.png" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
+<p>We can further characterize a distribution based on it’s symmetry or skewness.</p>
+<p>Walk through figure.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -830,14 +907,40 @@
 </section>
 <section class="slide level2">
 
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a>world <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Happiness)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href=""></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb14-3"><a href=""></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(Happiness))) <span class="sc">+</span></span>
+<span id="cb14-4"><a href=""></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fu">median</span>(Happiness))) <span class="sc">+</span></span>
+<span id="cb14-5"><a href=""></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">mean</span>(Happiness), <span class="at">y =</span> <span class="fu">maxFreq</span>(Happiness)),</span>
+<span id="cb14-6"><a href=""></a>             <span class="at">label =</span> <span class="st">"mean"</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href=""></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">median</span>(Happiness), <span class="at">y =</span> <span class="fu">maxFreq</span>(Happiness)<span class="sc">*</span><span class="dv">2</span>),</span>
+<span id="cb14-8"><a href=""></a>             <span class="at">label =</span> <span class="st">"median"</span>) <span class="sc">+</span></span>
+<span id="cb14-9"><a href=""></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb14-10"><a href=""></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 
-<img data-src="01-intro_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"><aside class="notes">
-<ol type="1">
-<li>Mean</li>
-<li>Variance</li>
-<li>Skew</li>
-<li>Kurtosis The first two moments (mean and variance) will be central to many inferential procedures (e.g., ANOVA). We will make assumptions about the other two moments (skew and kurtosis) in order to use some statistical procedures.</li>
-</ol>
+</div>
+<img data-src="01-intro_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"><p>In a normal distribution, the mean, median, and mode are all relatively equal.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a>world <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(Happiness, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-3"><a href=""></a>            <span class="at">median =</span> <span class="fu">median</span>(Happiness, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+   mean median
+  &lt;dbl&gt;  &lt;dbl&gt;
+1  5.43   5.42</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Coming back to our happiness data, if we look at the distribution it looks relatively normal or bell-shaped. Also called gaussian in more technical terms.</p>
+<p>As I mentioned earlier, a perfectly normal distribution, the mean, median, and mode are equal.</p>
+<p>In the happiness data, the mean is 5.43 and median is 5.42.</p>
+<p>It looks like the mode would be off to the left of center a little bit. Why is that? A: This distribution is close to normal, but not perfectly normal.</p>
+<p>Why mode not included here? This data actually has multiple modes. I’m betting something is going on like a bunch of values occur twice. So, you get many modes. I don’t see the mode used really ever in reporting data, probably because of things like this. So you’ll more commonly see the mean and median when data are skewed.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -850,10 +953,94 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="next-time" class="slide level2">
-<h2>Next time…</h2>
-<p>describing relationships</p>
-<p>Before class, please download and install R and RStudio.</p>
+<section class="slide level2">
+
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>world <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Corruption)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href=""></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb17-3"><a href=""></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(Corruption, <span class="at">na.rm=</span>T))) <span class="sc">+</span></span>
+<span id="cb17-4"><a href=""></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fu">median</span>(Corruption, <span class="at">na.rm=</span>T))) <span class="sc">+</span></span>
+<span id="cb17-5"><a href=""></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">mean</span>(Corruption, <span class="at">na.rm=</span>T), <span class="at">y =</span> <span class="fu">maxFreq</span>(Corruption)), <span class="at">label =</span> <span class="st">"mean"</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a href=""></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">median</span>(Corruption, <span class="at">na.rm=</span>T), <span class="at">y =</span> <span class="fu">maxFreq</span>(Corruption)<span class="sc">*</span><span class="dv">2</span>), <span class="at">label =</span> <span class="st">"median"</span>) <span class="sc">+</span></span>
+<span id="cb17-7"><a href=""></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb17-8"><a href=""></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="01-intro_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"><p>In a skewed distribution, both the mean and median get pulled away from the mode. The mean is pulled further.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a>world <span class="sc">%&gt;%</span> </span>
+<span id="cb18-2"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(Corruption, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb18-3"><a href=""></a>            <span class="at">median =</span> <span class="fu">median</span>(Corruption, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+   mean median
+  &lt;dbl&gt;  &lt;dbl&gt;
+1 0.734  0.810</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>If we now look at the corruption variable from that same dataset (they were asked to rate something about corruption in their government). You see that this variable is negatively skewed (or left skewed).</p>
+<p>And what happens is that the mean gets pulled in the direction of the skew and away from the bulk of the data. But you can see that the median is not as effected.</p>
+<p>If I know nothing else about a person, what is my best guess at their corruption rating? The median because it falls within the bulk of the data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="kurtosis" class="slide level2">
+<h2>Kurtosis</h2>
+<p>Kurtosis characterizes <strong>tail-heaviness</strong> of a distribution.</p>
+
+<img data-src="images/kurtosis.png" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
+<p>We can also characterize a distribution based on it’s kurtosis. Kurtosis is really about how “heavy” the tails of a distribution are and the likelihood of outliers.</p>
+<p>You’ll sometimes hear it described as peakedness, but that’s a little misleading in that the thing that really matters is the heaviness of the tails (i.e., extreme values).</p>
+<ul>
+<li>platykurtic: too flat, more data than you’d expect in the tails, negative kurtosis</li>
+<li>leptokurtic: too pointy, less data than you’d expect in the tails, positive kurtosis</li>
+<li>the normal distribution is mesokurtic, so not too pointy or too flat.</li>
+</ul>
+<p>Most inferential statistics assume distributions are not skewed and are mesokurtic (i.e., not too pointy or too flat).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="next-time-the-normal-distribution" class="slide level2">
+<h2>Next Time: The Normal Distribution</h2>
+
+<img data-src="images/not_normal.png" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
+<p>What we assume in most statistical tests is that we have a normal distribution. The normal distribution has some convenient properties - that we’ll cover next time - that make it very useful for statistics. We’ll also talk about why it might be safe to assume, in many situations, that you have a normal distribution.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
