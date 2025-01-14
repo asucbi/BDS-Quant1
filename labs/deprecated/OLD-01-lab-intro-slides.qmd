@@ -1,0 +1,373 @@
+---
+title: "PSY515: Module 1 Lab Slides"
+format: 
+  revealjs:
+    multiplex: true
+    slide-number: true
+    incremental: true
+    theme: simple
+    touch: true
+    code-overflow: wrap
+execute:
+  echo: true
+editor: visual
+---
+
+## Module 1 Quiz!
+
+Q1: What is **one** reason that we describe our data? 
+
+::: notes
+find errors in data entry or collection
+understand the data
+explore descriptive research questions
+:::
+
+------------------------------------------------------------------------
+
+## Module 1 Quiz!
+
+Q2: Distributions are most often described by their...
+
+* A. mean and median
+* B. variance and standard deviation
+* C. mean and variance
+* D. median and standard deviation
+
+Assume that the distribution we are describing is _not_ skewed.
+
+::: notes
+we want to describe the center and spread
+mean and variance, these are used in most statistical tests
+:::
+
+------------------------------------------------------------------------
+
+## Module 1 Quiz!
+
+Q3: I want to calculate a measure of spread in my distribution, so I calculate each score's deviation from the mean (i.e., x - mean) and then I add those scores together. What do I get?
+
+* A. The variance
+* B. The standard deviation
+* C. The range
+* D. Zero
+
+::: notes
+deviations from the mean sum to zero, this is why we use the sum of squared deviations
+:::
+
+------------------------------------------------------------------------
+
+## Module 1 Quiz!
+
+Q4: What happens to the mean in a skewed distribution?
+
+::: notes
+gets pulled toward the tail
+so, what might we prefer to use? A: median becuase it represents the bulk of the data
+:::
+
+------------------------------------------------------------------------
+
+## Module 1 Quiz!
+
+Q5: Which statistics classes or trainings have you taken in the past?
+
+::: notes
+free question!
+:::
+
+------------------------------------------------------------------------
+
+## The Normal Distribution
+
+![](images/not_normal.png){fig-align="center"}
+
+```{r, warning=FALSE, message=FALSE, results='hide', echo=FALSE}
+library(tidyverse)
+library(ggpubr)
+# make it pretty
+colors = RColorBrewer::brewer.pal(4, "Set2")
+```
+:::notes
+When we ended last time I mentioned taht we assume in most statistical tests is that we have a normal distribution. The normal distribution has some convenient properties that make it very useful for statistics. So, we'll briefly discuss those, adn why it might be safe to assume, in many situations, that you have a normal distribution. We'll also go through some R code to prepare you for your homework.
+:::
+
+------------------------------------------------------------------------
+
+## Characteristics of the normal distribution
+
+::: incremental
+-   The mean and standard deviation are independent.
+
+-   The distribution is unimodal and symmetric.
+
+-   The area of under the curve between corresponding locations, in standard deviation units, is the same regardless of $\mu$ and $\sigma$.
+
+    -   For example, in a normal distribution, approximately 68% of the area under the curve falls between 1 $\sigma$ below the mean and 1 $\sigma$ above mean—for every normal curve (regardless of the value of the mean and standard deviation).
+:::
+
+::: notes
+What is a normal distribution? [draw on board]
+
+Mean and standard deviation are independent. Changing the mean does not change the standard deviation and vice versa.
+
+Example: - A city with a longer average commute time (higher mean) might also have a greater variability in commute times (higher standard deviation) due to factors like traffic congestion, longer distances, and more diverse transportation options. - A city with shorter average commute times might have more consistent commute times (lower standard deviation) due to shorter distances and less traffic.
+
+Has one mode/peak in the center and the data are symmetric around that peak (same amount on either side)
+
+And area under the curve is the same in standard deviation units. We're going to dig into this a little bit more in a second.
+:::
+
+------------------------------------------------------------------------
+
+```{r}
+#| code-fold: true
+#| 
+ggplot(data.frame(x = seq(-4, 4)), aes(x)) +
+  stat_function(fun = function(x) dnorm(x, mean = 0, sd = 2)) +
+  stat_function(fun = function(x) dnorm(x, mean = 2, sd = .2), color = "blue") +
+  stat_function(fun = function(x) dnorm(x, mean = -1.25, sd = 1), color = "red") +
+  scale_x_continuous("Variable X") +
+  scale_y_continuous("Density") +
+  ggtitle("Normal Curves")
+```
+
+::: notes
+These are all normal distributions.
+
+They have different means, they have different standard deviations. But they are all unimodal and symmetrical, and about 68% of their data is within one standard deviation of the mean. So, they meet the requirements for a normal distribution.
+:::
+
+------------------------------------------------------------------------
+
+All of these distributions are normal and have an equivalent area (proportion) that falls between a standard deviation below and above their respective means.
+
+```{r, fig.width=13, fig.height = 5}
+#| code-fold: true
+p1 = ggplot(data.frame(x = seq(-4, 4)), aes(x)) +
+stat_function(fun = function(x) dnorm(x, mean = 0, sd = 2) , 
+                xlim = c(0-2, 0+2),
+                geom = "area", fill = colors[1]) +
+  stat_function(fun = function(x) dnorm(x, mean = 0, sd = 2)) +
+  geom_hline(aes(yintercept = 0)) +
+  annotate("text", x = -1.5, y = 0.75, label = "Mean = 0") +
+  annotate("text", x = -1.5, y = 0.65, label = "SD = 2") +
+  scale_x_continuous("Variable X") +
+  scale_y_continuous("Density", limits = c(0,2))+
+  ggtitle("Area under the normal curve") +
+  theme(text = element_text(size = 25), 
+        plot.title = element_text(size = 18))
+
+p2 = ggplot(data.frame(x = seq(-4, 4)), aes(x)) +
+stat_function(fun = function(x) dnorm(x, mean = 2, sd = .2) , 
+                xlim = c(2-.2, 2+.2),
+                geom = "area", fill = colors[1]) +
+  stat_function(fun = function(x) dnorm(x, mean = 2, sd = .2)) +
+  geom_hline(aes(yintercept = 0)) +
+  annotate("text", x = -1.5, y = 0.75, label = "Mean = 2") +
+  annotate("text", x = -1.5, y = 0.65, label = "SD = 0.2") +
+  scale_x_continuous("Variable X") +
+  scale_y_continuous("Density", limits = c(0,2))+
+  ggtitle("Area under the normal curve")+
+  theme(text = element_text(size = 25), 
+        plot.title = element_text(size = 18))
+
+p3 = ggplot(data.frame(x = seq(-4, 4)), aes(x)) +
+stat_function(fun = function(x) dnorm(x, mean = -1.25, sd = 1) , 
+                xlim = c(-1.25-1, -1.25+1),
+                geom = "area", fill = colors[1]) +
+  stat_function(fun = function(x) dnorm(x, mean = -1.25, sd = 1)) +
+  geom_hline(aes(yintercept = 0)) +
+  annotate("text", x = -1.5, y = 0.75, label = "Mean = -1.25") +
+  annotate("text", x = -1.5, y = 0.65, label = "SD = 1") +
+  scale_x_continuous("Variable X") +
+  scale_y_continuous("Density", limits = c(0,2))+
+  ggtitle("Area under the normal curve")+
+  theme(text = element_text(size = 25), 
+        plot.title = element_text(size = 18))
+
+ggarrange(p1, p2, p3, ncol = 3)
+```
+
+::: notes
+These are the same three plots, now spread out so you can see them more easily.
+
+So, regarless of the mean and the standard deviation, approximately 68% of the data falls within one standard deviation of the mean.
+
+For this plot on the left this means that, the mean is 0 and sd is 2, so 68% of the data falls between 0-2 or -2 and 0+2 or 2.
+
+In this middle plot, the mean is 2 and the standard deviation is 0.2. This means that 68% of the data falls between what two numbers? \[1.8 and 2.2\]
+
+In the plot on the right, the mean is -1.25 and the standard deviation is 1. So, 68% of the data falls between what two numbers? \[-2.25 and 0.25\]
+
+Different means, different standard deviations, but the same amount of data between the -1SD and +1SD
+:::
+
+------------------------------------------------------------------------
+
+# The Empirical Rule
+
+In a normal distribution:
+
+::: incremental
+-   Approximately 68% of the data falls within **one** standard deviation of the mean.
+-   Approximately 95% of the data falls within **two** standard deviations of the mean.
+-   Approximately 99.7% of the data falls within **three** standard deviations of the mean.
+:::
+
+------------------------------------------------------------------------
+
+# The Empirical Rule
+
+![](images/empirical_rule.png){fig-align="center"}
+::: notes
+Here's an illustration of the empirical rule. 
+
+68% - purple
+green plus purple sums to 95% 
+and all colors together sum to 99.7%
+You also see here that the distribution is symmetrical, which means that half of the data fall on either side of the mean. 
+
+The reason that this is convenient is because if I have a normal distribution, I can look at how many standard deviations a given score is from the mean, and I can say whether it's rare or common given the distribution. 
+:::
+
+------------------------------------------------------------------------
+
+# The Standard Normal Distribution
+
+
+[The normal distribution with $\mu$=0 and $\sigma$=1 is called standard normal.]{style="font-size:35px;"}
+
+[Variables with quite different means and standard deviations can be standardized so that they can be compared in the same metric (standard deviation units). This allows statements such as "relative to the mean, I am more conscientious (e.g., 2SD from the mean or $Z=2$) than I am extraverted (e.g., 1SD from the mean or $Z=1$)."]{style="font-size:35px;"}
+
+[I could not say, however, that I am twice as conscientious as I am extraverted.]{style="font-size:35px;"}
+
+::: notes
+But there is one "special" case of the normal distribution called the standard normal distribution.
+
+This is important because it allows us to compare distributions and variables with different means and standard deviations. 
+
+I could not say... Q: Why? A: Because 1SD doesn't equate to the same thing. I can't say I'm twice as heavy as I am tall.
+
+So, you might see these "Zs" above, and that should sound familiar from previous classes. These are z-scores. 
+
+:::
+
+
+------------------------------------------------------------------------
+
+# A Quick Refresher: Z-Scores
+
+A Z-Score is a numerical measurement that describes a value's relationship to the mean of a group of values and is measured in terms of standard deviation units.
+
+The formula used to calculate a z-score is: $z = \frac{x - \mu}{\sigma}$
+
+::: notes
+So, going back to our earlier normal distributions. Let's take the one with a mean of 0 and sd of 2. [draw on board] I want to know the z-score that corresponds to an x value of 3. How would I get that? (3-0)/2 = 1.5
+
+Let's do the same for the middle distribution that had a mean of 2 and a standard deviation of 0.2. What's the z-score the corresponds to an x value of 3? (3-2)/0.2 = 5
+
+That distribution is very tight, so a score of 3 is far from the mean.
+:::
+
+------------------------------------------------------------------------
+
+# How is this all useful?
+
+-   Given any score, we can calculate the probability of getting a value greater than that *z*-score. *(Or less than that z*-score.)
+
+-   How likely is it that we would find a score this extreme (or more extreme) in this distribution?
+
+::: notes
+
+There are other things you can calculate too, like the likelihood of getting a score between to values, but this is the property we'll focus on today.
+
+What does this sound like -- given this distribution, how likely is it to get a score this extreme or greater? This is the p-value!
+
+If your score is very unlikely given the distribution, then your p-value will be low. 
+
+:::
+
+------------------------------------------------------------------------
+
+### Example
+
+What's the probability of getting a *z*-score of 1 or greater?
+
+![](images/normal_distribution.jpg){fig-align="center"}
+::: notes
+
+We would sum up the percentages greater than 1, to get 13.6+2.1+0.01 = 15.71%
+Only about 16% of the data is greater than 1 SD from the mean.
+So, this would be a p-value of .16
+:::
+
+------------------------------------------------------------------------
+
+### Example
+
+What's the probability of getting a *z*-score of 3 or greater?
+
+![](images/normal_distribution.jpg){fig-align="center"}
+
+::: notes
+
+Now, only one percent of the data are greater than a p-value of 3.
+So, this is a pretty rare score corresponding to a p-value of .001.
+That score is pretty unlikely given the distribution.
+
+:::
+
+------------------------------------------------------------------------
+
+
+| All continuous distributions can be standardized, but if they are not normal to begin with, standardization will not make them so. *Standardization does not alter distribution shape.* |
+| \[PLUS, OUR SAMPLES SOMETIMES AREN'T NORMALLY DISTRIBUTED -- FORTUANTELY, WE DON'T ACTUALLY CARE ABOUT THE SAMPLES!\] |
+| So, how can we implement these useful properties of the normal distribution? |
+
+------------------------------------------------------------------------
+
+### Sampling distributions are normal
+
+One of the most important discoveries in statistics is that the sampling distributions of many statistics are approximately normal even when the sample (and population) distributions are not.
+
+The **sampling distribution** of a statistic is the probability distribution that specifies probabilities for the possible values that the statistic can take.
+
+-   For example, the mean of a random sample will not precisely equal the population mean. But, how far off will it be? And what distribution shape will these possible sample mean values have?
+
+The error represented by how far off a sample mean is from the population mean is called **sampling error**.
+
+MAYBE ADD STANDARD ERROR HERE?
+
+::: notes
+DRAW SAMPLING DISTRIBUTION
+
+Show mean, show how more likely close to values of mean draw bar to represent sampling error
+:::
+
+------------------------------------------------------------------------
+
+### Central limit theorem
+
+According to the **central limit theorem**, as sample size increases, the sampling distribution of the mean approaches normality, even when the data upon which the mean is based are not normally distributed.
+
+The sample size necessary to be "approximately normal" depends on the nature of the underlying data. The less normal it is, the larger the sample size necessary in order for the sampling distribution of the means to become normal.
+
+"Around sample size of 30" is a common rule of thumb.
+
+[- Note, however, that this rule of thumb is sufficiently only to assume that the sampling distribution is normal. This makes no assumptions about statistical power.]{style="font-size:30px;"}
+
+::: notes
+Regardless of the CLT, if the data are skewed, we might wonder if the mean is the best estimator to use here.
+
+LAB: QUICK REVIEW / DEMO OF CLT AND THEN, IN HOMEWORK, CALCULATE Z-SCORES, QUIZ 1 QUESTION, PROBABILITY OF A SCORE AT LEAST THIS EXTREME, CENTRAL LIMIT THEOREM WITH A FEW DIFFERENT SAMPLE SIZES AND A FEW DIFFERENT DISTRIBUTIONS AND ASK WHAT THIS DEMONSTRATES
+:::
+
+------------------------------------------------------------------------
+
+## Next Week!
+
+Don't forget to complete Journal 1 and submit your homework by 12pm on Tuesday (January 21st)!
+
+------------------------------------------------------------------------

@@ -529,12 +529,8 @@
           display:block!important;
       }</style></aside>
 </section>
-<section class="slide level2">
-
-</section></section>
-<section>
-<section id="when-are-office-hours" class="title-slide slide level1 center">
-<h1>When are office hours?</h1>
+<section id="when-are-office-hours" class="slide level2">
+<h2>When are office hours?</h2>
 <p>You tell me!</p>
 <p>Factors to consider:</p>
 <div>
@@ -543,6 +539,16 @@
 <li class="fragment"><p>Homework is due on Tuesdays.</p></li>
 <li class="fragment"><p>It seems like Friday or Monday would be optimal, but I know that folks might not be on campus.</p></li>
 <li class="fragment"><p>I can hold office hours in person and/or virtually on Mondays or virtually (only) on Fridays.</p></li>
+</ul>
+</div>
+</section>
+<section id="a-quick-note-about-ai" class="slide level2">
+<h2>A Quick Note about AI</h2>
+<div>
+<ul>
+<li class="fragment"><p>The use of AI is <strong>not permitted</strong> in this course.</p></li>
+<li class="fragment"><p>Why?</p></li>
+<li class="fragment"><p>I would like you to develop a deep understanding of how to run and interpret statistical analyses. Using AI to automate coding and interpretation will not help you learn and understand these concepts. It would be a disservice to you.</p></li>
 </ul>
 </div>
 </section>
@@ -585,8 +591,8 @@
 <li class="fragment"><p>Find errors in data entry or collection</p></li>
 <li class="fragment"><p>Understand your data</p></li>
 <li class="fragment"><p>Explore descriptive research questions</p></li>
+<li class="fragment"><p>Overall, there’s a lot to learn from descriptive statistics.</p></li>
 </ul>
-<p>Overall, there’s a lot to learn from descriptive statistics.</p>
 </div>
 <aside class="notes">
 <p>Find errors. In my own work, for example, I was analyzing some data for a ManyBabies project and combining a bunch of data from labs around the world. There was a variable in the data that was supposed to code how long infants looked at the screen during a trial. The trial was 20 seconds long, and most of the values for this variable ranged from 0 to 20. However, I noticed that some values were much higher – closer to 20,000. Why might this have happened?</p>
@@ -606,10 +612,6 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="happiness" class="slide level2">
-<h2>Happiness</h2>
-<p>Examples today are based on data from the <a href="https://worldhappiness.report/ed/2015/">2015 World Happiness Report</a>, which is an annual survey part of the <a href="https://www.gallup.com/178667/gallup-world-poll-work.aspx">Gallup World Poll</a>.</p>
-</section>
 <section id="distributions" class="slide level2">
 <h2>Distributions</h2>
 <p>A <strong>distribution</strong> is a description of the [relative] number of times a variable X will take each of its unique values.</p>
@@ -623,8 +625,9 @@
 
 </div>
 <img data-src="01-intro_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"><aside class="notes">
-<p>And we’re typically not describing one observation. We want to describe a group of observations or a distribution of observations.</p>
-<p>So, here, on the x axis (across the bottom) we have people’s ratings of how happy feel. And, on the y axis (on the side) we have the frequency of each rating. So, about 14 people rated their happiness between 5 and 5.2. As an aside, how much data is in that bar (e.g., whether it’s between 5 and 5.2 or 5 and 6 or whatever) is going to depend on the number of “breaks” that you set in your code.</p>
+<p>When we’re describing at data typically not describing one observation – my score or your score. We want to describe a group of observations or a distribution of observations. So, we want some way of summarizing across a datset.</p>
+<p>For example, these data were taken from the 2015 world happiness report. This is an annual survey collected as part of the gallup world poll.</p>
+<p>Here, on the x axis (across the bottom) we have people’s ratings of how happy feel. And, on the y axis (on the side) we have the frequency of each rating. So, about 14 people rated their happiness between 5 and 5.2. As an aside, how much data is in that bar (e.g., whether it’s between 5 and 5.2 or 5 and 6 or whatever) is going to depend on the number of “breaks” that you set in your code.</p>
 <p>If you sum up the bars, you will get the total number of observations in the dataset. Here that is 136. This is the distribution on happiness ratings in the dataset.</p>
 <p>Our goal is statistics is to model or summarize this distribution in a meaningful way.</p>
 <style type="text/css">
@@ -639,18 +642,16 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="thinking-of-the-mean-as-a-model" class="slide level2">
-<h2>Thinking of the Mean as a Model</h2>
-<p>If I know nothing about a participant in this survey, but I had to guess their Happiness rating, what would be the <em>best</em> number to guess?</p>
+<section id="question" class="slide level2">
+<h2>Question:</h2>
+<p>If I know nothing about someone, for example a participant in the survey, but I had to guess their Happiness rating, what would be the <em>best</em> number to guess?</p>
 </section>
-<section id="thinking-of-the-mean-as-a-model-1" class="slide level2">
-<h2>Thinking of the Mean as a Model</h2>
-<p>If I know nothing about a participant in this survey, but I had to guess their Happiness rating, what would be the <em>best</em> number to guess?</p>
-<div style="font-size: 4em; color: red;">
-<p>The Mean!</p>
-</div>
+<section id="the-mean" class="slide level2">
+<h2>The Mean!</h2>
+<p>If I don’t have any other information, then the best “model” of my dataset would be the mean or average observation.</p>
 <aside class="notes">
-<p>So, if our goal in creating a statistical model is to summarize the data in a meaningful way,t then the mean might be the best “model” or summary of the data when you don’t have any other information.</p>
+<p>If I don’t have any other information, then the best “model” of my dataset might be the mean or average observation.</p>
+<p>And, if our goal in creating a statistical model is to summarize the data in a meaningful way, then the mean might be the best “model” or summary of the data when you don’t have any other information.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -893,98 +894,9 @@
 <img data-src="images/skewness.png" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
 <p>We can further characterize a distribution based on it’s symmetry or skewness.</p>
 <p>Walk through figure.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section class="slide level2">
-
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a>world <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Happiness)) <span class="sc">+</span></span>
-<span id="cb14-2"><a href=""></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
-<span id="cb14-3"><a href=""></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(Happiness))) <span class="sc">+</span></span>
-<span id="cb14-4"><a href=""></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fu">median</span>(Happiness))) <span class="sc">+</span></span>
-<span id="cb14-5"><a href=""></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">mean</span>(Happiness), <span class="at">y =</span> <span class="fu">maxFreq</span>(Happiness)),</span>
-<span id="cb14-6"><a href=""></a>             <span class="at">label =</span> <span class="st">"mean"</span>) <span class="sc">+</span></span>
-<span id="cb14-7"><a href=""></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">median</span>(Happiness), <span class="at">y =</span> <span class="fu">maxFreq</span>(Happiness)<span class="sc">*</span><span class="dv">2</span>),</span>
-<span id="cb14-8"><a href=""></a>             <span class="at">label =</span> <span class="st">"median"</span>) <span class="sc">+</span></span>
-<span id="cb14-9"><a href=""></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
-<span id="cb14-10"><a href=""></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-
-</div>
-<img data-src="01-intro_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"><p>In a normal distribution, the mean, median, and mode are all relatively equal.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a>world <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(Happiness, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb15-3"><a href=""></a>            <span class="at">median =</span> <span class="fu">median</span>(Happiness, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 2
-   mean median
-  &lt;dbl&gt;  &lt;dbl&gt;
-1  5.43   5.42</code></pre>
-</div>
-</div>
-<aside class="notes">
-<p>Coming back to our happiness data, if we look at the distribution it looks relatively normal or bell-shaped. Also called gaussian in more technical terms.</p>
-<p>As I mentioned earlier, a perfectly normal distribution, the mean, median, and mode are equal.</p>
-<p>In the happiness data, the mean is 5.43 and median is 5.42.</p>
-<p>It looks like the mode would be off to the left of center a little bit. Why is that? A: This distribution is close to normal, but not perfectly normal.</p>
-<p>Why mode not included here? This data actually has multiple modes. I’m betting something is going on like a bunch of values occur twice. So, you get many modes. I don’t see the mode used really ever in reporting data, probably because of things like this. So you’ll more commonly see the mean and median when data are skewed.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section class="slide level2">
-
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>world <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Corruption)) <span class="sc">+</span></span>
-<span id="cb17-2"><a href=""></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
-<span id="cb17-3"><a href=""></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(Corruption, <span class="at">na.rm=</span>T))) <span class="sc">+</span></span>
-<span id="cb17-4"><a href=""></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fu">median</span>(Corruption, <span class="at">na.rm=</span>T))) <span class="sc">+</span></span>
-<span id="cb17-5"><a href=""></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">mean</span>(Corruption, <span class="at">na.rm=</span>T), <span class="at">y =</span> <span class="fu">maxFreq</span>(Corruption)), <span class="at">label =</span> <span class="st">"mean"</span>) <span class="sc">+</span></span>
-<span id="cb17-6"><a href=""></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">median</span>(Corruption, <span class="at">na.rm=</span>T), <span class="at">y =</span> <span class="fu">maxFreq</span>(Corruption)<span class="sc">*</span><span class="dv">2</span>), <span class="at">label =</span> <span class="st">"median"</span>) <span class="sc">+</span></span>
-<span id="cb17-7"><a href=""></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
-<span id="cb17-8"><a href=""></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-
-</div>
-<img data-src="01-intro_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"><p>In a skewed distribution, both the mean and median get pulled away from the mode. The mean is pulled further.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a>world <span class="sc">%&gt;%</span> </span>
-<span id="cb18-2"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(Corruption, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb18-3"><a href=""></a>            <span class="at">median =</span> <span class="fu">median</span>(Corruption, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 2
-   mean median
-  &lt;dbl&gt;  &lt;dbl&gt;
-1 0.734  0.810</code></pre>
-</div>
-</div>
-<aside class="notes">
-<p>If we now look at the corruption variable from that same dataset (they were asked to rate something about corruption in their government). You see that this variable is negatively skewed (or left skewed).</p>
-<p>And what happens is that the mean gets pulled in the direction of the skew and away from the bulk of the data. But you can see that the median is not as effected.</p>
-<p>If I know nothing else about a person, what is my best guess at their corruption rating? The median because it falls within the bulk of the data.</p>
+<p>In a normal distribution, the mean, median, and mode are all relatively equal.</p>
+<p>In a skewed distribution, both the mean and median get pulled away from the mode. The mean is pulled further.</p>
+<p>So, if I know nothing else about a person, and the data is skewed what might be a better guess at their score? The median or mode because it falls within the bulk of the data. Often people report the median when data are skewed.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1022,11 +934,12 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="next-time-the-normal-distribution" class="slide level2">
-<h2>Next Time: The Normal Distribution</h2>
+<section id="the-normal-distribution" class="slide level2">
+<h2>The Normal Distribution</h2>
 
-<img data-src="images/not_normal.png" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
-<p>What we assume in most statistical tests is that we have a normal distribution. The normal distribution has some convenient properties - that we’ll cover next time - that make it very useful for statistics. We’ll also talk about why it might be safe to assume, in many situations, that you have a normal distribution.</p>
+<img data-src="images/paranormal-distribution.jpg" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
+<p>In most statistical tests we assume that we have a normal distribution. A lot of assumptions that we test for, like you did in BDS1, check for normality of the distribution.</p>
+<p>The reason we do this is because the normal distribution has some convenient properties that make it very useful for statistics.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1038,6 +951,191 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="characteristics-of-the-normal-distribution" class="slide level2">
+<h2>Characteristics of the normal distribution</h2>
+<div>
+<ul>
+<li class="fragment"><p>The mean and standard deviation are independent.</p></li>
+<li class="fragment"><p>The distribution is unimodal and symmetric.</p></li>
+<li class="fragment"><p>The area of under the curve between corresponding locations, in standard deviation units, is the same regardless of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>.</p>
+<ul>
+<li class="fragment">For example, in a normal distribution, approximately 68% of the area under the curve falls between 1 <span class="math inline">\(\sigma\)</span> below the mean and 1 <span class="math inline">\(\sigma\)</span> above mean—for every normal curve (regardless of the value of the mean and standard deviation).</li>
+</ul></li>
+</ul>
+</div>
+<aside class="notes">
+<p>What is a normal distribution? [draw on board]</p>
+<p>Mean and standard deviation are independent. Changing the mean does not change the standard deviation and vice versa.</p>
+<p>Example: - A city with a longer average commute time (higher mean) might also have a greater variability in commute times (higher standard deviation) due to factors like traffic congestion, longer distances, and more diverse transportation options. - A city with shorter average commute times might have more consistent commute times (lower standard deviation) due to shorter distances and less traffic.</p>
+<p>Has one mode/peak in the center and the data are symmetric around that peak (same amount on either side)</p>
+<p>And area under the curve is the same in standard deviation units. What do I mean by that?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>)), <span class="fu">aes</span>(x)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href=""></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb14-3"><a href=""></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> .<span class="dv">2</span>), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb14-4"><a href=""></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="sc">-</span><span class="fl">1.25</span>, <span class="at">sd =</span> <span class="dv">1</span>), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb14-5"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="st">"Variable X"</span>) <span class="sc">+</span></span>
+<span id="cb14-6"><a href=""></a>  <span class="fu">scale_y_continuous</span>(<span class="st">"Density"</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href=""></a>  <span class="fu">ggtitle</span>(<span class="st">"Normal Curves"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="01-intro_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"><aside class="notes">
+<p>These are all normal distributions.</p>
+<p>They have different means, they have different standard deviations. But they are all unimodal and symmetrical, and about 68% of their data is within one standard deviation of the mean. So, they meet the requirements for a normal distribution.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<p>All of these distributions are normal and have an equivalent area (proportion) that falls between one standard deviation below and one above their respective means.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a>p1 <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>)), <span class="fu">aes</span>(x)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href=""></a><span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>) , </span>
+<span id="cb15-3"><a href=""></a>                <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0-2</span>, <span class="dv">0</span><span class="sc">+</span><span class="dv">2</span>),</span>
+<span id="cb15-4"><a href=""></a>                <span class="at">geom =</span> <span class="st">"area"</span>, <span class="at">fill =</span> colors[<span class="dv">1</span>]) <span class="sc">+</span></span>
+<span id="cb15-5"><a href=""></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb15-6"><a href=""></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb15-7"><a href=""></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">y =</span> <span class="fl">0.75</span>, <span class="at">label =</span> <span class="st">"Mean = 0"</span>) <span class="sc">+</span></span>
+<span id="cb15-8"><a href=""></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">y =</span> <span class="fl">0.65</span>, <span class="at">label =</span> <span class="st">"SD = 2"</span>) <span class="sc">+</span></span>
+<span id="cb15-9"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="st">"Variable X"</span>) <span class="sc">+</span></span>
+<span id="cb15-10"><a href=""></a>  <span class="fu">scale_y_continuous</span>(<span class="st">"Density"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>))<span class="sc">+</span></span>
+<span id="cb15-11"><a href=""></a>  <span class="fu">ggtitle</span>(<span class="st">"Area under the normal curve"</span>) <span class="sc">+</span></span>
+<span id="cb15-12"><a href=""></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
+<span id="cb15-13"><a href=""></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>))</span>
+<span id="cb15-14"><a href=""></a></span>
+<span id="cb15-15"><a href=""></a>p2 <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>)), <span class="fu">aes</span>(x)) <span class="sc">+</span></span>
+<span id="cb15-16"><a href=""></a><span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> .<span class="dv">2</span>) , </span>
+<span id="cb15-17"><a href=""></a>                <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">2</span><span class="fl">-.2</span>, <span class="dv">2</span><span class="fl">+.2</span>),</span>
+<span id="cb15-18"><a href=""></a>                <span class="at">geom =</span> <span class="st">"area"</span>, <span class="at">fill =</span> colors[<span class="dv">1</span>]) <span class="sc">+</span></span>
+<span id="cb15-19"><a href=""></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> .<span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb15-20"><a href=""></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb15-21"><a href=""></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">y =</span> <span class="fl">0.75</span>, <span class="at">label =</span> <span class="st">"Mean = 2"</span>) <span class="sc">+</span></span>
+<span id="cb15-22"><a href=""></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">y =</span> <span class="fl">0.65</span>, <span class="at">label =</span> <span class="st">"SD = 0.2"</span>) <span class="sc">+</span></span>
+<span id="cb15-23"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="st">"Variable X"</span>) <span class="sc">+</span></span>
+<span id="cb15-24"><a href=""></a>  <span class="fu">scale_y_continuous</span>(<span class="st">"Density"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>))<span class="sc">+</span></span>
+<span id="cb15-25"><a href=""></a>  <span class="fu">ggtitle</span>(<span class="st">"Area under the normal curve"</span>)<span class="sc">+</span></span>
+<span id="cb15-26"><a href=""></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
+<span id="cb15-27"><a href=""></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>))</span>
+<span id="cb15-28"><a href=""></a></span>
+<span id="cb15-29"><a href=""></a>p3 <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>)), <span class="fu">aes</span>(x)) <span class="sc">+</span></span>
+<span id="cb15-30"><a href=""></a><span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="sc">-</span><span class="fl">1.25</span>, <span class="at">sd =</span> <span class="dv">1</span>) , </span>
+<span id="cb15-31"><a href=""></a>                <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.25</span><span class="dv">-1</span>, <span class="sc">-</span><span class="fl">1.25</span><span class="sc">+</span><span class="dv">1</span>),</span>
+<span id="cb15-32"><a href=""></a>                <span class="at">geom =</span> <span class="st">"area"</span>, <span class="at">fill =</span> colors[<span class="dv">1</span>]) <span class="sc">+</span></span>
+<span id="cb15-33"><a href=""></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="sc">-</span><span class="fl">1.25</span>, <span class="at">sd =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb15-34"><a href=""></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb15-35"><a href=""></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">y =</span> <span class="fl">0.75</span>, <span class="at">label =</span> <span class="st">"Mean = -1.25"</span>) <span class="sc">+</span></span>
+<span id="cb15-36"><a href=""></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">y =</span> <span class="fl">0.65</span>, <span class="at">label =</span> <span class="st">"SD = 1"</span>) <span class="sc">+</span></span>
+<span id="cb15-37"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="st">"Variable X"</span>) <span class="sc">+</span></span>
+<span id="cb15-38"><a href=""></a>  <span class="fu">scale_y_continuous</span>(<span class="st">"Density"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>))<span class="sc">+</span></span>
+<span id="cb15-39"><a href=""></a>  <span class="fu">ggtitle</span>(<span class="st">"Area under the normal curve"</span>)<span class="sc">+</span></span>
+<span id="cb15-40"><a href=""></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
+<span id="cb15-41"><a href=""></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>))</span>
+<span id="cb15-42"><a href=""></a></span>
+<span id="cb15-43"><a href=""></a><span class="fu">ggarrange</span>(p1, p2, p3, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="01-intro_files/figure-revealjs/unnamed-chunk-8-1.png" width="1248" class="r-stretch"><aside class="notes">
+<p>These are the same three plots, now spread out so you can see them more easily.</p>
+<p>So, regarless of the mean and the standard deviation, approximately 68% of the data falls within one standard deviation of the mean.</p>
+<p>For this plot on the left this means that, the mean is 0 and sd is 2, so 68% of the data falls between 0-2 or -2 and 0+2 or 2.</p>
+<p>In this middle plot, the mean is 2 and the standard deviation is 0.2. This means that 68% of the data falls between what two numbers? [1.8 and 2.2]</p>
+<p>In the plot on the right, the mean is -1.25 and the standard deviation is 1. So, 68% of the data falls between what two numbers? [-2.25 and 0.25]</p>
+<p>Different means, different standard deviations, but the same amount of data between the -1SD and +1SD</p>
+<p>[DRAW THESE FIGURES ON THE BOARD FOR LATER]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="the-empirical-rule" class="title-slide slide level1 center">
+<h1>The Empirical Rule</h1>
+<p>In a normal distribution:</p>
+<div>
+<ul>
+<li class="fragment">Approximately 68% of the data falls within <strong>one</strong> standard deviation of the mean.</li>
+<li class="fragment">Approximately 95% of the data falls within <strong>two</strong> standard deviations of the mean.</li>
+<li class="fragment">Approximately 99.7% of the data falls within <strong>three</strong> standard deviations of the mean.</li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="the-empirical-rule-1" class="title-slide slide level1 center">
+<h1>The Empirical Rule</h1>
+
+<img data-src="images/empirical_rule.png" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
+<p>Here’s an illustration of the empirical rule.</p>
+<p>68% - purple green plus purple sums to 95% and all colors together sum to 99.7% You also see here that the distribution is symmetrical, which means that half of the data fall on either side of the mean.</p>
+<p>The reason that this is convenient is because if I have a normal distribution, I can look at how many standard deviations a given score is from the mean, and I can say whether it’s rare or common given the distribution.</p>
+<p>Let’s do some practice!</p>
+<p>Q: In this first distribution, 50% of the data is <em>above</em> what value? A: 0 Q: What about the middle distribution? A: 2</p>
+<p>Q: In the third distribution, 68% of the data is between what two values? A: -2.25 and 0.25 Q: What about the middle distribution? A: 1.8 and 2.2</p>
+<p>Q: In the second distribution, 2.35% of the data is <em>below</em> what value? A: 1.6</p>
+<p>Q: In the first distribution, 97.35% of the data is below what value? A: 4</p>
+<p>Q: In the third distribution, what percent of the data is between a raw score of -3.25 and +1.25? A: 95%</p>
+<p>Q: Is a score of 3 more likely in the first distribution, with a mean of 0, or the second distribution, with a mean of 2? A: First distribution. Q: Why? A: Because the standard deviation in the distribution with a mean of 2 is very small. A score of 3 is only 1.5 standard deviations from the mean in the first distribution but, even though the mean in the second is 2, a score of three is 5 standard deviations away.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="questions-1" class="slide level2">
+<h2>Questions?</h2>
+
+<img data-src="images/not_normal.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section class="slide level2">
+
+<p>In general, when building statistical models, we must not forget that the aim is to understand something about the real world. Or predict, choose an action, make a decision, summarize evidence, and so on, but always about the real world, not an abstract mathematical world: our models are not the reality. Hand (2014)</p>
 </section>
 <section class="slide level2">
 

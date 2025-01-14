@@ -1,0 +1,77 @@
+---
+title: "Module 1: Lab Starter File"
+format: html
+editor: visual
+---
+
+::: callout-important
+For this module's lab (and homework), I would like to see your code in the final document. So, make sure you haven't hidden any of your code (i.e., by using `echo=FALSE`) in your code chunks.
+:::
+
+## Load Packages
+
+```{r load-packages, message= FALSE}
+
+# type your code here
+
+
+```
+
+## Read in the Data; View the Data
+
+```{r read-and-view, message= FALSE}
+
+# type your code here
+
+
+
+```
+
+## Exercise 1:
+
+```{r individual-descriptives}
+
+# type your code here
+
+
+# sanity check: is the sd equal to the sqrt of the variance
+
+
+
+```
+
+## Exercise 2:
+
+```{r happiness-summary}
+
+# type your code here
+
+
+```
+
+## Exercise 3:
+
+```{r histogram}
+
+# type your code here
+
+
+
+# does the variable look normally distributed? skewed? what do the descriptives suggest?
+
+```
+
+## Exercise 4:
+
+```{r skew-kurtosis}
+
+# type your code here
+
+
+
+```
+
+## Exercise 5:
+
+# type your summary here
+

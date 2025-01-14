@@ -398,7 +398,20 @@
 </section>
 <section id="module-1-quiz" class="slide level2">
 <h2>Module 1 Quiz!</h2>
-<p>Q1:</p>
+<p>Q1: A normal distribution has a mean of XX and a standard deviation of XX. Approximately 68% of the data falls between what two numbers?</p>
+<aside class="notes">
+<p>ADD A MEAN AND SD, ADD A FIGURE ACTUALLY, I CAN’T USE THIS FOR THIS QUIZ BECAUSE WE WON’T HAVE COVERED IT YET! ADD IT TO THE HOMEWORK. MAYBE HAVE THEM RUN THE CODE TO CREATE THE FIGURE.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="module-1-quiz-1" class="slide level2">
 <h2>Module 1 Quiz!</h2>
@@ -410,7 +423,7 @@
 </section>
 <section id="module-1-quiz-3" class="slide level2">
 <h2>Module 1 Quiz!</h2>
-<p>Q4:</p>
+<p>Q4: Which statistics classes or trainings have you taken in the past?</p>
 </section>
 <section id="the-normal-distribution" class="slide level2">
 <h2>The Normal Distribution</h2>
@@ -526,31 +539,15 @@
 <span id="cb2-42"><a href=""></a></span>
 <span id="cb2-43"><a href=""></a><span class="fu">ggarrange</span>(p1, p2, p3, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="01-intro-slides_files/figure-revealjs/unnamed-chunk-3-1.png" width="1248"></p>
-</figure>
-</div>
-</div>
-</div>
-<aside class="notes">
-<hr>
-<section id="a-quick-aside-z-scores" class="title-slide slide level1 center">
-<h1>A quick aside: Z-Scores</h1>
-<hr>
-</section>
 
-<section id="the-empirical-rule" class="title-slide slide level1 center">
-<h1>The Empirical Rule</h1>
-
-<img data-src="images/normal_distribution.jpg" class="quarto-figure quarto-figure-center r-stretch"><hr>
-</section>
-<section id="next-time-the-normal-distribution" class="slide level2">
-<h2>Next Time: The Normal Distribution</h2>
-
-<img data-src="images/not_normal.png" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
-<p>What we assume in most statistical tests is that we have a normal distribution. The normal distribution has some convenient properties - that we’ll cover next time - that make it very useful for statistics. We’ll also talk about why it might be safe to assume, in many situations, that you have a normal distribution.</p>
+</div>
+<img data-src="01-intro-slides_files/figure-revealjs/unnamed-chunk-3-1.png" width="1248" class="r-stretch"><aside class="notes">
+<p>These are the same three plots, now spread out so you can see them more easily.</p>
+<p>So, regarless of the mean and the standard deviation, approximately 68% of the data falls within one standard deviation of the mean.</p>
+<p>For this plot on the left this means that, the mean is 0 and sd is 2, so 68% of the data falls between 0-2 or -2 and 0+2 or 2.</p>
+<p>In this middle plot, the mean is 2 and the standard deviation is 0.2. This means that 68% of the data falls between what two numbers? [1.8 and 2.2]</p>
+<p>In the plot on the right, the mean is -1.25 and the standard deviation is 1. So, 68% of the data falls between what two numbers? [-2.25 and 0.25]</p>
+<p>Different means, different standard deviations, but the same amount of data between the two standard deviations.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -562,26 +559,205 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<hr>
+</section>
+<section class="slide level2">
+
+</section>
+<section>
+<section id="the-empirical-rule" class="title-slide slide level1 center">
+<h1>The Empirical Rule</h1>
+
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="the-standard-normal-distribution" class="title-slide slide level1 center">
+<h1>The Standard Normal Distribution</h1>
+
+</section>
+<section id="section" class="slide level2">
+<h2><img data-src="images/normal_distribution.jpg" class="quarto-figure quarto-figure-center"></h2>
+</section></section>
+<section>
+<section id="the-standard-normal-distribution-1" class="title-slide slide level1 center">
+<h1>The Standard Normal Distribution</h1>
+<p><span style="font-size:35px;">The normal distribution with <span class="math inline">\(\mu\)</span>=0 and <span class="math inline">\(\sigma\)</span>=1 is called standard normal.</span></p>
+<p><span style="font-size:35px;">Variables with quite different means and standard deviations can be standardized so that they can be compared in the same metric (standard deviation units). This allows statements such as “relative to the mean, I am more conscientious (e.g., <span class="math inline">\(Z=2\)</span>) than I am extraverted (e.g., <span class="math inline">\(Z=1\)</span>).”</span></p>
+<p><span style="font-size:35px;">I could not say, however, that I am twice as conscientious as I am extraverted.</span></p>
+<aside class="notes">
+<p>Why?</p>
+<div>
+<ul>
+<li>not ratio scales, no set amount to compare</li>
+<li>not the same units – what I’m twice as heavy as I am tall?</li>
+<li><em>z</em>-score is comparison to other people</li>
+</ul>
+</div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="a-quick-refresher-z-scores" class="title-slide slide level1 center">
+<h1>A Quick Refresher: Z-Scores</h1>
+<p>A Z-Score is a numerical measurement that describes a value’s relationship to the mean of a group of values and is measured in terms of standard deviation units.</p>
+<p>The formula used to calculate a z-score is: <span class="math inline">\(z = \frac{x - \mu}{\sigma}\)</span></p>
+<aside class="notes">
+<p>So, going back to our earlier normal distributions. Let’s take the one with a mean of 0 and sd of 2. I want to know the z-score that corresponds to an x value of 3. How would I get that? (3-0)/2 = 1.5</p>
+<p>Let’s do the same for the middle distribution that had a mean of 2 and a standard deviation of 0.2. What’s the z-score the corresponds to an x value of 3? (3-2)/0.2 = 5</p>
+<p>That distribution is very tight, so a score of 3 is far from the mean.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="how-is-this-all-useful" class="title-slide slide level1 center">
+<h1>How is this all useful?</h1>
+<ul>
+<li class="fragment"><p><span style="font-size:35px;">Given any score, we can calculate the probability of getting a value greater than that <em>z</em>-score. <em>(Or less than that z</em>-score.)</span></p></li>
+<li class="fragment"><p><span style="font-size:35px;">Given any two <em>z</em>-scores, we can calculate the probability of getting a value between these scores. <em>(Or outside those z</em>-scores)</span></p></li>
+<li class="fragment"><p><span style="font-size:35px;">Given a probability <span class="math inline">\(p\)</span>, we can identify the <em>z</em>-score at which the proportion of scores below <em>(or above)</em> <span class="math inline">\(p\)</span> falls.</span></p></li>
+<li class="fragment"><p><span style="font-size:35px;">Given a probability <span class="math inline">\(p\)</span>, we can identify the <em>z</em>-score at which the proportion of scores that fall above <span class="math inline">\(-Z\)</span> and below <span class="math inline">\(Z\)</span> is equal to <span class="math inline">\(p\)</span>.</span></p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="example">Example</h3>
+<p>What’s the probability of getting a <em>z</em>-score smaller than 1.2?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">pnorm</span>(<span class="fl">1.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8849303</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>)), <span class="fu">aes</span>(x)) <span class="sc">+</span></span>
+<span id="cb5-2"><a href=""></a><span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dnorm</span>(x) , </span>
+<span id="cb5-3"><a href=""></a>                <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="fl">1.2</span>),</span>
+<span id="cb5-4"><a href=""></a>                <span class="at">geom =</span> <span class="st">"area"</span>, <span class="at">fill =</span> colors[<span class="dv">1</span>]) <span class="sc">+</span></span>
+<span id="cb5-5"><a href=""></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dnorm</span>(x)) <span class="sc">+</span></span>
+<span id="cb5-6"><a href=""></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb5-7"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="st">"z-score"</span>) <span class="sc">+</span></span>
+<span id="cb5-8"><a href=""></a>  <span class="fu">scale_y_continuous</span>(<span class="st">"Density"</span>)<span class="sc">+</span></span>
+<span id="cb5-9"><a href=""></a>  <span class="fu">theme_pubr</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="01-intro-slides_files/figure-revealjs/unnamed-chunk-5-1.png" width="1440" class="r-stretch"><aside class="notes">
+<p>this is the p-value! how likely are you to find a value at least as extreme as this score?</p>
+<p>if it’s very unlikley, you’ll have a low p-value – MIGHT WANT TO GO INTO NULL HYPOTHESIS??</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<table class="caption-top">
+<colgroup>
+<col style="width: 100%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"># BUT!</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">All continuous distributions can be standardized, but if they are not normal to begin with, standardization will not make them so. <em>Standardization does not alter distribution shape.</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[PLUS, OUR SAMPLES SOMETIMES AREN’T NORMALLY DISTRIBUTED – FORTUANTELY, WE DON’T ACTUALLY CARE ABOUT THE SAMPLES!]</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">So, how can we implement these useful properties of the normal distribution?</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sampling-distributions-are-normal">Sampling distributions are normal</h3>
+<p>One of the most important discoveries in statistics is that the sampling distributions of many statistics are approximately normal even when the sample (and population) distributions are not.</p>
+<p>The <strong>sampling distribution</strong> of a statistic is the probability distribution that specifies probabilities for the possible values that the statistic can take.</p>
+<ul>
+<li class="fragment">For example, the mean of a random sample will not precisely equal the population mean. But, how far off will it be? And what distribution shape will these possible sample mean values have?</li>
+</ul>
+<p>The error represented by how far off a sample mean is from the population mean is called <strong>sampling error</strong>.</p>
+<p>MAYBE ADD STANDARD ERROR HERE?</p>
+<aside class="notes">
+<p>DRAW SAMPLING DISTRIBUTION</p>
+<p>Show mean, show how more likely close to values of mean draw bar to represent sampling error</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="central-limit-theorem">Central limit theorem</h3>
+<p>According to the <strong>central limit theorem</strong>, as sample size increases, the sampling distribution of the mean approaches normality, even when the data upon which the mean is based are not normally distributed.</p>
+<p>The sample size necessary to be “approximately normal” depends on the nature of the underlying data. The less normal it is, the larger the sample size necessary in order for the sampling distribution of the means to become normal.</p>
+<p>“Around sample size of 30” is a common rule of thumb.</p>
+<p><span style="font-size:30px;">- Note, however, that this rule of thumb is sufficiently only to assume that the sampling distribution is normal. This makes no assumptions about statistical power.</span></p>
+<aside class="notes">
+<p>Regardless of the CLT, if the data are skewed, we might wonder if the mean is the best estimator to use here.</p>
+<p>LAB: QUICK REVIEW / DEMO OF CLT AND THEN, IN HOMEWORK, CALCULATE Z-SCORES, QUIZ 1 QUESTION, PROBABILITY OF A SCORE AT LEAST THIS EXTREME, CENTRAL LIMIT THEOREM WITH A FEW DIFFERENT SAMPLE SIZES AND A FEW DIFFERENT DISTRIBUTIONS AND ASK WHAT THIS DEMONSTRATES</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="next-week" class="slide level2">
+<h2>Next Week!</h2>
+<p>Don’t forget to complete Journal 1 and submit your homework by 12pm on Tuesday (January 21st)!</p>
+</section>
+<section class="slide level2">
+
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
-
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
+</section></section>
     </div>
   </div>
 
