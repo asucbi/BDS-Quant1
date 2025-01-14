@@ -23,16 +23,16 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="01-lab_files/libs/clipboard/clipboard.min.js"></script>
-<script src="01-lab_files/libs/quarto-html/quarto.js"></script>
-<script src="01-lab_files/libs/quarto-html/popper.min.js"></script>
-<script src="01-lab_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="01-lab_files/libs/quarto-html/anchor.min.js"></script>
-<link href="01-lab_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="01-lab_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="01-lab_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="01-lab_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="01-lab_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="01-lab-worksheet_files/libs/clipboard/clipboard.min.js"></script>
+<script src="01-lab-worksheet_files/libs/quarto-html/quarto.js"></script>
+<script src="01-lab-worksheet_files/libs/quarto-html/popper.min.js"></script>
+<script src="01-lab-worksheet_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="01-lab-worksheet_files/libs/quarto-html/anchor.min.js"></script>
+<link href="01-lab-worksheet_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="01-lab-worksheet_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="01-lab-worksheet_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="01-lab-worksheet_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="01-lab-worksheet_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -80,13 +80,13 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="starter-files">Starter Files</h2>
 <p>In the Files pane you should see these two R Notebooks:</p>
 <ul>
-<li>mod-01-lab.qmd</li>
-<li>mod-01-hw.qmd</li>
+<li>mod-01-lab-starter.qmd</li>
+<li>mod-01-hw-starter.qmd</li>
 </ul>
-<p>Go ahead and open up <code>mod-01-lab.qmd</code>. This is your “starter file” for today’s lab. You will build upon this document as you work on the exercises in this lab session.</p>
+<p>Go ahead and open up <code>mod-01-lab-starter.qmd</code>. This is your “starter file” for today’s lab. You will build upon this document as you work on the exercises in this lab session.</p>
 </section>
-<section id="step-1.-update-the-yaml" class="level2">
-<h2 class="anchored" data-anchor-id="step-1.-update-the-yaml">Step 1. Update the YAML</h2>
+<section id="step-1-update-the-yaml" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-update-the-yaml">Step 1: Update the YAML</h2>
 <p>In the YAML at the top of your .qmd file, change the author name to your name and put in today’s date.</p>
 </section>
 <section id="step-2-render-it" class="level2">
@@ -136,8 +136,44 @@ Important
 </section>
 <section id="exercise-1" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1">Exercise 1:</h2>
-<p>Calculate the mean, median, variance and standard deviation of the “Happiness” variable using the corresponding function in R. Use the following functions:</p>
+<p>Calculate (individually) the mean, median, variance and standard deviation of the “Happiness” variable using the corresponding function in R. Use the following functions:</p>
 <p><code>mean()</code> <code>median()</code> <code>var()</code> <code>sd()</code></p>
+<p>Save your values as variables, as we’ll be using them in the write-up!</p>
+</section>
+<section id="exercise-2" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2">Exercise 2:</h2>
+<p>Construct a summary of the “Happiness” variable that contains each of the above parameters.</p>
+</section>
+<section id="exercise-3" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3">Exercise 3:</h2>
+<p>Create a histogram of the “Happiness” variable. Make sure to label your plot.</p>
+<p>What do the descriptive statistics and histogram suggest about the shape of the “Happiness” distribution? Is it normally distributed or skewed in one direction? How can you tell?</p>
+</section>
+<section id="exercise-4" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4">Exercise 4:</h2>
+<p>Now, let’s examine the skew and kurtosis of the distribution!</p>
+<p>First, we need to install and load the <code>moments</code> package.</p>
+<p>Next, we can use the <code>skewness()</code> and <code>kurtosis()</code> functions to calculate these values.</p>
+<p>Again, save your values as variables, as we’ll be using them in the write-up!</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Skewness:</strong> Though this is counter-intuitive, <strong>negative skewness</strong> is indicated by <strong>higher</strong> (positive) values, while positive skewness is indicated by <strong>lower</strong> (negative) values. A skewness value between -1 and +1 is excellent, -2 to +2 suggest moderate skewness, and values beyond -2 or +2 suggest substantial non-normality.</p>
+<p><strong>Kurtosis:</strong> <strong>Positive</strong> kurtosis values indicate a <strong>more peaked</strong> distribution, while <strong>negative</strong> kurtosis values indicate a <strong>flatter</strong> distribution. Kurtosis values greater than +2 suggest that the distribution is too peaked and values lower than -2 suggest that the distribution is too flat.</p>
+<p>For both skew and kurtosis, a normal distribution would have a value of 0.</p>
+</div>
+</div>
+</section>
+<section id="exercise-5" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-5">Exercise 5:</h2>
+<p>Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the variables you created earlier to insert the descriptive values directly into your summary.</p>
 <hr>
 </section>
 
