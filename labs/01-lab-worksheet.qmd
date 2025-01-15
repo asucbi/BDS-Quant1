@@ -25,17 +25,13 @@ In the Files pane you should see these two R Notebooks:
 
 Go ahead and open up `mod-01-lab-starter.qmd`. This is your "starter file" for today's lab. You will build upon this document as you work on the exercises in this lab session.
 
-## Step 1: Update the YAML
-
-In the YAML at the top of your .qmd file, change the author name to your name and put in today's date.
-
-## Step 2: Render it!
+## Step 1: Check that the file Renders!
 
 Click the button called "Render" (circled in the image below) and then double check to see that your document rendered in the **Viewer** pane. It is always a good idea to occasionally check that the document still renders correctly after making changes.
 
 ![](images/render.png)
 
-## Step 3: Load Packages
+## Step 2: Load Packages
 
 Today, we'll be using the following packages:
 
@@ -49,7 +45,7 @@ Please load these packages using the `library()` function. You may need to insta
 library(tidyverse)
 ```
 
-## Step 4: Read in the Data
+## Step 3: Read in the Data
 
 The data we will use in Module 1 is from the [2015 World Happiness Report](https://worldhappiness.report/ed/2015/), an annual survey part of the [Gallup World Poll](https://www.gallup.com/178667/gallup-world-poll-work.aspx).
 
@@ -124,7 +120,7 @@ Note: You do not need to submit your lab, but you will need to submit a rendered
 -   In the YAML, change "format: html" to "format: pdf"
 -   Click "Render" at the top of the document
 -   If you get a popup warning, click "Try Again" (may be specific to Mac)
--   Click the "Save" icon on the top right (circled in the image below) 
+-   Click the "Save" icon on the top right (circled in the image below)
 
 ![](images/save_pdf.png)
 

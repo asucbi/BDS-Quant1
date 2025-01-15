@@ -6,7 +6,7 @@ editor: visual
 
 ## Purpose
 
-This week's homework is very simple. You will be asked to characterize distributions of data, just as you did in lab, and report your results. 
+This week's homework is very simple. You will be asked to characterize distributions of data, just as you did in lab, and report your results.
 
 ## Access the Starter Files for Module 1
 
@@ -23,7 +23,7 @@ In the Files pane you should see these two R Notebooks:
 -   mod-01-lab-starter.qmd
 -   mod-01-hw-starter.qmd
 
-Go ahead and open up `mod-01-hw-starter.qmd`. 
+Open up `mod-01-hw-starter.qmd`.
 
 ## Update the YAML
 
@@ -75,7 +75,7 @@ Calculate (individually) the mean, median, variance and standard deviation of th
 
 Save your values as variables, as we'll be using them in our write-up!
 
-Now, create a table of these values. 
+Now, create a table of these values.
 
 There are some nice instructions on the [Quarto Website](https://quarto.org/docs/authoring/tables.html) that cover the creation of tables.
 
@@ -83,7 +83,7 @@ There are some nice instructions on the [Quarto Website](https://quarto.org/docs
 
 Construct a summary of the "Happiness" variable that contains each of the above parameters.
 
-Turn this summary into a table that renders nicely in your final document. 
+Turn this summary into a table that renders nicely in your final document.
 
 The function `kable` in the `knitr` package is a nice option for creating tables from r objects. More information about this function is available [here](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html).
 
@@ -111,7 +111,7 @@ Write up a summary of what you found. Make sure to include information about whi
 
 ## Exercise 6:
 
-Choose one of the [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday/tree/main) datasets and find a **continuous** variable that you would like to examine. Tell me the year and title of that dataset (e.g., 2021 - Netflix Titles). Repeat Exercises 1-5 for that variable. 
+Choose one of the [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday/tree/main) datasets and find a **continuous** variable that you would like to examine. Tell me the year and title of that dataset (e.g., 2021 - Netflix Titles). Repeat Exercises 1-5 for that variable.
 
 If you are working on this homework in a group, each member should please use a *different* dataset.
 
@@ -121,6 +121,6 @@ If you are working on this homework in a group, each member should please use a 
 
 Render your file as a PDF and submit to "Module 1: Homework Submission" on Canvas!
 
-
+IMPORTANT: For this module's homework, I would like to see your code in the final document. So, make sure you **HAVE NOT** hidden any of your code (i.e., by using `echo=FALSE`) in your code chunks.
 
 ------------------------------------------------------------------------
