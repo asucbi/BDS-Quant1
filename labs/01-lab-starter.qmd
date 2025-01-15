@@ -1,0 +1,123 @@
+---
+title: "Module 1: Lab Starter File"
+format: html
+editor: visual
+---
+
+For this module's lab (and homework), I would like to see your code in the final document. So, make sure you haven't hidden any of your code (i.e., by using `echo=FALSE`) in your code chunks.
+
+## Load Packages
+
+```{r load-packages, message= FALSE}
+
+# type your code here
+
+
+```
+
+## Read in the Data; View the Data
+
+```{r read-and-view, message= FALSE}
+
+# type your code here
+
+
+
+```
+
+## Exercise 1:
+
+Calculate (individually) the mean, median, variance and standard deviation of the "Happiness" variable using the corresponding function in R. Please use these functions:
+
+`mean()` `median()` `var()` `sd()`
+
+Save your values as variables, as we'll be using them in our write-up!
+
+Now, create a table of these values.
+
+```{r happiness-descriptives}
+
+# type your code here
+
+
+# sanity check: is the sd equal to the sqrt of the variance
+
+
+# create a table using the variables you created
+
+```
+
+The code below is for a **pipe table**. However there are *many* ways to create tables. The [Quarto Website](https://quarto.org/docs/authoring/tables.html) has some nice instructions that go more in depth about the creation of tables
+
+Notice that I am creating the table within my text, and not in the code chunk.
+
+| Statistic          |             Value |
+|--------------------|------------------:|
+| Mean               | \[insert r code\] |
+| Median             | \[insert r code\] |
+| Variance           | \[insert r code\] |
+| Standard Deviation | \[insert r code\] |
+
+: Happiness Descriptives {.striped .hover}
+
+Render your document to see that the table renders correctly.
+
+## Exercise 2:
+
+Construct a **summary** of the "Happiness" variable that contains each of the above parameters.
+
+Turn this summary into a table that renders nicely in your final document.
+
+The function `kable` in the `knitr` package is a nice option for creating tables from r objects. More information about this function is available [here](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html).
+
+```{r happiness-summary}
+
+# type your code here
+
+
+# turn your summary into a table using `kable` (uncomment lines below)
+#knitr::kable(summary)
+
+#knitr::kable(t(summary))
+
+```
+
+## Exercise 3:
+
+Create a histogram of the "Happiness" variable. Make sure to label your plot.
+
+What do the descriptive statistics and histogram suggest about the shape of the "Happiness" distribution? Is it normally distributed or skewed in one direction? How can you tell?
+
+```{r histogram}
+
+# type your code here
+
+
+
+# does the variable look normally distributed? skewed? what do the descriptives suggest?
+
+```
+
+## Exercise 4:
+
+Now, let's examine the skew and kurtosis of the distribution!
+
+First, we need to install and load the `moments` package.
+
+Next, we can use the `skewness()` and `kurtosis()` functions to calculate these values.
+
+Again, save your values as variables, as we'll be using them in the write-up!
+
+```{r skew-kurtosis}
+
+# type your code here
+
+
+
+```
+
+## Exercise 5:
+
+Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the variables you created earlier to insert the descriptive values directly into your summary.
+
+# type your summary here

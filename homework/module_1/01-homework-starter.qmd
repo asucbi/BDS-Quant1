@@ -1,0 +1,102 @@
+---
+title: "Module 1: Homework Starter File"
+format: html
+editor: visual
+---
+
+IMPORTANT: For this module's homework, I would like to see your code in the final document. So, make sure you haven't hidden any of your code (i.e., by using `echo=FALSE`) in your code chunks.
+
+## Load Packages
+
+```{r load-packages, message= FALSE}
+
+# type your code here
+
+
+```
+
+## Read in the Data; View the Data
+
+```{r read-and-view, message= FALSE}
+
+# type your code here
+
+```
+
+## Exercise 1:
+
+Calculate (individually) the mean, median, variance and standard deviation of the "Corruption" variable using the corresponding function in R. Please use these functions:
+
+`mean()` `median()` `var()` `sd()`
+
+Save your values as variables, as we'll be using them in our write-up!
+
+Create a pipe table using these values. Don't forget to add a title to your table.
+
+```{r corruption-descriptives}
+
+# type your code here
+
+```
+
+## Exercise 2:
+
+Construct a **summary** of the "Corruption" variable that contains each of the above parameters.
+
+Use `knitr` to create a table from your summary object.
+
+```{r corruption-summary}
+
+# type your code here
+
+```
+
+## Exercise 3:
+
+Create a histogram of the "Corruption" variable. Make sure to label your plot.
+
+Add a vertical line the indicates the location of the mean (solid red line) and median (dashed red line). Hint: use `geom_vline`.
+
+What do the descriptive statistics and histogram suggest about the shape of the "Corruption" distribution? Is it normally distributed or skewed in one direction? How can you tell?
+
+```{r histogram}
+
+# type your code here
+
+```
+
+## Exercise 4:
+
+Now, let's examine the skew and kurtosis of the distribution!
+
+First, we need to install and load the `moments` package.
+
+Next, we can use the `skewness()` and `kurtosis()` functions to calculate these values.
+
+Again, save your values as variables, as we'll be using them in the write-up!
+
+```{r skew-kurtosis}
+
+# type your code here
+
+```
+
+## Exercise 5:
+
+Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the variables you created earlier to insert the descriptive values directly into your summary.
+
+# type your summary here
+
+
+```{r}
+```
+
+## Exercise 6:
+
+Don't forget Exercise 6!!
+
+```{r tidytuesday-descriptives}
+
+# type your code here
+
+

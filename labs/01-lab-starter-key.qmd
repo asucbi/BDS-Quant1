@@ -1,0 +1,195 @@
+---
+title: "Module 1: Lab Starter File KEY"
+format: html
+editor: visual
+---
+
+For this module's lab (and homework), I would like to see your code in the final document. So, make sure you haven't hidden any of your code (i.e., by using `echo=FALSE`) in your code chunks.
+
+## Load Packages
+
+```{r load-packages, message= FALSE}
+
+# type your code here
+
+
+
+
+###
+library(tidyverse)
+library(knitr)
+library(moments)
+
+```
+
+## Read in the Data; View the Data
+
+```{r read-and-view, message= FALSE}
+
+# type your code here
+
+
+
+
+###
+world <- read_csv("data/world_happiness_2015.csv")
+
+View(world)
+
+```
+
+## Exercise 1:
+
+Calculate (individually) the mean, median, variance and standard deviation of the "Happiness" variable using the corresponding function in R. Please use these functions:
+
+`mean()` `median()` `var()` `sd()`
+
+Save your values as variables, as we'll be using them in our write-up!
+
+Now, create a table of these values.
+
+```{r happiness-descriptives}
+
+# type your code here
+
+
+
+
+
+###
+mean_happiness <- mean_happiness <- mean(world$Happiness, na.rm = TRUE)
+median_happiness <- median(world$Happiness, na.rm = TRUE)
+var_happiness <- var(world$Happiness, na.rm = TRUE)
+sd_happiness <- sd(world$Happiness, na.rm = TRUE)
+
+# sanity check: is the sd equal to the sqrt of the variance
+
+
+
+
+###
+sqrt(var(world$Happiness, na.rm = TRUE))
+# or
+sqrt(var(world$Happiness, na.rm = TRUE)) == sd(world$Happiness, na.rm = TRUE)
+
+# create a table using the variables you created
+
+```
+
+The code below is for a **pipe table**. However there are *many* ways to create tables. The [Quarto Website](https://quarto.org/docs/authoring/tables.html) has some nice instructions that go more in depth about the creation of tables
+
+Notice that I am creating the table within my text, and not in the code chunk.
+
+| Statistic          |             Value |
+|--------------------|------------------:|
+| Mean               | \[insert r code\] |
+| Median             | \[insert r code\] |
+| Variance           | \[insert r code\] |
+| Standard Deviation | \[insert r code\] |
+
+: Happiness Descriptives {.striped .hover}
+
+### 
+
+| Statistic          |                          Value |
+|--------------------|-------------------------------:|
+| Mean               |   `r round(mean_happiness, 2)` |
+| Median             | `r round(median_happiness, 2)` |
+| Variance           |     `r round(sd_happiness, 2)` |
+| Standard Deviation |    `r round(var_happiness, 2)` |
+
+: Happiness Descriptives {.striped .hover}
+
+Render your document to see that the table renders correctly.
+
+## Exercise 2:
+
+Construct a **summary** of the "Happiness" variable that contains each of the above parameters.
+
+Turn this summary into a table that renders nicely in your final document.
+
+```{r happiness-summary}
+
+# type your code here
+
+
+
+
+###
+# multiple ways to do it, this is one example!
+world %>% 
+  summarise(mean = mean(Happiness, na.rm = TRUE),
+            median = median(Happiness, na.rm = TRUE),
+            variance = var(Happiness, na.rm = TRUE),
+            standard_deviation = sd(Happiness, na.rm = TRUE))
+
+summary <- world %>% 
+  summarise(mean = round(mean(Happiness, na.rm = TRUE),2),
+            median = round(median(Happiness, na.rm = TRUE),2),
+            variance = round(var(Happiness, na.rm = TRUE),2),
+            standard_deviation = round(sd(Happiness, na.rm = TRUE),2))
+
+knitr::kable(summary)
+
+knitr::kable(t(summary))
+
+```
+
+## Exercise 3:
+
+Create a histogram of the "Happiness" variable. Make sure to label your plot.
+
+What do the descriptive statistics and histogram suggest about the shape of the "Happiness" distribution? Is it normally distributed or skewed in one direction? How can you tell?
+
+```{r histogram}
+
+# type your code here
+
+
+
+
+###
+world %>% 
+  ggplot(aes(x = Happiness)) +
+  geom_histogram() +
+  labs(title = "World Happiness Ratings in 2015")
+
+# does the variable look normally distributed? skewed? what do the descriptives suggest?
+
+```
+
+## Exercise 4:
+
+Now, let's examine the skew and kurtosis of the distribution!
+
+First, we need to install and load the `moments` package.
+
+Next, we can use the `skewness()` and `kurtosis()` functions to calculate these values.
+
+Again, save your values as variables, as we'll be using them in the write-up!
+
+```{r skew-kurtosis}
+
+# type your code here
+
+
+
+
+###
+skew_happiness <- world %>% 
+  select(Happiness) %>% 
+  skewness(na.rm=TRUE)
+
+kurtosis_happiness <- world %>% 
+  select(Happiness) %>% 
+  kurtosis(na.rm=TRUE)
+
+```
+
+## Exercise 5:
+
+Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the variables you created earlier to insert the descriptive values directly into your summary.
+
+### 
+
+In the 2015 World Happiness Report, the average Happiness rating is `r round(mean_happiness, 2)`. The median Happiness rating is `r round(median_happiness, 2)`, the variance in Happiness ratings is `r round(var_happiness, 2)`, and the standard deviation is `r round(sd_happiness, 2)`. A histogram of the data reveals an approximately normally distribution. While the skewness of `r round(skew_happiness, 2)` is close to zero and suggests an approximately normal distribution, the kurtosis is slightly high at `r round(kurtosis_happiness, 2)`. For these data, the mean would be the most appropriate measure of central tendency.

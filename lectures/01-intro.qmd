@@ -141,7 +141,6 @@ Factors to consider:
 -   Why?
 
 -   I would like you to develop a deep understanding of how to run and interpret statistical analyses. Using AI to automate coding and interpretation will not help you learn and understand these concepts. It would be a disservice to you.
-
 :::
 
 ------------------------------------------------------------------------
@@ -214,26 +213,22 @@ hist(world$Happiness, breaks = 30,
 ```
 
 ::: notes
+When we're describing at data typically not describing one observation -- my score or your score. We want to describe a group of observations or a distribution of observations. So, we want some way of summarizing across a datset.
 
-When we're describing at data typically not describing one observation -- my score or your score. We want to describe a group of observations or a distribution of observations. So, we want some way of summarizing across a datset. 
-
-For example, these data were taken from the 2015 world happiness report. This is an annual survey collected as part of the gallup world poll. 
+For example, these data were taken from the 2015 world happiness report. This is an annual survey collected as part of the gallup world poll.
 
 Here, on the x axis (across the bottom) we have people's ratings of how happy feel. And, on the y axis (on the side) we have the frequency of each rating. So, about 14 people rated their happiness between 5 and 5.2. As an aside, how much data is in that bar (e.g., whether it's between 5 and 5.2 or 5 and 6 or whatever) is going to depend on the number of "breaks" that you set in your code.
 
 If you sum up the bars, you will get the total number of observations in the dataset. Here that is 136. This is the distribution on happiness ratings in the dataset.
 
 Our goal is statistics is to model or summarize this distribution in a meaningful way.
-
 :::
-
 
 ------------------------------------------------------------------------
 
 ## Question:
 
 If I know nothing about someone, for example a participant in the survey, but I had to guess their Happiness rating, what would be the *best* number to guess?
-
 
 ------------------------------------------------------------------------
 
@@ -244,7 +239,7 @@ If I don't have any other information, then the best "model" of my dataset would
 ::: notes
 If I don't have any other information, then the best "model" of my dataset might be the mean or average observation.
 
-And, if our goal in creating a statistical model is to summarize the data in a meaningful way, then the mean might be the best "model" or summary of the data when you don't have any other information. 
+And, if our goal in creating a statistical model is to summarize the data in a meaningful way, then the mean might be the best "model" or summary of the data when you don't have any other information.
 :::
 
 ------------------------------------------------------------------------
@@ -359,7 +354,7 @@ So what's the lesson here? He put too much faith in the average life expectancy 
 ## Center and spread
 
 ::: incremental
--   Distributions are most often described by their mean and **variance**.
+-   Distributions are most often described by their **center** (mean/median) and **spread** (variance/standard deviation).
 
 -   Typically, these two parameters are used in common inferential techniques.
 
@@ -444,6 +439,14 @@ In a normal distribution, the mean, median, and mode are all relatively equal.
 In a skewed distribution, both the mean and median get pulled away from the mode. The mean is pulled further.
 
 So, if I know nothing else about a person, and the data is skewed what might be a better guess at their score? The median or mode because it falls within the bulk of the data. Often people report the median when data are skewed.
+:::
+
+------------------------------------------------------------------------
+
+In general, when building statistical models, we must not forget that the aim is to understand something about the real world. Or predict, choose an action, make a decision, summarize evidence, and so on, but always about the real world, not an abstract mathematical world: our models are not the reality. Hand (2014)
+
+::: notes
+So, we talked about the mean as a model. And this is relevant to this quote from the reading that I sent around yesterday. Our aim is to understand something about the real world. At the simplest level, we can think about the mean as a model. Of course we can calculate the mean of any continuous variable, but if the data are skewed, the mean isn't a good model of what's actually happening in the real world. In the case of skewed data, the median might be a better model of what's actually occurring in the real world (given that your data collection procedures actually sample the real world, which is another issue altogether).
 
 :::
 
@@ -479,11 +482,11 @@ library(ggpubr)
 # make it pretty
 colors = RColorBrewer::brewer.pal(4, "Set2")
 ```
-:::notes
+
+::: notes
 In most statistical tests we assume that we have a normal distribution. A lot of assumptions that we test for, like you did in BDS1, check for normality of the distribution.
 
 The reason we do this is because the normal distribution has some convenient properties that make it very useful for statistics.
-
 :::
 
 ------------------------------------------------------------------------
@@ -501,7 +504,7 @@ The reason we do this is because the normal distribution has some convenient pro
 :::
 
 ::: notes
-What is a normal distribution? [draw on board]
+What is a normal distribution? \[draw on board\]
 
 Mean and standard deviation are independent. Changing the mean does not change the standard deviation and vice versa.
 
@@ -509,8 +512,7 @@ Example: - A city with a longer average commute time (higher mean) might also ha
 
 Has one mode/peak in the center and the data are symmetric around that peak (same amount on either side)
 
-And area under the curve is the same in standard deviation units. 
-What do I mean by that?
+And area under the curve is the same in standard deviation units. What do I mean by that?
 :::
 
 ------------------------------------------------------------------------
@@ -597,7 +599,7 @@ In the plot on the right, the mean is -1.25 and the standard deviation is 1. So,
 
 Different means, different standard deviations, but the same amount of data between the -1SD and +1SD
 
-[DRAW THESE FIGURES ON THE BOARD FOR LATER]
+\[DRAW THESE FIGURES ON THE BOARD FOR LATER\]
 :::
 
 ------------------------------------------------------------------------
@@ -619,39 +621,26 @@ In a normal distribution:
 ![](images/empirical_rule.png){fig-align="center"}
 
 ::: notes
-Here's an illustration of the empirical rule. 
+Here's an illustration of the empirical rule.
 
-68% - purple
-green plus purple sums to 95% 
-and all colors together sum to 99.7%
-You also see here that the distribution is symmetrical, which means that half of the data fall on either side of the mean. 
+68% - purple green plus purple sums to 95% and all colors together sum to 99.7% You also see here that the distribution is symmetrical, which means that half of the data fall on either side of the mean.
 
-The reason that this is convenient is because if I have a normal distribution, I can look at how many standard deviations a given score is from the mean, and I can say whether it's rare or common given the distribution. 
+The reason that this is convenient is because if I have a normal distribution, I can look at how many standard deviations a given score is from the mean, and I can say whether it's rare or common given the distribution.
 
 Let's do some practice!
 
-Q: In this first distribution, 50% of the data is _above_ what value? A: 0
-Q: What about the middle distribution? A: 2
+Q: In this first distribution, 50% of the data is *above* what value? A: 0 Q: What about the middle distribution? A: 2
 
-Q: In the third distribution, 68% of the data is between what two values? A: -2.25 and 0.25
-Q: What about the middle distribution? A: 1.8 and 2.2
+Q: In the third distribution, 68% of the data is between what two values? A: -2.25 and 0.25 Q: What about the middle distribution? A: 1.8 and 2.2
 
-Q: In the second distribution, 2.35% of the data is _below_ what value?
-A: 1.6
+Q: In the second distribution, 2.35% of the data is *below* what value? A: 1.6
 
-Q: In the first distribution, 97.35% of the data is below what value?
-A: 4
+Q: In the first distribution, 97.35% of the data is below what value? A: 4
 
-Q: In the third distribution, what percent of the data is between a raw score of -3.25 and +1.25?
-A: 95%
+Q: In the third distribution, what percent of the data is between a raw score of -3.25 and +1.25? A: 95%
 
-Q: Is a score of 3 more likely in the first distribution, with a mean of 0, or the second distribution, with a mean of 2?
-A: First distribution. 
-Q: Why?
-A: Because the standard deviation in the distribution with a mean of 2 is very small. A score of 3 is only 1.5 standard deviations from the mean in the first distribution but, even though the mean in the second is 2, a score of three is 5 standard deviations away.
-
+Q: Is a score of 3 more likely in the first distribution, with a mean of 0, or the second distribution, with a mean of 2? A: First distribution. Q: Why? A: Because the standard deviation in the distribution with a mean of 2 is very small. A score of 3 is only 1.5 standard deviations from the mean in the first distribution but, even though the mean in the second is 2, a score of three is 5 standard deviations away.
 :::
-
 
 ------------------------------------------------------------------------
 
@@ -659,8 +648,5 @@ A: Because the standard deviation in the distribution with a mean of 2 is very s
 
 ![](images/not_normal.png){fig-align="center"}
 
-------------------------------------------------------------------------
-
-In general, when building statistical models, we must not forget that the aim is to understand something about the real world. Or predict, choose an action, make a decision, summarize evidence, and so on, but always about the real world, not an abstract mathematical world: our models are not the reality. Hand (2014)
 
 ------------------------------------------------------------------------

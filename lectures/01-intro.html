@@ -792,7 +792,7 @@
 <h2>Center and spread</h2>
 <div>
 <ul>
-<li class="fragment"><p>Distributions are most often described by their mean and <strong>variance</strong>.</p></li>
+<li class="fragment"><p>Distributions are most often described by their <strong>center</strong> (mean/median) and <strong>spread</strong> (variance/standard deviation).</p></li>
 <li class="fragment"><p>Typically, these two parameters are used in common inferential techniques.</p></li>
 <li class="fragment"><p>The mean represents the average score in a distribution. A good measure of spread will tell us something about how the typical score deviates from the mean.</p></li>
 <li class="fragment"><p>Why can’t we use the average deviation?</p></li>
@@ -897,6 +897,23 @@
 <p>In a normal distribution, the mean, median, and mode are all relatively equal.</p>
 <p>In a skewed distribution, both the mean and median get pulled away from the mode. The mean is pulled further.</p>
 <p>So, if I know nothing else about a person, and the data is skewed what might be a better guess at their score? The median or mode because it falls within the bulk of the data. Often people report the median when data are skewed.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<p>In general, when building statistical models, we must not forget that the aim is to understand something about the real world. Or predict, choose an action, make a decision, summarize evidence, and so on, but always about the real world, not an abstract mathematical world: our models are not the reality. Hand (2014)</p>
+<aside class="notes">
+<p>So, we talked about the mean as a model. And this is relevant to this quote from the reading that I sent around yesterday. Our aim is to understand something about the real world. At the simplest level, we can think about the mean as a model. Of course we can calculate the mean of any continuous variable, but if the data are skewed, the mean isn’t a good model of what’s actually happening in the real world. In the case of skewed data, the median might be a better model of what’s actually occurring in the real world (given that your data collection procedures actually sample the real world, which is another issue altogether).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1133,10 +1150,6 @@
 <h2>Questions?</h2>
 
 <img data-src="images/not_normal.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section class="slide level2">
-
-<p>In general, when building statistical models, we must not forget that the aim is to understand something about the real world. Or predict, choose an action, make a decision, summarize evidence, and so on, but always about the real world, not an abstract mathematical world: our models are not the reality. Hand (2014)</p>
-</section>
 <section class="slide level2">
 
 <div class="quarto-auto-generated-content">

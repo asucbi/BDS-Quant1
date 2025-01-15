@@ -15,12 +15,10 @@ editor: visual
 
 ## Module 1 Quiz!
 
-Q1: What is **one** reason that we describe our data? 
+Q1: What is **one** reason that we describe our data?
 
 ::: notes
-find errors in data entry or collection
-understand the data
-explore descriptive research questions
+find errors in data entry or collection understand the data explore descriptive research questions
 :::
 
 ------------------------------------------------------------------------
@@ -30,18 +28,14 @@ explore descriptive research questions
 Q2: Distributions are most often described by their...
 
 ::: nonincremental
-* A. mean and median
-* B. variance and standard deviation
-* C. mean and variance
-* D. median and standard deviation
-
+-   A. mean and median
+-   B. variance and standard deviation
+-   C. center and spread
+-   D. color and shape
 :::
 
-Assume that the distribution we are describing is _not_ skewed.
-
 ::: notes
-we want to describe the center and spread
-mean and variance, these are used in most statistical tests
+we want to describe the center and spread most often the mean and variance or the mean and standard deviation, these are used in most statistical tests
 :::
 
 ------------------------------------------------------------------------
@@ -51,12 +45,10 @@ mean and variance, these are used in most statistical tests
 Q3: I want to calculate a measure of spread in my distribution, so I calculate each score's deviation from the mean (i.e., x - mean) and then I add those scores together. What do I get?
 
 ::: nonincremental
-
-* A. The variance
-* B. The standard deviation
-* C. The range
-* D. Zero
-
+-   A. The variance
+-   B. The standard deviation
+-   C. The range
+-   D. Zero
 :::
 
 ::: notes
@@ -70,8 +62,7 @@ deviations from the mean sum to zero, this is why we use the sum of squared devi
 Q4: What happens to the mean in a skewed distribution?
 
 ::: notes
-gets pulled toward the tail
-so, what might we prefer to use? A: median becuase it represents the bulk of the data
+gets pulled toward the tail so, what might we prefer to use? A: median becuase it represents the bulk of the data
 :::
 
 ------------------------------------------------------------------------
@@ -83,6 +74,7 @@ Q5: In the (hypothetical) 2024 Gallup Happiness Poll, the mean happiness rating 
 ::: notes
 According to the Empirical Rule, in a normal distribution, 68% of values fall within plus or minus 1 SD from the mean. This means that 68% of happiness ratings would fall between 2 and 6.
 :::
+
 ------------------------------------------------------------------------
 
 ## BONUS POINT!
@@ -98,5 +90,7 @@ free point!
 ## Reminders for Next Week!
 
 Don't forget to complete Journal 1 and submit your homework by 12pm on Tuesday (January 21st)!
+
+You can **always** reach out (via Slack, email, office hours) if you have **any** questions!
 
 ------------------------------------------------------------------------
