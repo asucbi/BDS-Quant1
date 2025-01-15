@@ -1,5 +1,5 @@
 ---
-title: "Module 1: Lab Handout"
+title: "Module 1: Lab Instructions"
 format: html
 editor: visual
 ---
