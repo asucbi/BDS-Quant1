@@ -25,10 +25,6 @@ In the Files pane you should see these two R Notebooks:
 
 Open up `mod-01-hw-starter.qmd`.
 
-## Update the YAML
-
-In the YAML at the top of your .qmd file, change the author name to your name and put in today's date.
-
 ## Render it!
 
 Click the button called "Render" (circled in the image below) and then double check to see that your document rendered in the **Viewer** pane. It is always a good idea to occasionally check that the document still renders correctly after making changes.
@@ -40,6 +36,8 @@ Click the button called "Render" (circled in the image below) and then double ch
 Today, we'll be using the following packages:
 
 -   **tidyverse**: a collection of packages for doing data analysis in a "tidy" way
+-   **knitr**: a package that supports the integration of code into text documents, we will be using it today to create a table
+-   **moments**: a package that calculates skewness and kurtosis
 
 Please load these packages using the `library()` function.
 
@@ -63,57 +61,51 @@ If you are having trouble reading in the data, remember that they are in the `da
 
 Now, use the `View()` function to take a look at your data.
 
-::: callout-important
-Why should we always take a look at the data after reading it in?
-:::
+In lab we used the "Happiness" variable. For this first part of the homework (Exercises 1-5) we will be using the "Corruption" variable from that same dataset. For this variable, participants were asked: “Is corruption widespread throughout the government or not” and “Is corruption widespread within businesses or not?” Their score on the "Corruption" variable is the average of these two questions. 
 
 ## Exercise 1:
 
-Calculate (individually) the mean, median, variance and standard deviation of the "Happiness" variable using the corresponding function in R. Please use these functions:
+Calculate (individually) the mean, median, variance and standard deviation of the "Corruption" variable using the corresponding function in R. Please use these functions:
 
 `mean()` `median()` `var()` `sd()`
 
-Save your values as variables, as we'll be using them in our write-up!
+Save your values as objects, as we'll be using them in our write-up!
 
-Now, create a table of these values.
+Now, create a pipe table using these values.
 
-There are some nice instructions on the [Quarto Website](https://quarto.org/docs/authoring/tables.html) that cover the creation of tables.
 
 ## Exercise 2:
 
-Construct a summary of the "Happiness" variable that contains each of the above parameters.
+Construct a summary of the "Corruption" variable that contains each of the above parameters.
 
 Turn this summary into a table that renders nicely in your final document.
 
-The function `kable` in the `knitr` package is a nice option for creating tables from r objects. More information about this function is available [here](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html).
 
 ## Exercise 3:
 
-Create a histogram of the "Happiness" variable. Make sure to label your plot.
+Create a histogram of the "Corruption" variable. Make sure to label your plot.
 
-*NEW*: Add a vertical line the indicates the location of the mean (solid red line) and median (dashed red line). Hint: use `geom_vline`.
+**NEW CHALLENGE**: Add a vertical line the indicates the location of the mean (using a solid red line) and median (using a dashed red line). Hint: use `geom_vline`.
 
-What do the descriptive statistics and histogram suggest about the shape of the "Happiness" distribution? Is it normally distributed or skewed in one direction? How can you tell?
+What do the descriptive statistics and histogram suggest about the shape of the "Corruption" distribution? Is it normally distributed or skewed in one direction? How can you tell?
 
 ## Exercise 4:
 
 Now, let's examine the skew and kurtosis of the distribution!
 
-First, we need to install and load the `moments` package.
+Remember that we are using the `skewness()` and `kurtosis()` functions in the `moments` package to calculate these values.
 
-Next, we can use the `skewness()` and `kurtosis()` functions to calculate these values.
-
-Again, save your values as variables, as we'll be using them in the write-up!
+Again, save your values as objects, as we'll be using them in the write-up!
 
 ## Exercise 5:
 
-Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the variables you created earlier to insert the descriptive values directly into your summary.
+Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the objects you created earlier to insert the descriptive values directly into your summary.
 
 ## Exercise 6:
 
-Choose one of the [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday/tree/main) datasets and find a **continuous** variable that you would like to examine. Tell me the year and title of that dataset (e.g., 2021 - Netflix Titles). Repeat Exercises 1-5 for that variable.
+Choose one of the [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday/tree/main) datasets and find a **continuous** variable that you would like to examine. Repeat Exercises 1-5 for that variable. Make sure to include the year and title of that dataset (e.g., 2021 - Netflix Titles) in your summary. 
 
-If you are working on this homework in a group, each member should please use a *different* dataset.
+If you are working on this homework in a group, each member should please use a **different** dataset.
 
 ## Wrapping Up
 

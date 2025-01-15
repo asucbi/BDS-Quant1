@@ -15,7 +15,7 @@ IMPORTANT: For this module's homework, I would like to see your code in the fina
 
 ```
 
-## Read in the Data; View the Data
+## Read in and View the Data
 
 ```{r read-and-view, message= FALSE}
 
@@ -29,7 +29,7 @@ Calculate (individually) the mean, median, variance and standard deviation of th
 
 `mean()` `median()` `var()` `sd()`
 
-Save your values as variables, as we'll be using them in our write-up!
+Save your values as objects, as we'll be using them in our write-up!
 
 Create a pipe table using these values. Don't forget to add a title to your table.
 
@@ -73,7 +73,7 @@ First, we need to install and load the `moments` package.
 
 Next, we can use the `skewness()` and `kurtosis()` functions to calculate these values.
 
-Again, save your values as variables, as we'll be using them in the write-up!
+Again, save your values as objects, as we'll be using them in the write-up!
 
 ```{r skew-kurtosis}
 
@@ -83,7 +83,7 @@ Again, save your values as variables, as we'll be using them in the write-up!
 
 ## Exercise 5:
 
-Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the variables you created earlier to insert the descriptive values directly into your summary.
+Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the objects you created earlier to insert the descriptive values directly into your summary.
 
 # type your summary here
 
@@ -94,6 +94,8 @@ Write up a summary of what you found. Make sure to include information about whi
 
 Don't forget Exercise 6!!
 
-\`\`\`{r tidytuesday-descriptives}
+```{r tidytuesday-descriptives}
 
 # type your code here
+
+```

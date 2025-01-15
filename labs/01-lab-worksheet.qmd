@@ -71,7 +71,7 @@ Calculate (individually) the mean, median, variance and standard deviation of th
 
 `mean()` `median()` `var()` `sd()`
 
-Save your values as variables, as we'll be using them in our write-up!
+Save your values as objects, as we'll be using them in our write-up!
 
 Now, create a table of these values.
 
@@ -99,7 +99,7 @@ First, we need to install and load the `moments` package.
 
 Next, we can use the `skewness()` and `kurtosis()` functions to calculate these values.
 
-Again, save your values as variables, as we'll be using them in the write-up!
+Again, save your values as objects, as we'll be using them in the write-up!
 
 ::: callout-tip
 **Skewness:** Though this is counter-intuitive, **negative skewness** is indicated by **higher** (positive) values, while positive skewness is indicated by **lower** (negative) values. A skewness value between -1 and +1 is excellent, -2 to +2 suggest moderate skewness, and values beyond -2 or +2 suggest substantial non-normality.
@@ -111,7 +111,7 @@ For both skew and kurtosis, a normal distribution would have a value of 0.
 
 ## Exercise 5:
 
-Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the variables you created earlier to insert the descriptive values directly into your summary.
+Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the objects you created earlier to insert the descriptive values directly into your summary.
 
 ## Render your document.
 

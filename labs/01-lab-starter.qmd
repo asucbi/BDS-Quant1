@@ -31,7 +31,7 @@ Calculate (individually) the mean, median, variance and standard deviation of th
 
 `mean()` `median()` `var()` `sd()`
 
-Save your values as variables, as we'll be using them in our write-up!
+Save your values as objects, as we'll be using them in our write-up!
 
 Now, create a table of these values.
 
@@ -43,7 +43,7 @@ Now, create a table of these values.
 # sanity check: is the sd equal to the sqrt of the variance
 
 
-# create a table using the variables you created
+# create a table using the objects you created
 
 ```
 
@@ -106,7 +106,7 @@ First, we need to install and load the `moments` package.
 
 Next, we can use the `skewness()` and `kurtosis()` functions to calculate these values.
 
-Again, save your values as variables, as we'll be using them in the write-up!
+Again, save your values as objects, as we'll be using them in the write-up!
 
 ```{r skew-kurtosis}
 
@@ -118,6 +118,6 @@ Again, save your values as variables, as we'll be using them in the write-up!
 
 ## Exercise 5:
 
-Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the variables you created earlier to insert the descriptive values directly into your summary.
+Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the objects you created earlier to insert the descriptive values directly into your summary.
 
 # type your summary here

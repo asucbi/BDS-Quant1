@@ -17,7 +17,7 @@ library(tidyverse)
 
 ```
 
-## Read in the Data; View the Data
+## Read in and View the Data
 
 ```{r read-and-view, message= FALSE}
 
@@ -33,7 +33,7 @@ Calculate (individually) the mean, median, variance and standard deviation of th
 
 `mean()` `median()` `var()` `sd()`
 
-Save your values as variables, as we'll be using them in our write-up!
+Save your values as objects, as we'll be using them in our write-up!
 
 ```{r corruption-descriptives}
 
@@ -68,7 +68,7 @@ world %>%
 
 Create a histogram of the "Corruption" variable. Make sure to label your plot.
 
-Add a vertical line the indicates the location of the mean (solid red line) and median (dashed red line). Hint: use `geom_vline`.
+Add a vertical line the indicates the location of the mean (using a solid red line) and median (using a dashed red line). Hint: use `geom_vline`.
 
 What do the descriptive statistics and histogram suggest about the shape of the "Corruption" distribution? Is it normally distributed or skewed in one direction? How can you tell?
 
@@ -94,7 +94,7 @@ First, we need to install and load the `moments` package.
 
 Next, we can use the `skewness()` and `kurtosis()` functions to calculate these values.
 
-Again, save your values as variables, as we'll be using them in the write-up!
+Again, save your values as objects, as we'll be using them in the write-up!
 
 ```{r skew-kurtosis}
 
@@ -114,7 +114,7 @@ kurtosis_corrup <- world %>%
 
 ## Exercise 5:
 
-Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the variables you created earlier to insert the descriptive values directly into your summary.
+Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the objects you created earlier to insert the descriptive values directly into your summary.
 
 # type your summary here
 
