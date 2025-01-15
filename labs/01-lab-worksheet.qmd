@@ -124,7 +124,10 @@ Note: You do not need to submit your lab, but you will need to submit a rendered
 -   In the YAML, change "format: html" to "format: pdf"
 -   Click "Render" at the top of the document
 -   If you get a popup warning, click "Try Again" (may be specific to Mac)
--   Click the "Save" icon on the top right (circled in the image below) ![](images/save_pdf.png)
+-   Click the "Save" icon on the top right (circled in the image below) 
+
+![](images/save_pdf.png)
+
 -   Save wherever you keep your class documents and upload your file to Canvas
 
 ------------------------------------------------------------------------
