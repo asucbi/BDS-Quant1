@@ -8,14 +8,10 @@ For this module's lab (and homework), I would like to see your code in the final
 
 ## Load Packages
 
+Note: you may have to install these packages first.
+
 ```{r load-packages, message= FALSE}
 
-# type your code here
-
-
-
-
-###
 library(tidyverse)
 library(knitr)
 library(moments)
@@ -26,12 +22,6 @@ library(moments)
 
 ```{r read-and-view, message= FALSE}
 
-# type your code here
-
-
-
-
-###
 world <- read_csv("data/world_happiness_2015.csv")
 
 View(world)
@@ -50,13 +40,6 @@ Now, create a table of these values.
 
 ```{r happiness-descriptives}
 
-# type your code here
-
-
-
-
-
-###
 mean_happiness <- mean_happiness <- mean(world$Happiness, na.rm = TRUE)
 median_happiness <- median(world$Happiness, na.rm = TRUE)
 var_happiness <- var(world$Happiness, na.rm = TRUE)
@@ -64,21 +47,18 @@ sd_happiness <- sd(world$Happiness, na.rm = TRUE)
 
 # sanity check: is the sd equal to the sqrt of the variance
 
+sqrt(var_happiness)
 
-
-
-###
-sqrt(var(world$Happiness, na.rm = TRUE))
-# or
-sqrt(var(world$Happiness, na.rm = TRUE)) == sd(world$Happiness, na.rm = TRUE)
-
-# create a table using the objects you created
+sd_happiness == sqrt(var_happiness)
 
 ```
+Create a table using the objects you created.
 
 The code below is for a **pipe table**. However there are *many* ways to create tables. The [Quarto Website](https://quarto.org/docs/authoring/tables.html) has some nice instructions that go more in depth about the creation of tables
 
 Notice that I am creating the table within my text, and not in the code chunk.
+
+Template:
 
 | Statistic          |             Value |
 |--------------------|------------------:|
@@ -90,6 +70,7 @@ Notice that I am creating the table within my text, and not in the code chunk.
 : Happiness Descriptives {.striped .hover}
 
 ### 
+Finished Version:
 
 | Statistic          |                          Value |
 |--------------------|-------------------------------:|
@@ -110,12 +91,6 @@ Turn this summary into a table that renders nicely in your final document.
 
 ```{r happiness-summary}
 
-# type your code here
-
-
-
-
-###
 # multiple ways to do it, this is one example!
 world %>% 
   summarise(mean = mean(Happiness, na.rm = TRUE),
@@ -141,20 +116,15 @@ Create a histogram of the "Happiness" variable. Make sure to label your plot.
 
 What do the descriptive statistics and histogram suggest about the shape of the "Happiness" distribution? Is it normally distributed or skewed in one direction? How can you tell?
 
+It looks relatively normal. 
+
 ```{r histogram}
 
-# type your code here
-
-
-
-
-###
 world %>% 
   ggplot(aes(x = Happiness)) +
   geom_histogram() +
   labs(title = "World Happiness Ratings in 2015")
 
-# does the variable look normally distributed? skewed? what do the descriptives suggest?
 
 ```
 
@@ -179,6 +149,8 @@ Again, save your values as objects, as we'll be using them in the write-up!
 skew_happiness <- world %>% 
   select(Happiness) %>% 
   skewness(na.rm=TRUE)
+
+skewness(world$Happiness, na.rm = TRUE)
 
 kurtosis_happiness <- world %>% 
   select(Happiness) %>% 
