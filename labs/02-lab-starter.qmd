@@ -1,0 +1,167 @@
+---
+title: "Module 2: Lab Starter File KEY"
+format: html
+editor: visual
+---
+
+For this module's lab (and homework), I would like to see your code in the final document. So, make sure you haven't hidden any of your code (i.e., by using `echo=FALSE`) in your code chunks.
+
+## Load Packages
+
+Note: you may have to install these packages first.
+
+```{r load-packages, message= FALSE}
+
+library(tidyverse)
+library(infer)
+library(knitr)
+
+```
+
+## Read in the Data; View the Data
+
+```{r read-and-view, message= FALSE}
+
+
+
+
+```
+
+## Exercise 1:
+
+For this first exercise, we are going to generate 10000 random samples of different sizes (5, 30, and 100) from a skewed distribution. For each sample, we will calculate the mean. Then, we will plot those 1000 means to examine the resulting sampling distributions. We will use the (depressing, sorry!) infant_mortality variable in the gapminder data. 
+
+
+First, let's plot the distribution and generate some descriptives. Create a table of the descriptives (rounded to 2 decimal places). 
+
+```{r plot-distribution}
+
+
+
+
+```
+Describe the shape of the distribution. If it is skewed, please specify the direction (positive/right skewed or negative/left skewed).
+
+The data are positively skewed (or right skewed). 
+
+Next, let's take 1000 samples of size 5 and calcualte the mean for each sample. We will use the `rep_sample_n()` function from the *infer* package.
+
+```{r sample-5}
+
+
+
+
+```
+Now, do the same thing for sample size of 30 and 100 (i.e., copy the above code and change the `size` and `n` to the appropriate values).
+
+```{r sample-30-100}
+
+
+
+```
+Next, combine your three data frames together and generate a plot to compare them.
+
+```{r comparison-plot}
+
+
+
+
+```
+Compare the three plots, what does this show?
+
+This illustrates that the distribution approaches normal as sample size increases. Note that, even for a sample size of 5, the _sampling distributon of the mean_ is more normal than the original distribution. By the time you get to a sample of 30, it's already looking _much_ closer to normal.
+
+
+## Exercise 2:
+
+Now, let's practice the steps of Null Hypothesis Significance Testing (NHST). There is no data to read in for this exercise. 
+
+A psychologist is investigating the impact of a new mindfulness meditation technique on stress levels. It is known that the average stress score on a well-validated scale is 75 for the general population.
+
+The psychologist recruits 25 participants to undergo the mindfulness meditation program for 8 weeks. After the program, the participants complete the standardized stress scale. The sample of participants has an average stress score of 68 with a standard deviation of 12.
+
+**Step 1:** State the null and alternative hypotheses. Use _non-directional_ hypotheses.
+
+H~0~: $\mu$ = 75
+
+H~1~: $\mu$ $\neq$ 75
+
+**Step 2:** Choose your alpha level; provide a justification.
+
+$\alpha$: .05
+
+This is the standard alpha level used in Psychology.
+
+**Step 3:** Collect your data.
+
+We're going to pretend we already did this! 
+
+Restating from above: Our sample mean is 68 and sample standard deviation is 12. The population mean is 75. 
+
+$\bar{x}$ = 68
+
+_s_ = 12
+
+$\mu$ = 75
+
+**Step 4:** Define the mean and SEM for the sampling distribution. Estimate the population mean and sd from your data, calculate the SEM. Report the SEM.
+
+_SEM_ = $\sigma$ / $\sqrt{n}$
+
+```{r define-distribution}
+
+
+
+
+
+```
+
+
+
+**Step 5:** Determine the probability of your data or more extreme under the null distribution. Calculate the t-statistic and then generate a p-value using the `pt()` function.
+
+_t_ = ($\bar{x}$ - $\mu$) / _SEM_
+
+```{r t-and-p}
+
+
+
+
+
+```
+
+**Step 6:** Compare your probability (p-value) to your alpha level and decide whether to reject or retain the null hypothesis. 
+
+
+
+
+
+**Step 7:** Write up your results summary. Make sure to include a Confidence Interval around your estimate of the mean. See Lab Handout for additional notes about what needs to be included in a summary.
+
+95% CI = $\bar{x}$ &pm;(1.96 x SEM)
+
+```{r confidence-interval}
+
+# remember that you've already created objects for xbar (sample_mean) and the SEM, round to 2 decimal places
+
+
+
+
+```
+
+[type summary here]
+
+## Consider the following alternative scenarios. What would you conclude?
+
+If observed sample mean was 72, the t statistic would be -1.25 and p-value would be 0.22. What do you conclude?
+
+[type conclusion here]
+
+If the observed sample mean was 82, the t statistic would be 2.92 and p-value would be .008. What do you conclude?
+
+[type conclusion here]
+
+
+
+
+

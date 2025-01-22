@@ -156,6 +156,7 @@ kurtosis_happiness <- world %>%
   select(Happiness) %>% 
   kurtosis(na.rm=TRUE)
 
+
 ```
 
 ## Exercise 5:
@@ -165,3 +166,25 @@ Write up a summary of what you found. Make sure to include information about whi
 ### 
 
 In the 2015 World Happiness Report, the average Happiness rating is `r round(mean_happiness, 2)`. The median Happiness rating is `r round(median_happiness, 2)`, the variance in Happiness ratings is `r round(var_happiness, 2)`, and the standard deviation is `r round(sd_happiness, 2)`. A histogram of the data reveals an approximately normally distribution. While the skewness of `r round(skew_happiness, 2)` is close to zero and suggests an approximately normal distribution, the kurtosis is slightly high at `r round(kurtosis_happiness, 2)`. For these data, the mean would be the most appropriate measure of central tendency.
+
+```{r}
+```
+Amir's (excellent) question: How does the `skewness()` function calculate the skew? What is the equation?
+
+There are multiple equations to calculate skew, the one that the `moments` package uses is:
+
+Skewness = (sum((x - mean(x))^3) / n) / (sum((x - mean(x))^2) / n)^(3/2)
+
+We can try out this equation.
+
+x <- world$Happiness
+n <- nrow(world)
+
+skew_happiness_calc <- (sum((x - mean(x))^3) / n) / (sum((x - mean(x))^2) / n)^(3/2)
+
+#skew using the equation
+skew_happiness_calc
+
+#skew using the function
+skew_happiness
+

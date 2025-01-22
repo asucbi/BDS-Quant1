@@ -1,0 +1,196 @@
+---
+title: "Module 2: Lab Starter File KEY"
+format: html
+editor: visual
+---
+
+For this module's lab (and homework), I would like to see your code in the final document. So, make sure you haven't hidden any of your code (i.e., by using `echo=FALSE`) in your code chunks.
+
+## Load Packages
+
+Note: you may have to install these packages first.
+
+```{r load-packages, message= FALSE}
+
+library(tidyverse)
+library(infer)
+library(knitr)
+
+```
+
+## Read in the Data; View the Data
+
+```{r read-and-view, message= FALSE}
+
+gapminder_2015 <- read_csv("data/gapminder_2015.csv")
+
+View(gapminder_2015)
+
+```
+
+## Exercise 1:
+
+For this first exercise, we are going to generate 10000 random samples of different sizes (5, 30, and 100) from a skewed distribution. For each sample, we will calculate the mean. Then, we will plot those 1000 means to examine the resulting sampling distributions. We will use the (depressing, sorry!) infant_mortality variable in the gapminder data.
+
+First, let's plot the distribution and generate some descriptives. Create a table of the descriptives (rounded to 2 decimal places).
+
+```{r plot-distribution}
+
+gapminder_2015 %>% 
+  ggplot(aes(x = infant_mortality)) +
+  geom_histogram() 
+
+mortality_summary <- gapminder_2015 %>% 
+  summarise(Mean = mean(infant_mortality, na.rm = TRUE),
+            Median = median(infant_mortality, na.rm = TRUE), 
+            Variance = var(infant_mortality, na.rm = TRUE),
+            `Standard Deviation` = sd(infant_mortality, na.rm = TRUE))
+
+kable(t(mortality_summary), digits = 2, col.names = c("Statistic", "Value"), caption = "Infant Mortality Descriptive Statistics")  
+
+```
+
+Describe the shape of the distribution. If it is skewed, please specify the direction (positive/right skewed or negative/left skewed).
+
+The data are positively skewed (or right skewed).
+
+Next, let's take 1000 samples of size 5 and calcualte the mean for each sample. We will use the `rep_sample_n()` function from the *infer* package.
+
+```{r sample-5}
+
+sample_5 <- rep_sample_n(gapminder_2015, size = 5, reps = 10000) %>% #here we are getting 100 samples of size 5
+  group_by(replicate) %>% #here we are grouping by sample (the function created this `replicate` variable)
+  summarise(mean_infant_mortality = mean(life_expectancy)) %>% #now, get the mean for each sample
+  mutate(n = "5") #add a variable that indcates the sample size
+
+```
+
+Now, do the same thing for sample size of 30 and 100 (i.e., copy the above code and change the `size` and `n` to the appropriate values).
+
+```{r sample-30-100}
+
+sample_30 <- rep_sample_n(gapminder_2015, size = 30, reps = 10000) %>% 
+  group_by(replicate) %>% 
+  summarise(mean_infant_mortality = mean(life_expectancy)) %>% 
+  mutate(n = 30)
+
+sample_100 <- rep_sample_n(gapminder_2015, size = 100, reps = 10000) %>% 
+  group_by(replicate) %>% 
+  summarise(mean_infant_mortality = mean(life_expectancy)) %>% 
+  mutate(n = 100)
+
+```
+
+Next, combine your three data frames together and generate a plot to compare them.
+
+```{r comparison-plot}
+
+all_samples <- bind_rows(sample_5, sample_30, sample_100)
+
+ggplot(all_samples) + #use all_samples data
+  geom_histogram(aes(x = mean_infant_mortality), color = "black")  + #create a histogram of infant mortality values, make the bars black
+  xlab("Infant mortality per 1,000 live births") + #label the x axis
+  ylab("Number of countries") + #label the y axis
+  facet_wrap(~n, ncol = 1) #create a separate graph for each "n" value, put them all in one column
+
+```
+
+Compare the three plots, what does this show?
+
+This illustrates that the distribution approaches normal as sample size increases. Note that, even for a sample size of 5, the *sampling distributon of the mean* is more normal than the original distribution. By the time you get to a sample of 30, it's already looking *much* closer to normal.
+
+## Exercise 2:
+
+Now, let's practice the steps of Null Hypothesis Significance Testing (NHST). There is no data to read in for this exercise.
+
+A psychologist is investigating the impact of a new mindfulness meditation technique on stress levels. It is known that the average stress score on a well-validated scale is 75 for the general population.
+
+The psychologist recruits 25 participants to undergo the mindfulness meditation program for 8 weeks. After the program, the participants complete the standardized stress scale. The sample of participants has an average stress score of 68 with a standard deviation of 12.
+
+**Step 1:** State the null and alternative hypotheses. Use *non-directional* hypotheses.
+
+H~0~: $\mu$ = 75
+
+H~1~: $\mu$ $\neq$ 75
+
+**Step 2:** Choose your alpha level; provide a justification.
+
+$\alpha$: .05
+
+This is the standard alpha level used in Psychology.
+
+**Step 3:** Collect your data.
+
+We're going to pretend we already did this!
+
+Restating from above: Our sample mean is 68 and sample standard deviation is 12. The population mean is 75.
+
+$\bar{x}$ = 68
+
+*s* = 12
+
+$\mu$ = 75
+
+**Step 4:** Define the mean and SEM for the sampling distribution. Estimate the population mean and sd from your data, calculate the SEM. Report the SEM.
+
+*SEM* = $\sigma$ / $\sqrt{n}$
+
+```{r define-distribution}
+
+# first, I am going to create objects for each of these values (some of which I'll use later)
+population_mean <- 75
+sample_mean <- 68
+estimated_sigma <- 12
+sample_size <- 25
+
+# then, I'll use those objects to calcualte the SEM
+SEM <- estimated_sigma / sqrt(sample_size)
+
+# make sure to report the SEM that you calculated above
+
+```
+
+*SEM* = `r SEM`
+
+**Step 5:** Determine the probability of your data or more extreme under the null distribution. Calculate the t-statistic and then generate a p-value using the `pt()` function.
+
+*t* = ($\bar{x}$ - $\mu$) / *SEM*
+
+```{r t-and-p}
+
+t_statistic <- (sample_mean - population_mean) / SEM
+
+df_value <- sample_size - 1
+
+p_value <- 2*pt(abs(t_statistic), df = df_value, lower.tail = FALSE)
+
+```
+
+**Step 6:** Compare your probability (p-value) to your alpha level and decide whether to reject or retain the null hypothesis.
+
+My alpha level is .05 and my observed p-value is `r round(p_value, 3)`, so I reject the null hypothesis that participants in the mindfulness program have an average score on the stress scale.
+
+**Step 7:** Write up your results summary. Make sure to include a Confidence Interval around your estimate of the mean.
+
+95% CI = $\bar{x}$ ±(1.96 x SEM)
+
+```{r confidence-interval}
+
+# remember that you've already created objects for xbar (sample_mean) and the SEM, round to 2 decimal places
+
+lower_bound <- round(sample_mean - (1.96*SEM), 2)
+upper_bound <- round(sample_mean + (1.96*SEM), 2)
+
+```
+
+We examined the effect of an 8-week mindfulness meditation program on stress levels.The average score of participants after the program (*M* = `r sample_mean`, 95%CI \[`r lower_bound`, `r upper_bound`\], *SD* = `r estimated_sigma`) was significantly higher than the population average ($\mu$ = `r population_mean`), *t*(`r df_value`) = `r round(t_statistic, 2)`, *p* = `r round(p_value, 3)`.This finding suggests that the mindfulness meditation program has a significant impact on reducing stress levels in participants.
+
+## Consider the following alternative scenarios. What would you conclude?
+
+If observed sample mean was 72, the t statistic would be -1.25 and p-value would be 0.22. What do you conclude?
+
+I would conclude that there is not a signficiant effect. The mindfulness program did not decrease stress more than would be expected by chance.
+
+If the observed sample mean was 82, the t statistic would be 2.92 and p-value would be .008. What do you conclude?
+
+I would conclude that there IS a signficant effect. BUT the mindfulness program actually INCREASED stress levels. Oops! Even though this wasn't your prediction, it would still be useful to know!

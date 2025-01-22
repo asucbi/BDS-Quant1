@@ -1,0 +1,116 @@
+---
+title: "Module 1: Homework Instructions"
+format: html
+editor: visual
+---
+
+## Purpose
+
+This week's homework is very simple. You will be asked to characterize distributions of data, just as you did in lab, and report your results.
+
+## Access the Starter Files for Module 1
+
+-   Go to [posit.cloud](posit.cloud) and then **navigate to the course workspace** via the left sidebar.
+
+    -   Look for the course workspace called "Statistical Methods Spring 2025"
+
+-   Open the project titled **Module 1** This module contains the starter files that you will use for this lab and for your homework.
+
+## Starter Files
+
+In the Files pane you should see these two R Notebooks:
+
+-   mod-01-lab-starter.qmd
+-   mod-01-hw-starter.qmd
+
+Open up `mod-01-hw-starter.qmd`.
+
+## Render it!
+
+Click the button called "Render" (circled in the image below) and then double check to see that your document rendered in the **Viewer** pane. It is always a good idea to occasionally check that the document still renders correctly after making changes.
+
+![](images/render.png)
+
+## Load Packages
+
+Today, we'll be using the following packages:
+
+-   **tidyverse**: a collection of packages for doing data analysis in a "tidy" way
+-   **knitr**: a package that supports the integration of code into text documents, we will be using it today to create a table
+-   **moments**: a package that calculates skewness and kurtosis
+
+Please load these packages using the `library()` function.
+
+```{r load-packages, echo=FALSE, message=FALSE}
+library(tidyverse)
+```
+
+## Step 4: Read in the Data
+
+The data we will use in Module 1 is from the [2015 World Happiness Report](https://worldhappiness.report/ed/2015/), an annual survey part of the [Gallup World Poll](https://www.gallup.com/178667/gallup-world-poll-work.aspx).
+
+Read in the data using the `read_csv()` function. Name the data "world."
+
+```{r read in data, echo = FALSE, message=FALSE}
+world <- read_csv("data/world_happiness_2015.csv")
+```
+
+::: callout-note
+If you are having trouble reading in the data, remember that they are in the `data` folder!
+:::
+
+Now, use the `View()` function to take a look at your data.
+
+In lab we used the "Happiness" variable. For this first part of the homework (Exercises 1-5) we will be using the "Corruption" variable from that same dataset. For this variable, participants were asked: “Is corruption widespread throughout the government or not” and “Is corruption widespread within businesses or not?” Their score on the "Corruption" variable is the average of these two questions.
+
+## Exercise 1:
+
+Calculate (individually) the mean, median, variance and standard deviation of the "Corruption" variable using the corresponding function in R. Please use these functions:
+
+`mean()` `median()` `var()` `sd()`
+
+Save your values as objects, as we'll be using them in our write-up!
+
+Now, create a pipe table using these values.
+
+## Exercise 2:
+
+Construct a summary of the "Corruption" variable that contains each of the above parameters.
+
+Turn this summary into a table that renders nicely in your final document.
+
+## Exercise 3:
+
+Create a histogram of the "Corruption" variable. Make sure to label your plot.
+
+**NEW CHALLENGE**: Add a vertical line the indicates the location of the mean (using a solid red line) and median (using a dashed red line). Hint: use `geom_vline`.
+
+What do the descriptive statistics and histogram suggest about the shape of the "Corruption" distribution? Is it normally distributed or skewed in one direction? How can you tell?
+
+## Exercise 4:
+
+Now, let's examine the skew and kurtosis of the distribution!
+
+Remember that we are using the `skewness()` and `kurtosis()` functions in the `moments` package to calculate these values.
+
+Again, save your values as objects, as we'll be using them in the write-up!
+
+## Exercise 5:
+
+Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the objects you created earlier to insert the descriptive values directly into your summary.
+
+## Exercise 6:
+
+Choose one of the [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday/tree/main) datasets and find a **continuous** variable that you would like to examine. Repeat Exercises 1-5 for that variable. Make sure to include the year and title of that dataset (e.g., 2021 - Netflix Titles) in your summary.
+
+If you are working on this homework in a group, each member should please use a **different** dataset.
+
+## Wrapping Up
+
+# Render and Submit your .qmd file!
+
+Render your file as a PDF and submit to "Module 1: Homework Submission" on Canvas!
+
+IMPORTANT: For this module's homework, I would like to see your code in the final document. So, make sure you **HAVE NOT** hidden any of your code (i.e., by using `echo=FALSE`) in your code chunks.
+
+------------------------------------------------------------------------

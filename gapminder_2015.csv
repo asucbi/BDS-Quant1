@@ -1,0 +1,179 @@
+country,year,infant_mortality,life_expectancy,fertility,population,gdp,continent,region
+Albania,2015,12.5,78,1.78,2896679,NA,Europe,Southern Europe
+Algeria,2015,21.9,76.4,2.71,39666519,NA,Africa,Northern Africa
+Angola,2015,96,59.6,5.65,25021974,NA,Africa,Middle Africa
+Antigua and Barbuda,2015,5.8,76.4,2.06,91818,NA,Americas,Caribbean
+Argentina,2015,11.1,76.5,2.15,43416755,NA,Americas,South America
+Armenia,2015,12.6,74.7,1.41,3017712,NA,Asia,Western Asia
+Australia,2015,3,82.3,1.88,23968973,NA,Oceania,Australia and New Zealand
+Austria,2015,2.9,81.3,1.5,8544586,NA,Europe,Western Europe
+Azerbaijan,2015,27.9,72.9,1.89,9753968,NA,Asia,Western Asia
+Bahamas,2015,9.9,73.7,1.88,388019,NA,Americas,Caribbean
+Bahrain,2015,5.3,79.1,2.03,1377237,NA,Asia,Western Asia
+Bangladesh,2015,30.7,70.4,2.12,160995642,NA,Asia,Southern Asia
+Barbados,2015,12,75.7,1.86,284215,NA,Americas,Caribbean
+Belarus,2015,3.4,71,1.51,9495826,NA,Europe,Eastern Europe
+Belgium,2015,3.3,80.5,1.86,11299192,NA,Europe,Western Europe
+Belize,2015,14.2,71.7,2.6,359287,NA,Americas,Central America
+Benin,2015,64.2,62.3,4.69,10879829,NA,Africa,Western Africa
+Bhutan,2015,27.2,72.7,2.15,774830,NA,Asia,Southern Asia
+Bolivia,2015,30.6,73.2,3.14,10724705,NA,Americas,South America
+Bosnia and Herzegovina,2015,5.1,78.9,1.32,3810416,NA,Europe,Southern Europe
+Botswana,2015,34.8,58.7,2.54,2262485,NA,Africa,Southern Africa
+Brazil,2015,14.6,74.4,1.78,207847528,NA,Americas,South America
+Brunei,2015,8.6,77.1,1.96,423188,NA,Asia,South-Eastern Asia
+Bulgaria,2015,9.3,74.8,1.57,7149787,NA,Europe,Eastern Europe
+Burkina Faso,2015,60.9,60.9,5.43,18105570,NA,Africa,Western Africa
+Burundi,2015,54.1,61.4,5.85,11178921,NA,Africa,Eastern Africa
+Cambodia,2015,24.6,69.4,2.8,15577899,NA,Asia,South-Eastern Asia
+Cameroon,2015,57.1,59.4,4.63,23344179,NA,Africa,Middle Africa
+Canada,2015,4.3,81.7,1.68,35939927,NA,Americas,Northern America
+Cape Verde,2015,20.7,72.9,2.22,520502,NA,Africa,Western Africa
+Central African Republic,2015,91.5,49.6,4.2,4900274,NA,Africa,Middle Africa
+Chad,2015,85,57.4,6.04,14037472,NA,Africa,Middle Africa
+Chile,2015,7,79.4,1.8,17948141,NA,Americas,South America
+China,2015,9.2,76.2,1.57,1376048943,NA,Asia,Eastern Asia
+Colombia,2015,13.6,78,2.23,48228704,NA,Americas,South America
+Comoros,2015,55.1,68.1,4.58,788474,NA,Africa,Eastern Africa
+"Congo, Dem. Rep.",2015,74.5,60.8,5.72,77266814,NA,Africa,Middle Africa
+"Congo, Rep.",2015,33.2,61.5,4.86,4620330,NA,Africa,Middle Africa
+Costa Rica,2015,8.5,80.3,1.77,4807850,NA,Americas,Central America
+Cote d'Ivoire,2015,66.6,59.1,4.76,22701556,NA,Africa,Western Africa
+Croatia,2015,3.6,77.8,1.52,4240317,NA,Europe,Southern Europe
+Cuba,2015,4,78.2,1.45,11389562,NA,Americas,Caribbean
+Cyprus,2015,2.5,81.8,1.46,1165300,NA,Asia,Western Asia
+Czech Republic,2015,2.8,78.8,1.6,10543186,NA,Europe,Eastern Europe
+Denmark,2015,2.9,80.4,1.89,5669081,NA,Europe,Northern Europe
+Djibouti,2015,54.2,63.8,3.26,887861,NA,Africa,Eastern Africa
+Dominican Republic,2015,25.7,75.3,2.42,10528391,NA,Americas,Caribbean
+Ecuador,2015,18.4,75.9,2.5,16144363,NA,Americas,South America
+Egypt,2015,20.3,71.5,2.7,91508084,NA,Africa,Northern Africa
+El Salvador,2015,14.4,74.9,2.14,6126583,NA,Americas,Central America
+Equatorial Guinea,2015,68.2,61,4.65,845060,NA,Africa,Middle Africa
+Eritrea,2015,34.1,60.7,4.52,5227791,NA,Africa,Eastern Africa
+Estonia,2015,2.3,77.8,1.62,1312558,NA,Europe,Northern Europe
+Ethiopia,2015,41.4,65.2,4.28,99390750,NA,Africa,Eastern Africa
+Fiji,2015,19.1,65.8,2.54,892145,NA,Oceania,Melanesia
+Finland,2015,1.9,80.9,1.86,5503457,NA,Europe,Northern Europe
+France,2015,3.5,81.8,1.98,64395345,NA,Europe,Western Europe
+Gabon,2015,36.1,65.9,3.97,1725292,NA,Africa,Middle Africa
+Gambia,2015,47.9,68.1,5.67,1990924,NA,Africa,Western Africa
+Georgia,2015,10.6,72.9,1.81,3999812,NA,Asia,Western Asia
+Germany,2015,3.1,80.8,1.44,80688545,NA,Europe,Western Europe
+Ghana,2015,42.8,65.3,3.74,27409893,NA,Africa,Western Africa
+Greece,2015,3.6,81,1.55,10954617,NA,Europe,Southern Europe
+Grenada,2015,10.8,71.5,2.13,106825,NA,Americas,Caribbean
+Guatemala,2015,24.3,72.6,3.66,16342897,NA,Americas,Central America
+Guinea,2015,61,59.1,4.75,12608590,NA,Africa,Western Africa
+Guinea-Bissau,2015,60.3,55.6,4.8,1844325,NA,Africa,Western Africa
+Guyana,2015,32,66.8,2.47,767085,NA,Americas,South America
+Haiti,2015,52.2,64.3,3.03,10711067,NA,Americas,Caribbean
+Honduras,2015,17.4,73,2.91,8075060,NA,Americas,Central America
+Hungary,2015,5.3,76.7,1.44,9855023,NA,Europe,Eastern Europe
+Iceland,2015,1.6,83.3,2.06,329425,NA,Europe,Northern Europe
+India,2015,37.9,67.2,2.43,1311050527,NA,Asia,Southern Asia
+Indonesia,2015,22.8,71.1,2.28,257563815,NA,Asia,South-Eastern Asia
+Iran,2015,13.4,74.6,1.91,79109272,NA,Asia,Southern Asia
+Iraq,2015,26.5,67.4,3.91,36423395,NA,Asia,Western Asia
+Ireland,2015,3,81.7,1.99,4688465,NA,Europe,Northern Europe
+Israel,2015,3.2,82.1,2.86,8064036,NA,Asia,Western Asia
+Italy,2015,2.9,82.2,1.52,59797685,NA,Europe,Southern Europe
+Jamaica,2015,13.5,75,2.21,2793335,NA,Americas,Caribbean
+Japan,2015,2,83.2,1.45,126573481,NA,Asia,Eastern Asia
+Jordan,2015,15.4,78.5,3.12,7594547,NA,Asia,Western Asia
+Kazakhstan,2015,12.6,70.2,2.4,17625226,NA,Asia,Central Asia
+Kenya,2015,35.5,65.1,4.24,46050302,NA,Africa,Eastern Africa
+Kiribati,2015,43.6,63,2.89,112423,NA,Oceania,Micronesia
+South Korea,2015,2.9,81,1.36,50293439,NA,Asia,Eastern Asia
+Kuwait,2015,7.3,80.3,2.55,3892115,NA,Asia,Western Asia
+Kyrgyz Republic,2015,19,69.8,3.04,5939962,NA,Asia,Central Asia
+Lao,2015,50.7,67.1,2.87,6802023,NA,Asia,South-Eastern Asia
+Latvia,2015,6.9,75.4,1.64,1970503,NA,Europe,Northern Europe
+Lebanon,2015,7.1,78.9,1.49,5850743,NA,Asia,Western Asia
+Lesotho,2015,69.2,47.1,2.94,2135022,NA,Africa,Southern Africa
+Liberia,2015,52.8,63.2,4.64,4503438,NA,Africa,Western Africa
+Libya,2015,11.4,74.1,2.26,6278438,NA,Africa,Northern Africa
+Lithuania,2015,3.3,75.2,1.55,2878405,NA,Europe,Northern Europe
+Luxembourg,2015,1.5,82.2,1.69,567110,NA,Europe,Western Europe
+"Macedonia, FYR",2015,4.8,76.5,1.43,2078453,NA,Europe,Southern Europe
+Madagascar,2015,35.9,63.5,4.35,24235390,NA,Africa,Eastern Africa
+Malawi,2015,43.4,60.5,5.23,17215232,NA,Africa,Eastern Africa
+Malaysia,2015,6,75.3,1.94,30331007,NA,Asia,South-Eastern Asia
+Maldives,2015,7.4,80,2.18,363657,NA,Asia,Southern Asia
+Mali,2015,74.5,60.2,6.81,17599694,NA,Africa,Western Africa
+Malta,2015,5.1,82.1,1.35,418670,NA,Europe,Southern Europe
+Mauritania,2015,65.1,69.7,4.55,4067564,NA,Africa,Western Africa
+Mauritius,2015,11.8,74.5,1.5,1273212,NA,Africa,Eastern Africa
+Mexico,2015,11.3,75.9,2.13,127017224,NA,Americas,Central America
+"Micronesia, Fed. Sts.",2015,28.6,68.9,3.19,104460,NA,Oceania,Micronesia
+Moldova,2015,13.6,73.9,1.45,4068897,NA,Europe,Eastern Europe
+Mongolia,2015,19,67.1,2.4,2959134,NA,Asia,Eastern Asia
+Montenegro,2015,4.3,77.2,1.65,625781,NA,Europe,Southern Europe
+Morocco,2015,23.7,74.6,2.71,34377511,NA,Africa,Northern Africa
+Mozambique,2015,56.7,57.1,5.04,27977863,NA,Africa,Eastern Africa
+Namibia,2015,32.8,64.2,2.95,2458830,NA,Africa,Southern Africa
+Nepal,2015,29.4,69.7,2.18,28513700,NA,Asia,Southern Asia
+Netherlands,2015,3.2,81.3,1.78,16924929,NA,Europe,Western Europe
+New Zealand,2015,4.7,81.4,2.02,4528526,NA,Oceania,Australia and New Zealand
+Nicaragua,2015,18.8,78,2.42,6082032,NA,Americas,Central America
+Niger,2015,57.1,61,7.51,19899120,NA,Africa,Western Africa
+Nigeria,2015,69.4,64.6,5.89,182201962,NA,Africa,Western Africa
+Norway,2015,2,82,1.93,5210967,NA,Europe,Northern Europe
+Oman,2015,9.9,77.2,2.75,4490541,NA,Asia,Western Asia
+Pakistan,2015,65.8,65.9,3.04,188924874,NA,Asia,Southern Asia
+Panama,2015,14.6,78.2,2.42,3929141,NA,Americas,Central America
+Papua New Guinea,2015,44.5,60.9,3.67,7619321,NA,Oceania,Melanesia
+Paraguay,2015,17.5,74.4,2.8,6639123,NA,Americas,South America
+Peru,2015,13.1,79.5,2.36,31376670,NA,Americas,South America
+Philippines,2015,22.2,71,2.98,100699395,NA,Asia,South-Eastern Asia
+Poland,2015,4.5,77.6,1.44,38611794,NA,Europe,Eastern Europe
+Portugal,2015,3,80.8,1.31,10349803,NA,Europe,Southern Europe
+Qatar,2015,6.8,79.7,1.98,2235355,NA,Asia,Western Asia
+Romania,2015,9.7,75.2,1.45,19511324,NA,Europe,Eastern Europe
+Russia,2015,8.2,71,1.61,143456918,NA,Europe,Eastern Europe
+Rwanda,2015,31.1,65.9,4.31,11609666,NA,Africa,Eastern Africa
+St. Lucia,2015,12.7,74.8,1.87,184999,NA,Americas,Caribbean
+St. Vincent and the Grenadines,2015,16.6,71.2,1.95,109462,NA,Americas,Caribbean
+Samoa,2015,15,73.2,4.03,193228,NA,Oceania,Polynesia
+Saudi Arabia,2015,12.5,79.5,2.54,31540372,NA,Asia,Western Asia
+Senegal,2015,41.7,65.3,4.81,15129273,NA,Africa,Western Africa
+Serbia,2015,5.9,76.2,1.37,8850975,NA,Europe,Southern Europe
+Seychelles,2015,11.7,74.1,2.13,96471,NA,Africa,Eastern Africa
+Sierra Leone,2015,87.1,57.1,4.55,6453184,NA,Africa,Western Africa
+Singapore,2015,2.1,82,1.3,5603740,NA,Asia,South-Eastern Asia
+Slovak Republic,2015,5.8,77.6,1.43,5426258,NA,Europe,Eastern Europe
+Slovenia,2015,2.1,80.9,1.53,2067526,NA,Europe,Southern Europe
+Solomon Islands,2015,23.6,64,3.91,583591,NA,Oceania,Melanesia
+South Africa,2015,33.6,61.3,2.34,54490406,NA,Africa,Southern Africa
+Spain,2015,3.5,82.6,1.53,46121699,NA,Europe,Southern Europe
+Sri Lanka,2015,8.4,77.6,2.31,20715010,NA,Asia,Southern Asia
+Sudan,2015,47.6,67.5,4.28,40234882,NA,Africa,Northern Africa
+Suriname,2015,19,72,2.22,542975,NA,Americas,South America
+Swaziland,2015,44.5,51.8,3.2,1286970,NA,Africa,Southern Africa
+Sweden,2015,2.4,82.1,1.93,9779426,NA,Europe,Northern Europe
+Switzerland,2015,3.4,83,1.55,8298663,NA,Europe,Western Europe
+Syria,2015,11.1,68.2,2.88,18502413,NA,Asia,Western Asia
+Tajikistan,2015,38.5,72.4,3.75,8481855,NA,Asia,Central Asia
+Tanzania,2015,35.2,64.1,5.07,53470420,NA,Africa,Eastern Africa
+Thailand,2015,10.5,74.7,1.38,67959359,NA,Asia,South-Eastern Asia
+Timor-Leste,2015,44.7,72.4,5.6,1184765,NA,Asia,South-Eastern Asia
+Togo,2015,52.3,61.5,4.51,7304578,NA,Africa,Western Africa
+Tonga,2015,14.4,71.5,3.68,106170,NA,Oceania,Polynesia
+Trinidad and Tobago,2015,18.2,72.4,1.79,1360088,NA,Americas,Caribbean
+Tunisia,2015,12.1,77.6,1.97,11253554,NA,Africa,Northern Africa
+Turkey,2015,11.6,79.2,2,78665830,NA,Asia,Western Asia
+Turkmenistan,2015,43.7,70,2.27,5373502,NA,Asia,Central Asia
+Uganda,2015,37.7,61.3,5.67,39032383,NA,Africa,Eastern Africa
+Ukraine,2015,7.7,71.5,1.49,44823765,NA,Europe,Eastern Europe
+United Arab Emirates,2015,5.9,75.4,1.77,9156963,NA,Asia,Western Asia
+United Kingdom,2015,3.5,81,1.89,64715810,NA,Europe,Northern Europe
+United States,2015,5.6,79.1,1.97,321773631,NA,Americas,Northern America
+Uruguay,2015,8.7,76.8,2.03,3431555,NA,Americas,South America
+Uzbekistan,2015,33.9,71.8,2.25,29893488,NA,Asia,Central Asia
+Vanuatu,2015,23.1,64.9,3.31,264652,NA,Oceania,Melanesia
+Venezuela,2015,12.9,74.8,2.34,31108083,NA,Americas,South America
+West Bank and Gaza,2015,18,74.6,3.88,4668466,NA,Asia,Western Asia
+Vietnam,2015,17.3,75.4,1.7,93447601,NA,Asia,South-Eastern Asia
+Yemen,2015,33.8,66,3.83,26832215,NA,Asia,Western Asia
+Zambia,2015,43.3,56.7,5.59,16211767,NA,Africa,Eastern Africa
+Zimbabwe,2015,46.6,59.3,3.35,15602751,NA,Africa,Eastern Africa

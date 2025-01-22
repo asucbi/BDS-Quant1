@@ -1,0 +1,168 @@
+---
+title: "Module 2: Lab Instructions"
+format: html
+editor: visual
+---
+
+## Purpose
+
+The purpose of today's lab is to: (1) visualize the Central Limit Theorem, and (2) practice the steps of Null Hypothesis Significance Testing (NHST).
+
+## Access the Starter Files for Module 2
+
+-   Go to [posit.cloud](posit.cloud) and then **navigate to the course workspace** via the left sidebar.
+
+    -   Look for the course workspace called "Statistical Methods Spring 2025"
+
+-   Open the project titled **Module 2** This module contains the starter files that you will use for this lab and for your homework.
+
+## Starter Files
+
+In the Files pane you should see these two R Notebooks:
+
+-   mod-02-lab-starter.qmd
+-   mod-02-hw-starter.qmd
+
+Go ahead and open up `mod-02-lab-starter.qmd`. This is your "starter file" for today's lab. You will build upon this document as you work on the exercises in this lab session.
+
+## Step 1: Check that the file Renders!
+
+Click the button called "Render" (circled in the image below) and then double check to see that your document rendered in the **Viewer** pane. It is always a good idea to occasionally check that the document still renders correctly after making changes.
+
+![](images/render.png)
+
+## Step 2: Load Packages
+
+Today, we'll be using the following packages:
+
+-   **tidyverse**: a collection of packages for doing data analysis in a "tidy" way
+-   **infer**: a package designed for statistical inference, we will be using it to generate "sample" datasets
+-   **knitr**: a package that supports the integration of code into text documents, we will be using it today to create a table
+
+Please load these packages using the `library()` function. If the packages don't load, you may need to `install.packages()` first.
+
+```{r load-packages, echo=FALSE, message=FALSE}
+library(tidyverse); library(infer)
+```
+
+## Step 3: Read in the Data
+
+The data we will use in Module 2 is from the Gapminder Foundation, a non-profit collects data about social, economic, and environmental development at local, national, and global levels. The data we will use today were collected in 2015.
+
+Read in the data using the `read_csv()` function. Name the data "gapminder_2015"
+
+```{r read in data, echo = FALSE, message=FALSE}
+gapminder_2015 <- read_csv("data/gapminder_2015.csv")
+```
+
+Now, use the `View()` function to take a look at your data.
+
+## Exercise 1:
+
+For this first exercise, we are going to generate 10000 random samples of different sizes (5, 30, and 100) from a skewed distribution. For each sample, we will calculate the mean. Then, we will plot those 1000 means to examine the resulting sampling distributions. We will use the (depressing, sorry!) infant_mortality variable in the gapminder data. 
+
+Compare the three plots, what does this show?
+
+## Exercise 2:
+
+Now, let's practice the steps of Null Hypothesis Significance Testing (NHST). 
+
+:::callout-note
+There is no data to read in for this exercise. 
+:::
+
+A psychologist is investigating the impact of a new mindfulness meditation technique on stress levels. It is known that the average stress score on a well-validated scale is 75 for the general population.
+
+The psychologist recruits 25 participants to undergo the mindfulness meditation program for 8 weeks. After the program, the participants complete the standardized stress scale. The sample of participants has an average stress score of 68 with a standard deviation of 12. 
+
+**Step 1:** State the null and alternative hypotheses. Use _non-directional_ hypotheses.
+
+H~0~:
+
+H~1~:
+
+**Step 2:** Choose your alpha level. If you choose not to use $\alpha$ = .05, provide a justification.
+
+$\alpha$: 
+
+**Step 3:** Collect your data.
+
+We're going to pretend we already did this! 
+
+Restating from above: Our sample mean is 68 and sample standard deviation is 12. The population mean is 75. 
+
+$\bar{x}$ = 68
+
+_s_ = 12
+
+$\mu$ = 75
+
+**Step 4:** Define the mean and SEM for the sampling distribution. Estimate the population mean and sd from your data, calculate the SEM. Report the SEM.
+
+_SEM_ = $\sigma$ / $\sqrt{n}$
+
+:::callout-note
+Note: While we are calculating these statistics for practice, and to generate a confidence interval, we will use a t-distribution to generate the _exact_ p-value for our observed data. You should always report the exact p-value if you can unless it's under .001. In that case, you would report _p_ < .001. 
+:::
+
+**Step 5:** Determine the probability of your data or more extreme under the null distribution. Calculate the t-statistic and then generate a p-value using the `pt()` function.
+
+_t_ = ($\bar{x}$ - $\mu$) / _SEM_
+
+**Step 6:** Compare your probability (p-value) to your alpha level and decide whether to reject or retain the null hypothesis. 
+
+**Step 7:** Write up your results summary. Make sure to include a Confidence Interval around your estimate of the mean. 
+
+95% CI = $\bar{x}$ &pm;(1.96 x SEM)
+
+Make sure to include the following in your results summary:
+
+  *   <span style="color: blue;">A brief statement about what you tested.<span>
+  *   <span style="color: orange;">Descriptive statistics for your sample(s), including the confidence intervall around your estimate.<span>
+  *   <span style="color: green;">A statement of the direction of the effect.<span>
+  *   <span style="color: hotpink;">Descriptives for the value or group you are comparing your sample to.<span> 
+  *   <span style="color: purple;">Results of the statistical test you performed, written in APA Style (including statistic and p-value).<span>
+  *   <span style="color: turquoise;">A clear statement about what you found.<span>
+
+:::callout-note
+The items listed above do not need to be included in this exact order.
+
+:::
+
+
+```{r values for summary, echo = FALSE, message=FALSE}
+population_mean <- 75
+sample_mean <- 68
+estimated_sigma <- 12
+sample_size <- 25
+SEM <- estimated_sigma / sqrt(sample_size)
+t_statistic <- (sample_mean - population_mean) / SEM
+df_value <- sample_size - 1
+p_value <- 2*pt(abs(t_statistic), df = df_value, lower.tail = FALSE)
+lower_bound <- round(sample_mean - (1.96*SEM), 2)
+upper_bound <- round(sample_mean + (1.96*SEM), 2)
+```
+
+<span style="color: blue;">We examined the effect of an 8-week mindfulness meditation program on stress levels.<span> <span style="color: orange;">The average score of participants after the program (_M_ = `r sample_mean`, 95%CI [`r lower_bound`, `r upper_bound`], _SD_ = `r estimated_sigma`)<span> <span style="color: green;">was significantly higher than the population average,<span> <span style="color: hotpink;">($\mu$ = `r population_mean`)<span>, <span style="color: purple;">_t_(`r df_value`) = `r round(t_statistic, 2)`, _p_ = `r round(p_value, 3)`.<span> <span style="color: turquoise;">This finding suggests that the mindfulness meditation program has a significant impact on reducing stress levels in participants.<span>
+
+## Consider the following alternative scenarios. What would you conclude?
+
+If observed sample mean was 72, the t statistic would be -1.25 and p-value would be 0.22. What do you conclude?
+
+If the observed sample mean was 82, the t statistic would be 2.92 and p-value would be .008. What do you conclude?
+
+## Render your document.
+
+Note: You do not need to submit your lab, but you will need to submit a rendered PDF version of your homework to "Module 2: Homework Submission" on Canvas.
+
+-   At the top of the .qmd file, change "format: html" to "format: pdf"
+-   Click "Render" at the top of the document
+-   Your document will open in a browser tab
+-   If you get a popup warning, click "Try Again" (may be specific to Mac)
+-   Click the "Save" icon on the top right (circled in the image below)
+
+![](images/save_pdf.png)
+
+-   Save wherever you keep your class documents and upload your file to Canvas
+
+------------------------------------------------------------------------
