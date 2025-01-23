@@ -54,17 +54,17 @@ Read in the data using the `read_csv()` function. Name the data "gapminder_2015"
 ```{r read in data, echo = FALSE, message=FALSE}
 gapminder_2015 <- read_csv("data/gapminder_2015.csv")
 ```
+
 ::: callout-note
 If you are having trouble reading in the data, remember that they are in the `data` folder!
 :::
 
 Now, use the `View()` function to take a look at your data.
 
-**In lab we used the "infant_mortality" variable. For Exercise 1 we will be using the "life_expectancy" variable from that same dataset.** 
+**In lab we used the "infant_mortality" variable. For Exercise 1 we will be using the "life_expectancy" variable from that same dataset.**
 
 ::: callout-important
-You must answer all questions and follow all steps in the homework document. Any time you see [insert answer here] in the starter file you need to replace that with the information that is being requested. To be eligible for full credit, please replace all [insert answer here] placeholder, answer all questions, and address all instructions in this document.
-
+You must answer all questions and follow all steps in the homework document. Any time you see \[insert answer here\] in the starter file you need to replace that with the information that is being requested. To be eligible for full credit, please replace all \[insert answer here\] placeholders, answer all questions, and address all instructions in this document.
 :::
 
 ## Exercise 1:
@@ -79,17 +79,17 @@ Compare the three plots, what does this show?
 
 ## Exercise 2:
 
-Now, let's practice the steps of Null Hypothesis Significance Testing (NHST). 
+Now, let's practice the steps of Null Hypothesis Significance Testing (NHST).
 
-:::callout-note
-There is no data to read in for this exercise. 
+::: callout-note
+There is no data to read in for this exercise.
 :::
 
 A researcher is investigating whether people can subconsciously detect subtle emotional cues in facial expressions. Participants are presented with pairs of faces that differ very slightly in their expression (e.g., happy vs. sad). She shows participants pairs of faces, and they are asked to choose which face in each pair exhibits more positive emotion.
 
 If people can subconsciously detect subtle emotional cues in facial expressions, then they should perform above chance (i.e., above 50%). The sample of 50 participants, on average, gets 54% of trials correct with a standard deviation of 15. Assume the standard deviation was calculated correctly for a sample (e.g., n-1 in the denominator).
 
-**Step 1:** State the null and alternative hypotheses. Use _non-directional_ hypotheses.
+**Step 1:** State the null and alternative hypotheses. Use *non-directional* hypotheses.
 
 H~0~:
 
@@ -97,63 +97,63 @@ H~1~:
 
 **Step 2:** Choose your alpha level. If you choose not to use $\alpha$ = .05, provide a justification.
 
-$\alpha$: 
+$\alpha$:
 
 **Step 3:** Collect your data.
 
-We're going to pretend we already did this! 
+We're going to pretend we already did this!
 
-$\bar{x}$ = 
+$\bar{x}$ =
 
-_s_ = 
+*s* =
 
-$\mu$ = 
+$\mu$ =
 
 **Step 4:** Define the SEM for the sampling distribution. Report the SEM.
 
-_SEM_ = $\sigma$ / $\sqrt{n}$
+*SEM* = $\sigma$ / $\sqrt{n}$
 
 **Step 5:** Determine the probability of your data or more extreme under the null distribution. Calculate the t-statistic and then generate a p-value using the `pt()` function.
 
-_t_ = ($\bar{x}$ - $\mu$) / _SEM_
+*t* = ($\bar{x}$ - $\mu$) / *SEM*
 
-**Step 6:** Compare your probability (p-value) to your alpha level and decide whether to reject or retain the null hypothesis. 
+**Step 6:** Compare your probability (p-value) to your alpha level and decide whether to reject or retain the null hypothesis.
 
-**Step 7:** Write up your results summary. Make sure to include a Confidence Interval around your estimate of the mean. 
+**Step 7:** Write up your results summary. Make sure to include a Confidence Interval around your estimate of the mean.
 
-95% CI = $\bar{x}$ &pm;(1.96 x SEM)
+95% CI = $\bar{x}$ ±(1.96 x SEM)
 
 **Review the Lab Instructions for a reminder about the information that needs to be included in your summary!**
 
-## Exercise 3: 
+## Exercise 3:
 
 Now, let's assume that the sample of 50 participants, on average, gets 56% of trials correct. Again we find a standard deviation of 15. You can still assume the standard deviation was calculated correctly for a sample (e.g., n-1 in the denominator).
 
-Repeat steps 3 through 7 with the new observed mean value. 
+Repeat steps 3 through 7 with the new observed mean value.
 
 **Step 3:** Collect your data.
 
-We're going to pretend we already did this! 
+We're going to pretend we already did this!
 
-$\bar{x}$ = 
+$\bar{x}$ =
 
-_s_ = 
+*s* =
 
-$\mu$ = 
+$\mu$ =
 
 **Step 4:** Define the SEM for the sampling distribution. Report the SEM.
 
-_SEM_ = $\sigma$ / $\sqrt{n}$
+*SEM* = $\sigma$ / $\sqrt{n}$
 
 **Step 5:** Determine the probability of your data or more extreme under the null distribution. Calculate the t-statistic and then generate a p-value using the `pt()` function.
 
-_t_ = ($\bar{x}$ - $\mu$) / _SEM_
+*t* = ($\bar{x}$ - $\mu$) / *SEM*
 
-**Step 6:** Compare your probability (p-value) to your alpha level and decide whether to reject or retain the null hypothesis. 
+**Step 6:** Compare your probability (p-value) to your alpha level and decide whether to reject or retain the null hypothesis.
 
-**Step 7:** Write up your results summary. Make sure to include a Confidence Interval around your estimate of the mean. 
+**Step 7:** Write up your results summary. Make sure to include a Confidence Interval around your estimate of the mean.
 
-95% CI = $\bar{x}$ &pm;(1.96 x SEM)
+95% CI = $\bar{x}$ ±(1.96 x SEM)
 
 ## Render your document.
 
@@ -162,7 +162,7 @@ Note: To receive credit for this homework, submit a rendered PDF version of your
 -   At the top of the .qmd file, change "format: html" to "format: pdf"
 -   Click "Render" at the top of the document
 -   Your document will open in a browser tab
-    -   If your document opens in the "Viewer" pane, click the "sidebar" button (circled in image below). 
+    -   If your document opens in the "Viewer" pane, click the "sidebar" button (circled in image below).
     -   If you get a popup warning, click "Try Again" (may be specific to Mac)
 
 ![](images/sidebar.png)
@@ -170,7 +170,6 @@ Note: To receive credit for this homework, submit a rendered PDF version of your
 -   Click the "Save" icon on the top right (circled in the image below)
 
 ![](images/save_pdf.png)
-
 
 -   Save wherever you keep your class documents and upload your file to Canvas
 

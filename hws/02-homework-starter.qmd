@@ -6,11 +6,11 @@ editor: visual
 
 ## Homework Note
 
-You must answer all questions and follow all steps in the homework document. Any time you see [insert answer here] in the starter file you need to replace that with the information that is being requested. To be eligible for full credit, please replace all [insert answer here] placeholder, answer all questions, and address all instructions in this document.
+You must answer all questions and follow all steps in the homework document. Any time you see \[insert answer here\] in the starter file you need to replace that with the information that is being requested. To be eligible for full credit, please replace all \[insert answer here\] placeholders, answer all questions, and address all instructions in this document.
 
 ## Load Packages
 
-Note: you may have to install these packages first. If you do install them, I recommend doing it in the console rather than in this code chunk. 
+Note: you may have to install these packages first. If you do install them, I recommend doing it in the console rather than in this code chunk.
 
 ```{r load-packages, message= FALSE}
 
@@ -45,7 +45,7 @@ Compare the three plots, what does this show?
 
 Describe the shape of the distribution. If it is skewed, please specify the direction (positive/right skewed or negative/left skewed).
 
-[insert answer here]
+\[insert answer here\]
 
 The distribution is negatively (left) skewed.
 
@@ -78,7 +78,7 @@ Next, combine your three data frames together and generate a plot to compare the
 
 Compare the three plots, what does this show?
 
-[insert answer here]
+\[insert answer here\]
 
 ## Exercise 2:
 
@@ -90,15 +90,15 @@ If people can subconsciously detect subtle emotional cues in facial expressions,
 
 **Step 1:** State the null and alternative hypotheses. Use *non-directional* hypotheses.
 
-H~0~: $\mu$ = [insert answer here]
+H~0~: $\mu$ = \[insert answer here\]
 
-H~1~: $\mu$ $\neq$ [insert answer here]
+H~1~: $\mu$ $\neq$ \[insert answer here\]
 
 **Step 2:** Choose your alpha level; provide a justification.
 
-$\alpha$: [insert answer here]
+$\alpha$: \[insert answer here\]
 
-Justification: [insert answer here]
+Justification: \[insert answer here\]
 
 **Step 3:** Collect your data.
 
@@ -106,11 +106,11 @@ We're going to pretend we already did this!
 
 Restating from above: Our sample mean is 54 and sample standard deviation is 15 The population mean, under the null hypothesis, is 50.
 
-$\bar{x}$ = [insert answer here]
+$\bar{x}$ = \[insert answer here\]
 
-*s* = [insert answer here]
+*s* = \[insert answer here\]
 
-$\mu$ = [insert answer here]
+$\mu$ = \[insert answer here\]
 
 **Step 4:** Define the mean and SEM for the sampling distribution. Estimate the population mean and sd from your data, calculate the SEM. Report the SEM.
 
@@ -129,7 +129,7 @@ $\mu$ = [insert answer here]
 
 ```
 
-*SEM* = [insert answer here]
+*SEM* = \[insert answer here\]
 
 **Step 5:** Determine the probability of your data or more extreme under the null distribution. Calculate the t-statistic and then generate a p-value using the `pt()` function.
 
@@ -156,13 +156,13 @@ My alpha level is .05 and my observed p-value is `r round(p_value, 3)`, so I ret
 
 ```
 
-Summary: [insert answer here]
+Summary: \[insert answer here\]
 
-## Exercise 3: 
+## Exercise 3:
 
 Now, let's assume that the sample of 50 participants, on average, gets 56% of trials correct. Again we find a standard deviation of 15. You can still assume the standard deviation was calculated correctly for a sample (e.g., n-1 in the denominator).
 
-Repeat steps 3 through 7 with the new observed mean value. 
+Repeat steps 3 through 7 with the new observed mean value.
 
 **Step 3:** Collect your data.
 
@@ -170,11 +170,11 @@ We're going to pretend we already did this!
 
 Our sample mean is 56 and sample standard deviation is 15 The population mean, under the null hypothesis, is 50.
 
-$\bar{x}$ = [insert answer here]
+$\bar{x}$ = \[insert answer here\]
 
-*s* = [insert answer here]
+*s* = \[insert answer here\]
 
-$\mu$ = [insert answer here]
+$\mu$ = \[insert answer here\]
 
 **Step 4:** Define the SEM for the sampling distribution. Report the SEM.
 
@@ -186,7 +186,7 @@ $\mu$ = [insert answer here]
 
 ```
 
-*SEM* = [insert answer here]
+*SEM* = \[insert answer here\]
 
 **Step 5:** Determine the probability of your data or more extreme under the null distribution. Calculate the t-statistic and then generate a p-value using the `pt()` function.
 
@@ -212,6 +212,6 @@ My alpha level is .05 and my observed p-value is `r round(p_value, 3)`, so I ret
 
 ```
 
-Summary: [insert answer here]
+Summary: \[insert answer here\]
 
 ## Render and submit your document. Follow the steps outlined in the Homework Instructions.
