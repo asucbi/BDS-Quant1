@@ -22,6 +22,8 @@ library(knitr)
 
 ```{r read-and-view, message= FALSE}
 
+
+
 gapminder_2015 <- read_csv("data/gapminder_2015.csv")
 
 View(gapminder_2015)
@@ -30,7 +32,7 @@ View(gapminder_2015)
 
 ## Exercise 1:
 
-For this first exercise, we are going to generate 10000 random samples of different sizes (5, 30, and 100) from a skewed distribution. For each sample, we will calculate the mean. Then, we will plot those 1000 means to examine the resulting sampling distributions. We will use the (depressing, sorry!) infant_mortality variable in the gapminder data.
+For this first exercise, we are going to generate 10000 random samples of different sizes (5, 30, and 100) from a skewed distribution. For each sample, we will calculate the mean. Then, we will plot those 10000 means to examine the resulting sampling distributions. We will use the (depressing, sorry!) infant_mortality variable in the gapminder data.
 
 First, let's plot the distribution and generate some descriptives. Create a table of the descriptives (rounded to 2 decimal places).
 
@@ -183,7 +185,7 @@ upper_bound <- round(sample_mean + (1.96*SEM), 2)
 
 ```
 
-We examined the effect of an 8-week mindfulness meditation program on stress levels.The average score of participants after the program (*M* = `r sample_mean`, 95%CI \[`r lower_bound`, `r upper_bound`\], *SD* = `r estimated_sigma`) was significantly higher than the population average ($\mu$ = `r population_mean`), *t*(`r df_value`) = `r round(t_statistic, 2)`, *p* = `r round(p_value, 3)`.This finding suggests that the mindfulness meditation program has a significant impact on reducing stress levels in participants.
+We examined the effect of an 8-week mindfulness meditation program on stress levels.The average score of participants after the program (*M* = `r sample_mean`, 95%CI \[`r lower_bound`, `r upper_bound`\], *SD* = `r estimated_sigma`) was significantly higher than the population average ($\mu$ = `r population_mean`), *t*(`r df_value`) = `r round(t_statistic, 2)`, *p* = `r round(p_value, 3)`. This finding suggests that the mindfulness meditation program has a significant impact on reducing stress levels in participants.
 
 ## Consider the following alternative scenarios. What would you conclude?
 
@@ -194,3 +196,7 @@ I would conclude that there is not a signficiant effect. The mindfulness program
 If the observed sample mean was 82, the t statistic would be 2.92 and p-value would be .008. What do you conclude?
 
 I would conclude that there IS a signficant effect. BUT the mindfulness program actually INCREASED stress levels. Oops! Even though this wasn't your prediction, it would still be useful to know!
+
+What if p was .06? What would you conclude?
+
+Not significant!

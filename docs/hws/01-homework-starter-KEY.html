@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Module 2: Lab Instructions</title>
+<title>Module 1: Homework Starter File</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,49 +20,54 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="02-lab-worksheet_files/libs/clipboard/clipboard.min.js"></script>
-<script src="02-lab-worksheet_files/libs/quarto-html/quarto.js"></script>
-<script src="02-lab-worksheet_files/libs/quarto-html/popper.min.js"></script>
-<script src="02-lab-worksheet_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="02-lab-worksheet_files/libs/quarto-html/anchor.min.js"></script>
-<link href="02-lab-worksheet_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="02-lab-worksheet_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="02-lab-worksheet_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="02-lab-worksheet_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="02-lab-worksheet_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="01-homework-starter-KEY_files/libs/clipboard/clipboard.min.js"></script>
+<script src="01-homework-starter-KEY_files/libs/quarto-html/quarto.js"></script>
+<script src="01-homework-starter-KEY_files/libs/quarto-html/popper.min.js"></script>
+<script src="01-homework-starter-KEY_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="01-homework-starter-KEY_files/libs/quarto-html/anchor.min.js"></script>
+<link href="01-homework-starter-KEY_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="01-homework-starter-KEY_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="01-homework-starter-KEY_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="01-homework-starter-KEY_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="01-homework-starter-KEY_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -74,7 +79,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Module 2: Lab Instructions</h1>
+<h1 class="title">Module 1: Homework Starter File</h1>
 </div>
 
 
@@ -91,154 +96,120 @@ window.Quarto = {
 </header>
 
 
-<section id="purpose" class="level2">
-<h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
-<p>The purpose of today’s lab is to: (1) visualize the Central Limit Theorem, and (2) practice the steps of Null Hypothesis Significance Testing (NHST).</p>
+<p>IMPORTANT: For this module’s homework, I would like to see your code in the final document. So, make sure you <strong>HAVE NOT</strong> hidden any of your code (i.e., by using <code>echo=FALSE</code>) in your code chunks.</p>
+<section id="load-packages" class="level2">
+<h2 class="anchored" data-anchor-id="load-packages">Load Packages</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># type your code here</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="access-the-starter-files-for-module-2" class="level2">
-<h2 class="anchored" data-anchor-id="access-the-starter-files-for-module-2">Access the Starter Files for Module 2</h2>
-<ul>
-<li><p>Go to <a href="posit.cloud">posit.cloud</a> and then <strong>navigate to the course workspace</strong> via the left sidebar.</p>
-<ul>
-<li>Look for the course workspace called “Statistical Methods Spring 2025”</li>
-</ul></li>
-<li><p>Open the project titled <strong>Module 2</strong> This module contains the starter files that you will use for this lab and for your homework.</p></li>
-</ul>
-</section>
-<section id="starter-files" class="level2">
-<h2 class="anchored" data-anchor-id="starter-files">Starter Files</h2>
-<p>In the Files pane you should see these two R Notebooks:</p>
-<ul>
-<li>mod-02-lab-starter.qmd</li>
-<li>mod-02-hw-starter.qmd</li>
-</ul>
-<p>Go ahead and open up <code>mod-02-lab-starter.qmd</code>. This is your “starter file” for today’s lab. You will build upon this document as you work on the exercises in this lab session.</p>
-</section>
-<section id="step-1-check-that-the-file-renders" class="level2">
-<h2 class="anchored" data-anchor-id="step-1-check-that-the-file-renders">Step 1: Check that the file Renders!</h2>
-<p>Click the button called “Render” (circled in the image below) and then double check to see that your document rendered in the <strong>Viewer</strong> pane. It is always a good idea to occasionally check that the document still renders correctly after making changes.</p>
-<p><img src="images/render.png" class="img-fluid"></p>
-</section>
-<section id="step-2-load-packages" class="level2">
-<h2 class="anchored" data-anchor-id="step-2-load-packages">Step 2: Load Packages</h2>
-<p>Today, we’ll be using the following packages:</p>
-<ul>
-<li><strong>tidyverse</strong>: a collection of packages for doing data analysis in a “tidy” way</li>
-<li><strong>infer</strong>: a package designed for statistical inference, we will be using it to generate “sample” datasets</li>
-<li><strong>knitr</strong>: a package that supports the integration of code into text documents, we will be using it today to create a table</li>
-</ul>
-<p>Please load these packages using the <code>library()</code> function. If the packages don’t load, you may need to <code>install.packages()</code> first.</p>
-</section>
-<section id="step-3-read-in-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="step-3-read-in-the-data">Step 3: Read in the Data</h2>
-<p>The data we will use in Module 2 is from the Gapminder Foundation, a non-profit collects data about social, economic, and environmental development at local, national, and global levels. The data we will use today were collected in 2015.</p>
-<p>Read in the data using the <code>read_csv()</code> function. Name the data “gapminder_2015”</p>
-<p>Now, use the <code>View()</code> function to take a look at your data.</p>
+<section id="read-in-and-view-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="read-in-and-view-the-data">Read in and View the Data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># type your code here</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>world <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/world_happiness_2015.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="exercise-1" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1">Exercise 1:</h2>
-<p>For this first exercise, we are going to generate 10000 random samples of different sizes (5, 30, and 100) from a skewed distribution. For each sample, we will calculate the mean. Then, we will plot those 10000 means to examine the resulting sampling distributions. We will use the (depressing, sorry!) infant_mortality variable in the gapminder data.</p>
-<p>Compare the three plots, what does this show?</p>
+<p>Calculate (individually) the mean, median, variance and standard deviation of the “Corruption” variable using the corresponding function in R. Please use these functions:</p>
+<p><code>mean()</code> <code>median()</code> <code>var()</code> <code>sd()</code></p>
+<p>Save your values as objects, as we’ll be using them in our write-up!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># type your code here</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>mean_corrup <span class="ot">&lt;-</span> <span class="fu">mean</span>(world<span class="sc">$</span>Corruption, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>median_corrup <span class="ot">&lt;-</span> <span class="fu">median</span>(world<span class="sc">$</span>Corruption, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>var_corrup <span class="ot">&lt;-</span> <span class="fu">var</span>(world<span class="sc">$</span>Corruption, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>sd_corrup <span class="ot">&lt;-</span> <span class="fu">sd</span>(world<span class="sc">$</span>Corruption, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="exercise-2" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-2">Exercise 2:</h2>
-<p>Now, let’s practice the steps of Null Hypothesis Significance Testing (NHST).</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>There is no data to read in for this exercise.</p>
-</div>
-</div>
-<p>A psychologist is investigating the impact of a new mindfulness meditation technique on stress levels. It is known that the average stress score on a well-validated scale is 75 for the general population.</p>
-<p>The psychologist recruits 25 participants to undergo the mindfulness meditation program for 8 weeks. After the program, the participants complete the standardized stress scale. The sample of participants has an average stress score of 68 with a standard deviation of 12.</p>
-<p><strong>Step 1:</strong> State the null and alternative hypotheses. Use <em>non-directional</em> hypotheses.</p>
-<p>H<sub>0</sub>:</p>
-<p>H<sub>1</sub>:</p>
-<p><strong>Step 2:</strong> Choose your alpha level. If you choose not to use <span class="math inline">\(\alpha\)</span> = .05, provide a justification.</p>
-<p><span class="math inline">\(\alpha\)</span>:</p>
-<p><strong>Step 3:</strong> Collect your data.</p>
-<p>We’re going to pretend we already did this!</p>
-<p>Restating from above: Our sample mean is 68 and sample standard deviation is 12. The population mean is 75.</p>
-<p><span class="math inline">\(\bar{x}\)</span> = 68</p>
-<p><em>s</em> = 12</p>
-<p><span class="math inline">\(\mu\)</span> = 75</p>
-<p><strong>Step 4:</strong> Define the mean and SEM for the sampling distribution. Estimate the population mean and sd from your data, calculate the SEM. Report the SEM.</p>
-<p><em>SEM</em> = <span class="math inline">\(\sigma\)</span> / <span class="math inline">\(\sqrt{n}\)</span></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
+<p>Construct a <strong>summary</strong> of the “Corruption” variable that contains each of the above parameters.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># type your code here</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>world <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(Corruption, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">median =</span> <span class="fu">median</span>(Corruption, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">variance =</span> <span class="fu">var</span>(Corruption, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">standard_deviation =</span> <span class="fu">sd</span>(Corruption, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+   mean median variance standard_deviation
+  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;              &lt;dbl&gt;
+1 0.734  0.810   0.0398              0.200</code></pre>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>Note: While we are calculating these statistics for practice, and to generate a confidence interval, we will use a t-distribution to generate the <em>exact</em> p-value for our observed data. You should always report the exact p-value if you can unless it’s under .001. In that case, you would report <em>p</em> &lt; .001.</p>
-</div>
-</div>
-<p><strong>Step 5:</strong> Determine the probability of your data or more extreme under the null distribution. Calculate the t-statistic and then generate a p-value using the <code>pt()</code> function.</p>
-<p><em>t</em> = (<span class="math inline">\(\bar{x}\)</span> - <span class="math inline">\(\mu\)</span>) / <em>SEM</em></p>
-<p><strong>Step 6:</strong> Compare your probability (p-value) to your alpha level and decide whether to reject or retain the null hypothesis.</p>
-<p><strong>Step 7:</strong> Write up your results summary. Make sure to include a Confidence Interval around your estimate of the mean.</p>
-<p>95% CI = <span class="math inline">\(\bar{x}\)</span> ±(1.96 x SEM)</p>
-<p>Make sure to include the following in your results summary:</p>
-<ul>
-<li><span style="color: blue;">A brief statement about what you tested.<span></span></span></li>
-<li><span style="color: orange;">Descriptive statistics for your sample(s), including the confidence intervall around your estimate.<span></span></span></li>
-<li><span style="color: green;">Whether there was an effect and, if so, the direction of the effect.<span></span></span></li>
-<li><span style="color: hotpink;">Descriptives for the value or group you are comparing your sample to.<span></span></span></li>
-<li><span style="color: purple;">Results of the statistical test you performed, written in APA Style (including statistic and p-value).<span></span></span></li>
-<li><span style="color: turquoise;">A clear statement about what you found.<span></span></span></li>
-</ul>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The items listed above do not need to be included in this exact order.</p>
-</div>
-</div>
-<p><span style="color: blue;">We examined the effect of an 8-week mindfulness meditation program on stress levels.<span> <span style="color: orange;">The average score of participants after the program (<em>M</em> = 68, 95%CI [63.3, 72.7], <em>SD</em> = 12)<span> <span style="color: green;">was significantly higher than the population average,<span> <span style="color: hotpink;">(<span class="math inline">\(\mu\)</span> = 75)<span>, <span style="color: purple;"><em>t</em>(24) = -2.92, <em>p</em> = 0.008.<span> <span style="color: turquoise;">This finding suggests that the mindfulness meditation program has a significant impact on reducing stress levels in participants.<span></span></span></span></span></span></span></span></span></span></span></span></span></p>
 </section>
-<section id="consider-the-following-alternative-scenarios.-what-would-you-conclude" class="level2">
-<h2 class="anchored" data-anchor-id="consider-the-following-alternative-scenarios.-what-would-you-conclude">Consider the following alternative scenarios. What would you conclude?</h2>
-<p>If observed sample mean was 72, the t statistic would be -1.25 and p-value would be 0.22. What do you conclude?</p>
-<p>If the observed sample mean was 82, the t statistic would be 2.92 and p-value would be .008. What do you conclude?</p>
+<section id="exercise-3" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3">Exercise 3:</h2>
+<p>Create a histogram of the “Corruption” variable. Make sure to label your plot.</p>
+<p>Add a vertical line the indicates the location of the mean (using a solid red line) and median (using a dashed red line). Hint: use <code>geom_vline</code>.</p>
+<p>What do the descriptive statistics and histogram suggest about the shape of the “Corruption” distribution? Is it normally distributed or skewed in one direction? How can you tell?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># type your code here</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>world <span class="sc">%&gt;%</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Corruption)) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> mean_corrup), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> median_corrup), <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"World Corruption Ratings in 2015"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 11 rows containing non-finite outside the scale range
+(`stat_bin()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01-homework-starter-KEY_files/figure-html/histogram-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="render-your-document." class="level2">
-<h2 class="anchored" data-anchor-id="render-your-document.">Render your document.</h2>
-<p>Note: You do not need to submit your lab, but you will need to submit a rendered PDF version of your homework to “Module 2: Homework Submission” on Canvas.</p>
-<ul>
-<li>At the top of the .qmd file, change “format: html” to “format: pdf”</li>
-<li>Click “Render” at the top of the document</li>
-<li>Your document will open in a browser tab
-<ul>
-<li>If your document opens in the “Viewer” pane, click the “sidebar” button (circled in image below).</li>
-<li>If you get a popup warning, click “Try Again” (may be specific to Mac)</li>
-</ul></li>
-</ul>
-<p><img src="images/sidebar.png" class="img-fluid"></p>
-<ul>
-<li>Click the “Save” icon on the top right (circled in the image below)</li>
-</ul>
-<p><img src="images/save_pdf.png" class="img-fluid"></p>
-<ul>
-<li>Save wherever you keep your class documents and upload your file to Canvas</li>
-</ul>
-<hr>
+<section id="exercise-4" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4">Exercise 4:</h2>
+<p>Now, let’s examine the skew and kurtosis of the distribution!</p>
+<p>First, we need to install and load the <code>moments</code> package.</p>
+<p>Next, we can use the <code>skewness()</code> and <code>kurtosis()</code> functions to calculate these values.</p>
+<p>Again, save your values as objects, as we’ll be using them in the write-up!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># type your code here</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>skew_corrup <span class="ot">&lt;-</span> world <span class="sc">%&gt;%</span> </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Corruption) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skewness</span>(<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>kurtosis_corrup <span class="ot">&lt;-</span> world <span class="sc">%&gt;%</span> </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Corruption) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kurtosis</span>(<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercise-5" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-5">Exercise 5:</h2>
+<p>Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the objects you created earlier to insert the descriptive values directly into your summary.</p>
+</section>
+<section id="type-your-summary-here" class="level1">
+<h1>type your summary here</h1>
+<p>In the 2015 World Happiness Report, the average Corruption rating is 0.73. The median Corruption rating is 0.81, the variance in Corruption ratings is 0.04, and the standard deviation is 0.2. A histogram of the data reveals an approximately normally distribution. While the skewness of -1.5 is close to zero and suggests an approximately normal distribution, the kurtosis is slightly high at 4.6. For these data, the mean would be the most appropriate measure of central tendency.</p>
+<section id="exercise-6" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6">Exercise 6:</h2>
+<p>```{r tidytuesday-descriptives}</p>
+</section>
+</section>
+<section id="type-your-code-here" class="level1">
+<h1>type your code here</h1>
 </section>
 
 </main>

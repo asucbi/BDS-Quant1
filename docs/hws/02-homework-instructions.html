@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Module 2: Lab Instructions</title>
+<title>Module 2: Homework Instructions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,16 +23,16 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="02-lab-worksheet_files/libs/clipboard/clipboard.min.js"></script>
-<script src="02-lab-worksheet_files/libs/quarto-html/quarto.js"></script>
-<script src="02-lab-worksheet_files/libs/quarto-html/popper.min.js"></script>
-<script src="02-lab-worksheet_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="02-lab-worksheet_files/libs/quarto-html/anchor.min.js"></script>
-<link href="02-lab-worksheet_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="02-lab-worksheet_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="02-lab-worksheet_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="02-lab-worksheet_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="02-lab-worksheet_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="02-homework-instructions_files/libs/clipboard/clipboard.min.js"></script>
+<script src="02-homework-instructions_files/libs/quarto-html/quarto.js"></script>
+<script src="02-homework-instructions_files/libs/quarto-html/popper.min.js"></script>
+<script src="02-homework-instructions_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="02-homework-instructions_files/libs/quarto-html/anchor.min.js"></script>
+<link href="02-homework-instructions_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="02-homework-instructions_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="02-homework-instructions_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="02-homework-instructions_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="02-homework-instructions_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -74,7 +74,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Module 2: Lab Instructions</h1>
+<h1 class="title">Module 2: Homework Instructions</h1>
 </div>
 
 
@@ -93,7 +93,7 @@ window.Quarto = {
 
 <section id="purpose" class="level2">
 <h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
-<p>The purpose of today’s lab is to: (1) visualize the Central Limit Theorem, and (2) practice the steps of Null Hypothesis Significance Testing (NHST).</p>
+<p>In this week’s homework you will be asked to generate another set of three sampling distributions and compare them. You will also demonstrate your ability to carry out the steps of Null Hypothesis Significance Testing (NHST).</p>
 </section>
 <section id="access-the-starter-files-for-module-2" class="level2">
 <h2 class="anchored" data-anchor-id="access-the-starter-files-for-module-2">Access the Starter Files for Module 2</h2>
@@ -112,15 +112,15 @@ window.Quarto = {
 <li>mod-02-lab-starter.qmd</li>
 <li>mod-02-hw-starter.qmd</li>
 </ul>
-<p>Go ahead and open up <code>mod-02-lab-starter.qmd</code>. This is your “starter file” for today’s lab. You will build upon this document as you work on the exercises in this lab session.</p>
+<p>Open up <code>mod-02-hw-starter.qmd</code>.</p>
 </section>
-<section id="step-1-check-that-the-file-renders" class="level2">
-<h2 class="anchored" data-anchor-id="step-1-check-that-the-file-renders">Step 1: Check that the file Renders!</h2>
+<section id="render-it" class="level2">
+<h2 class="anchored" data-anchor-id="render-it">Render it!</h2>
 <p>Click the button called “Render” (circled in the image below) and then double check to see that your document rendered in the <strong>Viewer</strong> pane. It is always a good idea to occasionally check that the document still renders correctly after making changes.</p>
 <p><img src="images/render.png" class="img-fluid"></p>
 </section>
-<section id="step-2-load-packages" class="level2">
-<h2 class="anchored" data-anchor-id="step-2-load-packages">Step 2: Load Packages</h2>
+<section id="load-packages" class="level2">
+<h2 class="anchored" data-anchor-id="load-packages">Load Packages</h2>
 <p>Today, we’ll be using the following packages:</p>
 <ul>
 <li><strong>tidyverse</strong>: a collection of packages for doing data analysis in a “tidy” way</li>
@@ -129,15 +129,44 @@ window.Quarto = {
 </ul>
 <p>Please load these packages using the <code>library()</code> function. If the packages don’t load, you may need to <code>install.packages()</code> first.</p>
 </section>
-<section id="step-3-read-in-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="step-3-read-in-the-data">Step 3: Read in the Data</h2>
-<p>The data we will use in Module 2 is from the Gapminder Foundation, a non-profit collects data about social, economic, and environmental development at local, national, and global levels. The data we will use today were collected in 2015.</p>
+<section id="step-4-read-in-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-read-in-the-data">Step 4: Read in the Data</h2>
+<p>The data we will use in Module 2 is from the Gapminder Foundation, a non-profit that collects data about social, economic, and environmental development at local, national, and global levels. The data we will use today were collected in 2015.</p>
 <p>Read in the data using the <code>read_csv()</code> function. Name the data “gapminder_2015”</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you are having trouble reading in the data, remember that they are in the <code>data</code> folder!</p>
+</div>
+</div>
 <p>Now, use the <code>View()</code> function to take a look at your data.</p>
+<p><strong>In lab we used the “infant_mortality” variable. For Exercise 1 we will be using the “life_expectancy” variable from that same dataset.</strong></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You must answer all questions and follow all steps in the homework document. Any time you see [insert answer here] in the starter file you need to replace that with the information that is being requested. To be eligible for full credit, please replace all [insert answer here] placeholder, answer all questions, and address all instructions in this document.</p>
+</div>
+</div>
 </section>
 <section id="exercise-1" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1">Exercise 1:</h2>
-<p>For this first exercise, we are going to generate 10000 random samples of different sizes (5, 30, and 100) from a skewed distribution. For each sample, we will calculate the mean. Then, we will plot those 10000 means to examine the resulting sampling distributions. We will use the (depressing, sorry!) infant_mortality variable in the gapminder data.</p>
+<p>For this first exercise, please generate 10000 random samples of different sizes (10, 50, and 150) from a distribution. For each sample, calculate the mean. Then, plot those 10000 means to examine the resulting sampling distributions. Use the life_expectancy variable in the gapminder data.</p>
+<p><strong>Remember that we are now using the “life_expectancy” variable!</strong></p>
+<p>Take a look at the data. What can you say about the shape of the distribution? If it is skewed, comment on the direction of the skew.</p>
 <p>Compare the three plots, what does this show?</p>
 </section>
 <section id="exercise-2" class="level2">
@@ -156,8 +185,8 @@ Note
 <p>There is no data to read in for this exercise.</p>
 </div>
 </div>
-<p>A psychologist is investigating the impact of a new mindfulness meditation technique on stress levels. It is known that the average stress score on a well-validated scale is 75 for the general population.</p>
-<p>The psychologist recruits 25 participants to undergo the mindfulness meditation program for 8 weeks. After the program, the participants complete the standardized stress scale. The sample of participants has an average stress score of 68 with a standard deviation of 12.</p>
+<p>A researcher is investigating whether people can subconsciously detect subtle emotional cues in facial expressions. Participants are presented with pairs of faces that differ very slightly in their expression (e.g., happy vs.&nbsp;sad). She shows participants pairs of faces, and they are asked to choose which face in each pair exhibits more positive emotion.</p>
+<p>If people can subconsciously detect subtle emotional cues in facial expressions, then they should perform above chance (i.e., above 50%). The sample of 50 participants, on average, gets 54% of trials correct with a standard deviation of 15. Assume the standard deviation was calculated correctly for a sample (e.g., n-1 in the denominator).</p>
 <p><strong>Step 1:</strong> State the null and alternative hypotheses. Use <em>non-directional</em> hypotheses.</p>
 <p>H<sub>0</sub>:</p>
 <p>H<sub>1</sub>:</p>
@@ -165,62 +194,38 @@ Note
 <p><span class="math inline">\(\alpha\)</span>:</p>
 <p><strong>Step 3:</strong> Collect your data.</p>
 <p>We’re going to pretend we already did this!</p>
-<p>Restating from above: Our sample mean is 68 and sample standard deviation is 12. The population mean is 75.</p>
-<p><span class="math inline">\(\bar{x}\)</span> = 68</p>
-<p><em>s</em> = 12</p>
-<p><span class="math inline">\(\mu\)</span> = 75</p>
-<p><strong>Step 4:</strong> Define the mean and SEM for the sampling distribution. Estimate the population mean and sd from your data, calculate the SEM. Report the SEM.</p>
+<p><span class="math inline">\(\bar{x}\)</span> =</p>
+<p><em>s</em> =</p>
+<p><span class="math inline">\(\mu\)</span> =</p>
+<p><strong>Step 4:</strong> Define the SEM for the sampling distribution. Report the SEM.</p>
 <p><em>SEM</em> = <span class="math inline">\(\sigma\)</span> / <span class="math inline">\(\sqrt{n}\)</span></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Note: While we are calculating these statistics for practice, and to generate a confidence interval, we will use a t-distribution to generate the <em>exact</em> p-value for our observed data. You should always report the exact p-value if you can unless it’s under .001. In that case, you would report <em>p</em> &lt; .001.</p>
-</div>
-</div>
 <p><strong>Step 5:</strong> Determine the probability of your data or more extreme under the null distribution. Calculate the t-statistic and then generate a p-value using the <code>pt()</code> function.</p>
 <p><em>t</em> = (<span class="math inline">\(\bar{x}\)</span> - <span class="math inline">\(\mu\)</span>) / <em>SEM</em></p>
 <p><strong>Step 6:</strong> Compare your probability (p-value) to your alpha level and decide whether to reject or retain the null hypothesis.</p>
 <p><strong>Step 7:</strong> Write up your results summary. Make sure to include a Confidence Interval around your estimate of the mean.</p>
 <p>95% CI = <span class="math inline">\(\bar{x}\)</span> ±(1.96 x SEM)</p>
-<p>Make sure to include the following in your results summary:</p>
-<ul>
-<li><span style="color: blue;">A brief statement about what you tested.<span></span></span></li>
-<li><span style="color: orange;">Descriptive statistics for your sample(s), including the confidence intervall around your estimate.<span></span></span></li>
-<li><span style="color: green;">Whether there was an effect and, if so, the direction of the effect.<span></span></span></li>
-<li><span style="color: hotpink;">Descriptives for the value or group you are comparing your sample to.<span></span></span></li>
-<li><span style="color: purple;">Results of the statistical test you performed, written in APA Style (including statistic and p-value).<span></span></span></li>
-<li><span style="color: turquoise;">A clear statement about what you found.<span></span></span></li>
-</ul>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The items listed above do not need to be included in this exact order.</p>
-</div>
-</div>
-<p><span style="color: blue;">We examined the effect of an 8-week mindfulness meditation program on stress levels.<span> <span style="color: orange;">The average score of participants after the program (<em>M</em> = 68, 95%CI [63.3, 72.7], <em>SD</em> = 12)<span> <span style="color: green;">was significantly higher than the population average,<span> <span style="color: hotpink;">(<span class="math inline">\(\mu\)</span> = 75)<span>, <span style="color: purple;"><em>t</em>(24) = -2.92, <em>p</em> = 0.008.<span> <span style="color: turquoise;">This finding suggests that the mindfulness meditation program has a significant impact on reducing stress levels in participants.<span></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p><strong>Review the Lab Instructions for a reminder about the information that needs to be included in your summary!</strong></p>
 </section>
-<section id="consider-the-following-alternative-scenarios.-what-would-you-conclude" class="level2">
-<h2 class="anchored" data-anchor-id="consider-the-following-alternative-scenarios.-what-would-you-conclude">Consider the following alternative scenarios. What would you conclude?</h2>
-<p>If observed sample mean was 72, the t statistic would be -1.25 and p-value would be 0.22. What do you conclude?</p>
-<p>If the observed sample mean was 82, the t statistic would be 2.92 and p-value would be .008. What do you conclude?</p>
+<section id="exercise-3" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3">Exercise 3:</h2>
+<p>Now, let’s assume that the sample of 50 participants, on average, gets 56% of trials correct. Again we find a standard deviation of 15. You can still assume the standard deviation was calculated correctly for a sample (e.g., n-1 in the denominator).</p>
+<p>Repeat steps 3 through 7 with the new observed mean value.</p>
+<p><strong>Step 3:</strong> Collect your data.</p>
+<p>We’re going to pretend we already did this!</p>
+<p><span class="math inline">\(\bar{x}\)</span> =</p>
+<p><em>s</em> =</p>
+<p><span class="math inline">\(\mu\)</span> =</p>
+<p><strong>Step 4:</strong> Define the SEM for the sampling distribution. Report the SEM.</p>
+<p><em>SEM</em> = <span class="math inline">\(\sigma\)</span> / <span class="math inline">\(\sqrt{n}\)</span></p>
+<p><strong>Step 5:</strong> Determine the probability of your data or more extreme under the null distribution. Calculate the t-statistic and then generate a p-value using the <code>pt()</code> function.</p>
+<p><em>t</em> = (<span class="math inline">\(\bar{x}\)</span> - <span class="math inline">\(\mu\)</span>) / <em>SEM</em></p>
+<p><strong>Step 6:</strong> Compare your probability (p-value) to your alpha level and decide whether to reject or retain the null hypothesis.</p>
+<p><strong>Step 7:</strong> Write up your results summary. Make sure to include a Confidence Interval around your estimate of the mean.</p>
+<p>95% CI = <span class="math inline">\(\bar{x}\)</span> ±(1.96 x SEM)</p>
 </section>
 <section id="render-your-document." class="level2">
 <h2 class="anchored" data-anchor-id="render-your-document.">Render your document.</h2>
-<p>Note: You do not need to submit your lab, but you will need to submit a rendered PDF version of your homework to “Module 2: Homework Submission” on Canvas.</p>
+<p>Note: To receive credit for this homework, submit a rendered PDF version of your file to “Module 2: Homework Submission” on Canvas.</p>
 <ul>
 <li>At the top of the .qmd file, change “format: html” to “format: pdf”</li>
 <li>Click “Render” at the top of the document</li>

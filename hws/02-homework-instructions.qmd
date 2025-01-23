@@ -1,29 +1,29 @@
 ---
-title: "Module 1: Homework Instructions"
+title: "Module 2: Homework Instructions"
 format: html
 editor: visual
 ---
 
 ## Purpose
 
-This week's homework is very simple. You will be asked to characterize distributions of data, just as you did in lab, and report your results.
+In this week's homework you will be asked to generate another set of three sampling distributions and compare them. You will also demonstrate your ability to carry out the steps of Null Hypothesis Significance Testing (NHST).
 
-## Access the Starter Files for Module 1
+## Access the Starter Files for Module 2
 
 -   Go to [posit.cloud](posit.cloud) and then **navigate to the course workspace** via the left sidebar.
 
     -   Look for the course workspace called "Statistical Methods Spring 2025"
 
--   Open the project titled **Module 1** This module contains the starter files that you will use for this lab and for your homework.
+-   Open the project titled **Module 2** This module contains the starter files that you will use for this lab and for your homework.
 
 ## Starter Files
 
 In the Files pane you should see these two R Notebooks:
 
--   mod-01-lab-starter.qmd
--   mod-01-hw-starter.qmd
+-   mod-02-lab-starter.qmd
+-   mod-02-hw-starter.qmd
 
-Open up `mod-01-hw-starter.qmd`.
+Open up `mod-02-hw-starter.qmd`.
 
 ## Render it!
 
@@ -36,81 +36,142 @@ Click the button called "Render" (circled in the image below) and then double ch
 Today, we'll be using the following packages:
 
 -   **tidyverse**: a collection of packages for doing data analysis in a "tidy" way
+-   **infer**: a package designed for statistical inference, we will be using it to generate "sample" datasets
 -   **knitr**: a package that supports the integration of code into text documents, we will be using it today to create a table
--   **moments**: a package that calculates skewness and kurtosis
 
-Please load these packages using the `library()` function.
+Please load these packages using the `library()` function. If the packages don't load, you may need to `install.packages()` first.
 
 ```{r load-packages, echo=FALSE, message=FALSE}
-library(tidyverse)
+library(tidyverse); library(infer); library(knitr)
 ```
 
 ## Step 4: Read in the Data
 
-The data we will use in Module 1 is from the [2015 World Happiness Report](https://worldhappiness.report/ed/2015/), an annual survey part of the [Gallup World Poll](https://www.gallup.com/178667/gallup-world-poll-work.aspx).
+The data we will use in Module 2 is from the Gapminder Foundation, a non-profit that collects data about social, economic, and environmental development at local, national, and global levels. The data we will use today were collected in 2015.
 
-Read in the data using the `read_csv()` function. Name the data "world."
+Read in the data using the `read_csv()` function. Name the data "gapminder_2015"
 
 ```{r read in data, echo = FALSE, message=FALSE}
-world <- read_csv("data/world_happiness_2015.csv")
+gapminder_2015 <- read_csv("data/gapminder_2015.csv")
 ```
-
 ::: callout-note
 If you are having trouble reading in the data, remember that they are in the `data` folder!
 :::
 
 Now, use the `View()` function to take a look at your data.
 
-In lab we used the "Happiness" variable. For this first part of the homework (Exercises 1-5) we will be using the "Corruption" variable from that same dataset. For this variable, participants were asked: “Is corruption widespread throughout the government or not” and “Is corruption widespread within businesses or not?” Their score on the "Corruption" variable is the average of these two questions.
+**In lab we used the "infant_mortality" variable. For Exercise 1 we will be using the "life_expectancy" variable from that same dataset.** 
+
+::: callout-important
+You must answer all questions and follow all steps in the homework document. Any time you see [insert answer here] in the starter file you need to replace that with the information that is being requested. To be eligible for full credit, please replace all [insert answer here] placeholder, answer all questions, and address all instructions in this document.
+
+:::
 
 ## Exercise 1:
 
-Calculate (individually) the mean, median, variance and standard deviation of the "Corruption" variable using the corresponding function in R. Please use these functions:
+For this first exercise, please generate 10000 random samples of different sizes (10, 50, and 150) from a distribution. For each sample, calculate the mean. Then, plot those 10000 means to examine the resulting sampling distributions. Use the life_expectancy variable in the gapminder data.
 
-`mean()` `median()` `var()` `sd()`
+**Remember that we are now using the "life_expectancy" variable!**
 
-Save your values as objects, as we'll be using them in our write-up!
+Take a look at the data. What can you say about the shape of the distribution? If it is skewed, comment on the direction of the skew.
 
-Now, create a pipe table using these values.
+Compare the three plots, what does this show?
 
 ## Exercise 2:
 
-Construct a summary of the "Corruption" variable that contains each of the above parameters.
+Now, let's practice the steps of Null Hypothesis Significance Testing (NHST). 
 
-Turn this summary into a table that renders nicely in your final document.
+:::callout-note
+There is no data to read in for this exercise. 
+:::
 
-## Exercise 3:
+A researcher is investigating whether people can subconsciously detect subtle emotional cues in facial expressions. Participants are presented with pairs of faces that differ very slightly in their expression (e.g., happy vs. sad). She shows participants pairs of faces, and they are asked to choose which face in each pair exhibits more positive emotion.
 
-Create a histogram of the "Corruption" variable. Make sure to label your plot.
+If people can subconsciously detect subtle emotional cues in facial expressions, then they should perform above chance (i.e., above 50%). The sample of 50 participants, on average, gets 54% of trials correct with a standard deviation of 15. Assume the standard deviation was calculated correctly for a sample (e.g., n-1 in the denominator).
 
-**NEW CHALLENGE**: Add a vertical line the indicates the location of the mean (using a solid red line) and median (using a dashed red line). Hint: use `geom_vline`.
+**Step 1:** State the null and alternative hypotheses. Use _non-directional_ hypotheses.
 
-What do the descriptive statistics and histogram suggest about the shape of the "Corruption" distribution? Is it normally distributed or skewed in one direction? How can you tell?
+H~0~:
 
-## Exercise 4:
+H~1~:
 
-Now, let's examine the skew and kurtosis of the distribution!
+**Step 2:** Choose your alpha level. If you choose not to use $\alpha$ = .05, provide a justification.
 
-Remember that we are using the `skewness()` and `kurtosis()` functions in the `moments` package to calculate these values.
+$\alpha$: 
 
-Again, save your values as objects, as we'll be using them in the write-up!
+**Step 3:** Collect your data.
 
-## Exercise 5:
+We're going to pretend we already did this! 
 
-Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the objects you created earlier to insert the descriptive values directly into your summary.
+$\bar{x}$ = 
 
-## Exercise 6:
+_s_ = 
 
-Choose one of the [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday/tree/main) datasets and find a **continuous** variable that you would like to examine. Repeat Exercises 1-5 for that variable. Make sure to include the year and title of that dataset (e.g., 2021 - Netflix Titles) in your summary.
+$\mu$ = 
 
-If you are working on this homework in a group, each member should please use a **different** dataset.
+**Step 4:** Define the SEM for the sampling distribution. Report the SEM.
 
-## Wrapping Up
+_SEM_ = $\sigma$ / $\sqrt{n}$
 
-# Render and Submit your .qmd file!
+**Step 5:** Determine the probability of your data or more extreme under the null distribution. Calculate the t-statistic and then generate a p-value using the `pt()` function.
 
-Render your file as a PDF and submit to "Module 1: Homework Submission" on Canvas!
+_t_ = ($\bar{x}$ - $\mu$) / _SEM_
 
-IMPORTANT: For this module's homework, I would like to see your code in the final document. So, make sure you **HAVE NOT** hidden any of your code (i.e., by using `echo=FALSE`) in your code chunks.
+**Step 6:** Compare your probability (p-value) to your alpha level and decide whether to reject or retain the null hypothesis. 
+
+**Step 7:** Write up your results summary. Make sure to include a Confidence Interval around your estimate of the mean. 
+
+95% CI = $\bar{x}$ &pm;(1.96 x SEM)
+
+**Review the Lab Instructions for a reminder about the information that needs to be included in your summary!**
+
+## Exercise 3: 
+
+Now, let's assume that the sample of 50 participants, on average, gets 56% of trials correct. Again we find a standard deviation of 15. You can still assume the standard deviation was calculated correctly for a sample (e.g., n-1 in the denominator).
+
+Repeat steps 3 through 7 with the new observed mean value. 
+
+**Step 3:** Collect your data.
+
+We're going to pretend we already did this! 
+
+$\bar{x}$ = 
+
+_s_ = 
+
+$\mu$ = 
+
+**Step 4:** Define the SEM for the sampling distribution. Report the SEM.
+
+_SEM_ = $\sigma$ / $\sqrt{n}$
+
+**Step 5:** Determine the probability of your data or more extreme under the null distribution. Calculate the t-statistic and then generate a p-value using the `pt()` function.
+
+_t_ = ($\bar{x}$ - $\mu$) / _SEM_
+
+**Step 6:** Compare your probability (p-value) to your alpha level and decide whether to reject or retain the null hypothesis. 
+
+**Step 7:** Write up your results summary. Make sure to include a Confidence Interval around your estimate of the mean. 
+
+95% CI = $\bar{x}$ &pm;(1.96 x SEM)
+
+## Render your document.
+
+Note: To receive credit for this homework, submit a rendered PDF version of your file to "Module 2: Homework Submission" on Canvas.
+
+-   At the top of the .qmd file, change "format: html" to "format: pdf"
+-   Click "Render" at the top of the document
+-   Your document will open in a browser tab
+    -   If your document opens in the "Viewer" pane, click the "sidebar" button (circled in image below). 
+    -   If you get a popup warning, click "Try Again" (may be specific to Mac)
+
+![](images/sidebar.png)
+
+-   Click the "Save" icon on the top right (circled in the image below)
+
+![](images/save_pdf.png)
+
+
+-   Save wherever you keep your class documents and upload your file to Canvas
 
 ------------------------------------------------------------------------

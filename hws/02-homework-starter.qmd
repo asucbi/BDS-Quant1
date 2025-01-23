@@ -1,0 +1,217 @@
+---
+title: "Module 2: Homework Starter File KEY"
+format: html
+editor: visual
+---
+
+## Homework Note
+
+You must answer all questions and follow all steps in the homework document. Any time you see [insert answer here] in the starter file you need to replace that with the information that is being requested. To be eligible for full credit, please replace all [insert answer here] placeholder, answer all questions, and address all instructions in this document.
+
+## Load Packages
+
+Note: you may have to install these packages first. If you do install them, I recommend doing it in the console rather than in this code chunk. 
+
+```{r load-packages, message= FALSE}
+
+
+
+```
+
+## Read in the Data; View the Data
+
+```{r read-and-view, message= FALSE}
+
+
+
+```
+
+## Exercise 1:
+
+For this first exercise, please generate 10000 random samples of different sizes (10, 50, and 150) from a distribution. For each sample, calculate the mean. Then, plot those 10000 means to examine the resulting sampling distributions. Use the life_expectancy variable in the gapminder data.
+
+Remember that we are now using the "life_expectancy" variable!
+
+Take a look at the data. What can you say about the shape of the distribution? If it is skewed, comment on the direction of the skew.
+
+Compare the three plots, what does this show?
+
+```{r plot-distribution}
+
+
+
+
+```
+
+Describe the shape of the distribution. If it is skewed, please specify the direction (positive/right skewed or negative/left skewed).
+
+[insert answer here]
+
+The distribution is negatively (left) skewed.
+
+Next, let's take 10000 samples of size 10 and calculate the mean for each sample. We will use the `rep_sample_n()` function from the *infer* package.
+
+```{r sample-10}
+
+
+
+
+```
+
+Now, do the same thing for sample size of 50 and 150 (i.e., copy the above code and change the `size` and `n` to the appropriate values).
+
+```{r sample-50-150}
+
+
+
+
+```
+
+Next, combine your three data frames together and generate a plot to compare them.
+
+```{r comparison-plot}
+
+
+
+
+```
+
+Compare the three plots, what does this show?
+
+[insert answer here]
+
+## Exercise 2:
+
+Now, let's practice the steps of Null Hypothesis Significance Testing (NHST). There is no data to read in for this exercise.
+
+A researcher is investigating whether people can subconsciously detect subtle emotional cues in facial expressions. Participants are presented with pairs of faces that differ very slightly in their expression (e.g., happy vs. sad). She shows participants pairs of faces and they are asked to choose which face in each pair exhibits more positive emotion.
+
+If people can subconsciously detect subtle emotional cues in facial expressions, then they should perform above chance (or 50%). The sample of 50 participants, on average, gets 54% of trials correct with a standard deviation of 15. Assume the standard deviation was calculated correctly for a sample (e.g., n-1 in the denominator).
+
+**Step 1:** State the null and alternative hypotheses. Use *non-directional* hypotheses.
+
+H~0~: $\mu$ = [insert answer here]
+
+H~1~: $\mu$ $\neq$ [insert answer here]
+
+**Step 2:** Choose your alpha level; provide a justification.
+
+$\alpha$: [insert answer here]
+
+Justification: [insert answer here]
+
+**Step 3:** Collect your data.
+
+We're going to pretend we already did this!
+
+Restating from above: Our sample mean is 54 and sample standard deviation is 15 The population mean, under the null hypothesis, is 50.
+
+$\bar{x}$ = [insert answer here]
+
+*s* = [insert answer here]
+
+$\mu$ = [insert answer here]
+
+**Step 4:** Define the mean and SEM for the sampling distribution. Estimate the population mean and sd from your data, calculate the SEM. Report the SEM.
+
+*SEM* = $\sigma$ / $\sqrt{n}$
+
+```{r define-distribution}
+
+# first, create objects for each of these values (some of which we'll use later)
+
+
+
+# then, use those objects to calculate the SEM
+
+
+# make sure to report the SEM that you calculated above
+
+```
+
+*SEM* = [insert answer here]
+
+**Step 5:** Determine the probability of your data or more extreme under the null distribution. Calculate the t-statistic and then generate a p-value using the `pt()` function.
+
+*t* = ($\bar{x}$ - $\mu$) / *SEM*
+
+```{r t-d-and-p}
+
+
+
+```
+
+**Step 6:** Compare your probability (p-value) to your alpha level and decide whether to reject or retain the null hypothesis.
+
+My alpha level is .05 and my observed p-value is `r round(p_value, 3)`, so I retain (or fail to reject) the null hypothesis that people cannot detect subtle social cues.
+
+**Step 7:** Write up your results summary. Make sure to include a Confidence Interval around your estimate of the mean.
+
+95% CI = $\bar{x}$ ±(1.96 x SEM)
+
+```{r confidence-interval}
+
+
+
+
+```
+
+Summary: [insert answer here]
+
+## Exercise 3: 
+
+Now, let's assume that the sample of 50 participants, on average, gets 56% of trials correct. Again we find a standard deviation of 15. You can still assume the standard deviation was calculated correctly for a sample (e.g., n-1 in the denominator).
+
+Repeat steps 3 through 7 with the new observed mean value. 
+
+**Step 3:** Collect your data.
+
+We're going to pretend we already did this!
+
+Our sample mean is 56 and sample standard deviation is 15 The population mean, under the null hypothesis, is 50.
+
+$\bar{x}$ = [insert answer here]
+
+*s* = [insert answer here]
+
+$\mu$ = [insert answer here]
+
+**Step 4:** Define the SEM for the sampling distribution. Report the SEM.
+
+*SEM* = $\sigma$ / $\sqrt{n}$
+
+```{r define-distribution-2}
+
+
+
+```
+
+*SEM* = [insert answer here]
+
+**Step 5:** Determine the probability of your data or more extreme under the null distribution. Calculate the t-statistic and then generate a p-value using the `pt()` function.
+
+*t* = ($\bar{x}$ - $\mu$) / *SEM*
+
+```{r t-and-p-2}
+
+
+
+```
+
+**Step 6:** Compare your probability (p-value) to your alpha level and decide whether to reject or retain the null hypothesis.
+
+My alpha level is .05 and my observed p-value is `r round(p_value, 3)`, so I retain (or fail to reject) the null hypothesis that people cannot detect subtle social cues.
+
+**Step 7:** Write up your results summary. Make sure to include a Confidence Interval around your estimate of the mean.
+
+95% CI = $\bar{x}$ ±(1.96 x SEM)
+
+```{r confidence-interval-2}
+
+
+
+```
+
+Summary: [insert answer here]
+
+## Render and submit your document. Follow the steps outlined in the Homework Instructions.

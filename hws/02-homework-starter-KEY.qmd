@@ -1,127 +1,268 @@
 ---
-title: "Module 1: Homework Starter File"
+title: "Module 2: Homework Starter File KEY"
 format: html
 editor: visual
 ---
 
-IMPORTANT: For this module's homework, I would like to see your code in the final document. So, make sure you **HAVE NOT** hidden any of your code (i.e., by using `echo=FALSE`) in your code chunks.
+## Homework Note
+
+You must answer all questions and follow all steps in the homework document. Any time you see \[XX\] in the starter file you need to replace that with the value that is being requested. If you do not replace all \[XX\] values and answer all questions or address all instructions in this document, questions will be marked as incorrect.
 
 ## Load Packages
 
+Note: you may have to install these packages first. If you do install them, I recommend doing it in the console rather than in this code chunk.
+
 ```{r load-packages, message= FALSE}
 
-# type your code here
-
 library(tidyverse)
-
+library(infer)
+library(knitr)
 
 ```
 
-## Read in and View the Data
+## Read in the Data; View the Data
 
 ```{r read-and-view, message= FALSE}
 
-# type your code here
+gapminder_2015 <- read_csv("data/gapminder_2015.csv")
 
-world <- read_csv("data/world_happiness_2015.csv")
+View(gapminder_2015)
 
 ```
 
 ## Exercise 1:
 
-Calculate (individually) the mean, median, variance and standard deviation of the "Corruption" variable using the corresponding function in R. Please use these functions:
+For this first exercise, we are going to generate 10000 random samples of different sizes (10, 50, and 150) from a skewed distribution. For each sample, we will calculate the mean. Then, we will plot those 10000 means to examine the resulting sampling distributions. We will use the life_expectancy variable in the gapminder data.
 
-`mean()` `median()` `var()` `sd()`
+Remember that we are now using the "life_expectancy" variable!
 
-Save your values as objects, as we'll be using them in our write-up!
+Take a look at the data. What can you say about the shape of the distribution? If it is skewed, comment on the direction of the skew.
 
-```{r corruption-descriptives}
+Compare the three plots, what does this show?
 
-# type your code here
+```{r plot-distribution}
 
-mean_corrup <- mean(world$Corruption, na.rm = TRUE)
-median_corrup <- median(world$Corruption, na.rm = TRUE)
-var_corrup <- var(world$Corruption, na.rm = TRUE)
-sd_corrup <- sd(world$Corruption, na.rm = TRUE)
+gapminder_2015 %>% 
+  ggplot(aes(x = life_expectancy)) +
+  geom_histogram() 
+
+life_expectancy_summary <- gapminder_2015 %>% 
+  summarise(Mean = mean(life_expectancy, na.rm = TRUE),
+            Median = median(life_expectancy, na.rm = TRUE), 
+            Variance = var(life_expectancy, na.rm = TRUE),
+            `Standard Deviation` = sd(life_expectancy, na.rm = TRUE))
+
+kable(t(life_expectancy_summary), digits = 2, col.names = c("Statistic", "Value"), caption = "Life Expectancy Descriptive Statistics")  
 
 ```
+
+Describe the shape of the distribution. If it is skewed, please specify the direction (positive/right skewed or negative/left skewed).
+
+\[insert answer here\]
+
+The distribution is negatively (left) skewed.
+
+Next, let's take 10000 samples of size 10 and calculate the mean for each sample. We will use the `rep_sample_n()` function from the *infer* package.
+
+```{r sample-10}
+
+sample_10 <- rep_sample_n(gapminder_2015, size = 10, reps = 10000) %>% 
+  group_by(replicate) %>% 
+  summarise(mean_life_expectancy = mean(life_expectancy)) %>% 
+  mutate(n = 10) 
+
+```
+
+Now, do the same thing for sample size of 50 and 150 (i.e., copy the above code and change the `size` and `n` to the appropriate values).
+
+```{r sample-50-150}
+
+sample_50 <- rep_sample_n(gapminder_2015, size = 50, reps = 10000) %>% 
+  group_by(replicate) %>% 
+  summarise(mean_life_expectancy = mean(life_expectancy)) %>% 
+  mutate(n = 50)
+
+sample_150 <- rep_sample_n(gapminder_2015, size = 150, reps = 10000) %>% 
+  group_by(replicate) %>% 
+  summarise(mean_life_expectancy = mean(life_expectancy)) %>% 
+  mutate(n = 150)
+
+```
+
+Next, combine your three data frames together and generate a plot to compare them.
+
+```{r comparison-plot}
+
+all_samples <- bind_rows(sample_10, sample_50, sample_150)
+
+ggplot(all_samples) + 
+  geom_histogram(aes(x = mean_life_expectancy), color = "black")  + 
+  xlab("Life Expectancy") + 
+  ylab("Number of countries") + 
+  facet_wrap(~n, ncol = 1) 
+
+```
+
+Compare the three plots, what does this show?
+
+This illustrates that the distribution approaches normal as sample size increases.
 
 ## Exercise 2:
 
-Construct a **summary** of the "Corruption" variable that contains each of the above parameters.
+Now, let's practice the steps of Null Hypothesis Significance Testing (NHST). There is no data to read in for this exercise.
 
-```{r corruption-summary}
+A researcher is investigating whether people can subconsciously detect subtle emotional cues in facial expressions. Participants are presented with pairs of faces that differ very slightly in their expression (e.g., happy vs. sad). She shows participants pairs of faces and they are asked to choose which face in each pair exhibits more positive emotion.
 
-# type your code here
+If people can subconsciously detect subtle emotional cues in facial expressions, then they should perform above chance (or 50%). The sample of 50 participants, on average, gets 54% of trials correct with a standard deviation of 15. Assume the standard deviation was calculated correctly for a sample (e.g., n-1 in the denominator).
 
-world %>% 
-  summarise(mean = mean(Corruption, na.rm = TRUE),
-            median = median(Corruption, na.rm = TRUE),
-            variance = var(Corruption, na.rm = TRUE),
-            standard_deviation = sd(Corruption, na.rm = TRUE))
-  
+**Step 1:** State the null and alternative hypotheses. Use *non-directional* hypotheses.
 
+H~0~: $\mu$ = 50
+
+H~1~: $\mu$ $\neq$ 50
+
+**Step 2:** Choose your alpha level; provide a justification.
+
+$\alpha$: .05
+
+This is the standard alpha level used in Psychology.
+
+**Step 3:** Collect your data.
+
+We're going to pretend we already did this!
+
+Restating from above: Our sample mean is 54 and sample standard deviation is 15 The population mean, under the null hypothesis, is 50.
+
+$\bar{x}$ = 54
+
+*s* = 15
+
+$\mu$ = 50
+
+**Step 4:** Define the mean and SEM for the sampling distribution. Estimate the population mean and sd from your data, calculate the SEM. Report the SEM.
+
+*SEM* = $\sigma$ / $\sqrt{n}$
+
+```{r define-distribution}
+
+# first, I am going to create objects for each of these values (some of which I'll use later)
+population_mean <- 50
+sample_mean <- 54
+estimated_sigma <- 15
+sample_size <- 50
+
+# then, I'll use those objects to calculate the SEM
+SEM <- estimated_sigma / sqrt(sample_size)
+
+# make sure to report the SEM that you calculated above
 
 ```
+
+*SEM* = `r SEM`
+
+**Step 5:** Determine the probability of your data or more extreme under the null distribution. Calculate the t-statistic and then generate a p-value using the `pt()` function.
+
+*t* = ($\bar{x}$ - $\mu$) / *SEM*
+
+```{r t-and-p}
+
+t_statistic <- (sample_mean - population_mean) / SEM
+
+df_value <- sample_size - 1
+
+p_value <- 2*pt(abs(t_statistic), df = df_value, lower.tail = FALSE)
+
+```
+
+**Step 6:** Compare your probability (p-value) to your alpha level and decide whether to reject or retain the null hypothesis.
+
+My alpha level is .05 and my observed p-value is `r round(p_value, 3)`, so I retain (or fail to reject) the null hypothesis that people cannot detect subtle social cues.
+
+**Step 7:** Write up your results summary. Make sure to include a Confidence Interval around your estimate of the mean.
+
+95% CI = $\bar{x}$ ±(1.96 x SEM)
+
+```{r confidence-interval}
+
+# remember that you've already created objects for xbar (sample_mean) and the SEM, round to 2 decimal places
+
+lower_bound <- round(sample_mean - (1.96*SEM), 2)
+upper_bound <- round(sample_mean + (1.96*SEM), 2)
+
+```
+
+We examined whether people detect subtle emotional cues in facial expressions. Participants' average performance on the emotion detection task task (*M* = `r sample_mean`, 95%CI \[`r lower_bound`, `r upper_bound`\], *SD* = `r estimated_sigma`) was not significantly different from chance ($\mu$ = `r population_mean`), *t*(`r df_value`) = `r round(t_statistic, 2)`, *p* = `r round(p_value, 3)`.This finding suggests that participants cannot detect subtle emotional cues in facial expressions.
 
 ## Exercise 3:
 
-Create a histogram of the "Corruption" variable. Make sure to label your plot.
+Now, let's assume that the sample of 50 participants, on average, gets 56% of trials correct, again with a standard deviation of 15. You can still assume the standard deviation was calculated correctly for a sample (e.g., n-1 in the denominator).
 
-Add a vertical line the indicates the location of the mean (using a solid red line) and median (using a dashed red line). Hint: use `geom_vline`.
+Repeat steps 3 through 7 with the new observed mean value.
 
-What do the descriptive statistics and histogram suggest about the shape of the "Corruption" distribution? Is it normally distributed or skewed in one direction? How can you tell?
+**Step 3:** Collect your data.
 
-```{r histogram}
+We're going to pretend we already did this!
 
-# type your code here
+Our sample mean is 56 and sample standard deviation is 15 The population mean, under the null hypothesis, is 50.
 
-world %>% 
-  ggplot(aes(x = Corruption)) +
-  geom_histogram() +
-  geom_vline(aes(xintercept = mean_corrup), color = "red") +
-  geom_vline(aes(xintercept = median_corrup), linetype = "dashed", color = "red") +
-  labs(title = "World Corruption Ratings in 2015")
+$\bar{x}$ = 56
 
+*s* = 15
 
-```
+$\mu$ = 50
 
-## Exercise 4:
+**Step 4:** Define the mean and SEM for the sampling distribution. Estimate the population mean and sd from your data, calculate the SEM. Report the SEM.
 
-Now, let's examine the skew and kurtosis of the distribution!
+*SEM* = $\sigma$ / $\sqrt{n}$
 
-First, we need to install and load the `moments` package.
+```{r define-distribution-2}
 
-Next, we can use the `skewness()` and `kurtosis()` functions to calculate these values.
+# first, I am going to create objects for each of these values (some of which I'll use later)
+population_mean <- 50
+sample_mean <- 56
+estimated_sigma <- 15
+sample_size <- 50
 
-Again, save your values as objects, as we'll be using them in the write-up!
+# then, I'll use those objects to calculate the SEM
+SEM <- estimated_sigma / sqrt(sample_size)
 
-```{r skew-kurtosis}
-
-# type your code here
-
-library(moments)
-
-skew_corrup <- world %>% 
-  select(Corruption) %>% 
-  skewness(na.rm=TRUE)
-
-kurtosis_corrup <- world %>% 
-  select(Corruption) %>% 
-  kurtosis(na.rm=TRUE)
+# make sure to report the SEM that you calculated above
 
 ```
 
-## Exercise 5:
+*SEM* = `r SEM`
 
-Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the objects you created earlier to insert the descriptive values directly into your summary.
+**Step 5:** Determine the probability of your data or more extreme under the null distribution. Calculate the t-statistic and then generate a p-value using the `pt()` function.
 
-# type your summary here
+*t* = ($\bar{x}$ - $\mu$) / *SEM*
 
-In the 2015 World Happiness Report, the average Corruption rating is `r round(mean_corrup, 2)`. The median Corruption rating is `r round(median_corrup, 2)`, the variance in Corruption ratings is `r round(var_corrup, 2)`, and the standard deviation is `r round(sd_corrup, 2)`. A histogram of the data reveals an approximately normally distribution. While the skewness of `r round(skew_corrup, 2)` is close to zero and suggests an approximately normal distribution, the kurtosis is slightly high at `r round(kurtosis_corrup, 2)`. For these data, the mean would be the most appropriate measure of central tendency.
+```{r t-and-p-2}
 
-## Exercise 6:
+t_statistic <- (sample_mean - population_mean) / SEM
 
-\`\`\`{r tidytuesday-descriptives}
+df_value <- sample_size - 1
 
-# type your code here
+p_value <- 2*pt(abs(t_statistic), df = df_value, lower.tail = FALSE)
+
+```
+
+**Step 6:** Compare your probability (p-value) to your alpha level and decide whether to reject or retain the null hypothesis.
+
+My alpha level is .05 and my observed p-value is `r round(p_value, 3)`, so I retain (or fail to reject) the null hypothesis that people cannot detect subtle social cues.
+
+**Step 7:** Write up your results summary. Make sure to include a Confidence Interval around your estimate of the mean.
+
+95% CI = $\bar{x}$ ±(1.96 x SEM)
+
+```{r confidence-interval-2}
+
+# remember that you've already created objects for xbar (sample_mean) and the SEM, round to 2 decimal places
+
+lower_bound <- round(sample_mean - (1.96*SEM), 2)
+upper_bound <- round(sample_mean + (1.96*SEM), 2)
+
+```
+
+We examined whether people can detect subtle emotional cues in facial expressions. Participants' average performance on the emotion detection task (*M* = `r sample_mean`, 95%CI \[`r lower_bound`, `r upper_bound`\], *SD* = `r estimated_sigma`) was significantly greater than chance ($\mu$ = `r population_mean`), *t*(`r df_value`) = `r round(t_statistic, 2)`, *p* = `r round(p_value, 3)`. This finding suggests that participants are able to detect subtle emotional cues in facial expressions.
+
+## Render and submit your document. Follow the steps outlined in the Homework Instructions.
