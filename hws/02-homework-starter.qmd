@@ -28,7 +28,7 @@ Note: you may have to install these packages first. If you do install them, I re
 
 ## Exercise 1:
 
-For this first exercise, please generate 10000 random samples of different sizes (10, 50, and 150) from a distribution. For each sample, calculate the mean. Then, plot those 10000 means to examine the resulting sampling distributions. Use the life_expectancy variable in the gapminder data.
+For this first exercise, please generate 10000 random samples of sizes 10, 50, and 150 from the life_expectancy distribution. For each sample, calculate the mean. Then, plot those 10000 means to examine the resulting sampling distributions. 
 
 Remember that we are now using the "life_expectancy" variable!
 
@@ -46,8 +46,6 @@ Compare the three plots, what does this show?
 Describe the shape of the distribution. If it is skewed, please specify the direction (positive/right skewed or negative/left skewed).
 
 \[insert answer here\]
-
-The distribution is negatively (left) skewed.
 
 Next, let's take 10000 samples of size 10 and calculate the mean for each sample. We will use the `rep_sample_n()` function from the *infer* package.
 
@@ -90,9 +88,9 @@ If people can subconsciously detect subtle emotional cues in facial expressions,
 
 **Step 1:** State the null and alternative hypotheses. Use *non-directional* hypotheses.
 
-H~0~: $\mu$ = \[insert answer here\]
+H~0~: \[insert answer here\]
 
-H~1~: $\mu$ $\neq$ \[insert answer here\]
+H~1~: \[insert answer here\]
 
 **Step 2:** Choose your alpha level; provide a justification.
 

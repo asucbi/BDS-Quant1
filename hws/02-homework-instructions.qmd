@@ -69,7 +69,7 @@ You must answer all questions and follow all steps in the homework document. Any
 
 ## Exercise 1:
 
-For this first exercise, please generate 10000 random samples of different sizes (10, 50, and 150) from a distribution. For each sample, calculate the mean. Then, plot those 10000 means to examine the resulting sampling distributions. Use the life_expectancy variable in the gapminder data.
+For this first exercise, please generate 10000 random samples of sizes 10, 50, and 150 from the life_expectancy distribution. For each sample, calculate the mean. Then, plot those 10000 means to examine the resulting sampling distributions. 
 
 **Remember that we are now using the "life_expectancy" variable!**
 
