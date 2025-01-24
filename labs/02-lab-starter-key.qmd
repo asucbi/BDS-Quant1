@@ -22,8 +22,6 @@ library(knitr)
 
 ```{r read-and-view, message= FALSE}
 
-
-
 gapminder_2015 <- read_csv("data/gapminder_2015.csv")
 
 View(gapminder_2015)
@@ -56,14 +54,14 @@ Describe the shape of the distribution. If it is skewed, please specify the dire
 
 The data are positively skewed (or right skewed).
 
-Next, let's take 1000 samples of size 5 and calcualte the mean for each sample. We will use the `rep_sample_n()` function from the *infer* package.
+Next, let's take 10000 samples of size 5 and calculate the mean for each sample. We will use the `rep_sample_n()` function from the *infer* package.
 
 ```{r sample-5}
 
 sample_5 <- rep_sample_n(gapminder_2015, size = 5, reps = 10000) %>% #here we are getting 100 samples of size 5
   group_by(replicate) %>% #here we are grouping by sample (the function created this `replicate` variable)
-  summarise(mean_infant_mortality = mean(life_expectancy)) %>% #now, get the mean for each sample
-  mutate(n = "5") #add a variable that indcates the sample size
+  summarise(mean_infant_mortality = mean(infant_mortality)) %>% #now, get the mean for each sample
+  mutate(n = 5) #add a variable that indicates the sample size
 
 ```
 
@@ -73,12 +71,12 @@ Now, do the same thing for sample size of 30 and 100 (i.e., copy the above code 
 
 sample_30 <- rep_sample_n(gapminder_2015, size = 30, reps = 10000) %>% 
   group_by(replicate) %>% 
-  summarise(mean_infant_mortality = mean(life_expectancy)) %>% 
+  summarise(mean_infant_mortality = mean(infant_mortality)) %>% 
   mutate(n = 30)
 
 sample_100 <- rep_sample_n(gapminder_2015, size = 100, reps = 10000) %>% 
   group_by(replicate) %>% 
-  summarise(mean_infant_mortality = mean(life_expectancy)) %>% 
+  summarise(mean_infant_mortality = mean(infant_mortality)) %>% 
   mutate(n = 100)
 
 ```
@@ -145,7 +143,8 @@ sample_mean <- 68
 estimated_sigma <- 12
 sample_size <- 25
 
-# then, I'll use those objects to calcualte the SEM
+# then, I'll use those objects to calculate the SEM
+
 SEM <- estimated_sigma / sqrt(sample_size)
 
 # make sure to report the SEM that you calculated above
@@ -185,17 +184,21 @@ upper_bound <- round(sample_mean + (1.96*SEM), 2)
 
 ```
 
-We examined the effect of an 8-week mindfulness meditation program on stress levels.The average score of participants after the program (*M* = `r sample_mean`, 95%CI \[`r lower_bound`, `r upper_bound`\], *SD* = `r estimated_sigma`) was significantly higher than the population average ($\mu$ = `r population_mean`), *t*(`r df_value`) = `r round(t_statistic, 2)`, *p* = `r round(p_value, 3)`. This finding suggests that the mindfulness meditation program has a significant impact on reducing stress levels in participants.
+We examined the effect of an 8-week mindfulness meditation program on stress levels.The average score of participants after the program (*M* = `r sample_mean`, 95%CI [`r lower_bound`, `r upper_bound`], *SD* = `r estimated_sigma`) was significantly lower than the population average ($\mu$ = `r population_mean`), *t*(`r df_value`) = `r round(t_statistic, 2)`, *p* = `r round(p_value, 3)`. This finding suggests that the mindfulness meditation program has a significant impact on reducing stress levels in participants.
+
+See image below for an illustration of how to insert r code into summary: 
+
+![](images/lab02_code_chunk.png)
 
 ## Consider the following alternative scenarios. What would you conclude?
 
 If observed sample mean was 72, the t statistic would be -1.25 and p-value would be 0.22. What do you conclude?
 
-I would conclude that there is not a signficiant effect. The mindfulness program did not decrease stress more than would be expected by chance.
+I would conclude that there is not a significant effect. The mindfulness program did not decrease stress more than would be expected by chance.
 
 If the observed sample mean was 82, the t statistic would be 2.92 and p-value would be .008. What do you conclude?
 
-I would conclude that there IS a signficant effect. BUT the mindfulness program actually INCREASED stress levels. Oops! Even though this wasn't your prediction, it would still be useful to know!
+I would conclude that there IS a significant effect. BUT the mindfulness program actually INCREASED stress levels. Oops! Even though this wasn't your prediction, it would still be useful to know!
 
 What if p was .06? What would you conclude?
 

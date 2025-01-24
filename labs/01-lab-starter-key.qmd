@@ -52,6 +52,7 @@ sqrt(var_happiness)
 sd_happiness == sqrt(var_happiness)
 
 ```
+
 Create a table using the objects you created.
 
 The code below is for a **pipe table**. However there are *many* ways to create tables. The [Quarto Website](https://quarto.org/docs/authoring/tables.html) has some nice instructions that go more in depth about the creation of tables
@@ -70,6 +71,7 @@ Template:
 : Happiness Descriptives {.striped .hover}
 
 ### 
+
 Finished Version:
 
 | Statistic          |                          Value |
@@ -116,7 +118,7 @@ Create a histogram of the "Happiness" variable. Make sure to label your plot.
 
 What do the descriptive statistics and histogram suggest about the shape of the "Happiness" distribution? Is it normally distributed or skewed in one direction? How can you tell?
 
-It looks relatively normal. 
+It looks relatively normal.
 
 ```{r histogram}
 
@@ -169,22 +171,19 @@ In the 2015 World Happiness Report, the average Happiness rating is `r round(mea
 
 ```{r}
 ```
+
 Amir's (excellent) question: How does the `skewness()` function calculate the skew? What is the equation?
 
 There are multiple equations to calculate skew, the one that the `moments` package uses is:
 
-Skewness = (sum((x - mean(x))^3) / n) / (sum((x - mean(x))^2) / n)^(3/2)
+Skewness = (sum((x - mean(x))\^3) / n) / (sum((x - mean(x))\^2) / n)\^(3/2)
 
 We can try out this equation.
 
-x <- world$Happiness
-n <- nrow(world)
+x \<- world\$Happiness n \<- nrow(world)
 
-skew_happiness_calc <- (sum((x - mean(x))^3) / n) / (sum((x - mean(x))^2) / n)^(3/2)
+skew_happiness_calc \<- (sum((x - mean(x))\^3) / n) / (sum((x - mean(x))\^2) / n)\^(3/2)
 
-#skew using the equation
-skew_happiness_calc
+#skew using the equation skew_happiness_calc
 
-#skew using the function
-skew_happiness
-
+#skew using the function skew_happiness
