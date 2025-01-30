@@ -184,9 +184,9 @@ upper_bound <- round(sample_mean + (1.96*SEM), 2)
 
 ```
 
-We examined the effect of an 8-week mindfulness meditation program on stress levels.The average score of participants after the program (*M* = `r sample_mean`, 95%CI [`r lower_bound`, `r upper_bound`], *SD* = `r estimated_sigma`) was significantly lower than the population average ($\mu$ = `r population_mean`), *t*(`r df_value`) = `r round(t_statistic, 2)`, *p* = `r round(p_value, 3)`. This finding suggests that the mindfulness meditation program has a significant impact on reducing stress levels in participants.
+We examined the effect of an 8-week mindfulness meditation program on stress levels.The average score of participants after the program (*M* = `r sample_mean`, 95%CI \[`r lower_bound`, `r upper_bound`\], *SD* = `r estimated_sigma`) was significantly lower than the population average ($\mu$ = `r population_mean`), *t*(`r df_value`) = `r round(t_statistic, 2)`, *p* = `r round(p_value, 3)`. This finding suggests that the mindfulness meditation program has a significant impact on reducing stress levels in participants.
 
-See image below for an illustration of how to insert r code into summary: 
+See image below for an illustration of how to insert r code into summary:
 
 ![](images/lab02_code_chunk.png)
 

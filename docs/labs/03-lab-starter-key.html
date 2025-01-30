@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Module 3: Lab Starter File KEY</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="03-lab-starter-key_files/libs/clipboard/clipboard.min.js"></script>
+<script src="03-lab-starter-key_files/libs/quarto-html/quarto.js"></script>
+<script src="03-lab-starter-key_files/libs/quarto-html/popper.min.js"></script>
+<script src="03-lab-starter-key_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="03-lab-starter-key_files/libs/quarto-html/anchor.min.js"></script>
+<link href="03-lab-starter-key_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="03-lab-starter-key_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="03-lab-starter-key_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="03-lab-starter-key_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="03-lab-starter-key_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Module 3: Lab Starter File KEY</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="load-packages" class="level2">
+<h2 class="anchored" data-anchor-id="load-packages">Load Packages</h2>
+<p>Note: you may have to install these packages first.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(papaja) <span class="co">#for formatting p values</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom) <span class="co">#for formatting tables</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co">#for formatting tables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="part-1-correlation" class="level1">
+<h1>Part 1: Correlation</h1>
+<section id="read-in-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="read-in-the-data">Read in the Data</h2>
+<p>First, let’s read in the data and then use <code>View()</code> to check it out.</p>
+<p>The data file is called <code>consc_health.csv</code>. Please name the data “health”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>health <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/consc_health.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 60 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): gender
+dbl (3): pid, consc, sr_health
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(health)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="scatter-plot" class="level2">
+<h2 class="anchored" data-anchor-id="scatter-plot">Scatter plot</h2>
+<p>Scatter plots allow us to visualize the relationship between two variables. Let’s create a scatter plot of the relation between conscientiousness and self-reported health using <code>ggplot()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> health, <span class="fu">aes</span>(<span class="at">x=</span>consc, <span class="at">y=</span>sr_health)) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Conscientiousness"</span>, <span class="at">y =</span> <span class="st">"Self-Reported Health"</span>) <span class="co">#label your axes!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-lab-starter-key_files/figure-html/scatter-plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> What do you notice about the strength and direction of the data?</p>
+</blockquote>
+</section>
+<section id="calculate-correlation-coefficient-r" class="level2">
+<h2 class="anchored" data-anchor-id="calculate-correlation-coefficient-r">Calculate correlation coefficient (<em>r</em>)</h2>
+<p>Now, let’s calculate the correlation coefficient for <code>health$consc</code> and <code>health$sr_health</code> using the <code>cor()</code> function (this is in the <code>{stats}</code> package, which is a core package in to R - no need to install/load!).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(health<span class="sc">$</span>consc, health<span class="sc">$</span>sr_health)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4765366</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> Is the correlation positive or negative? …strong or weak?</p>
+</blockquote>
+</section>
+<section id="correlation-test" class="level2">
+<h2 class="anchored" data-anchor-id="correlation-test">Correlation test</h2>
+<p>You can run a correlation test using the <code>corr.test()</code> function from the <code>{psych}</code> package (note: the <code>{psych}</code> package is built into R, so no need to install or load!)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>r_consc_health <span class="ot">&lt;-</span> health <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(consc, sr_health) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">corr.test</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> What can we conclude about the relationship between conscientiousness and health from this data?</p>
+</blockquote>
+<p>It is often very useful to save the output of a statistical test to an object that you can then pull useful information out of it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(r_consc_health)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 14
+ $ r     : num [1:2, 1:2] 1 0.477 0.477 1
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:2] "consc" "sr_health"
+  .. ..$ : chr [1:2] "consc" "sr_health"
+ $ n     : num 60
+ $ t     : num [1:2, 1:2] Inf 4.13 4.13 Inf
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:2] "consc" "sr_health"
+  .. ..$ : chr [1:2] "consc" "sr_health"
+ $ p     : num [1:2, 1:2] 0 0.000119 0.000119 0
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:2] "consc" "sr_health"
+  .. ..$ : chr [1:2] "consc" "sr_health"
+ $ p.adj : num 0.000119
+ $ se    : num [1:2, 1:2] 0 0.115 0.115 0
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:2] "consc" "sr_health"
+  .. ..$ : chr [1:2] "consc" "sr_health"
+ $ sef   : num 0.132
+ $ adjust: chr "holm"
+ $ sym   : logi TRUE
+ $ ci    :'data.frame': 1 obs. of  4 variables:
+  ..$ lower: num 0.253
+  ..$ r    : num 0.477
+  ..$ upper: num 0.652
+  ..$ p    : num 0.000119
+ $ ci2   :'data.frame': 1 obs. of  5 variables:
+  ..$ lower: num 0.253
+  ..$ r    : num 0.477
+  ..$ upper: num 0.652
+  ..$ p    : num 0.000119
+  ..$ p.adj: num 0.000119
+ $ ci.adj:'data.frame': 1 obs. of  2 variables:
+  ..$ lower.adj: num 0.253
+  ..$ upper.adj: num 0.652
+ $ stars : chr [1:2, 1:2] "1***" "0.48***" "0.48***" "1***"
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:2] "consc" "sr_health"
+  .. ..$ : chr [1:2] "consc" "sr_health"
+ $ Call  : language corr.test(x = .)
+ - attr(*, "class")= chr [1:2] "psych" "corr.test"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>r_consc_health<span class="sc">$</span>p <span class="co">#p-value matrix</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 consc    sr_health
+consc     0.0000000000 0.0001186082
+sr_health 0.0001186082 0.0000000000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>r_consc_health<span class="sc">$</span>p.adj <span class="co">#p-value (adjusted for multiple comparisons, which isn't applicable here)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0001186082</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>r_consc_health<span class="sc">$</span>ci <span class="co">#confidence interval</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                lower         r     upper            p
+consc-sr_hl 0.2532571 0.4765366 0.6516132 0.0001186082</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>r_consc_health<span class="sc">$</span>n <span class="co">#sample size</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 60</code></pre>
+</div>
+</div>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>A significant positive correlation was found between conscientiousness and self-reported health status, <em>r</em>(58) = 0.48, 95% CI[0.25, 0.65], <em>p</em> &lt; .001.</p>
+</section>
+</section>
+<section id="part-2-regression" class="level1">
+<h1>Part 2: Regression</h1>
+<p>Let’s add a regression line to the plot we created earlier. You can add a line of best fit by adding a <code>geom_smooth()</code> layer to the plot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> health, <span class="fu">aes</span>(<span class="at">x=</span>consc, <span class="at">y=</span>sr_health)) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Conscientiousness"</span>, <span class="at">y =</span> <span class="st">"Self-Reported Health"</span>)  <span class="co">#label your axes!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-lab-starter-key_files/figure-html/regression-line-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Example:</em> <code>model &lt;- lm(y ~ x, data = df)</code></p>
+<p>Let’s perform a linear regression analysis.</p>
+<ul>
+<li>Regress self-report health scores on conscientiousness using the <code>lm()</code> function below.</li>
+<li>Store the results of <code>lm()</code> in an object called <code>model</code>.</li>
+<li>If you’re not sure how to do this, look at the example above!</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(health<span class="sc">$</span>sr_health <span class="sc">~</span> health<span class="sc">$</span>consc)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(sr_health <span class="sc">~</span> consc, <span class="at">data =</span> health)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s see what the output looks like (print by typing <code>model</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = sr_health ~ consc, data = health)
+
+Coefficients:
+(Intercept)        consc  
+     1.6570       0.4904  </code></pre>
+</div>
+</div>
+<p>We can get even more information using <code>summary()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = sr_health ~ consc, data = health)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.5450 -0.6414 -0.1623  0.6817  2.0154 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   1.6570     0.3571   4.641 2.03e-05 ***
+consc         0.4904     0.1188   4.128 0.000119 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.8854 on 58 degrees of freedom
+Multiple R-squared:  0.2271,    Adjusted R-squared:  0.2138 
+F-statistic: 17.04 on 1 and 58 DF,  p-value: 0.0001186</code></pre>
+</div>
+</div>
+<section id="residual-standard-error" class="level4">
+<h4 class="anchored" data-anchor-id="residual-standard-error">Residual standard error</h4>
+<p>Let’s calculate the residual standard error from scratch, and then I will show you how to pull this value directly from the output.</p>
+<p>First, we need to get the predicted values of Y.</p>
+<p>Our regression model object, called <code>model</code>, is actually a <code>list</code> that contains a lot of useful information that we don’t see in the output above. Let’s take a look at all the information stored in this object using the <code>str()</code> function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 12
+ $ coefficients : Named num [1:2] 1.66 0.49
+  ..- attr(*, "names")= chr [1:2] "(Intercept)" "consc"
+ $ residuals    : Named num [1:60] -1.052 0.374 -0.14 -0.462 0.86 ...
+  ..- attr(*, "names")= chr [1:60] "1" "2" "3" "4" ...
+ $ effects      : Named num [1:60] -23.6511 -3.655 -0.0716 -0.2861 0.9479 ...
+  ..- attr(*, "names")= chr [1:60] "(Intercept)" "consc" "" "" ...
+ $ rank         : int 2
+ $ fitted.values: Named num [1:60] 2.96 4.12 3.54 2.51 3.35 ...
+  ..- attr(*, "names")= chr [1:60] "1" "2" "3" "4" ...
+ $ assign       : int [1:2] 0 1
+ $ qr           :List of 5
+  ..$ qr   : num [1:60, 1:2] -7.746 0.129 0.129 0.129 0.129 ...
+  .. ..- attr(*, "dimnames")=List of 2
+  .. .. ..$ : chr [1:60] "1" "2" "3" "4" ...
+  .. .. ..$ : chr [1:2] "(Intercept)" "consc"
+  .. ..- attr(*, "assign")= int [1:2] 0 1
+  ..$ qraux: num [1:2] 1.13 1.29
+  ..$ pivot: int [1:2] 1 2
+  ..$ tol  : num 1e-07
+  ..$ rank : int 2
+  ..- attr(*, "class")= chr "qr"
+ $ df.residual  : int 58
+ $ xlevels      : Named list()
+ $ call         : language lm(formula = sr_health ~ consc, data = health)
+ $ terms        :Classes 'terms', 'formula'  language sr_health ~ consc
+  .. ..- attr(*, "variables")= language list(sr_health, consc)
+  .. ..- attr(*, "factors")= int [1:2, 1] 0 1
+  .. .. ..- attr(*, "dimnames")=List of 2
+  .. .. .. ..$ : chr [1:2] "sr_health" "consc"
+  .. .. .. ..$ : chr "consc"
+  .. ..- attr(*, "term.labels")= chr "consc"
+  .. ..- attr(*, "order")= int 1
+  .. ..- attr(*, "intercept")= int 1
+  .. ..- attr(*, "response")= int 1
+  .. ..- attr(*, ".Environment")=&lt;environment: R_GlobalEnv&gt; 
+  .. ..- attr(*, "predvars")= language list(sr_health, consc)
+  .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
+  .. .. ..- attr(*, "names")= chr [1:2] "sr_health" "consc"
+ $ model        :'data.frame':  60 obs. of  2 variables:
+  ..$ sr_health: num [1:60] 1.91 4.49 3.4 2.05 4.21 ...
+  ..$ consc    : num [1:60] 2.66 5.02 3.85 1.73 3.45 ...
+  ..- attr(*, "terms")=Classes 'terms', 'formula'  language sr_health ~ consc
+  .. .. ..- attr(*, "variables")= language list(sr_health, consc)
+  .. .. ..- attr(*, "factors")= int [1:2, 1] 0 1
+  .. .. .. ..- attr(*, "dimnames")=List of 2
+  .. .. .. .. ..$ : chr [1:2] "sr_health" "consc"
+  .. .. .. .. ..$ : chr "consc"
+  .. .. ..- attr(*, "term.labels")= chr "consc"
+  .. .. ..- attr(*, "order")= int 1
+  .. .. ..- attr(*, "intercept")= int 1
+  .. .. ..- attr(*, "response")= int 1
+  .. .. ..- attr(*, ".Environment")=&lt;environment: R_GlobalEnv&gt; 
+  .. .. ..- attr(*, "predvars")= language list(sr_health, consc)
+  .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
+  .. .. .. ..- attr(*, "names")= chr [1:2] "sr_health" "consc"
+ - attr(*, "class")= chr "lm"</code></pre>
+</div>
+</div>
+<p>We can extract elements from this list by using <code>LIST$ELEMENT</code> or <code>LIST[["ELEMENT"]]</code>.</p>
+</section>
+<section id="extracting-predicted-y-values" class="level3">
+<h3 class="anchored" data-anchor-id="extracting-predicted-y-values">Extracting predicted Y values</h3>
+<p>The fitted values of Y are stored in <code>model</code> in an element called <code>fitted.values</code>. Using the instructions about how to extract elements from lists right above, extract the fitted values from the model and store these in an object called <code>fitted_y</code>. Print <code>fitted_y</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fitted_y <span class="ot">&lt;-</span> model<span class="sc">$</span>fitted.values</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>fitted_y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1        2        3        4        5        6        7        8 
+2.961300 4.119826 3.543509 2.507581 3.350326 3.621532 3.038562 3.570843 
+       9       10       11       12       13       14       15       16 
+3.178485 3.147345 2.758911 3.403290 2.987058 3.015841 3.216697 3.135321 
+      17       18       19       20       21       22       23       24 
+3.056917 3.006047 3.015321 3.297619 2.458993 2.840238 3.082434 2.292952 
+      25       26       27       28       29       30       31       32 
+3.103269 3.133964 2.989617 3.354057 2.882657 3.952820 2.891139 3.307783 
+      33       34       35       36       37       38       39       40 
+2.745710 3.555768 3.643154 2.474954 2.778601 2.520440 2.935472 2.524356 
+      41       42       43       44       45       46       47       48 
+2.467469 3.442900 4.079152 2.368996 3.882772 2.256636 3.239823 2.609330 
+      49       50       51       52       53       54       55       56 
+2.309207 3.229900 2.795072 2.476516 3.459384 3.363102 3.536529 1.938202 
+      57       58       59       60 
+2.698847 3.737070 3.129544 2.779391 </code></pre>
+</div>
+</div>
+<p>Next, calculate the difference between the actual values of Y and the fitted values of Y. Store the output in an object called <code>residuals</code> and print them.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>residuals <span class="ot">&lt;-</span> health<span class="sc">$</span>sr_health <span class="sc">-</span> fitted_y</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>residuals</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          1           2           3           4           5           6 
+-1.05179179  0.37371307 -0.13961566 -0.46222179  0.85971248  1.49034005 
+          7           8           9          10          11          12 
+ 0.05099371  1.00473746  0.72444971 -0.51013035  0.84130202 -0.46213405 
+         13          14          15          16          17          18 
+-0.35681873  0.68032922  2.01542826 -0.05149984 -0.64163120  1.41852518 
+         19          20          21          22          23          24 
+ 0.63739066 -0.38306263 -0.18498050 -0.56514672 -0.57972677 -0.64136398 
+         25          26          27          28          29          30 
+-1.46937901 -0.96204444  0.13844794  0.42834928  0.08103582 -0.22450409 
+         31          32          33          34          35          36 
+-1.34106226  1.61985264  1.01873328  1.07527601 -0.27924189  0.38539640 
+         37          38          39          40          41          42 
+-0.99089855 -0.94483134  0.06312578  1.76842089  1.17242288 -1.12845379 
+         43          44          45          46          47          48 
+-0.95248954 -0.71015044 -1.54500530 -0.31210445  0.37530444 -0.70690430 
+         49          50          51          52          53          54 
+ 0.63716375 -0.39605196  1.19505547 -1.33741467 -0.07534450  0.09696171 
+         55          56          57          58          59          60 
+-0.26867918  0.68566564 -0.71606326 -0.32167592  0.99511089 -1.12082173 </code></pre>
+</div>
+</div>
+</section>
+<section id="extracting-residuals" class="level3">
+<h3 class="anchored" data-anchor-id="extracting-residuals">Extracting residuals</h3>
+<p>OK, so I made you do extra work. You can actually grab the residuals directly from the <code>model</code> object using <code>model$residuals</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>model<span class="sc">$</span>residuals</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          1           2           3           4           5           6 
+-1.05179179  0.37371307 -0.13961566 -0.46222179  0.85971248  1.49034005 
+          7           8           9          10          11          12 
+ 0.05099371  1.00473746  0.72444971 -0.51013035  0.84130202 -0.46213405 
+         13          14          15          16          17          18 
+-0.35681873  0.68032922  2.01542826 -0.05149984 -0.64163120  1.41852518 
+         19          20          21          22          23          24 
+ 0.63739066 -0.38306263 -0.18498050 -0.56514672 -0.57972677 -0.64136398 
+         25          26          27          28          29          30 
+-1.46937901 -0.96204444  0.13844794  0.42834928  0.08103582 -0.22450409 
+         31          32          33          34          35          36 
+-1.34106226  1.61985264  1.01873328  1.07527601 -0.27924189  0.38539640 
+         37          38          39          40          41          42 
+-0.99089855 -0.94483134  0.06312578  1.76842089  1.17242288 -1.12845379 
+         43          44          45          46          47          48 
+-0.95248954 -0.71015044 -1.54500530 -0.31210445  0.37530444 -0.70690430 
+         49          50          51          52          53          54 
+ 0.63716375 -0.39605196  1.19505547 -1.33741467 -0.07534450  0.09696171 
+         55          56          57          58          59          60 
+-0.26867918  0.68566564 -0.71606326 -0.32167592  0.99511089 -1.12082173 </code></pre>
+</div>
+</div>
+<p>Let’s check to see that our calculation of the residuals matches what we grabbed directly from the model output.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(residuals, <span class="dv">10</span>) <span class="sc">==</span> <span class="fu">round</span>(<span class="fu">resid</span>(model), <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE 
+  17   18   19   20   21   22   23   24   25   26   27   28   29   30   31   32 
+TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE 
+  33   34   35   36   37   38   39   40   41   42   43   44   45   46   47   48 
+TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE 
+  49   50   51   52   53   54   55   56   57   58   59   60 
+TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE </code></pre>
+</div>
+</div>
+<section id="sum-of-squared-residuals" class="level4">
+<h4 class="anchored" data-anchor-id="sum-of-squared-residuals">Sum of squared residuals</h4>
+<p>Calculate the sum of squared residuals and store the output in an object called <code>sum_sq_residuals</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>sum_sq_residuals <span class="ot">&lt;-</span> <span class="fu">sum</span>(residuals<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>sum_sq_residuals</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 45.46788</code></pre>
+</div>
+</div>
+<p>Finally, now that we have pulled the necessary components, calculate the residual standard error using the formula above. Store the results of the calculation to an object called <code>residual_standard_error</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>residual_standard_error <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(sum_sq_residuals <span class="sc">/</span> (<span class="fu">nrow</span>(health) <span class="sc">-</span> <span class="dv">2</span>))</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>residual_standard_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8853976</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="extracting-residual-standard-error" class="level3">
+<h3 class="anchored" data-anchor-id="extracting-residual-standard-error">Extracting residual standard error</h3>
+<p>We can also get the standard error more directly. However, it is not stored in the model object that we stored the output of the <code>lm()</code> function to. It is stored in the output of the <code>summary()</code> function. Let’s assign the output of this function to an object called <code>model_summary</code>, and then inspect its structure:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>model_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(model)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(model_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 11
+ $ call         : language lm(formula = sr_health ~ consc, data = health)
+ $ terms        :Classes 'terms', 'formula'  language sr_health ~ consc
+  .. ..- attr(*, "variables")= language list(sr_health, consc)
+  .. ..- attr(*, "factors")= int [1:2, 1] 0 1
+  .. .. ..- attr(*, "dimnames")=List of 2
+  .. .. .. ..$ : chr [1:2] "sr_health" "consc"
+  .. .. .. ..$ : chr "consc"
+  .. ..- attr(*, "term.labels")= chr "consc"
+  .. ..- attr(*, "order")= int 1
+  .. ..- attr(*, "intercept")= int 1
+  .. ..- attr(*, "response")= int 1
+  .. ..- attr(*, ".Environment")=&lt;environment: R_GlobalEnv&gt; 
+  .. ..- attr(*, "predvars")= language list(sr_health, consc)
+  .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
+  .. .. ..- attr(*, "names")= chr [1:2] "sr_health" "consc"
+ $ residuals    : Named num [1:60] -1.052 0.374 -0.14 -0.462 0.86 ...
+  ..- attr(*, "names")= chr [1:60] "1" "2" "3" "4" ...
+ $ coefficients : num [1:2, 1:4] 1.657 0.49 0.357 0.119 4.641 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:2] "(Intercept)" "consc"
+  .. ..$ : chr [1:4] "Estimate" "Std. Error" "t value" "Pr(&gt;|t|)"
+ $ aliased      : Named logi [1:2] FALSE FALSE
+  ..- attr(*, "names")= chr [1:2] "(Intercept)" "consc"
+ $ sigma        : num 0.885
+ $ df           : int [1:3] 2 58 2
+ $ r.squared    : num 0.227
+ $ adj.r.squared: num 0.214
+ $ fstatistic   : Named num [1:3] 17 1 58
+  ..- attr(*, "names")= chr [1:3] "value" "numdf" "dendf"
+ $ cov.unscaled : num [1:2, 1:2] 0.1626 -0.0513 -0.0513 0.018
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:2] "(Intercept)" "consc"
+  .. ..$ : chr [1:2] "(Intercept)" "consc"
+ - attr(*, "class")= chr "summary.lm"</code></pre>
+</div>
+</div>
+<p>Can you find what the residual standard error is called? Once you find it, extract it from the model_summary.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>model_summary<span class="sc">$</span>sigma </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8853976</code></pre>
+</div>
+</div>
+<p>Is it equivalent to what we calculated above?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>model_summary<span class="sc">$</span>sigma <span class="sc">==</span> residual_standard_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> What does this residual standard error (AKA standard error of the estimate) mean?</p>
+</blockquote>
+</section>
+<section id="the-coefficient-of-determination-r2" class="level3">
+<h3 class="anchored" data-anchor-id="the-coefficient-of-determination-r2">The coefficient of determination (<span class="math inline">\(R^2\)</span>)</h3>
+<section id="calculating-r2-by-hand" class="level4">
+<h4 class="anchored" data-anchor-id="calculating-r2-by-hand">Calculating <span class="math inline">\(R^2\)</span> ‘by hand’</h4>
+<p>Another measure of how well our linear model is capturing variation in the outcome variable is <span class="math inline">\(R^2\)</span>.</p>
+<p>Let’s calculate <span class="math inline">\(R^2\)</span> by hand first. Here is the formula:</p>
+<p><span class="math display">\[R^2 = \frac{SS_{Model}}{SS_{Total}} = \frac{\Sigma(\hat{Y_i} - \bar{Y})^2}{\Sigma(Y_i - \bar{Y})^2}\]</span></p>
+<p>Calculate the following:</p>
+<ul>
+<li><p><span class="math inline">\(SS_{Model}\)</span></p></li>
+<li><p><span class="math inline">\(SS_{Total}\)</span></p></li>
+<li><p><span class="math inline">\(R^2\)</span></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>ss_model <span class="ot">&lt;-</span> <span class="fu">sum</span>((fitted_y <span class="sc">-</span> <span class="fu">mean</span>(health<span class="sc">$</span>sr_health))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>ss_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 13.35878</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>ss_total <span class="ot">&lt;-</span> <span class="fu">sum</span>((health<span class="sc">$</span>sr_health <span class="sc">-</span> <span class="fu">mean</span>(health<span class="sc">$</span>sr_health))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>ss_total</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 58.82665</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>r_squared <span class="ot">&lt;-</span> ss_model <span class="sc">/</span> ss_total</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>r_squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2270871</code></pre>
+</div>
+</div>
+</section>
+<section id="extracting-r2" class="level4">
+<h4 class="anchored" data-anchor-id="extracting-r2">Extracting <span class="math inline">\(R^2\)</span></h4>
+<p>The coefficient of determination is also stored in the element called <code>r.squared</code>. This represents the proportion of variance explained by the model. Like the residual standard error, we need to use the summary function to get it:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>model_summary<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2270871</code></pre>
+</div>
+</div>
+<p>Is it equivalent to what we calculated above?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>r_squared <span class="sc">==</span> model_summary<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(r_squared, <span class="dv">10</span>) <span class="sc">==</span> <span class="fu">round</span>(model_summary<span class="sc">$</span>r.squared, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> What does this r-squared value mean (in plain English)?</p>
+</blockquote>
+</section>
+</section>
+<section id="regression-coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="regression-coefficients">Regression coefficients</h3>
+<p>We also get estimates for the individual regression coefficients, <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> in the case of univariate regression.</p>
+<section id="calculating-regression-coefficients-by-hand" class="level4">
+<h4 class="anchored" data-anchor-id="calculating-regression-coefficients-by-hand">Calculating regression coefficients ‘by hand’</h4>
+<p>We can calculate these from scratch using the following formulas.</p>
+<p>For obtaining <span class="math inline">\(b_1\)</span>:</p>
+<p><span class="math display">\[b_1 = r(\frac{s_y}{s_x})\]</span></p>
+<p>Calculate <span class="math inline">\(b_1\)</span> using the equation above. Store the value in an object called <code>b1</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">cor</span>(health<span class="sc">$</span>sr_health, health<span class="sc">$</span>consc)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>s_y <span class="ot">&lt;-</span> <span class="fu">sd</span>(health<span class="sc">$</span>sr_health)</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>s_x <span class="ot">&lt;-</span> <span class="fu">sd</span>(health<span class="sc">$</span>consc)</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> r <span class="sc">*</span> (s_y <span class="sc">/</span> s_x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And for obtaining <span class="math inline">\(b_0\)</span>:</p>
+<p><span class="math display">\[b_0 = M_y - b_1M_x\]</span></p>
+<p>Calculate <span class="math inline">\(b_0\)</span> using the equation above. Store the value in an object called <code>b0</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>b0 <span class="ot">&lt;-</span> <span class="fu">mean</span>(health<span class="sc">$</span>sr_health) <span class="sc">-</span> (b1 <span class="sc">*</span> (<span class="fu">mean</span>(health<span class="sc">$</span>consc)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="extracting-regression-coefficients" class="level4">
+<h4 class="anchored" data-anchor-id="extracting-regression-coefficients">Extracting regression coefficients</h4>
+<p>We can also grab these estimates from the model output using <code>model$coefficients</code> or the <code>coef()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>model<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)       consc 
+  1.6569733   0.4904059 </code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> What does the intercept mean?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> What about the slope for conscientiousness?</p>
+</blockquote>
+<p>We can get the confidence intervals around those coefficients by using the <code>confint</code> function from the <code>{stats}</code> package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                2.5 %    97.5 %
+(Intercept) 0.9422515 2.3716950
+consc       0.2526050 0.7282069</code></pre>
+</div>
+</div>
+</section>
+<section id="getting-standardized-coefficients" class="level4">
+<h4 class="anchored" data-anchor-id="getting-standardized-coefficients">Getting standardized coefficients</h4>
+<p>These are called the <em>unstandardized</em> coefficients. We can also get the standardized coefficients. Standardized regression coefficients, often notated as <span class="math inline">\(\beta\)</span>, are just the regression coefficients after the variables have been <em>standardized</em> or <em>Z-scored</em>. To obtain them, we need to z-score our data with <code>scale()</code> before we run the <code>lm()</code> function. One really cool thing is that we can do it in the <code>lm()</code> call:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>std_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">scale</span>(sr_health) <span class="sc">~</span> <span class="fu">scale</span>(consc), <span class="at">data =</span> health)</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(std_model) <span class="sc">%&gt;%</span> </span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> (Intercept) scale(consc) 
+       0.000        0.477 </code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> What does the standardized slope for conscientiousness mean?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> Why is the intercept zero?</p>
+</blockquote>
+</section>
+<section id="getting-the-p-values" class="level4">
+<h4 class="anchored" data-anchor-id="getting-the-p-values">Getting the p-values</h4>
+<p>We can also test the significance of each of the regression coefficient estimates.</p>
+<p>We can get these from the summary of our model object by extracting the coefficients from the summary.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Estimate Std. Error  t value     Pr(&gt;|t|)
+(Intercept) 1.6569733  0.3570543 4.640676 0.0000202958
+consc       0.4904059  0.1187984 4.128050 0.0001186082</code></pre>
+</div>
+</div>
+<p>As an aside, let’s take a look at the correlation value that we calculated earlier. What do you notice?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>r_consc_health</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:corr.test(x = .)
+Correlation matrix 
+          consc sr_health
+consc      1.00      0.48
+sr_health  0.48      1.00
+Sample Size 
+[1] 60
+Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+          consc sr_health
+consc         0         0
+sr_health     0         0
+
+ To see confidence intervals of the correlations, print with the short=FALSE option</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> Is the test of the intercept significant? What does this mean?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> Is the test of the slope significant? What does this mean?</p>
+</blockquote>
+</section>
+</section>
+</section>
+<section id="a-tidier-way-to-extract-information" class="level1">
+<h1>A tidier way to extract information</h1>
+<p>You may have noticed at this point that working with lists has its challenges. Even just extracting the information we’ve extracted so far has some pretty messy code. There must be a better (tidier) way!</p>
+<p>Thankfully, there is. The <code>{broom}</code> package is a package for <em>tidying</em> the results of models. It’s pretty easy to use—you just pass the model object to a function from <code>{broom}</code> called <code>tidy()</code>. There are some more advanced things you can do, but just <code>tidy(model)</code> works for most purposes. And one really nice thing about <code>{broom}</code> is that it works with a lot of different types of models, so this will continue to work as we move to other techniques (e.g., multi-level modelling with <code>{lme4}</code>).</p>
+<section id="tidy" class="level3">
+<h3 class="anchored" data-anchor-id="tidy"><code>tidy()</code></h3>
+<p>Let’s see what happens when we tidy our model:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)    1.66      0.357      4.64 0.0000203
+2 consc          0.490     0.119      4.13 0.000119 </code></pre>
+</div>
+</div>
+<p>You can see it produces a dataframe containing the model coefficients and their significance tests. If you also want to get the confidence intervals around those coefficients, you simply need to add the argument <code>conf.int = TRUE</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 7
+  term        estimate std.error statistic   p.value conf.low conf.high
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)    1.66      0.357      4.64 0.0000203    0.942     2.37 
+2 consc          0.490     0.119      4.13 0.000119     0.253     0.728</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="reporting-regressions" class="level1">
+<h1>Reporting regressions</h1>
+<p>The last thing we’ll cover today is how to report the results of your regression in Tables.</p>
+<section id="create-tables-using-broom-and-kable" class="level3">
+<h3 class="anchored" data-anchor-id="create-tables-using-broom-and-kable">Create tables using <code>{broom}</code> and <code>{kable}</code></h3>
+<p>Our first option would be to make a table ‘by hand’ using a combination of <code>tidy()</code> and the <code>kable()</code> function from <code>{knitr}</code>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Results of Regressing Self-Reported Health on Conscientiousness</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">1.66</td>
+<td style="text-align: right;">0.36</td>
+<td style="text-align: right;">4.64</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">consc</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">4.13</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We could clean things up a bit more by changing the names and reformatting that pesky p-value column:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Results of Regressing Self-Reported Health on Conscientiousness</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">coefficient</th>
+<th style="text-align: right;">b</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">t</th>
+<th style="text-align: left;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">1.66</td>
+<td style="text-align: right;">0.36</td>
+<td style="text-align: right;">4.64</td>
+<td style="text-align: left;">&lt; .001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">consc</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">4.13</td>
+<td style="text-align: left;">&lt; .001</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This method is nice for two reasons:</p>
+<ol type="1">
+<li><p>You have a lot of control over how things look.</p></li>
+<li><p>It’s pretty general-purpose, and you can easily adapt it to new things you learn how to do in R.</p></li>
+</ol>
+<p>However, it has a downside in that it is hard to get this into picture perfect APA format (we didn’t get all the way there above) and so you may have to do some editing once you get it into word.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

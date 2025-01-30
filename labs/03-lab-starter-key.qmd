@@ -1,0 +1,585 @@
+---
+title: "Module 3: Lab Starter File KEY"
+format: html
+editor: visual
+---
+
+## Load Packages
+
+Note: you may have to install these packages first.
+
+```{r load-packages, message= FALSE}
+
+library(tidyverse)
+library(psych) #for correlation analysis
+library(papaja) #for formatting p values
+library(broom) #for formatting tables
+library(knitr) #for formatting tables
+
+```
+
+# Part 1: Correlation
+
+## Read in the Data
+
+First, let's read in the data and then use `View()` to check it out.
+
+The data file is called `consc_health.csv`. Please name the data "health".
+
+```{r read-and-view}
+
+#pause for students to attempt
+
+
+
+
+
+health <- read_csv("data/consc_health.csv")
+
+View(health)
+
+```
+
+## Scatter plot
+
+Scatter plots allow us to visualize the relationship between two variables. Let's create a scatter plot of the relation between conscientiousness and self-reported health using `ggplot()`.
+
+```{r scatter-plot}
+
+#pause for students to fill in ??
+
+
+
+
+
+
+ggplot(data = health, aes(x=consc, y=sr_health)) +
+  geom_point() +
+  labs(x = "Conscientiousness", y = "Self-Reported Health") #label your axes!
+
+```
+
+> **Question:** What do you notice about the strength and direction of the data?
+
+
+
+## Calculate correlation coefficient (*r*)
+
+Now, let's calculate the correlation coefficient for `health$consc` and `health$sr_health` using the `cor()` function (this is in the `{stats}` package, which is a core package in to R - no need to install/load!).
+
+```{r cor-coefficient}
+
+#pause for students to fill in ??
+
+
+
+
+cor(health$consc, health$sr_health)
+
+```
+
+> **Question:** Is the correlation positive or negative? ...strong or weak?
+
+## Correlation test
+
+You can run a correlation test using the `corr.test()` function from the `{psych}` package.
+
+```{r cor-test}
+
+r_consc_health <- health %>% 
+  select(consc, sr_health) %>% 
+  corr.test()
+
+```
+
+> **Question:** What can we conclude about the relationship between conscientiousness and health from this data?
+
+It is often very useful to save the output of a statistical test to an object that you can then pull useful information out of it.
+
+```{r save-objects}
+
+str(r_consc_health)
+
+r_consc_health$p #p-value matrix
+r_consc_health$p.adj #p-value (adjusted for multiple comparisons, which isn't applicable here)
+
+
+#pause for students to fill in ??
+
+
+
+
+r_consc_health$?? #confidence interval
+r_consc_health$?? #sample size
+
+```
+
+## Summary
+
+
+#pause for students to fill in A [WHAT GOES HERE]
+
+
+
+
+
+
+A significant positive correlation was found between conscientiousness and self-reported health status, *r*(`r r_consc_health$n-2`) = `r round(r_consc_health$ci$r, 2)`, 95% CI\[`r round(r_consc_health$ci$lower,2)`, `r round(r_consc_health$ci$upper,2)`\], *p* `r papaja::printp(r_consc_health$p.adj)`.
+
+# Part 2: Regression
+
+Let's add a regression line to the plot we created earlier. You can add a line of best fit by adding a `geom_smooth()` layer to the plot.
+
+```{r regression-line}
+
+ggplot(data = health, aes(x=consc, y=sr_health)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(x = "Conscientiousness", y = "Self-Reported Health")  #label your axes!
+
+```
+
+*Example:* `model <- lm(y ~ x, data = df)`
+
+Let's perform a linear regression analysis.
+
+-   Regress self-report health scores on conscientiousness using the `lm()` function below.
+-   Store the results of `lm()` in an object called `model`.
+-   If you're not sure how to do this, look at the example above!
+
+```{r create-model}
+
+#pause for students to create model
+
+
+
+
+
+
+model <- lm(health$sr_health ~ health$consc)
+model <- lm(sr_health ~ consc, data = health)
+
+```
+
+Let's see what the output looks like (print by typing `model`).
+
+```{r print-model}
+
+model
+
+```
+
+We can get even more information using `summary()`.
+
+```{r summary-model}
+
+
+#pause for students to fill in ??
+
+
+
+
+
+summary(model)
+
+```
+
+#### Residual standard error
+
+Let's calculate the residual standard error from scratch, and then I will show you how to pull this value directly from the output.
+
+First, we need to get the predicted values of Y.
+
+Our regression model object, called `model`, is actually a `list` that contains a lot of useful information that we don't see in the output above. Let's take a look at all the information stored in this object using the `str()` function:
+
+```{r model-structure}
+
+str(model)
+
+```
+
+We can extract elements from this list by using `LIST$ELEMENT` or `LIST[["ELEMENT"]]`.
+
+### Extracting predicted Y values
+
+The fitted values of Y are stored in `model` in an element called `fitted.values`. Using the instructions about how to extract elements from lists right above, extract the fitted values from the model and store these in an object called `fitted_y`. Print `fitted_y`.
+
+```{r exract-pred-y}
+
+
+#pause for students to fill in ??
+
+
+
+
+fitted_y <- model$fitted.values
+fitted_y
+
+```
+
+Next, calculate the difference between the actual values of Y and the fitted values of Y. Store the output in an object called `residuals` and print them.
+
+```{r extract-residuals}
+
+
+#pause for students to fill in ??
+
+
+
+
+residuals <- health$sr_health - fitted_y
+residuals
+
+```
+
+### Extracting residuals
+
+OK, so I made you do extra work. You can actually grab the residuals directly from the `model` object using `model$residuals`.
+
+```{r grab-residuals}
+
+model$residuals
+
+```
+
+Let's check to see that our calculation of the residuals matches what we grabbed directly from the model output.
+
+```{r compare-residuals}
+
+round(residuals, 10) == round(resid(model), 10)
+
+```
+
+#### Sum of squared residuals
+
+Calculate the sum of squared residuals and store the output in an object called `sum_sq_residuals`.
+
+```{r ss-resid}
+
+
+#pause for students to fill in ??
+
+
+
+
+
+sum_sq_residuals <- sum(residuals^2)
+sum_sq_residuals
+
+```
+
+Finally, now that we have pulled the necessary components, calculate the residual standard error using the formula above. Store the results of the calculation to an object called `residual_standard_error`.
+
+```{r calc-resid-se}
+
+residual_standard_error <- sqrt(sum_sq_residuals / (nrow(health) - 2))
+residual_standard_error
+
+```
+
+### Extracting residual standard error
+
+We can also get the standard error more directly. However, it is not stored in the model object that we stored the output of the `lm()` function to. It is stored in the output of the `summary()` function. Let's assign the output of this function to an object called `model_summary`, and then inspect its structure:
+
+```{r examine-model-summary}
+
+model_summary <- summary(model)
+str(model_summary)
+
+```
+
+Can you find what the residual standard error is called? Once you find it, extract it from the model_summary.
+
+```{r extract-resid-se}
+
+
+#pause for students to fill in ??
+
+
+
+
+
+
+
+model_summary$sigma 
+
+```
+
+Is it equivalent to what we calculated above?
+
+```{r compare-resid-se}
+
+
+#pause for students to fill in ??
+
+
+
+
+
+model_summary$sigma == residual_standard_error
+
+```
+
+> **Question:** What does this residual standard error (AKA standard error of the estimate) mean?
+
+### The coefficient of determination ($R^2$)
+
+#### Calculating $R^2$ 'by hand'
+
+Another measure of how well our linear model is capturing variation in the outcome variable is $R^2$.
+
+Let's calculate $R^2$ by hand first. Here is the formula:
+
+$$R^2 = \frac{SS_{Model}}{SS_{Total}} = \frac{\Sigma(\hat{Y_i} - \bar{Y})^2}{\Sigma(Y_i - \bar{Y})^2}$$
+
+Calculate the following:
+
+-   $SS_{Model}$
+
+-   $SS_{Total}$
+
+-   $R^2$
+
+```{r calc-R2}
+
+
+#pause for students to fill in ?? using equations above
+
+
+
+
+
+ss_model <- sum((fitted_y - mean(health$sr_health))^2)
+ss_model
+
+ss_total <- sum((health$sr_health - mean(health$sr_health))^2)
+ss_total
+
+r_squared <- ss_model / ss_total
+r_squared
+
+```
+
+#### Extracting $R^2$
+
+The coefficient of determination is also stored in the element called `r.squared`. This represents the proportion of variance explained by the model. Like the residual standard error, we need to use the summary function to get it:
+
+```{r extract-R2}
+
+model_summary$r.squared
+
+```
+
+Is it equivalent to what we calculated above?
+
+```{r compare-R2}
+
+r_squared == model_summary$r.squared
+
+round(r_squared, 10) == round(model_summary$r.squared, 10)
+
+```
+
+> **Question:** What does this r-squared value mean (in plain English)?
+
+### Regression coefficients
+
+We also get estimates for the individual regression coefficients, $b_0$ and $b_1$ in the case of univariate regression.
+
+#### Calculating regression coefficients 'by hand'
+
+We can calculate these from scratch using the following formulas.
+
+For obtaining $b_1$:
+
+$$b_1 = r(\frac{s_y}{s_x})$$
+
+Calculate $b_1$ using the equation above. Store the value in an object called `b1`.
+
+```{r calc-b1}
+
+r <- cor(health$sr_health, health$consc)
+
+s_y <- sd(health$sr_health)
+s_x <- sd(health$consc)
+
+b1 <- r * (s_y / s_x)
+
+```
+
+And for obtaining $b_0$:
+
+$$b_0 = M_y - b_1M_x$$
+
+Calculate $b_0$ using the equation above. Store the value in an object called `b0`.
+
+```{r calc-b0}
+
+b0 <- mean(health$sr_health) - (b1 * (mean(health$consc)))
+
+```
+
+#### Extracting regression coefficients
+
+We can also grab these estimates from the model output using `model$coefficients` or the `coef()` function.
+
+```{r extract-coeff}
+
+
+#pause for students to attempt
+
+
+
+
+
+model$coefficients
+
+```
+
+> **Question:** What does the intercept mean?
+
+> **Question:** What about the slope for conscientiousness?
+
+We can get the confidence intervals around those coefficients by using the `confint` function from the `{stats}` package. Save the confidence interval in an object called `model_ci`
+
+```{r get-ci}
+
+
+#pause for students to attempt
+
+
+
+
+
+
+model_ci <- confint(model)
+
+```
+
+#### Getting standardized coefficients
+
+These are called the *unstandardized* coefficients. We can also get the standardized coefficients. Standardized regression coefficients, often notated as $\beta$, are just the regression coefficients after the variables have been *standardized* or *Z-scored*. To obtain them, we need to z-score our data with `scale()` before we run the `lm()` function. One really cool thing is that we can do it in the `lm()` call:
+
+```{r standardize-coeff}
+
+std_model <- lm(scale(sr_health) ~ scale(consc), data = health)
+
+coefficients(std_model) %>% 
+  round(3)
+
+```
+
+> **Question:** What does the standardized slope for conscientiousness mean?
+
+> **Question:** Why is the intercept zero?
+
+#### Getting the p-values
+
+We can also test the significance of each of the regression coefficient estimates.
+
+We can get these from the summary of our model object by extracting the coefficients from the summary.
+
+```{r get-coeff}
+
+summary(model)$coefficients
+
+```
+
+As an aside, let's take a look at the correlation value that we calculated earlier. What do you notice?
+
+```{r reprint-corr}
+
+r_consc_health
+
+```
+
+> **Question:** Is the test of the intercept significant? What does this mean?
+
+> **Question:** Is the test of the slope significant? What does this mean?
+
+# A tidier way to extract information
+
+You may have noticed at this point that working with lists has its challenges. Even just extracting the information we've extracted so far has some pretty messy code. There must be a better (tidier) way!
+
+Thankfully, there is. The `{broom}` package is a package for *tidying* the results of models. It's pretty easy to use---you just pass the model object to a function from `{broom}` called `tidy()`. There are some more advanced things you can do, but just `tidy(model)` works for most purposes. And one really nice thing about `{broom}` is that it works with a lot of different types of models, so this will continue to work as we move to other techniques (e.g., multi-level modelling with `{lme4}`).
+
+### `tidy()`
+
+Let's see what happens when we tidy our model:
+
+```{r}
+tidy(model)
+```
+
+You can see it produces a dataframe containing the model coefficients and their significance tests. If you also want to get the confidence intervals around those coefficients, you simply need to add the argument `conf.int = TRUE`:
+
+```{r}
+
+tidy(model, conf.int = TRUE)
+
+```
+
+# Reporting regressions
+
+The last thing we'll cover today is how to report the results of your regression in Tables.
+
+### Create tables using `{broom}` and `{kable}`
+
+Our first option would be to make a table 'by hand' using a combination of `tidy()` and the `kable()` function from `{knitr}`.
+
+```{r, echo=FALSE}
+tidy(model) %>% 
+  knitr::kable(digits = c(NA, 2, 2, 2, 3), 
+               caption = "Results of Regressing Self-Reported Health on Conscientiousness") 
+```
+
+We could clean things up a bit more by changing the names and reformatting that pesky p-value column:
+
+```{r, echo=FALSE}
+tidy(model) %>% # we'll still run tidy on the model first
+  # but we'll pass it to rename (part of the tidyverse/dplyr)
+  # and rename some of the columns to be more similar to how
+  # we normally report these things.
+  # rename is pretty easy, it's a way to rename column names
+  # the general format is rename(new_name = old_name),
+  # where new_name is the new name you want the column to have
+  # and old_name is the old name that you're replacing.
+  rename(coefficient = term,
+        b            = estimate,
+        SE           = std.error,
+        t            = statistic,
+        p            = p.value) %>%
+  # Then we can mutate the p column to deal with the
+  # triple zeroes
+  mutate(p = ifelse(p > .001,    # condition
+                    round(p, 3), # true
+                    "< .001")    # false
+         ) %>% 
+  knitr::kable(digits  = c(NA, 2, 2, 2, 3), # Then we'll do the same as above with kable
+               caption = "Results of Regressing Self-Reported Health on Conscientiousness") 
+```
+
+This method is nice for two reasons:
+
+1.  You have a lot of control over how things look.
+
+2.  It's pretty general-purpose, and you can easily adapt it to new things you learn how to do in R.
+
+However, it has a downside in that it is hard to get this into picture perfect APA format (we didn't get all the way there above) and so you may have to do some editing once you get it into word.
+
+## Make sure to always include a written summary!
+
+You might want to save the relevant pieces as objects first.
+
+```{r summary}
+
+rsquared_prop <- round(model_summary$r.squared, 2)*100
+beta_value <- round(model_summary$coefficients[1,2], 2)
+t_value <- round(model_summary$coefficients[2,3], 2)
+p_value <- round(model_summary$coefficients[2,4], 3)
+ci_lower <- round(model_ci[2,1], 2)
+ci_upper <- round(model_ci[2,2], 2)
+
+```
+
+We conducted a univariate linear regression to examine the relation between conscientiousness and self-reported health. Overall, our model that included conscientiousness explained `r rsquared_prop`% of the variance in self-reported health. We found a positive relation such that individuals who had higher conscientiousness scores also reported better health, $\beta$ = `r beta_value`, 95% CI[`r ci_lower`, `r ci_upper`], _t_ = `r t_value`, *p* `r papaja::printp(p_value)`.
