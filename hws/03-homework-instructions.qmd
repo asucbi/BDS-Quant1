@@ -51,7 +51,7 @@ library(broom) #for formatting tables
 library(knitr) #for formatting tables
 ```
 
-## Step 4: Read in the Data
+## Read in the Data
 
 In the first set of exercises, we will use a dataset that looks at the relation between age and pitch perception (in Hz; the ability to distinguish between sounds based on their pitch). You will build a linear model and answer this question: Does pitch perception change as we age?
 
@@ -73,9 +73,9 @@ Now, use the `View()` function to take a look at your data.
 
 Make a scatter plot of the relation between `age` (x-axis) and `pitch` (y-axis).
 
-Run a correlation test between age and pitch using the `corr.test()` function. 
+Run a correlation test between age and pitch using the `corr.test()` function.
 
-Answer the following questions: 
+Answer the following questions:
 
 -   Is the correlation positive or negative?
 -   Is the correlation strong or weak?
@@ -87,13 +87,14 @@ Provide an APA-style summary of your results.
 
 
 ```
+
 ## Exercise 2 (Regression):
 
 Create a new plot, adding a regression line to your scatter plot of the relationship between `age` (x-axis) and `pitch` (y-axis).
 
 Perform a linear regression analysis using the `lm()` function. Recall the form of regression equations is: `model <- lm(y ~ x, data = df)`.
 
-Answer the following questions: 
+Answer the following questions:
 
 -   What is the intercept? What does it mean for the relation between age and pitch?
 -   What is the slope? What does it mean for the relation between age and pitch?
@@ -101,15 +102,16 @@ Answer the following questions:
 
 Create a table of your regression results.
 
-Provide an APA-style summary of your results (make sure it follow the example summary from the lab). 
+Provide an APA-style summary of your results (make sure it follow the example summary from the lab).
 
 ```{r regression}
 
 
 ```
+
 ## Exercise 3 (Regression Diagnostics):
 
-In this exercise, I am going to ask you to demonstrate some of the concepts we learned in class (but did not review in lab). Specifically, I would like you examine the residuals from the `age_pitch` model for violations of model assumptions. 
+In this exercise, I am going to ask you to demonstrate some of the concepts we learned in class (but did not review in lab). Specifically, I would like you examine the residuals from the `age_pitch` model for violations of model assumptions.
 
 First, create a histogram of the residuals from your regression (make sure you are plotting the **residuals**, see the lab for information about how to pull these values out of the model).
 
@@ -123,20 +125,19 @@ model %>%
   
 ```
 
-Finally, create a Q-Q plot of the **residuals** using the `qqline()` function in R. 
+Finally, create a Q-Q plot of the **residuals** using the `qqline()` function in R.
 
-:::callout-tip
-The only argument you need to give the `qqline()` function is the residuals of your model. 
-
+::: callout-tip
+The only argument you need to give the `qqline()` function is the residuals of your model.
 :::
 
-Answer the following questions: 
+Answer the following questions:
 
 -   Does it appear that the linearity assumption is met? How do you know?
 -   Does it appear that the normality assumption is met? How do you know?
 -   Does it appear that the constant variance assumption is met? How do you know?
 
-Note: If you detect violations you do not need to do anything to fix them. 
+Note: If you detect violations you do not need to do anything to fix them.
 
 ```{r diagnostics}
 
@@ -146,25 +147,23 @@ Note: If you detect violations you do not need to do anything to fix them.
 
 # Part 2
 
-Choose one of the [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday/tree/main) datasets that has two **continuous** variables that you would like to examine the relation between. Calculate a correlation and a regression analysis for that data then examine the regression diagnostics (repeating Exercise 1-3 above). 
+Choose one of the [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday/tree/main) datasets that has two **continuous** variables that you would like to examine the relation between. Calculate a correlation and a regression analysis for that data then examine the regression diagnostics (repeating Exercise 1-3 above).
 
 **Make sure to tell me the year and title of that dataset (e.g., 2021 - Netflix Titles).**
 
 If you are working on this homework in a group, each member should please use a **different** dataset.
 
-:::callout-note
-
+::: callout-note
 You might be wondering why I am asking you to find your own datasets rather than giving you curated data files. The reason is that, in many of the stats classes I've taught, students report that the most challenging part is applying what they've learned in class to their own data. Thus, my goal in asking you to find a dataset is to begin challenging you early to work with "your own" data and also give you the opportunity to find datasets that are interesting to you.
-
 :::
 
 ## Exercise 4 (Correlation):
 
 Make a scatter plot of the relation between the two variables you chose.
 
-Run a correlation test between age and pitch using the `corr.test()` function. 
+Run a correlation test between age and pitch using the `corr.test()` function.
 
-Answer the following questions: 
+Answer the following questions:
 
 -   Is the correlation positive or negative?
 -   Is the correlation strong or weak?
@@ -176,13 +175,14 @@ Provide an APA-style summary of your results.
 
 
 ```
+
 ## Exercise 5 (Regression):
 
 Create a new plot, adding a regression line to your scatter plot of the relation between your two variables.
 
 Perform a linear regression analysis using the `lm()` function. Recall the form of regression equations is: `model <- lm(y ~ x, data = df)`.
 
-Answer the following questions: 
+Answer the following questions:
 
 -   What is the intercept? What does it mean for the relation between your variables?
 -   What is the slope? What does it mean for the relation between your variables?
@@ -190,7 +190,7 @@ Answer the following questions:
 
 Create a table of your regression results.
 
-Provide an APA-style summary of your results (make sure it follow the example summary from the lab). 
+Provide an APA-style summary of your results (make sure it follow the example summary from the lab).
 
 ```{r regression-2}
 
@@ -212,20 +212,19 @@ model %>%
   
 ```
 
-Finally, create a Q-Q plot of the **residuals** using the `qqline()` function in R. 
+Finally, create a Q-Q plot of the **residuals** using the `qqline()` function in R.
 
-:::callout-tip
-The only argument you need to give the `qline()` function is the residuals of your model. 
-
+::: callout-tip
+The only argument you need to give the `qline()` function is the residuals of your model.
 :::
 
-Answer the following questions: 
+Answer the following questions:
 
 -   Does it appear that the linearity assumption is met? How do you know?
 -   Does it appear that the normality assumption is met? How do you know?
 -   Does it appear that the constant variance assumption is met? How do you know?
 
-Note: If you detect violations you do not need to do anything to fix them. 
+Note: If you detect violations you do not need to do anything to fix them.
 
 ```{r diagnostics-2}
 
