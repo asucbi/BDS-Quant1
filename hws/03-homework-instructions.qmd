@@ -1,0 +1,256 @@
+---
+title: "Module 3: Homework Instructions"
+format: html
+editor: visual
+---
+
+## Purpose
+
+In this week's homework you will be asked to calculate a correlation between two variables. Building on that correlation, you will then conduct a regression analysis. You will then be asked to find a dataset (within the TidyTuesday repository) and repeat these analyses with this new data.
+
+## Access the Starter Files for Module 3
+
+-   Go to [posit.cloud](posit.cloud) and then **navigate to the course workspace** via the left sidebar.
+
+    -   Look for the course workspace called "Statistical Methods Spring 2025"
+
+-   Open the project titled **Module 3** This module contains the starter files that you will use for this lab and for your homework.
+
+## Starter Files
+
+In the Files pane you should see these two R Notebooks:
+
+-   mod-03-lab-starter.qmd
+-   mod-03-hw-starter.qmd
+
+Open up `mod-03-hw-starter.qmd`.
+
+## Render it!
+
+Click the button called "Render" (circled in the image below) and then double check to see that your document rendered in the **Viewer** pane. It is always a good idea to occasionally check that the document still renders correctly after making changes.
+
+![](images/render.png)
+
+## Load Packages
+
+Today, we'll be using the following packages:
+
+-   **tidyverse**: a collection of packages for doing data analysis in a "tidy" way
+-   **psych**: a package that provides various functions for psychological research and data analysis
+-   **papaja**: a package that supports the formatting of APA style documents
+-   **broom**: a package that turns R output into tidy tables
+-   **knitr**: a package that supports the integration of code into text documents, we will be using it today to create a table
+
+Please load these packages using the `library()` function. If the packages don't load, you may need to `install.packages()` first.
+
+```{r load-packages, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(psych) #for correlation analysis
+library(papaja) #for formatting p values
+library(broom) #for formatting tables
+library(knitr) #for formatting tables
+```
+
+## Step 4: Read in the Data
+
+In the first set of exercises, we will use a dataset that looks at the relation between age and pitch perception (in Hz; the ability to distinguish between sounds based on their pitch). You will build a linear model and answer this question: Does pitch perception change as we age?
+
+Read in the data using the `read_csv()` function. Name the data "age_pitch"
+
+```{r read in data, echo = FALSE, message=FALSE}
+age_pitch <- read_csv("data/age_pitch.csv")
+```
+
+::: callout-note
+If you are having trouble reading in the data, remember that they are in the `data` folder!
+:::
+
+Now, use the `View()` function to take a look at your data.
+
+# Part 1
+
+## Exercise 1 (Correlation):
+
+Make a scatter plot of the relation between `age` (x-axis) and `pitch` (y-axis).
+
+Run a correlation test between age and pitch using the `corr.test()` function. 
+
+Answer the following questions: 
+
+-   Is the correlation positive or negative?
+-   Is the correlation strong or weak?
+
+Provide an APA-style summary of your results.
+
+```{r correlation}
+
+
+
+```
+## Exercise 2 (Regression):
+
+Create a new plot, adding a regression line to your scatter plot of the relationship between `age` (x-axis) and `pitch` (y-axis).
+
+Perform a linear regression analysis using the `lm()` function. Recall the form of regression equations is: `model <- lm(y ~ x, data = df)`.
+
+Answer the following questions: 
+
+-   What is the intercept? What does it mean for the relation between age and pitch?
+-   What is the slope? What does it mean for the relation between age and pitch?
+-   What is the coefficient of determination (R-squared)? What does it mean for the relation between age and pitch?
+
+Create a table of your regression results.
+
+Provide an APA-style summary of your results (make sure it follow the example summary from the lab). 
+
+```{r regression}
+
+
+```
+## Exercise 3 (Regression Diagnostics):
+
+In this exercise, I am going to ask you to demonstrate some of the concepts we learned in class (but did not review in lab). Specifically, I would like you examine the residuals from the `age_pitch` model for violations of model assumptions. 
+
+First, create a histogram of the residuals from your regression (make sure you are plotting the **residuals**, see the lab for information about how to pull these values out of the model).
+
+Next, create a scatter plot with the residuals on the X axis and the predicted values on the Y axis using the following code:
+
+```{r, eval=FALSE}
+model %>%
+  ggplot(aes(x=.fitted, y=.resid)) + 
+           geom_point() + 
+  geom_hline(yintercept = 0, color = "red")
+  
+```
+
+Finally, create a Q-Q plot of the **residuals** using the `qqline()` function in R. 
+
+:::callout-tip
+The only argument you need to give the `qqline()` function is the residuals of your model. 
+
+:::
+
+Answer the following questions: 
+
+-   Does it appear that the linearity assumption is met? How do you know?
+-   Does it appear that the normality assumption is met? How do you know?
+-   Does it appear that the constant variance assumption is met? How do you know?
+
+Note: If you detect violations you do not need to do anything to fix them. 
+
+```{r diagnostics}
+
+
+
+```
+
+# Part 2
+
+Choose one of the [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday/tree/main) datasets that has two **continuous** variables that you would like to examine the relation between. Calculate a correlation and a regression analysis for that data then examine the regression diagnostics (repeating Exercise 1-3 above). 
+
+**Make sure to tell me the year and title of that dataset (e.g., 2021 - Netflix Titles).**
+
+If you are working on this homework in a group, each member should please use a **different** dataset.
+
+:::callout-note
+
+You might be wondering why I am asking you to find your own datasets rather than giving you curated data files. The reason is that, in many of the stats classes I've taught, students report that the most challenging part is applying what they've learned in class to their own data. Thus, my goal in asking you to find a dataset is to begin challenging you early to work with "your own" data and also give you the opportunity to find datasets that are interesting to you.
+
+:::
+
+## Exercise 4 (Correlation):
+
+Make a scatter plot of the relation between the two variables you chose.
+
+Run a correlation test between age and pitch using the `corr.test()` function. 
+
+Answer the following questions: 
+
+-   Is the correlation positive or negative?
+-   Is the correlation strong or weak?
+
+Provide an APA-style summary of your results.
+
+```{r correlation-2}
+
+
+
+```
+## Exercise 5 (Regression):
+
+Create a new plot, adding a regression line to your scatter plot of the relation between your two variables.
+
+Perform a linear regression analysis using the `lm()` function. Recall the form of regression equations is: `model <- lm(y ~ x, data = df)`.
+
+Answer the following questions: 
+
+-   What is the intercept? What does it mean for the relation between your variables?
+-   What is the slope? What does it mean for the relation between your variables?
+-   What is the coefficient of determination (R-squared)? What does it mean for the relation between your variables?
+
+Create a table of your regression results.
+
+Provide an APA-style summary of your results (make sure it follow the example summary from the lab). 
+
+```{r regression-2}
+
+
+
+```
+
+## Exercise 6 (Regression Diagnostics):
+
+First, create a histogram of the residuals from your regression (make sure you are plotting the **residuals**, see the lab for information about how to pull these values out of the model).
+
+Next, create a scatter plot with the residuals on the X axis and the predicted values on the Y axis using the following code:
+
+```{r, eval=FALSE}
+model %>%
+  ggplot(aes(x=.fitted, y=.resid)) + 
+           geom_point() + 
+  geom_hline(yintercept = 0, color = "red")
+  
+```
+
+Finally, create a Q-Q plot of the **residuals** using the `qqline()` function in R. 
+
+:::callout-tip
+The only argument you need to give the `qline()` function is the residuals of your model. 
+
+:::
+
+Answer the following questions: 
+
+-   Does it appear that the linearity assumption is met? How do you know?
+-   Does it appear that the normality assumption is met? How do you know?
+-   Does it appear that the constant variance assumption is met? How do you know?
+
+Note: If you detect violations you do not need to do anything to fix them. 
+
+```{r diagnostics-2}
+
+
+
+```
+
+## Render and submit your document.
+
+**Make sure that you I can see all of your answers in the rendered document!**
+
+To receive credit for this homework, submit a rendered PDF version of your file to "Module 3: Homework Submission" on Canvas.
+
+-   At the top of the .qmd file, change "format: html" to "format: pdf"
+-   Click "Render" at the top of the document
+-   Your document will open in a browser tab
+    -   If your document opens in the "Viewer" pane, click the "sidebar" button (circled in image below).
+    -   If you get a popup warning, click "Try Again" (may be specific to Mac)
+
+![](images/sidebar.png)
+
+-   Click the "Save" icon on the top right (circled in the image below)
+
+![](images/save_pdf.png)
+
+-   Save wherever you keep your class documents and upload your file to Canvas
+
+------------------------------------------------------------------------

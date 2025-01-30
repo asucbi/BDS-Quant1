@@ -1,0 +1,164 @@
+---
+title: "Module 3: Homework Starter File KEY"
+format: html
+editor: visual
+---
+
+## Homework Note
+
+You must answer ALL questions and follow ALL steps in the homework instructions!
+
+## Load Packages
+
+```{r load-packages, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(psych) #for correlation analysis
+library(papaja) #for formatting p values
+library(broom) #for formatting tables
+library(knitr) #for formatting tables
+```
+
+## Step 4: Read in the Data
+
+In the first set of exercises, we will use a dataset that looks at the relation between age and pitch perception (in Hz; the ability to distinguish between sounds based on their pitch). You will build a linear model and answer this question: Does pitch perception change as we age?
+
+Read in the data using the `read_csv()` function. Name the data "age_pitch"
+
+```{r read in data, echo = FALSE, message=FALSE}
+
+
+
+```
+
+# Part 1
+
+## Exercise 1 (Correlation):
+
+Make a scatter plot of the relation between `age` (x-axis) and `pitch` (y-axis).
+
+Run a correlation test between age and pitch using the `corr.test()` function.
+
+Answer the following questions:
+
+-   Is the correlation positive or negative?
+-   Is the correlation strong or weak?
+
+Provide an APA-style summary of your results.
+
+```{r correlation}
+
+
+
+```
+
+## Exercise 2 (Regression):
+
+Create a new plot, adding a regression line to your scatter plot of the relationship between `age` (x-axis) and `pitch` (y-axis).
+
+Perform a linear regression analysis using the `lm()` function. Recall the form of regression equations is: `model <- lm(y ~ x, data = df)`.
+
+Answer the following questions:
+
+-   What is the intercept? What does it mean for the relation between age and pitch?
+-   What is the slope? What does it mean for the relation between age and pitch?
+-   What is the coefficient of determination (R-squared)? What does it mean for the relation between age and pitch?
+
+Create a table of your regression results.
+
+Provide an APA-style summary of your results (make sure it follow the example summary from the lab).
+
+```{r regression}
+
+
+```
+
+## Exercise 3 (Regression Diagnostics):
+
+Create a histogram of the residuals from your regression (make sure you are plotting the **residuals**, see the lab for information about how to pull these values out of the model).
+
+Next, create a scatter plot with the residuals on the X axis and the predicted values on the Y axis (see homework instructions for code!).
+
+Finally, create a Q-Q plot of the **residuals** using the `qqline()` function in R.
+
+Answer the following questions:
+
+-   Does it appear that the linearity assumption is met? How do you know?
+-   Does it appear that the normality assumption is met? How do you know?
+-   Does it appear that the constant variance assumption is met? How do you know?
+
+Note: If you detect violations you do not need to do anything to fix them.
+
+```{r diagnostics}
+
+
+
+```
+
+# Part 2
+
+Choose a Tidy Tuesday dataset (see Homwork Instructions for details).
+
+## Exercise 4 (Correlation):
+
+Make a scatter plot of the relation between the two variables you chose.
+
+Run a correlation test between age and pitch using the `corr.test()` function.
+
+Answer the following questions:
+
+-   Is the correlation positive or negative?
+-   Is the correlation strong or weak?
+
+Provide an APA-style summary of your results.
+
+```{r correlation-2}
+
+
+
+```
+
+## Exercise 5 (Regression):
+
+Create a new plot, adding a regression line to your scatter plot of the relation between your two variables.
+
+Perform a linear regression analysis using the `lm()` function. Recall the form of regression equations is: `model <- lm(y ~ x, data = df)`.
+
+Answer the following questions:
+
+-   What is the intercept? What does it mean for the relation between your variables?
+-   What is the slope? What does it mean for the relation between your variables?
+-   What is the coefficient of determination (R-squared)? What does it mean for the relation between your variables?
+
+Create a table of your regression results.
+
+Provide an APA-style summary of your results (make sure it follow the example summary from the lab).
+
+```{r regression-2}
+
+
+
+```
+
+## Exercise 6 (Regression Diagnostics):
+
+First, create a histogram of the residuals from your regression (make sure you are plotting the **residuals**, see the lab for information about how to pull these values out of the model).
+
+Next, create a scatter plot with the residuals on the X axis and the predicted values on the Y axis.
+
+Finally, create a Q-Q plot of the **residuals** using the `qqline()` function in R.
+
+Answer the following questions:
+
+-   Does it appear that the linearity assumption is met? How do you know?
+-   Does it appear that the normality assumption is met? How do you know?
+-   Does it appear that the constant variance assumption is met? How do you know?
+
+Note: If you detect violations you do not need to do anything to fix them.
+
+```{r diagnostics-2}
+
+
+
+```
+
+## Render your document and submit it to Canvas. See Homework Instructions if you need further detail.
