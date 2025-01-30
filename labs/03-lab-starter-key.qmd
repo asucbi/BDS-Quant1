@@ -109,8 +109,8 @@ r_consc_health$p.adj #p-value (adjusted for multiple comparisons, which isn't ap
 
 
 
-r_consc_health$?? #confidence interval
-r_consc_health$?? #sample size
+r_consc_health$ci #confidence interval
+r_consc_health$n #sample size
 
 ```
 
