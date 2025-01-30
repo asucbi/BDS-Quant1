@@ -124,7 +124,7 @@ r_consc_health$n #sample size
 
 
 
-A significant positive correlation was found between conscientiousness and self-reported health status, *r*(`r r_consc_health$n-2`) = `r round(r_consc_health$ci$r, 2)`, 95% CI\[`r round(r_consc_health$ci$lower,2)`, `r round(r_consc_health$ci$upper,2)`\], *p* `r papaja::printp(r_consc_health$p.adj)`.
+A significant positive correlation was found between conscientiousness and self-reported health status, *r*(`r r_consc_health$n-2`) = `r round(r_consc_health$ci$r, 2)`, 95% CI[`r round(r_consc_health$ci$lower,2)`, `r round(r_consc_health$ci$upper,2)`], *p* `r papaja::printp(r_consc_health$p.adj)`.
 
 # Part 2: Regression
 
@@ -574,7 +574,7 @@ You might want to save the relevant pieces as objects first.
 ```{r summary}
 
 rsquared_prop <- round(model_summary$r.squared, 2)*100
-beta_value <- round(model_summary$coefficients[1,2], 2)
+beta_value <- round(model_summary$coefficients[2,1], 2)
 t_value <- round(model_summary$coefficients[2,3], 2)
 p_value <- round(model_summary$coefficients[2,4], 3)
 ci_lower <- round(model_ci[2,1], 2)
@@ -582,4 +582,14 @@ ci_upper <- round(model_ci[2,2], 2)
 
 ```
 
+Here's what it looks like when I insert the objects created above:
+
+![](images/reg-summary.png)
+
+Here's what it looks like when rendered:
+
 We conducted a univariate linear regression to examine the relation between conscientiousness and self-reported health. Overall, our model that included conscientiousness explained `r rsquared_prop`% of the variance in self-reported health. We found a positive relation such that individuals who had higher conscientiousness scores also reported better health, $\beta$ = `r beta_value`, 95% CI[`r ci_lower`, `r ci_upper`], _t_ = `r t_value`, *p* `r papaja::printp(p_value)`.
+
+
+
+

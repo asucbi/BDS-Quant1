@@ -946,13 +946,16 @@ sr_health     0         0
 <p>You might want to save the relevant pieces as objects first.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>rsquared_prop <span class="ot">&lt;-</span> <span class="fu">round</span>(model_summary<span class="sc">$</span>r.squared, <span class="dv">2</span>)<span class="sc">*</span><span class="dv">100</span></span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>beta_value <span class="ot">&lt;-</span> <span class="fu">round</span>(model_summary<span class="sc">$</span>coefficients[<span class="dv">1</span>,<span class="dv">2</span>], <span class="dv">2</span>)</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>beta_value <span class="ot">&lt;-</span> <span class="fu">round</span>(model_summary<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">1</span>], <span class="dv">2</span>)</span>
 <span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>t_value <span class="ot">&lt;-</span> <span class="fu">round</span>(model_summary<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">3</span>], <span class="dv">2</span>)</span>
 <span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="fu">round</span>(model_summary<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">4</span>], <span class="dv">3</span>)</span>
 <span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>ci_lower <span class="ot">&lt;-</span> <span class="fu">round</span>(model_ci[<span class="dv">2</span>,<span class="dv">1</span>], <span class="dv">2</span>)</span>
 <span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>ci_upper <span class="ot">&lt;-</span> <span class="fu">round</span>(model_ci[<span class="dv">2</span>,<span class="dv">2</span>], <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We conducted a univariate linear regression to examine the relation between conscientiousness and self-reported health. Overall, our model that included conscientiousness explained 23% of the variance in self-reported health. We found a positive relation such that individuals who had higher conscientiousness scores also reported better health, <span class="math inline">\(\beta\)</span> = 0.36, 95% CI[0.25, 0.73], <em>t</em> = 4.13, <em>p</em> &lt; .001.</p>
+<p>Here’s what it looks like when I insert the objects created above:</p>
+<p><img src="images/reg-summary.png" class="img-fluid"></p>
+<p>Here’s what it looks like when rendered:</p>
+<p>We conducted a univariate linear regression to examine the relation between conscientiousness and self-reported health. Overall, our model that included conscientiousness explained 23% of the variance in self-reported health. We found a positive relation such that individuals who had higher conscientiousness scores also reported better health, <span class="math inline">\(\beta\)</span> = 0.49, 95% CI[0.25, 0.73], <em>t</em> = 4.13, <em>p</em> &lt; .001.</p>
 </section>
 </section>
 
