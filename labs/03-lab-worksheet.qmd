@@ -242,7 +242,7 @@ Let's calculate the residual standard error from scratch, and then I will show y
 
 First, we need to get the predicted values of Y.
 
-Our regression model object, called `model`, is actually a `list` that contains a lot of useful information that we don't see in the output above. Let's take a look at all the information stored in this object using the `str()` function:
+Our regression model object, called `model`, is actually a `list` that contains a lot of useful information that we don't see in the output above. Let's take a look at all the information stored in this object using the `str()` function.
 
 ```{r, echo=FALSE, eval=FALSE}
 
@@ -316,12 +316,11 @@ residual_standard_error
 
 ### Extracting residual standard error
 
-We can also get the standard error more directly. However, it is not stored in the model object that we stored the output of the `lm()` function to. It is stored in the output of the `summary()` function. Let's assign the output of this function to an object called `model_summary`, and then inspect its structure:
+We can also get the standard error more directly. However, it is not stored in the model object that we stored the output of the `lm()` function to. It is stored in the output of the `summary()` function. Let's assign the output of this function to an object called `model_summary`, and then inspect its structure.
 
 ```{r, echo=FALSE}
 
 model_summary <- summary(model)
-str(model_summary)
 
 ```
 

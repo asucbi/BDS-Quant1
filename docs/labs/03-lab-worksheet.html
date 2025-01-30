@@ -297,7 +297,7 @@ F-statistic: 17.04 on 1 and 58 DF,  p-value: 0.0001186</code></pre>
 <p><span class="math display">\[\sqrt{\frac{\Sigma(Y_i - \hat{Y_i})^2}{N-2}}\]</span></p>
 <p>Let’s calculate the residual standard error from scratch, and then I will show you how to pull this value directly from the output.</p>
 <p>First, we need to get the predicted values of Y.</p>
-<p>Our regression model object, called <code>model</code>, is actually a <code>list</code> that contains a lot of useful information that we don’t see in the output above. Let’s take a look at all the information stored in this object using the <code>str()</code> function:</p>
+<p>Our regression model object, called <code>model</code>, is actually a <code>list</code> that contains a lot of useful information that we don’t see in the output above. Let’s take a look at all the information stored in this object using the <code>str()</code> function.</p>
 <p>We can extract elements from this list by using <code>LIST$ELEMENT</code> or <code>LIST[["ELEMENT"]]</code>.</p>
 </section>
 </section>
@@ -320,46 +320,7 @@ F-statistic: 17.04 on 1 and 58 DF,  p-value: 0.0001186</code></pre>
 </section>
 <section id="extracting-residual-standard-error" class="level3">
 <h3 class="anchored" data-anchor-id="extracting-residual-standard-error">Extracting residual standard error</h3>
-<p>We can also get the standard error more directly. However, it is not stored in the model object that we stored the output of the <code>lm()</code> function to. It is stored in the output of the <code>summary()</code> function. Let’s assign the output of this function to an object called <code>model_summary</code>, and then inspect its structure:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>List of 11
- $ call         : language lm(formula = sr_health ~ consc, data = health)
- $ terms        :Classes 'terms', 'formula'  language sr_health ~ consc
-  .. ..- attr(*, "variables")= language list(sr_health, consc)
-  .. ..- attr(*, "factors")= int [1:2, 1] 0 1
-  .. .. ..- attr(*, "dimnames")=List of 2
-  .. .. .. ..$ : chr [1:2] "sr_health" "consc"
-  .. .. .. ..$ : chr "consc"
-  .. ..- attr(*, "term.labels")= chr "consc"
-  .. ..- attr(*, "order")= int 1
-  .. ..- attr(*, "intercept")= int 1
-  .. ..- attr(*, "response")= int 1
-  .. ..- attr(*, ".Environment")=&lt;environment: R_GlobalEnv&gt; 
-  .. ..- attr(*, "predvars")= language list(sr_health, consc)
-  .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
-  .. .. ..- attr(*, "names")= chr [1:2] "sr_health" "consc"
- $ residuals    : Named num [1:60] -1.052 0.374 -0.14 -0.462 0.86 ...
-  ..- attr(*, "names")= chr [1:60] "1" "2" "3" "4" ...
- $ coefficients : num [1:2, 1:4] 1.657 0.49 0.357 0.119 4.641 ...
-  ..- attr(*, "dimnames")=List of 2
-  .. ..$ : chr [1:2] "(Intercept)" "consc"
-  .. ..$ : chr [1:4] "Estimate" "Std. Error" "t value" "Pr(&gt;|t|)"
- $ aliased      : Named logi [1:2] FALSE FALSE
-  ..- attr(*, "names")= chr [1:2] "(Intercept)" "consc"
- $ sigma        : num 0.885
- $ df           : int [1:3] 2 58 2
- $ r.squared    : num 0.227
- $ adj.r.squared: num 0.214
- $ fstatistic   : Named num [1:3] 17 1 58
-  ..- attr(*, "names")= chr [1:3] "value" "numdf" "dendf"
- $ cov.unscaled : num [1:2, 1:2] 0.1626 -0.0513 -0.0513 0.018
-  ..- attr(*, "dimnames")=List of 2
-  .. ..$ : chr [1:2] "(Intercept)" "consc"
-  .. ..$ : chr [1:2] "(Intercept)" "consc"
- - attr(*, "class")= chr "summary.lm"</code></pre>
-</div>
-</div>
+<p>We can also get the standard error more directly. However, it is not stored in the model object that we stored the output of the <code>lm()</code> function to. It is stored in the output of the <code>summary()</code> function. Let’s assign the output of this function to an object called <code>model_summary</code>, and then inspect its structure.</p>
 <p>Can you find what the residual standard error is called? Once you find it, extract it from the model_summary.</p>
 <p>Is it equivalent to what we calculated above?</p>
 <blockquote class="blockquote">
@@ -451,7 +412,7 @@ F-statistic: 17.04 on 1 and 58 DF,  p-value: 0.0001186</code></pre>
 <h3 class="anchored" data-anchor-id="tidy"><code>tidy()</code></h3>
 <p>Let’s see what happens when we tidy our model:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
   term        estimate std.error statistic   p.value
@@ -462,7 +423,7 @@ F-statistic: 17.04 on 1 and 58 DF,  p-value: 0.0001186</code></pre>
 </div>
 <p>You can see it produces a dataframe containing the model coefficients and their significance tests. If you also want to get the confidence intervals around those coefficients, you simply need to add the argument <code>conf.int = TRUE</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 7
   term        estimate std.error statistic   p.value conf.low conf.high
