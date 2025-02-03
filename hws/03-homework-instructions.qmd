@@ -125,10 +125,10 @@ model %>%
   
 ```
 
-Finally, create a Q-Q plot of the **residuals** using the `qqline()` function in R.
+Finally, create a Q-Q plot of the **residuals** using the `qqnorm()` and then the `qqline()` function in R.
 
 ::: callout-tip
-The only argument you need to give the `qqline()` function is the residuals of your model.
+The only argument you need to give the `qqnorm()` and `qqline()` functions is the residuals of your model.
 :::
 
 Answer the following questions:

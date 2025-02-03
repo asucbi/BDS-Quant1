@@ -1,0 +1,91 @@
+---
+title: "lecture-4-examples"
+author: "Jessica E. Kosie"
+date: "2025-02-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse); library(knitr); library(broom); library(easystats); library(olsrr)
+
+```
+```{r, echo = FALSE}
+
+master <- read.csv("https://raw.githubusercontent.com/jgeller112/psy503-psych_stats/master/static/slides/10-linear_modeling/data/regress.csv")
+
+head(master)
+
+colnames(master) <- c("subid", "PIL", "CESD", "AUDIT", "DAST")
+
+ggplot(master, aes(x=PIL, y=CESD))+
+  geom_point() + 
+  theme_minimal(base_size=16) +
+  labs(x = "Meaning in Life", y = "Depression")
+
+ggsave("PIL_CESD.png", height = 6, width = 8)
+
+ggplot(master, aes(x=AUDIT, y=CESD))+
+  geom_point() + 
+  theme_minimal(base_size=16) +
+  labs(x = "Alcohol Use", y = "Depression")
+
+ggsave("PIL_AUDIT.png", height = 6, width = 8)
+
+ggplot(master, aes(x=DAST, y=CESD))+
+  geom_point() + 
+  theme_minimal(base_size=16) +
+  labs(x = "Drug Use", y = "Depression")
+
+ggsave("PIL_DAST.png", height = 6, width = 8)
+
+
+model_fit <- lm(CESD ~ PIL + AUDIT + DAST,
+                data = master) 
+
+summary(model_fit)
+
+model_fit %>%
+  tidy(conf.int=TRUE) %>%
+  knitr::kable() 
+
+tidy(model_fit) %>% 
+  rename(coefficient = term,
+        b            = estimate,
+        SE           = std.error,
+        t            = statistic,
+        p            = p.value) %>%
+  mutate(p = ifelse(p > .001,    # condition
+                    round(p, 3), # true
+                    "< .001")    # false
+         ) %>% 
+  knitr::kable(digits  = c(NA, 2, 2, 2, 3)) 
+
+plot(check_collinearity(model_fit))
+ggsave("collinearity_plot.png", height = 6, width = 8)
+
+k = 3
+
+model_out<- model_fit  %>%
+  augment() %>%
+  mutate(lev_out = ifelse(.hat>(2*k+2)/nrow(.),1, 0), 
+         std_out=ifelse(abs(.std.resid) > 3, 1, 0))
+
+ols_plot_resid_stand(model_fit, threshold=3)
+ggsave("standardized_resid_plot.png", height = 6, width = 8)
+
+ols_plot_cooksd_bar(model_fit)
+ggsave("cooks_d_plot.png", height = 6, width = 8)
+
+
+n=nrow(master)
+
+4/(n-k-1)
+
+model_reduced <- lm(CESD ~ 1,
+                data = master) 
+
+anova(model_fit, model_reduced)
+
+
+
+```

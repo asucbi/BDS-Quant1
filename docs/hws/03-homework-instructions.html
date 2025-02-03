@@ -192,7 +192,7 @@ Note
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Finally, create a Q-Q plot of the <strong>residuals</strong> using the <code>qqline()</code> function in R.</p>
+<p>Finally, create a Q-Q plot of the <strong>residuals</strong> using the <code>qqnorm()</code> and then the <code>qqline()</code> function in R.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -203,7 +203,7 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The only argument you need to give the <code>qqline()</code> function is the residuals of your model.</p>
+<p>The only argument you need to give the <code>qqnorm()</code> and <code>qqline()</code> functions is the residuals of your model.</p>
 </div>
 </div>
 <p>Answer the following questions:</p>
