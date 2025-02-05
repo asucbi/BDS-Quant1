@@ -1,0 +1,470 @@
+---
+title: "Module 4: Starter File KEY"
+format: html
+editor: visual
+---
+
+# Purpose
+
+In today's lab, we will review Multiple Regression, work with Partial and Semi-Partial Correlations, and practice significance testing for Multiple Regression.
+
+For today's lab, you will need to load the following libraries.
+
+```{r libraries, message=FALSE}
+
+library(tidyverse)
+library(papaja) #for formatting p values
+library(broom) #for formatting tables
+library(knitr) #for formatting tables
+library(ppcor) #for calculating partial and semi-partial correlations
+library(easystats) #for assessing multicollinaerity
+
+```
+
+## Read in the Data
+
+First, let's read in the data and then use `View()` to check it out.
+
+Today's dataset is called `data_htwtage.csv`. Let's read it in and name it `mr_data` (i.e., multiple regression data).
+
+```{r read-and-view, message= FALSE, echo=FALSE}
+
+#students: fill in XXX with correct code
+
+
+
+
+
+
+mr_data <- read_csv("data/data_htwtage.csv")
+
+View(mr_data)
+
+```
+
+## Scatter plot
+
+Let's create two scatter plots of the relation between our IVs and DV using `ggplot()`.
+
+```{r scatter-plot, message = FALSE, echo=FALSE}
+
+#students: fill in XXX with correct code
+
+
+
+
+
+
+
+
+ggplot(data = mr_data, aes(x=age, y=weight)) +
+  geom_point() +
+  labs(x = "Age", y = "Weight") #label your axes!
+
+ggplot(data = mr_data, aes(x=height, y=weight)) +
+  geom_point() +
+  labs(x = "Height", y = "Weight") #label your axes!
+
+```
+
+> **Question:** What do you notice about the strength and direction of the data?
+
+# Multiple Regression
+
+Let's use both `age` and `height` to predict `weight`.
+
+Regress `weight` on `age` and `height`. Save the model to an object called `model_1`.
+
+Remember, use: `model_1 <- lm(Y ~ X1 + X2, data = data)`
+
+```{r run-regression, message = FALSE, echo=FALSE}
+
+#students: type out this model
+
+
+
+
+
+
+
+
+
+model_1 <- lm(weight ~ age + height, data = mr_data)
+summary(model_1)
+
+```
+
+> **Question** Write out the resulting model. How do we interpret each of these regression coefficients?
+
+# Partial Regression Coefficients
+
+# Partial regression coefficient for `age`
+
+1.  Regress `age` on `height`. Store the model in an object called `model_2`
+
+```{r age~height, message= FALSE, echo=FALSE}
+
+#students: type out this model
+
+
+
+
+
+
+
+
+model_2 <- lm(age ~ height, data = mr_data)
+
+```
+
+2.  Store the part of `age` that is unrelated to `height` in a new column in `data` called `age_resid`.
+
+```{r age~height-resid, message= FALSE, echo=FALSE}
+
+#students: fill in XXX with correct code
+
+
+
+
+
+
+
+
+mr_data$age_resid <- resid(model_2)
+
+```
+
+3.  Regress `weight` on the part of `age` that is unrelated to `height` (i.e., `data$age_resid`). Store the model in an object called `model_3`.
+
+```{r weight~age_resid, message= FALSE, echo=FALSE}
+
+#students: fill in XXX with correct code
+
+
+
+
+
+
+
+
+model_3 <- lm(weight ~ age_resid, data = mr_data)
+
+```
+
+4.  Examine the final results using the `summary()` function.
+
+```{r mod3-summary, message= FALSE, echo=FALSE}
+
+summary(model_3)
+
+```
+
+> **Question** How does the regression coefficient corresponding to the part of `age` that is unrelated to `height` in the univariate model (i.e., `model_3`) predicting `weight` compare to the regression coefficient corresponding to `age` in the multiple regression model (i.e., `model_1`)?
+
+> **Question** Which type of correlation is the partial regression coefficient conceptually most similar to?
+
+## Semi-partial Correlation
+
+Here, we will calculate the **semi-partial** correlation for age using the `spcor.test` function.
+
+```{r sp-cor, message= FALSE, echo=FALSE}
+
+#students: fill in XXX with correct code
+
+
+
+
+
+
+
+semi_partial_cor <- spcor.test(
+  x = mr_data$weight, # Y (var of interest 1)
+  y = mr_data$age,    # X1 (var of interest 2 - the one you want residualized)
+  z = mr_data$height  # X2 (control variable)
+)
+
+semi_partial_cor
+semi_partial_cor$estimate^2 # R-Squared 
+
+```
+
+## Partial Correlation
+
+Here, we will calculate the **partial** correlation for age using the `spcor.test` function.
+
+```{r p-cor, message= FALSE, echo=FALSE}
+
+#students: fill in XXX with correct code
+
+
+
+
+
+
+
+partial_cor <- pcor.test(
+  x = mr_data$weight, # Y (var of interest 1)
+  y = mr_data$age,    # X1 (var of interest 2)
+  z = mr_data$height  # X2 (control variable)
+)
+
+partial_cor
+partial_cor$estimate^2 # R-Squared
+
+```
+
+# Significance Testing: The Model Comparison Approach
+
+Let's run Model 1 (the intercept-only model) and see how much error is left unaccounted for. Save Model 1 to `model_1`.
+
+```{r intercept-only, message= FALSE, echo=FALSE}
+
+#students: fill in XXX with correct code
+
+
+
+
+
+
+model_1 <- lm(weight ~ 1, data = mr_data)
+
+```
+
+Let me introduce a new way of looking at the output of a regression analysis, the `anova()` function. This function gives us the SSE (the amount of unaccounted for error remaining in Model 1).
+
+```{r mod1-anova, message= FALSE, echo=FALSE}
+
+model_1_anova <- anova(model_1)
+model_1_anova
+
+```
+
+Let's run Model 2 (now including age and height) and see how much error is left unaccounted for. Save Model 2 to `model_2`.
+
+```{r mod2-anova, message= FALSE, echo=FALSE}
+
+model_2 <- lm(weight ~ age + height, data = mr_data)
+model_2_anova <- anova(model_2)
+model_2_anova
+
+```
+
+How much was SSE reduced by using Model 2 instead of Model 1? Save the output to a variable called `ssr` (i.e., sum of squares reduced).
+
+```{r ssr, message= FALSE, echo=FALSE}
+
+model_1_sse <- model_1_anova$`Sum Sq`[1]
+model_2_sse <- model_2_anova$`Sum Sq`[3]
+
+#students: fill in XXX with correct code
+
+
+
+
+
+
+
+
+ssr <- model_1_sse - model_2_sse
+ssr
+
+```
+
+## Model Comparison in a Single Step Using the `anova()` function
+
+We can give both models as arguments to the `anova()` function to make the model comparison in a single step and test whether the reduction in SSE is significant. Save the results of the model comparison to an object called `model_comparison`.
+
+```{r model-comparison, message= FALSE, echo=FALSE}
+
+#students: fill in XXX with correct code
+
+
+
+
+
+
+
+
+model_comparison <- anova(model_1, model_2)
+model_comparison
+
+```
+
+Let's also calculate how much we reduced the amount of unaccounted for error using Model 2 compared to Model 1 as a proportion of the total amount of unaccounted for error we started with in Model 1. Save the output to a variable called `per` (i.e., proportion_error_reduced).
+
+```{r per, message= FALSE, echo=FALSE}
+
+per <- (model_1_sse - model_2_sse) / model_1_sse
+per
+
+```
+
+> **Question** What does this proportional reduction in error mean?
+
+> **Question** What is the more familiar term for this value?
+
+Look again at our summary output if we run our multiple regression model (i.e., `model_2`) and see how our results map on.
+
+```{r mod2-summary, message= FALSE, echo=FALSE}
+
+summary(model_2)
+
+```
+
+## Testing the Significance of Specific Predictor(s)
+
+Construct Model 1 and Model 2. Store in variables labelled `model_1` and `model_2`, respectively.
+
+```{r mod1and2, message= FALSE, echo=FALSE}
+
+#students: fill in XXX with correct code
+
+
+
+
+
+
+
+
+model_1 <- lm(weight ~ age, data = mr_data)
+model_2 <- lm(weight ~ age + height, data = mr_data)
+
+```
+
+Compare the models using the `anova()` function. Save the results of the model comparison to an object called `model_comparison`.
+
+```{r mod1and2-compare, message= FALSE, echo=FALSE}
+
+model_comparison <- anova(model_1, model_2)
+model_comparison
+
+```
+
+Compute $R^2$.
+
+```{r compute-r2, message= FALSE, echo=FALSE}
+
+r_squared <- model_comparison$`Sum of Sq`[2] / model_comparison$RSS[1]
+r_squared
+
+```
+
+Look at summary output from Model 2 again.
+
+```{r mod2-summary2, message= FALSE, echo=FALSE}
+
+summary(model_2)
+
+```
+
+There's equivalence between what we've done using the model comparison approach and the *t*-test approach that's used to test the significance of the specific predictors in the model in the summary output. Notice what we get if we take the square root of the F-statistic from the model comparison output.
+
+```{r f-to-t, message= FALSE, echo=FALSE}
+
+sqrt(model_comparison$F[2])
+
+```
+
+And also notice the correspondence in the p-values.
+
+```{r compare-pvals, message= FALSE, echo=FALSE}
+
+model_comparison$`Pr(>F)`[2]
+
+```
+
+# Testing for Multicollinaerity
+
+> **Question** Do you think there is likely to be multicollinaerity in this dataset? Why?
+
+First, let's create a correlation matrix to examine potential correlations between our variables. Make sure to select only the variables that you want to examine.
+
+```{r correlation-matrix, message = FALSE, echo=FALSE}
+
+#students: fill in XXX with correct code
+
+
+
+
+
+
+cor_df <- mr_data[,2:4] #select only the numeric variables
+cor(cor_df) #create a correlation matrix
+
+```
+
+Next, let's use the `easystats` package to check the Tolerance and VIF (Variance Inflation Factor) in our data. Use `model_2` that you created above.
+
+```{r check-multicollinaerity, message = FALSE, echo=FALSE}
+
+#students: fill in XXX with correct code
+
+
+
+
+
+
+
+
+check_collinearity(model_2)
+
+
+```
+
+> **Question** Does it look like we have multicollinaerity in our data based on these diagnostics?
+
+Wait, what?? Let's calculate Tolerance and VIF "by hand."
+
+First, we'll get R<sub>j</sub><sup>2</sup> by predicting age from height. Call this `model_3`.
+
+Next, we'll extract the R<sub>j</sub><sup>2</sup> value from the summary.
+
+We'll then use this to calculate the Tolerance and the VIF.
+
+```{r calc-multicollinaerity, message = FALSE, echo=FALSE}
+
+model_3 <- lm(age ~ height, data = mr_data)
+model_3_r2 <- summary(model_3)$r.squared
+model_3_tol <- 1 - model_3_r2
+model_3_vif <- 1/model_3_tol
+
+```
+
+# Write an APA-Style Summary
+
+This summary is based on what is now called `model_2`. Don't forget to include a confidence interval around each of your estimates!
+
+It's helpful to create objects with each of the relevant values first.
+
+```{r get-values, message= FALSE, echo=FALSE}
+#confidence interval
+model_ci <- confint(model_2)
+
+age_ci_lower <- round(model_ci[2,1], 2)
+age_ci_upper <- round(model_ci[2,2], 2)
+height_ci_lower <- round(model_ci[3,1], 2)
+height_ci_upper <- round(model_ci[3,2], 2)
+
+#omnibus test
+mod_summary <- summary(model_2)
+
+df1 <- mod_summary$fstatistic[2]
+df2 <- mod_summary$fstatistic[3]
+f_value <- round(mod_summary$fstatistic[1], 2)
+omnibus_p_value <- pf(mod_summary$fstatistic[1], mod_summary$fstatistic[2], mod_summary$fstatistic[3], lower.tail = FALSE)
+omnibus_r_squared <- round(mod_summary$r.squared, 2)
+omnibus_adj_r_squared <- round(mod_summary$adj.r.squared, 2)
+
+#individual tests
+
+age_beta <- round(mod_summary$coefficients[2,1], 2)
+age_p_value <- mod_summary$coefficients[2,4]
+height_beta <- round(mod_summary$coefficients[3,1], 2)
+height_p_value <- mod_summary$coefficients[3,4]
+
+
+```
+
+## Now, let's write the summary:
+
+A multiple linear regression was conducted to examine the the effect of age and height on weight. The overall model significantly predicted weight, F(`r df1`, `r df2`) = `r f_value`, *p* = `r papaja::printp(omnibus_p_value)`. The model explained a substantial proportion of variance in weight, with an R<sup>2</sup> = `r omnibus_r_squared` and an adjusted R<sup>2</sup> = `r omnibus_adj_r_squared`. Age was not a significant predictor of weight ($\beta_1$ = `r age_beta`, 95% CI\[`r age_ci_lower`, `r age_ci_upper`\], *p* `r papaja::printp(age_p_value)`). However, height was a significant predictor of weight ($\beta_2$ = `r height_beta`, 95% CI\[`r height_ci_lower`, `r height_ci_upper`\], *p* \< `r papaja::printp(height_p_value)`), indicating that for every one-unit increase in height, weight is predicted to increase by `r height_beta` units, holding age constant. Overall, our model predicting weight from age and height found that height was a significant predictor while age was not.

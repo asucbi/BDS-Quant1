@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-library(tidyverse); library(knitr); library(broom); library(easystats); library(olsrr)
+library(tidyverse); library(knitr); library(broom); library(easystats); library(olsrr); library(corrplot)
 
 ```
 ```{r, echo = FALSE}
@@ -81,11 +81,13 @@ n=nrow(master)
 
 4/(n-k-1)
 
-model_reduced <- lm(CESD ~ 1,
-                data = master) 
+master_cor <- master %>% 
+  select(-subid) %>% 
+  na.omit()
 
-anova(model_fit, model_reduced)
+kable(cor(master_cor))
 
+corrplot(corr = cor(master_cor), method = "square")
 
 
 ```
