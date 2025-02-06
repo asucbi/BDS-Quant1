@@ -105,11 +105,21 @@ Treat the model you ran in Exercise 2 as Model 1. Make a new model, Model 2, tha
 
 Perform a model comparison to test whether the variation in the tendency to believe in conspiracy theories is accounted for by a desire for uniqueness and control (together) *above and beyond* the variation already accounted for by paranoia and delusional ideation.
 
-1.  Answer the question: Does Model 2 explain significantly more variance in the tendency to believe in conspiracy theories than Model 1?
+Treat the model you ran in Exercise 2 as Model 1. Make a new model, Model 2 (name it `model_2`), that includes all the predictors in Model 1 plus the desire for uniqueness (`uniqueness`) and the desire for control (`control`).
 
-2.  Report the change in SSE between Model 1 and Model 2.
+Perform a model comparison to test whether the variation in the tendency to believe in conspiracy theories is accounted for by a desire for uniqueness and control (together) *above and beyond* the variation already accounted for by paranoia and delusional ideation.
 
-3.  Provide an APA-style summary of your results (make sure it contains **all** necessary pieces, check lab for an example).
+1.  Run a regression predicting the tendency to believe in conspiracy theories (Y = `conspiracy`) from paranoia (X1 = `paranoia`), delusional ideation (X2 = `delusions`), desire for uniqueness (`uniqueness`) and the desire for control (`control`). Call it `model_2`.
+
+2.  Write out your interpretations of the overall model (both R<sup>2</sup> and the F-statistic) and each of the regression coefficients ($\beta_0$, $\beta_1$, and $\beta_2$).
+
+3.  Run regression diagnostics (i.e., `check_collinaerity()`) on Model 2 to look for potential multicollinaerity. Comment on what you find, but not need to try to correct anything.
+
+4.  Conduct a model comparison between Model 1 and Model 2. Answer the question: Does Model 2 explain significantly more variance in the tendency to believe in conspiracy theories than Model 1?
+
+5.  Report the change in SSE between Model 1 and Model 2. Hint: we called this `ssr` in lab.
+
+6.  Provide an APA-style summary of your results (make sure it contains **all** necessary pieces, check lab for an example).
 
 ```{r regression-2}
 
