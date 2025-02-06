@@ -172,9 +172,14 @@ Note
 <h2 class="anchored" data-anchor-id="exercise-3">Exercise 3:</h2>
 <p>Treat the model you ran in Exercise 2 as Model 1. Make a new model, Model 2, that includes all the predictors in Model 1 plus the desire for uniqueness (<code>uniqueness</code>) and the desire for control (<code>control</code>).</p>
 <p>Perform a model comparison to test whether the variation in the tendency to believe in conspiracy theories is accounted for by a desire for uniqueness and control (together) <em>above and beyond</em> the variation already accounted for by paranoia and delusional ideation.</p>
+<p>Treat the model you ran in Exercise 2 as Model 1. Make a new model, Model 2 (name it <code>model_2</code>), that includes all the predictors in Model 1 plus the desire for uniqueness (<code>uniqueness</code>) and the desire for control (<code>control</code>).</p>
+<p>Perform a model comparison to test whether the variation in the tendency to believe in conspiracy theories is accounted for by a desire for uniqueness and control (together) <em>above and beyond</em> the variation already accounted for by paranoia and delusional ideation.</p>
 <ol type="1">
-<li><p>Answer the question: Does Model 2 explain significantly more variance in the tendency to believe in conspiracy theories than Model 1?</p></li>
-<li><p>Report the change in SSE between Model 1 and Model 2.</p></li>
+<li><p>Run a regression predicting the tendency to believe in conspiracy theories (Y = <code>conspiracy</code>) from paranoia (X1 = <code>paranoia</code>), delusional ideation (X2 = <code>delusions</code>), desire for uniqueness (<code>uniqueness</code>) and the desire for control (<code>control</code>). Call it <code>model_2</code>.</p></li>
+<li><p>Write out your interpretations of the overall model (both R<sup>2</sup> and the F-statistic) and each of the regression coefficients (<span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, and <span class="math inline">\(\beta_2\)</span>).</p></li>
+<li><p>Run regression diagnostics (i.e., <code>check_collinaerity()</code>) on Model 2 to look for potential multicollinaerity. Comment on what you find, but not need to try to correct anything.</p></li>
+<li><p>Conduct a model comparison between Model 1 and Model 2. Answer the question: Does Model 2 explain significantly more variance in the tendency to believe in conspiracy theories than Model 1?</p></li>
+<li><p>Report the change in SSE between Model 1 and Model 2. Hint: we called this <code>ssr</code> in lab.</p></li>
 <li><p>Provide an APA-style summary of your results (make sure it contains <strong>all</strong> necessary pieces, check lab for an example).</p></li>
 </ol>
 </section>
