@@ -1,0 +1,114 @@
+---
+title: "Module 4: Homework Starter File"
+format: html
+editor: visual
+---
+
+## Homework Note
+
+You must answer ALL questions and follow ALL steps in the homework instructions!
+
+## Load Packages
+
+```{r load-packages, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(papaja) #for formatting p values
+library(broom) #for formatting tables
+library(knitr) #for formatting tables
+library(ppcor) #for calculating partial and semi-partial correlations
+library(easystats) #for assessing multicollinaerity
+```
+
+## Read in the Data
+
+The dataset we will use comes from data from [Kay (2021)](https://www.sciencedirect.com/science/article/pii/S0092656621000659). This paper examines why people believe in conspiracy theories.
+
+The data is called `data_kay2021.csv`. Read in the data using the `read_csv()` function. Name the data "kay2021"
+
+```{r read in data, echo = FALSE, message=FALSE}
+
+
+
+```
+
+## Exercise 1:
+
+Say a researcher is interested in whether there is a relationship between the tendency to believe in conspiracy theories (Y = `conspiracy`) and paranoia (X1 = `paranoia`) when controlling for person’s general tendency to have delusions (X2 = `delusions`). 
+
+1. Calculate **and report** the semi-partial and partial correlations for this scenario. For this exercise, your report can be as simple as: "The semi-partial correlation is ___ and the partial correlation is ___." 
+
+2. Explain the difference in what the semi-partial versus the partial correlation means.
+
+
+```{r correlations}
+
+
+
+
+```
+
+## Exercise 2:
+
+We want to predict the tendency to believe in conspiracy theories (Y = `conspiracy`) from paranoia (X1 = `paranoia`) and delusional ideation (X2 = `delusions`). Take the following steps:
+
+1. Run a regression predicting the tendency to believe in conspiracy theories (Y = `conspiracy`) from paranoia (X1 = `paranoia`) and delusional ideation (X2 = `delusions`). Call it `model_1`.
+
+2. Write out your interpretations of the overall model (both R<sup>2</sup> and the F-statistic) and each of the regression coefficients ($\beta_0$, $\beta_1$, and $\beta_2$).
+
+3. Run regression diagnostics (i.e., `check_collinaerity()`) to look for potential multicollinaerity. Comment on what you find, but not need to try to correct anything.
+
+4. Provide an APA-style summary of your results (make sure it contains **all** necessary pieces, check lab for an example).
+
+```{r regression-1}
+
+
+
+
+```
+
+## Exercise 3:
+
+Treat the model you ran in Exercise 2 as Model 1. Make a new model, Model 2 (name it `model_2`), that includes all the predictors in Model 1 plus the desire for uniqueness (`uniqueness`) and the desire for control (`control`).
+
+Perform a model comparison to test whether the variation in the tendency to believe in conspiracy theories is accounted for by a desire for uniqueness and control (together) _above and beyond_ the variation already accounted for by paranoia and delusional ideation.
+
+1. Run a regression predicting the tendency to believe in conspiracy theories (Y = `conspiracy`) from paranoia (X1 = `paranoia`), delusional ideation (X2 = `delusions`), desire for uniqueness (`uniqueness`) and the desire for control (`control`). Call it `model_2`.
+
+2. Write out your interpretations of the overall model (both R<sup>2</sup> and the F-statistic) and each of the regression coefficients ($\beta_0$, $\beta_1$, and $\beta_2$).
+
+3. Run regression diagnostics (i.e., `check_collinaerity()`) on Model 2 to look for potential multicollinaerity. Comment on what you find, but not need to try to correct anything.
+
+4. Conduct a model comparison between Model 1 and Model 2. Answer the question: Does Model 2 explain significantly more variance in the tendency to believe in conspiracy theories than Model 1?
+
+5. Report the change in SSE between Model 1 and Model 2. Hint: we called this `ssr` in lab.
+
+6. Provide an APA-style summary of your results (make sure it contains **all** necessary pieces, check lab for an example).
+
+```{r regression-2}
+
+
+
+
+```
+
+## Render and submit your document.
+
+**Make sure that you I can see all of your answers in the rendered document!**
+
+To receive credit for this homework, submit a rendered PDF version of your file to "Module 4: Homework Submission" on Canvas.
+
+-   At the top of the .qmd file, change "format: html" to "format: pdf"
+-   Click "Render" at the top of the document
+-   Your document will open in a browser tab
+    -   If your document opens in the "Viewer" pane, click the "sidebar" button (circled in image below).
+    -   If you get a popup warning, click "Try Again" (may be specific to Mac)
+
+![](images/sidebar.png)
+
+-   Click the "Save" icon on the top right (circled in the image below)
+
+![](images/save_pdf.png)
+
+-   Save wherever you keep your class documents and upload your file to Canvas
+
+------------------------------------------------------------------------
