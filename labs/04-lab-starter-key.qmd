@@ -134,7 +134,7 @@ mr_data$age_resid <- resid(model_2)
 
 ```
 
-3.  Regress `weight` on the part of `age` that is unrelated to `height` (i.e., `data$age_resid`). Store the model in an object called `model_3`.
+3.  Regress `weight` on the part of `age` that is unrelated to `height` (i.e., `age_resid`). Store the model in an object called `model_3`.
 
 ```{r weight~age_resid, message= FALSE, echo=FALSE}
 
