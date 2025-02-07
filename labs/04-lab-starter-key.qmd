@@ -27,7 +27,7 @@ First, let's read in the data and then use `View()` to check it out.
 
 Today's dataset is called `data_htwtage.csv`. Let's read it in and name it `mr_data` (i.e., multiple regression data).
 
-```{r read-and-view, message= FALSE, echo=FALSE}
+```{r read-and-view, message= FALSE}
 
 #students: fill in XXX with correct code
 
@@ -46,7 +46,7 @@ View(mr_data)
 
 Let's create two scatter plots of the relation between our IVs and DV using `ggplot()`.
 
-```{r scatter-plot, message = FALSE, echo=FALSE}
+```{r scatter-plot, message = FALSE}
 
 #students: fill in XXX with correct code
 
@@ -77,7 +77,7 @@ Regress `weight` on `age` and `height`. Save the model to an object called `mode
 
 Remember, use: `model_1 <- lm(Y ~ X1 + X2, data = data)`
 
-```{r run-regression, message = FALSE, echo=FALSE}
+```{r run-regression, message = FALSE}
 
 #students: type out this model
 
@@ -102,7 +102,7 @@ summary(model_1)
 
 1.  Regress `age` on `height`. Store the model in an object called `model_2`
 
-```{r age~height, message= FALSE, echo=FALSE}
+```{r age~height, message= FALSE}
 
 #students: type out this model
 
@@ -119,7 +119,7 @@ model_2 <- lm(age ~ height, data = mr_data)
 
 2.  Store the part of `age` that is unrelated to `height` in a new column in `data` called `age_resid`.
 
-```{r age~height-resid, message= FALSE, echo=FALSE}
+```{r age~height-resid, message= FALSE}
 
 #students: fill in XXX with correct code
 
@@ -136,7 +136,7 @@ mr_data$age_resid <- resid(model_2)
 
 3.  Regress `weight` on the part of `age` that is unrelated to `height` (i.e., `age_resid`). Store the model in an object called `model_3`.
 
-```{r weight~age_resid, message= FALSE, echo=FALSE}
+```{r weight~age_resid, message= FALSE}
 
 #students: fill in XXX with correct code
 
@@ -153,7 +153,7 @@ model_3 <- lm(weight ~ age_resid, data = mr_data)
 
 4.  Examine the final results using the `summary()` function.
 
-```{r mod3-summary, message= FALSE, echo=FALSE}
+```{r mod3-summary, message= FALSE}
 
 summary(model_3)
 
@@ -167,7 +167,7 @@ summary(model_3)
 
 Here, we will calculate the **semi-partial** correlation for age using the `spcor.test` function.
 
-```{r sp-cor, message= FALSE, echo=FALSE}
+```{r sp-cor, message= FALSE}
 
 #students: fill in XXX with correct code
 
@@ -192,7 +192,7 @@ semi_partial_cor$estimate^2 # R-Squared
 
 Here, we will calculate the **partial** correlation for age using the `spcor.test` function.
 
-```{r p-cor, message= FALSE, echo=FALSE}
+```{r p-cor, message= FALSE}
 
 #students: fill in XXX with correct code
 
@@ -217,7 +217,7 @@ partial_cor$estimate^2 # R-Squared
 
 Let's run Model 1 (the intercept-only model) and see how much error is left unaccounted for. Save Model 1 to `model_1`.
 
-```{r intercept-only, message= FALSE, echo=FALSE}
+```{r intercept-only, message= FALSE}
 
 #students: fill in XXX with correct code
 
@@ -232,7 +232,7 @@ model_1 <- lm(weight ~ 1, data = mr_data)
 
 Let me introduce a new way of looking at the output of a regression analysis, the `anova()` function. This function gives us the SSE (the amount of unaccounted for error remaining in Model 1).
 
-```{r mod1-anova, message= FALSE, echo=FALSE}
+```{r mod1-anova, message= FALSE}
 
 model_1_anova <- anova(model_1)
 model_1_anova
@@ -241,7 +241,7 @@ model_1_anova
 
 Let's run Model 2 (now including age and height) and see how much error is left unaccounted for. Save Model 2 to `model_2`.
 
-```{r mod2-anova, message= FALSE, echo=FALSE}
+```{r mod2-anova, message= FALSE}
 
 model_2 <- lm(weight ~ age + height, data = mr_data)
 model_2_anova <- anova(model_2)
@@ -251,7 +251,7 @@ model_2_anova
 
 How much was SSE reduced by using Model 2 instead of Model 1? Save the output to a variable called `ssr` (i.e., sum of squares reduced).
 
-```{r ssr, message= FALSE, echo=FALSE}
+```{r ssr, message= FALSE}
 
 model_1_sse <- model_1_anova$`Sum Sq`[1]
 model_2_sse <- model_2_anova$`Sum Sq`[3]
@@ -274,7 +274,7 @@ ssr
 
 We can give both models as arguments to the `anova()` function to make the model comparison in a single step and test whether the reduction in SSE is significant. Save the results of the model comparison to an object called `model_comparison`.
 
-```{r model-comparison, message= FALSE, echo=FALSE}
+```{r model-comparison, message= FALSE}
 
 #students: fill in XXX with correct code
 
@@ -292,7 +292,7 @@ model_comparison
 
 Let's also calculate how much we reduced the amount of unaccounted for error using Model 2 compared to Model 1 as a proportion of the total amount of unaccounted for error we started with in Model 1. Save the output to a variable called `per` (i.e., proportion_error_reduced).
 
-```{r per, message= FALSE, echo=FALSE}
+```{r per, message= FALSE}
 
 per <- (model_1_sse - model_2_sse) / model_1_sse
 per
@@ -305,7 +305,7 @@ per
 
 Look again at our summary output if we run our multiple regression model (i.e., `model_2`) and see how our results map on.
 
-```{r mod2-summary, message= FALSE, echo=FALSE}
+```{r mod2-summary, message= FALSE}
 
 summary(model_2)
 
@@ -315,7 +315,7 @@ summary(model_2)
 
 Construct Model 1 and Model 2. Store in variables labelled `model_1` and `model_2`, respectively.
 
-```{r mod1and2, message= FALSE, echo=FALSE}
+```{r mod1and2, message= FALSE}
 
 #students: fill in XXX with correct code
 
@@ -333,7 +333,7 @@ model_2 <- lm(weight ~ age + height, data = mr_data)
 
 Compare the models using the `anova()` function. Save the results of the model comparison to an object called `model_comparison`.
 
-```{r mod1and2-compare, message= FALSE, echo=FALSE}
+```{r mod1and2-compare, message= FALSE}
 
 model_comparison <- anova(model_1, model_2)
 model_comparison
@@ -342,7 +342,7 @@ model_comparison
 
 Compute $R^2$.
 
-```{r compute-r2, message= FALSE, echo=FALSE}
+```{r compute-r2, message= FALSE}
 
 r_squared <- model_comparison$`Sum of Sq`[2] / model_comparison$RSS[1]
 r_squared
@@ -351,7 +351,7 @@ r_squared
 
 Look at summary output from Model 2 again.
 
-```{r mod2-summary2, message= FALSE, echo=FALSE}
+```{r mod2-summary2, message= FALSE}
 
 summary(model_2)
 
@@ -359,7 +359,7 @@ summary(model_2)
 
 There's equivalence between what we've done using the model comparison approach and the *t*-test approach that's used to test the significance of the specific predictors in the model in the summary output. Notice what we get if we take the square root of the F-statistic from the model comparison output.
 
-```{r f-to-t, message= FALSE, echo=FALSE}
+```{r f-to-t, message= FALSE}
 
 sqrt(model_comparison$F[2])
 
@@ -367,7 +367,7 @@ sqrt(model_comparison$F[2])
 
 And also notice the correspondence in the p-values.
 
-```{r compare-pvals, message= FALSE, echo=FALSE}
+```{r compare-pvals, message= FALSE}
 
 model_comparison$`Pr(>F)`[2]
 
@@ -379,7 +379,7 @@ model_comparison$`Pr(>F)`[2]
 
 First, let's create a correlation matrix to examine potential correlations between our variables. Make sure to select only the variables that you want to examine.
 
-```{r correlation-matrix, message = FALSE, echo=FALSE}
+```{r correlation-matrix, message = FALSE}
 
 #students: fill in XXX with correct code
 
@@ -395,7 +395,7 @@ cor(cor_df) #create a correlation matrix
 
 Next, let's use the `easystats` package to check the Tolerance and VIF (Variance Inflation Factor) in our data. Use `model_2` that you created above.
 
-```{r check-multicollinaerity, message = FALSE, echo=FALSE}
+```{r check-multicollinaerity, message = FALSE}
 
 #students: fill in XXX with correct code
 
@@ -421,7 +421,7 @@ Next, we'll extract the R<sub>j</sub><sup>2</sup> value from the summary.
 
 We'll then use this to calculate the Tolerance and the VIF.
 
-```{r calc-multicollinaerity, message = FALSE, echo=FALSE}
+```{r calc-multicollinaerity, message = FALSE}
 
 model_3 <- lm(age ~ height, data = mr_data)
 model_3_r2 <- summary(model_3)$r.squared
@@ -436,7 +436,7 @@ This summary is based on what is now called `model_2`. Don't forget to include a
 
 It's helpful to create objects with each of the relevant values first.
 
-```{r get-values, message= FALSE, echo=FALSE}
+```{r get-values, message= FALSE}
 #confidence interval
 model_ci <- confint(model_2)
 
