@@ -173,7 +173,7 @@ cat_data %>%
 
 ## Let's start by just looking at variables with two levels.
 
-Create a new dataset called `cat_reduced` that includes only the treatment and control groups. Use `View()` to double check that the data look correct.
+Create a new dataset called `cat_reduced` that includes only the CBT and Psychotherapy groups. Use `View()` to double check that the data look correct.
 
 ```{r reduced-data}
 
@@ -206,7 +206,7 @@ Dummy coding is R's default method. This actually happens under the hood in R wh
 
 ```{r model-default}
 
-# studnets fill in model
+# students fill in model
 
 
 
@@ -234,7 +234,7 @@ cat_reduced %>%
 
 Now, let's change the reference level so that Psychotherapy is assigned a 0 and CBT is assigned a 1.
 
-```{r chnage-ref}
+```{r change-ref}
 
 # students fill in `case_when()`  
 
@@ -264,7 +264,8 @@ summary(model_newref)
 
 ## Deviation coding
 
-Now, let's say we're not interested in the difference between CBT and Psychotherapy. Instead, we want to know whether either differs from the grand mean of depression. To do this, we would use Deviation Coding. There are a few ways we can create our codes, but this is my preferred method:
+Now, let's say we're interested in the difference between CBT and Psychotherapy. One way we could do this is to use Deviation Coding. There are a few ways we can create our codes, but this is my preferred method:
+
 
 ### Create dummy variables with `mutate()` and `case_when()`
 
@@ -313,6 +314,8 @@ To get an ANOVA table, you can use the same `lm()` as regression, and use `anova
 model_anova <- anova(lm(depress ~ group, data = cat_data))
 model_anova
 
+lm_anova <- lm(depress ~ group, data = cat_data) 
+
 ```
 
 To calculate post-hod pairwise comparisons between group levels, we can use `emmeans::emmeans()`. This function takes an `lm()` output, an equation that indicates we want to perform pairwise t-tests (`pairwise`) on the left, and the IV (`group`) on the right, as well as an `adjust` (e.g. "bonferroni" or "holm").
@@ -330,7 +333,7 @@ To calculate post-hod pairwise comparisons between group levels, we can use `emm
 
 
 
-emmeans(model_anova, pairwise ~ group, adjust = "none")
+emmeans(lm_anova, pairwise ~ group, adjust = "none")
 
 ```
 
@@ -340,7 +343,7 @@ Since we are running a lot of tests (and number of tests grow as we add more lev
 
 ```{r emmeans-bonferroni}
 
-emmeans(model_anova, pairwise ~ group, adjust = "bonferroni")
+emmeans(lm_anova, pairwise ~ group, adjust = "bonferroni")
 
 ```
 
@@ -409,7 +412,7 @@ Now, we can run the linear model using these new dummy variables as the IV's.
 
 # students fill in model
 
-model_dummy1 <- lm(depress ~ CBT.v.Control + Psychotherapy.v.Control, data = cat_data) 
+model_dummy1 <- lm(depress ~ 1 + CBT.v.Control + Psychotherapy.v.Control, data = cat_data) 
 summary(model_dummy1)
 
 ```
@@ -451,7 +454,7 @@ attributes(cat_data$group)
 
 #run your model
 model_tvc <- lm(depress ~ group, data = cat_data)
-
+summary(model_tvc)
 ```
 
 We can have k-1 contrasts. So, we might want to add another contrast testing the two treatment groups. We can do the same thing to add another contrast.
@@ -475,6 +478,7 @@ attributes(cat_data$group)
 
 #run your model
 model_tvc <- lm(depress ~ group, data = cat_data)
+summary(model_tvc)
 
 ```
 
