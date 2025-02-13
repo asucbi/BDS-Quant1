@@ -26,7 +26,7 @@ Read in the data using the `read_csv()` function. Name the data "age_pitch"
 
 ```{r read in data, echo = FALSE, message=FALSE}
 
-
+age_pitch <- read_csv('data/age_pitch.csv')
 
 ```
 
@@ -47,6 +47,9 @@ Provide an APA-style summary of your results.
 
 ```{r correlation}
 
+ggplot(data = age_pitch, aes(x=age, y=pitch)) +
+  geom_point() +
+  labs(x = "Age", y = "Pitch")
 
 
 ```
@@ -61,7 +64,8 @@ Answer the following questions:
 
 -   What is the intercept? What does it mean for the relation between age and pitch?
 -   What is the slope? What does it mean for the relation between age and pitch?
--   What is the coefficient of determination (R-squared)? What does it mean for the relation between age and pitch?
+-   What is the coefficient 
+of determination (R-squared)? What does it mean for the relation between age and pitch?
 
 Create a table of your regression results.
 
@@ -69,6 +73,13 @@ Provide an APA-style summary of your results (make sure it follow the example su
 
 ```{r regression}
 
+ggplot(data = age_pitch, aes(x=age, y=pitch)) +
+  geom_point() +
+  geom_smooth(method="lm") +
+  labs(x = "Age", y = "Pitch")
+
+model_1 <- lm(pitch ~ age, data = age_pitch)
+summary(model_1)
 
 ```
 
@@ -90,7 +101,12 @@ Note: If you detect violations you do not need to do anything to fix them.
 
 ```{r diagnostics}
 
+hist(model_1$residuals)
 
+plot(model_1$fitted.values, model_1$residuals)
+
+qqnorm(model_1$residuals)
+qqline(model_1$residuals)
 
 ```
 

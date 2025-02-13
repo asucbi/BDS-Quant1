@@ -1,0 +1,556 @@
+---
+title: "Module 5: Lab Instructions"
+format: html
+editor: visual
+---
+
+# Purpose
+
+In today's lab, we will focus on linear regression with a categorical predictor. We will pay special attention to how categorical variables are coded and what that means for our interpretations.
+
+For today's lab, you will need to load the following libraries.
+
+```{r libraries, message=FALSE}
+
+library(tidyverse)
+library(papaja) #for formatting p values
+library(emmeans) #for post-hoc t-tests
+library(knitr) #for formatting tables
+
+```
+
+# Research scenario
+
+We'll be looking at a dataset comparing different kinds of treatment for depression. In this study, depressed patients (n = 5 per group) were randomly assigned to one of three groups:
+
+1.	CBT group 
+2.	Psychotherapy group 
+3.	Control group (received no therapy) 
+
+After 10 weeks, participants' depression scores were measured (on a scale of 1 = no depression to 12 = severely depressed). Our dataset will have just 2 variables: `group` (CBT, Psychotherapy, or Control) and `depress` (depression scores). 
+
+**NOTE:**
+`1` = CBT; 
+`2` = Psychotherapy;
+`3` = Control
+
+## Read in the data
+
+First, let's read in the data and then use `View()` to check it out.
+
+Today's dataset is called `depression_therapy.csv`. Let's read it in and name it `cat_data` (i.e., categorical regression data).
+
+```{r read-and-view, message= FALSE, echo=FALSE}
+
+cat_data <- read_csv("data/depression_therapy.csv")
+
+View(cat_data)
+
+```
+
+The data has 4 columns:
+
+-   group: a numeric indicator of whether they were in the CBT, Psychotherapy, or Control group
+-   depress: participants' score on the depression measure
+
+
+## Structure of the data
+
+The first thing we should check is how the data are structured. We should have a factor called `group` and a numeric variable for depression scores called `depress`. Let's use the function `str()`.
+
+
+```{r, echo = FALSE, message=FALSE, eval = FALSE}
+
+str(cat_data)
+
+```
+
+## Recode `group` as a factor
+
+R thinks that `group` is an integer, so we need to make it into a factor in order to run our analysis. We can use `mutate()` and base R's `factor()`, which can be used to turn variables into factors.
+
+NOTE: You want to provide labels in the same order as the levels of the factor, so in this case we want them in the order `CBT`, `Psychotherapy`, and `Control` (see above). 
+
+```{r, echo = FALSE, message=FALSE}
+
+cat_data <- cat_data %>% 
+  mutate(group = factor(group,
+                        labels = c("CBT", "Psychotherapy", "Control"))) # order matters here! 
+
+```
+
+Look at the structure of the data again. Now it's clear that `group` is a factor variable with the correct levels. 
+
+```{r, echo = FALSE, message=FALSE, eval=FALSE}
+
+str(cat_data)
+
+```
+
+## Descriptives
+
+Next, we'll get descriptives for each group using two tidyverse functions, `group_by()` and `summarize()`. First, you want to group by `group`, and then you want to summarize with three arguments, mean, sd, and n. We'll use knitr to make this into a table.
+
+```{r, echo = FALSE, message=FALSE, eval=FALSE}
+cat_data %>% 
+  group_by(group) %>% 
+  summarize(mean = mean(depress, na.rm = TRUE),
+            sd = sd(depress, na.rm = TRUE),
+            n = n()) %>% 
+  knitr::kable(digits = 2)
+
+```
+
+## Visualizing the data
+
+There are many ways that you can visualize the data. In ggplot, I recommend adding a `geom_boxplot()`  or `geom_violin()` layer. You can also use `geom_bar()` but there are some disadvantages to barplots, and there have even been attempts to [Bar Bar Plots!](https://thenode.biologists.com/barbarplots/) from scientific journals.
+
+[This](https://www.r-graph-gallery.com/boxplot.html) is a good resource for boxplots with ggplot, [this](https://www.r-graph-gallery.com/violin.html) is a good resource for violin plots with ggplot, and [this](https://www.r-graph-gallery.com/barplot.html) is a good resource for bar plots with ggplot.
+
+```{r , echo = FALSE, message=FALSE, eval=FALSE}
+
+#boxplot:
+cat_data %>% 
+  ggplot(aes(x = fct_reorder(group, depress), y = depress)) +
+  geom_boxplot() +
+  geom_jitter() +
+  theme_minimal() +
+  labs(x = NULL,
+       y = "Average depression score",
+       fill = "Group",
+       title = "Depression scores per group")
+
+#violin plot:
+cat_data %>% 
+  ggplot(aes(x = fct_reorder(group, depress), y = depress)) +
+  geom_violin(aes(fill = group)) +
+  geom_jitter() +
+  theme_minimal() +
+  labs(x = NULL,
+       y = "Average depression score",
+       fill = "Group",
+       title = "Depression scores per group")+
+  theme(legend.position = "none") 
+
+#barplot:
+cat_data %>% 
+  group_by(group) %>% 
+  summarise(avg_depress = mean(depress),
+            sd = sd(depress)) %>% 
+  ggplot(aes(x = fct_reorder(group, avg_depress), 
+             y = avg_depress)) +
+  geom_bar(stat = "identity", fill = "cornflowerblue") +
+  geom_point(data = cat_data, 
+             aes(x = group, y = depress),
+             position = 'jitter')+
+  theme_minimal()+
+  labs(y = "Average depression score",
+       x = NULL,
+       title = "Average depression score per group") +
+  geom_errorbar(aes(ymin=avg_depress - sd, ymax=avg_depress + sd),
+                width = .1)
+
+
+```
+***
+
+## Let's start by just looking at variables with two levels. 
+
+Create a new dataset called `cat_reduced` that includes only the treatment and control groups. Use `View()` to double check that the data look correct.
+
+```{r , echo = FALSE, message=FALSE}
+
+cat_reduced <- cat_data %>% 
+  filter(group != "Control") %>% 
+  droplevels()
+
+View(cat_reduced)
+
+```
+
+***
+
+# Regression with categorical predictors
+
+## Dummy coding
+
+Dummy coding is R's default method. This actually happens under the hood in R when our independent variable is a factor. Let's run a regression predicting `depress` from `group`.
+
+
+```{r , echo = FALSE, message=FALSE}
+
+model_default <- lm(depress ~ group, data = cat_reduced) 
+
+```
+
+>**Question:** What does the F test tell us?
+
+Here is our regression equation:
+
+$$Depression_i = \beta_0 + \beta_1psychotherapy_i + e_i$$
+
+R is creating a dummy variable for us under the hood: `groupPsychotherapy`.  Let's look at what R is doing.
+
+```{r , echo = FALSE, message=FALSE, eval=FALSE}
+
+cat_reduced %>%
+  mutate(groupPsychotherapy = case_when(group == "Psychotherapy" ~ 1,
+                                        TRUE ~ 0))
+
+```
+
+By default, R treats whatever the first level of the factor variable is as the reference group. In this case, CBT was the first level of `group` (because it was initially coded as `1` in our raw data), so the model treated CBT as our reference group.
+
+Here is our regression equation, derived from the output:
+
+$$Depression_i = 7.20 -3.80psychotherapy$$
+
+>**Question:** Using this equation, determine the mean depression score of each group.
+
+Now, let's revisit the output.
+```{r , echo = FALSE, message=FALSE}
+
+model_default <- lm(depress ~ group, data = cat_reduced) 
+
+```
+>**Question:** Interpret the intercept. What does a significant p-value signify?
+
+
+>**Question:** Interpret the slopes. What do the significant p-values signify?
+
+
+Now, let's change the reference level so that Psychotherapy is assigned a 0 and CBT is assigned a 1.
+
+```{r , echo = FALSE, message=FALSE}
+
+cat_reduced <- cat_reduced %>%
+  mutate(groupCBT = case_when(group == "CBT" ~ 1,
+                                        TRUE ~ 0))
+
+```
+
+Rerun the model. Compare it to the default model.
+
+```{r , echo = FALSE, message=FALSE}
+
+model_newref <- lm(depress ~ groupCBT, data = cat_reduced) 
+
+```
+>**Question:** Interpret the intercept. What does a significant p-value signify?
+
+
+>**Question:** Interpret the slopes. What do the significant p-values signify?
+
+
+## Deviation coding
+
+Now, let's say we're not interested in the difference between CBT and Psychotherapy. Instead, we want to know whether either differs from the grand mean of depression. To do this, we would use Deviation Coding. There are a few ways we can create our codes, but this is my preferred method:
+
+### Create dummy variables with `mutate()` and `case_when()`
+
+```{r , echo = FALSE, message=FALSE}
+
+# create new dummy variables containing 1's and 0's
+cat_reduced <- cat_reduced %>%
+  mutate(dev_code = case_when(group == "CBT" ~ .5,
+                                   TRUE ~ -.5))
+
+```
+
+Now, we can run the linear model using this new dummy variable as the IV.
+
+```{r , echo = FALSE, message=FALSE}
+
+model_dummy1 <- lm(depress ~ dev_code, data = cat_reduced) 
+
+```
+
+>**Question:** What does the intercept mean? What does the slope mean?
+
+ 
+
+***
+
+# Now, let's take a look at variables with more than 2 levels.
+
+For this, we'll go back to using `cat_data` as our data file.
+
+## Traditional ANOVA
+
+We will first review how to generate a "traditional ANOVA" table.
+
+To get an ANOVA table, you can use the same `lm()` as regression, and use `anova()` to get the ANOVA summary table. Importantly, you want to make sure that the categorical IV is a factor (which we did above). 
+
+
+```{r , echo = FALSE, message=FALSE}
+
+model_anova <- anova(lm(depress ~ group, data = cat_data))
+
+```
+
+To calculate post-hod pairwise comparisons between group levels, we can use `emmeans::emmeans()`. This function takes an `lm()` output, an equation that indicates we want to perform pairwise t-tests (`pairwise`) on the left, and the IV (`group`) on the right, as well as an `adjust` (e.g. "bonferroni" or "holm").
+
+
+```{r , echo = FALSE, message=FALSE, eval=FALSE}
+
+emmeans(model_anova, pairwise ~ group, adjust = "none")
+
+```
+
+Since we are running a lot of tests (and number of tests grow as we add more levels), we need to correct for multiple comparisons so that we don't have an inflated type I error rate.
+
+* Bonferroni correction: multiplies the p-values by the number of comparisons. We'll talk about this more in class on Tuesday!
+
+```{r , echo = FALSE, message=FALSE, eval=FALSE}
+
+emmeans(model_anova, pairwise ~ group, adjust = "bonferroni")
+
+```
+
+>**Question:** Compare the p-values from these two emmeans summaries. What do you notice?
+
+
+***
+
+## Regression with categorical predictors
+
+Running the ANOVA within a linear regression framework will give us the same information we already got from our regression model, and something more!
+
+## Dummy coding
+
+In regression, categorical predictors with more than two levels are broken up into more than one predictor. This actually happens under the hood in R when our independent variable is a factor. Let's put `group` as the predictor in our model as before.
+
+
+```{r , echo = FALSE, message=FALSE}
+
+model_default <- lm(depress ~ group, data = cat_data) 
+
+
+```
+
+>**Question:** What does the F test tell us?
+
+
+
+Here is our regression equation:
+
+$$Depression_i = \beta_0 + \beta_1psychotherapy_i + 
+\beta_2control_i + e_i$$
+
+R is creating two dummy variables for us under the hood: `groupPsychotherapy` and `groupControl`.  Let's look at what R is doing.
+
+```{r , echo = FALSE, message=FALSE, eval=FALSE}
+
+cat_data %>%
+  mutate(groupPsychotherapy = case_when(group == "Psychotherapy" ~ 1,
+                                        TRUE ~ 0),
+         groupControl = case_when(group == "Control" ~ 1, 
+                                  TRUE ~ 0)) 
+
+```
+
+By default, R treats whatever the first level of the factor variable is as the reference group. In this case, CBT was the first level of `group` (because it was initially coded as `1` in our raw data), so the model treated CBT as our reference group.
+
+Here is our regression equation, derived from the output:
+
+$$Depression_i = 7.20 -3.80psychotherapy + 2.60control$$
+
+>**Question:** Using this equation, determine the mean depression score of each group.
+
+
+
+Now, let's revisit the output.
+```{r , echo = FALSE, message=FALSE}
+
+model_default <- lm(depress ~ group, data = cat_data) 
+
+```
+>**Question:** Interpret the intercept. What does a significant p-value signify?
+
+
+>**Question:** Interpret the slopes. What do the significant p-values signify?
+
+
+Let's imagine that we have the following (more intuitive) research questions:
+
+1. Is CBT effective (relative to no therapy)? 
+2. Is psychotherapy effective (relative to no therapy)?  
+
+>**Question:** What do want our reference group to be to answer these research questions?
+
+
+Now let's make the appropriate dummy codes. Recall that we need *k*-1 dummy codes (where *k* is the number of groups). We have 3 groups, so we need 2 dummy codes. 
+
+Remember, our decision of how to set the dummy codes (which group to set as the **reference group**) should be guided by our research questions. 
+
+
+### Create dummy variables with `mutate()` and `case_when()`
+
+```{r , echo = FALSE, message=FALSE}
+# create new dummy variables containing 1's and 0's
+cat_data <- cat_data %>%
+  mutate(CBT.v.Control = case_when(group == "CBT" ~ 1,
+                                   TRUE ~ 0),
+         Psychotherapy.v.Control = case_when(group == "Psychotherapy" ~ 1,
+                                             TRUE ~ 0))
+
+
+
+```
+
+Now, we can run the linear model using these new dummy variables as the IV's.
+
+
+```{r , echo = FALSE, message=FALSE}
+
+model_dummy1 <- lm(depress ~ CBT.v.Control + Psychotherapy.v.Control, data = cat_data) 
+
+```
+
+>**Question:** What does the intercept mean? What do the slopes mean?
+
+
+Another reasonable question might be whether the treatments, on average) are better than the control.
+
+Rules for DIY / Planned Contrasts:
+
+1.    Groups coded with positive weights will be compared to groups with negative weights
+2.    The sum of weights you use should be zero
+3.    If a group is not involved in a comparison, assign it a weight of 0
+4.    Initial weight assigned to groups should be equal to # groups in opposite chunk of variation
+5.    To get final weights, divide initial weight by number of groups with non-zero weights
+
+|Step                  |CBT and Psychotherapy | Control  |
+|:---------------------|:---------------------|:---------|
+|Positive vs. Negative |Positive              |Negative  |
+|Initial Weights       |1, 1                  |-2        |
+|Final Weights         |1/3, 1/3              |-2/3      |
+
+
+### Here's an alternative way to create contrasts, using a matrix.
+
+```{r, echo = FALSE, message=FALSE, eval=FALSE}
+
+#first, check out the order of levels of your variable
+levels(cat_data$group)
+
+```
+```{r, echo = FALSE, message=FALSE}
+
+#now, list your final weights, in the same order of your levels
+Treat.v.Control = c(1/3, 1/3, -2/3)  
+
+#turn this into a matrix
+mat <- cbind(Treat.v.Control)
+
+#assign these contrasts to your variable
+contrasts(cat_data$group) <- mat
+
+```
+```{r, echo = FALSE, message=FALSE, eval=FALSE}
+
+#check out the `attributes()` of your variable
+attributes(cat_data$group)
+
+```
+```{r, echo = FALSE, message=FALSE}
+
+#run your model
+model_tvc <- lm(depress ~ group, data = cat_data)
+
+```
+>**Question:** What does the intercept mean? What do the slopes mean?
+
+
+We can have k-1 contrasts. So, we might want to add another contrast testing the two treatment groups. We can do the same thing to add another contrast. 
+
+```{r , echo = FALSE, message=FALSE, eval=FALSE}
+
+#first, check out the order of levels of your variable
+levels(cat_data$group)
+
+```
+```{r, echo = FALSE, message=FALSE}
+
+#now, list your final weights, in the same order of your levels. control drops out, so we assing it a zero.
+CBT.v.Psychotherapy = c(1/2, -1/2, 0)  
+
+#turn this into a matrix along with our previous contrasts
+mat <- cbind(Treat.v.Control, CBT.v.Psychotherapy)
+
+#assign these contrasts to your variable
+contrasts(cat_data$group) <- mat
+
+```
+```{r, echo = FALSE, message=FALSE, eval=FALSE}
+
+#check out the `attributes()` of your variable
+attributes(cat_data$group)
+
+#run your model
+model_tvc <- lm(depress ~ group, data = cat_data)
+
+```
+Now, write up an APA Style Summary!
+
+```{r , echo = FALSE, message=FALSE}
+# First, let's get all of the objects we will need. You can also do some of this within your summary, but I like to lay it all out here.
+
+summary_tvc <- summary(model_tvc)
+conf_tvc <- confint(model_tvc) #don't forget confidence intervals!
+aov_tvc <- anova(model_tvc)
+
+#descriptives
+descriptives <- cat_data %>% 
+  group_by(group) %>% 
+  summarise(mean = mean(depress, na.rm = TRUE),
+            sd = sd(depress, na.rm = TRUE))
+
+#omnibus effects
+aov_df_1 <- aov_tvc$Df[1]
+aov_df_2 <- aov_tvc$Df[2]
+aov_f_val <- round(aov_tvc$F[1], 2)
+aov_p_val <- aov_tvc$`Pr(>F)`[1]
+r_squared <- summary_tvc$r.squared
+adj_r_squared <- summary_tvc$adj.r.squared
+
+#treat vs. control
+mean_treat <- cat_data %>% 
+  filter(group != "Control") %>% 
+  summarise(mean = mean(depress))
+
+sd_treat <- cat_data %>% 
+  filter(group != "Control") %>% 
+  summarise(sd = sd(depress)) %>% 
+  round(2)
+
+mean_control <- cat_data %>% 
+  filter(group == "Control") %>% 
+  summarise(mean = mean(depress))
+
+sd_control <- cat_data %>% 
+  filter(group == "Control") %>% 
+  summarise(sd = sd(depress)) %>% 
+  round(2)
+ 
+tvc_beta <- summary_tvc$coefficients[2,1]
+tvc_ci_low <- round(conf_tvc[2,1], 2)
+tvc_ci_high <- round(conf_tvc[2,2], 2)
+tvc_pval <- summary_tvc$coefficients[2,4]
+
+mean_CBT <- round(descriptives[1,2], 2)
+sd_CBT <- round(descriptives[1,3], 2)
+
+mean_Psy <- round(descriptives[2,2], 2)
+sd_Psy <- round(descriptives[2,3], 2)
+
+cvp_beta <- summary_tvc$coefficients[3,1]
+cvp_ci_low <- round(conf_tvc[3,1], 2)
+cvp_ci_high <- round(conf_tvc[3,2], 2)
+cvp_pval <- summary_tvc$coefficients[3,4]
+
+
+```
+
+We ran a linear regression to examine the effect of different kinds of treatment on depression. We used custom contrast coding to examine the difference between the average of the treatment groups and the control group (CBT: 1/3, Psychotherapy: 1/3, Control: -2/3) and between the two types of treatment (CBT: 1/2, Psychotherapy: -1/2, Control: 0). Our omnibus test revealed a significant effect of treatment group on depression scores, F(`r aov_df_1`, `r aov_df_2`) = `r aov_f_val`, *p* `r papaja::printp(aov_p_val)`), and the model explained a substantial proportion of variance in weight, with an R<sup>2</sup> = `r r_squared` and an adjusted R<sup>2</sup> = `r adj_r_squared`. Participants in a treatment group (_M_ = `r mean_treat`, _SD_ = `r sd_treat`) had significantly lower depression scores than participants in the control group (_M_ = `r mean_control`, _SD_ = `r sd_control`), $\beta$ = `r tvc_beta`, 95% CI[`r tvc_ci_low`, `r tvc_ci_high`], *p* `r papaja::printp(tvc_pval)`. Within treatment groups, participants who received CBT (_M_ = `r mean_CBT`, _SD_ = `r sd_CBT`) had significantly higher depression scores than participants who received Psychotherapy (_M_ = `r mean_Psy`, _SD_ = `r sd_Psy`), $\beta$ = `r cvp_beta`, 95% CI[`r cvp_ci_low`, `r cvp_ci_high`], *p* =`r papaja::printp(cvp_pval)`. In summary, we found that treatment had an effect on participants' depression scores and Psychotherapy may be a better treatment option than CBT. 
+
