@@ -147,7 +147,7 @@ Note
 </section>
 <section id="exercise-2" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-2">Exercise 2:</h2>
-<p>Run an omnibus ANOVA test to determine whether there is a relationship between <code>salary</code> and <code>region</code>.</p>
+<p>Run a regression to determine whether there is a relationship between <code>salary</code> and <code>region</code>.</p>
 <p>Answer these questions:</p>
 <ol type="1">
 <li><p>What does the omnibus test tell you?</p></li>
@@ -157,7 +157,7 @@ Note
 </section>
 <section id="exercise-3" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-3">Exercise 3:</h2>
-<p>Conduct <em>post-hoc</em> pairwise comparisons for <code>teacher_salary</code> values across all levels of <code>region</code>. Because we preregistered our test of differences between groups (assume we did this), we <em>do not</em> need to correct for multiple comparisons. To remove the adjustment, make sure to include <code>adjust = "none"</code> in your <code>emmeans</code> code (if you don’t specify “none” it will apply a different adjustment).</p>
+<p>Conduct pairwise comparisons for <code>teacher_salary</code> values across all levels of <code>region</code>. Because we preregistered our test of differences between groups (assume we did this), we <em>do not</em> need to correct for multiple comparisons. To remove the adjustment, make sure to include <code>adjust = "none"</code> in your <code>emmeans</code> code (if you don’t specify “none” it will apply a different adjustment).</p>
 <p>Answer the following questions:</p>
 <ol type="1">
 <li><p>Which of the comparisons are significant? Which are not?</p></li>

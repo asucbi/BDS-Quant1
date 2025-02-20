@@ -100,7 +100,7 @@ ggplot(salary, aes(x = region, y = teacher_salary, fill = region)) +
 
 ## Exercise 2:
 
-Run an omnibus ANOVA test to determine whether there is a relationship between `salary` and `region`.
+Run a regression to determine whether there is a relationship between `salary` and `region`.
 
 Answer these questions: 
 
@@ -120,7 +120,7 @@ summary(model)
 
 ## Exercise 3:
 
-Conduct *post-hoc* pairwise comparisons for `teacher_salary` values across all levels of `region`. Because we preregistered our test of differences between groups (assume we did this), we _do not_ need to correct for multiple comparisons. To remove the adjustment, make sure to include `adjust = "none"` in your `emmeans` code (if you don't specify "none" it will apply a different adjustment). 
+Conduct pairwise comparisons for `teacher_salary` values across all levels of `region`. Because we preregistered our test of differences between groups (assume we did this), we _do not_ need to correct for multiple comparisons. To remove the adjustment, make sure to include `adjust = "none"` in your `emmeans` code (if you don't specify "none" it will apply a different adjustment). 
 
 Answer the following questions:
 

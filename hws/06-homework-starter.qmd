@@ -1,0 +1,142 @@
+---
+title: "Module 6: Homework Starter File"
+format: html
+editor: visual
+---
+
+## Load Packages
+
+```{r load-packages, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(papaja) #for formatting p values
+library(emmeans) #for post-hoc t-tests
+library(ggrain) #for creating raincloud plots
+library(MOTE) #for getting ci around effect sizes
+library(Superpower) #for simulating power
+```
+
+## Read in the Data
+
+The data we are going to use this week is called `salaries.csv`. Read in the data using the `read_csv()` function. Name the data "salaries".
+
+The data has 3 columns:
+
+-   state: the state in which the data was collected
+-   region: region of the US that the state falls into
+-   teacher_salary: average teacher's salary (in thousand per year)
+
+```{r read in data, echo = FALSE, message=FALSE}
+
+
+
+
+```
+
+## Research Problem:
+
+We are interested in whether teacher's salary differs by region in the United States. We collected data from teachers around the country and calculated each state's average salary. States were classified into one of four regions (Northeast, Midwest, West, and South). We are interested in whether these salaries differ overall and whether each differs from each other.
+
+## Exercise 1:
+
+Create (exactly) the raincloud plot from the homework instructions.
+
+Answer the question: What does the raincloud plot tell you about how teacher salary does or does not differ by region?
+
+```{r raincloud-plot, echo=FALSE}
+
+
+
+
+```
+
+## Exercise 2:
+
+Run a regression to determine whether there is a relationship between `salary` and `region`.
+
+Answer these questions: 
+
+1. What does the omnibus test tell you?
+
+2. What comparisons are being tested?
+
+3. Interpret each of the coefficients (e.g., the intercept and each of the region contrasts). Make sure to include information about significance and the direction of the effect.
+
+```{r omnibus-anova, echo=FALSE}
+
+
+
+
+```
+
+## Exercise 3:
+
+Conduct pairwise comparisons for `teacher_salary` values across all levels of `region`. Because we preregistered our test of differences between groups (assume we did this), we _do not_ need to correct for multiple comparisons. To remove the adjustment, make sure to include `adjust = "none"` in your `emmeans` code (if you don't specify "none" it will apply a different adjustment). 
+
+Answer the following questions:
+
+1. Which of the comparisons are significant? Which are not?
+
+2. How does this differ if you include the bonferroni adjustment? Why does it differ?
+
+```{r pariwise-comparisons, echo=FALSE}
+
+
+
+
+```
+
+## Exercise 4:
+
+Use the `MOTE` package to calculate the effect size and effect size confidence interval around each of the comparisons. 
+
+Answer the following questions:
+
+1. What are the effect sizes for each comparison?
+
+2. Is each effect small, medium, or large?
+
+```{r effsize-ci, echo=FALSE}
+
+
+
+
+```
+
+## Exercise 5:
+
+Now, write an APA style summary of your results. This should include information about your overall model (e.g., *F* and *R*<sup>2</sup>) as well as each of the pairwise comparisons and all relevant information (e.g., *t*, *p*, effect size, 95% CIs). 
+
+```{r apa-summary, echo=FALSE}
+
+
+
+
+```
+
+## Exercise 7:
+
+Now, let's say we want to run a replication study and we want to know many participants we need to achieve 90% power.
+
+First, create a power plot for sample sizes ranging from 2-50. Use this to determine what sample size you need to achieve 90% power for the omnibus test.
+
+Now, run an analysis to determine how much power would you have, given this sample size, for each of the pairwise comparisons. You can leave all of the other design parameters as-is. Set your number of simulations at 1000 (rather than the 500 we did in class).
+
+Answer the following questions:
+
+1. From the power plot, what sample size do you need to achieve 90% power for the overall test?
+
+2. What is your power estimate for each of the paired comparisons?
+
+3. Are you surprised by these values? Why or why not?
+
+4. In your replication study, will you recruit 12 participants or do something differently? If so, what? (No need to run any additional analysis for this question if you're thinking of that - just tell me what you would do!)
+
+```{r power-analysis, echo=FALSE}
+
+
+
+
+```
+
+## Render and submit your document.
+------------------------------------------------------------------------
