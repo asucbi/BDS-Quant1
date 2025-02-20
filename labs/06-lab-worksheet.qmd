@@ -291,12 +291,9 @@ power_result <- ANOVA_power(design_result,
 
 What is our power to detect the overall effect of `Condition`? What about the pairwise comparisons between the groups?
 
-
 What kind of power analysis would this be?
 
-
 What do you think of the power for this study design?
-
 
 ## Now, we want to run a replication study. Let's plan a study where we want to collect 100 Ps per group.
 
@@ -361,7 +358,6 @@ power_result <- ANOVA_power(design_result,
 
 What is our power to detect a .05 point difference with 40 per group?
 
-
 ## Plot a power curve just for this difference. What sample size is needed to achieve 90% power?
 
 ```{r plot-power, echo=FALSE, message=FALSE, eval=FALSE}
@@ -371,4 +367,3 @@ plot_power(design_result, min_n = 10, max_n = 400)
 ```
 
 How many participants would you need to achieve 90% power?
-

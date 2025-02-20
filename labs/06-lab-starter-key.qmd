@@ -137,7 +137,7 @@ summary(model)
 
 # F-value says there is a difference somewhere, but we don't see one in our summary!
 # we might want to look at the contrasts
-# contrasts(cue_data$Condition)
+contrasts(cue_data$Condition)
 
 ```
 
@@ -392,7 +392,7 @@ What is our power to detect the overall effect of `Condition`? What about the pa
 
 
 
-
+ANSWER: To detect the effect of Condition we have only 66.8% power (Yikes). To detect the cue-JOL vs. overt difference we have 10.0% power. To detect the Cue-JOL vs. Restudy difference we have 43.2% power. Finally, to detect the overt and restudy difference we have power of 72.2%.
 
 What kind of power analysis would this be?
 
@@ -405,6 +405,7 @@ What kind of power analysis would this be?
 
 
 
+ANSWER: We're doing it after we ran the study -- Post-hoc
 
 What do you think of the power for this study design?
 
@@ -417,6 +418,7 @@ What do you think of the power for this study design?
 
 
 
+ANSWER: Not very well powered study.
 
 # Now, we want to run a replication study. Let's plan a study where we want to collect 100 Ps per group.
 
@@ -457,6 +459,7 @@ What would are power be using the current study parameters to detect overall eff
 
 
 
+ANSWER: To detect the effect of Condition we have only 97% power -- much better! To detect the cue-JOL vs. overt difference we have 14.8% power. To detect the Cue-JOL vs. Restudy difference we have 83.6% power. Finally, to detect the overt and restudy difference we have power of 97.8%.
 
 What kind of power analysis would this be?
 
@@ -469,6 +472,7 @@ What kind of power analysis would this be?
 
 
 
+ANSWER: We're doing it before we run the replication, so its a priori -- good!
 
 What do you think of the power for this study design?
 
@@ -481,6 +485,7 @@ What do you think of the power for this study design?
 
 
 
+ANSWER: Much better, except for the effect of JOL vs OR is still very low. Why? Look back at Cohen's d values - effect for JOL vs OR is only -0.16 while others are .41 and .58 (much larger)
 
 # Let's say I want to power the study to be able to detect a .05 point difference on the final test between the Cue-Only JOLs and Overt Retrieval groups (e.g., the difference between their means).
 
@@ -520,6 +525,7 @@ What is our power to detect a .05 point difference with 40 per group?
 
 
 
+ANSWER: We have 30% power (not great!)
 
 # Plot a power curve just for this difference. What sample size is needed to achieve 90% power?
 
@@ -540,3 +546,4 @@ How many participants would you need to achieve 90% power?
 
 
 
+ANSWER: You need 205 participants to have 90% power to detect a .05 difference between the two conditions.
