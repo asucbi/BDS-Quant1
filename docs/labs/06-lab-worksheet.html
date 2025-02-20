@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Module 5: Lab Instructions</title>
+<title>Module 6: Lab Instructions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,16 +57,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="05-lab-worksheet_files/libs/clipboard/clipboard.min.js"></script>
-<script src="05-lab-worksheet_files/libs/quarto-html/quarto.js"></script>
-<script src="05-lab-worksheet_files/libs/quarto-html/popper.min.js"></script>
-<script src="05-lab-worksheet_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="05-lab-worksheet_files/libs/quarto-html/anchor.min.js"></script>
-<link href="05-lab-worksheet_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="05-lab-worksheet_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="05-lab-worksheet_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="05-lab-worksheet_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="05-lab-worksheet_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="06-lab-worksheet_files/libs/clipboard/clipboard.min.js"></script>
+<script src="06-lab-worksheet_files/libs/quarto-html/quarto.js"></script>
+<script src="06-lab-worksheet_files/libs/quarto-html/popper.min.js"></script>
+<script src="06-lab-worksheet_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="06-lab-worksheet_files/libs/quarto-html/anchor.min.js"></script>
+<link href="06-lab-worksheet_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="06-lab-worksheet_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="06-lab-worksheet_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="06-lab-worksheet_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="06-lab-worksheet_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -108,7 +108,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Module 5: Lab Instructions</h1>
+<h1 class="title">Module 6: Lab Instructions</h1>
 </div>
 
 
@@ -127,213 +127,108 @@ window.Quarto = {
 
 <section id="purpose" class="level1">
 <h1>Purpose</h1>
-<p>In today’s lab, we will focus on linear regression with a categorical predictor. We will pay special attention to how categorical variables are coded and what that means for our interpretations.</p>
-<p>For today’s lab, you will need to load the following libraries.</p>
+<p>In today’s lab, we will practice calculating effect sizes and estimating power using different methods.</p>
+<p>For today’s lab, you will need to load the following libraries (lots of them today!).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(papaja) <span class="co">#for formatting p values</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans) <span class="co">#for post-hoc t-tests</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co">#for formatting tables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co">#for formatting tables</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrain) <span class="co">#for creating raincloud plots</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MOTE) <span class="co">#for getting ci around effect sizes</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WebPower) <span class="co">#for calculating power</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Superpower) <span class="co">#for simulating power</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="research-scenario" class="level1">
 <h1>Research scenario</h1>
-<p>We’ll be looking at a dataset comparing different kinds of treatment for depression. In this study, depressed patients (n = 5 per group) were randomly assigned to one of three groups:</p>
-<ol type="1">
-<li>CBT group</li>
-<li>Psychotherapy group</li>
-<li>Control group (received no therapy)</li>
-</ol>
-<p>After 10 weeks, participants’ depression scores were measured (on a scale of 1 = no depression to 12 = severely depressed). Our dataset will have just 2 variables: <code>group</code> (CBT, Psychotherapy, or Control) and <code>depress</code> (depression scores).</p>
-<p><strong>NOTE:</strong> <code>1</code> = CBT; <code>2</code> = Psychotherapy; <code>3</code> = Control</p>
+<p>In today’s lab, we will be using data from <a href="https://link.springer.com/article/10.1007/s11409-021-09260-0">Tekin et al., 2021</a>; Experiment 1. In their study, participants viewed cue-target pairs (e.g., DOOR - HOUSE) during a study phase. After, groups either provided delayed judgments of learning (JOLs; e.g., given a cue word, how likely is it on a scale of 0-100 you will recall the target on a later test), attempted to retrieve the target word (DOOR-?), or restudied the same cue-target pairs (DOOR-HOUSE). Each group then took a final test over the pairs. The aim of their study was to determine whether engaging in retrieval practice or providing delayed JOLs had similar effects on memory.</p>
 <section id="read-in-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="read-in-the-data">Read in the data</h2>
 <p>First, let’s read in the data and then use <code>View()</code> to check it out.</p>
-<p>Today’s dataset is called <code>depression_therapy.csv</code>. Let’s read it in and name it <code>cat_data</code> (i.e., categorical regression data).</p>
-<p>The data has 4 columns:</p>
+<p>Today’s dataset is called <code>cue_data.csv</code>. Let’s read it in and name it <code>cue_data</code>.</p>
+<p>The data has 3 columns:</p>
 <ul>
-<li>group: a numeric indicator of whether they were in the CBT, Psychotherapy, or Control group</li>
-<li>depress: participants’ score on the depression measure</li>
+<li>Participant: a numeric indicator of participant number</li>
+<li>Total_Final: scores on the final test (percent correct)</li>
+<li>Condition: delayed judgment (<code>Cue-only JOL</code>), retrieval (<code>Overt retrie</code>), or restudy the same pairs (<code>Restudy</code>) - there is also a condition called <code>Cue-target J</code> that we are not using.</li>
 </ul>
 </section>
-<section id="structure-of-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="structure-of-the-data">Structure of the data</h2>
-<p>The first thing we should check is how the data are structured. We should have a factor called <code>group</code> and a numeric variable for depression scores called <code>depress</code>. Let’s use the function <code>str()</code>.</p>
 </section>
-<section id="recode-group-as-a-factor" class="level2">
-<h2 class="anchored" data-anchor-id="recode-group-as-a-factor">Recode <code>group</code> as a factor</h2>
-<p>R thinks that <code>group</code> is an integer, so we need to make it into a factor in order to run our analysis. We can use <code>mutate()</code> and base R’s <code>factor()</code>, which can be used to turn variables into factors.</p>
-<p>NOTE: You want to provide labels in the same order as the levels of the factor, so in this case we want them in the order <code>CBT</code>, <code>Psychotherapy</code>, and <code>Control</code> (see above).</p>
-<p>Look at the structure of the data again. Now it’s clear that <code>group</code> is a factor variable with the correct levels.</p>
-</section>
-<section id="descriptives" class="level2">
-<h2 class="anchored" data-anchor-id="descriptives">Descriptives</h2>
-<p>Next, we’ll get descriptives for each group using two tidyverse functions, <code>group_by()</code> and <code>summarize()</code>. First, you want to group by <code>group</code>, and then you want to summarize with three arguments, mean, sd, and n.&nbsp;We’ll use knitr to make this into a table.</p>
-</section>
-<section id="visualizing-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="visualizing-the-data">Visualizing the data</h2>
-<p>There are many ways that you can visualize the data. In ggplot, I recommend adding a <code>geom_boxplot()</code> or <code>geom_violin()</code> layer. You can also use <code>geom_bar()</code> but there are some disadvantages to barplots, and there have even been attempts to <a href="https://thenode.biologists.com/barbarplots/">Bar Bar Plots!</a> from scientific journals.</p>
-<p><a href="https://www.r-graph-gallery.com/boxplot.html">This</a> is a good resource for boxplots with ggplot, <a href="https://www.r-graph-gallery.com/violin.html">this</a> is a good resource for violin plots with ggplot, and <a href="https://www.r-graph-gallery.com/barplot.html">this</a> is a good resource for bar plots with ggplot.</p>
-<hr>
-</section>
-<section id="lets-start-by-just-looking-at-variables-with-two-levels." class="level2">
-<h2 class="anchored" data-anchor-id="lets-start-by-just-looking-at-variables-with-two-levels.">Let’s start by just looking at variables with two levels.</h2>
-<p>Create a new dataset called <code>cat_reduced</code> that includes only the treatment and control groups. Use <code>View()</code> to double check that the data look correct.</p>
-<hr>
-</section>
-</section>
-<section id="regression-with-categorical-predictors" class="level1">
-<h1>Regression with categorical predictors</h1>
-<section id="dummy-coding" class="level2">
-<h2 class="anchored" data-anchor-id="dummy-coding">Dummy coding</h2>
-<p>Dummy coding is R’s default method. This actually happens under the hood in R when our independent variable is a factor. Let’s run a regression predicting <code>depress</code> from <code>group</code>.</p>
-<blockquote class="blockquote">
-<p><strong>Question:</strong> What does the F test tell us?</p>
-</blockquote>
-<p>Here is our regression equation:</p>
-<p><span class="math display">\[Depression_i = \beta_0 + \beta_1psychotherapy_i + e_i\]</span></p>
-<p>R is creating a dummy variable for us under the hood: <code>groupPsychotherapy</code>. Let’s look at what R is doing.</p>
-<p>By default, R treats whatever the first level of the factor variable is as the reference group. In this case, CBT was the first level of <code>group</code> (because it was initially coded as <code>1</code> in our raw data), so the model treated CBT as our reference group.</p>
-<p>Here is our regression equation, derived from the output:</p>
-<p><span class="math display">\[Depression_i = 7.20 -3.80psychotherapy\]</span></p>
-<blockquote class="blockquote">
-<p><strong>Question:</strong> Using this equation, determine the mean depression score of each group.</p>
-</blockquote>
-<p>Now, let’s revisit the output.</p>
-<blockquote class="blockquote">
-<p><strong>Question:</strong> Interpret the intercept. What does a significant p-value signify?</p>
-</blockquote>
-<blockquote class="blockquote">
-<p><strong>Question:</strong> Interpret the slopes. What do the significant p-values signify?</p>
-</blockquote>
-<p>Now, let’s change the reference level so that Psychotherapy is assigned a 0 and CBT is assigned a 1.</p>
-<p>Rerun the model. Compare it to the default model.</p>
-<blockquote class="blockquote">
-<p><strong>Question:</strong> Interpret the intercept. What does a significant p-value signify?</p>
-</blockquote>
-<blockquote class="blockquote">
-<p><strong>Question:</strong> Interpret the slopes. What do the significant p-values signify?</p>
-</blockquote>
-</section>
-<section id="deviation-coding" class="level2">
-<h2 class="anchored" data-anchor-id="deviation-coding">Deviation coding</h2>
-<p>Now, let’s say we’re interested in the difference between CBT and Psychotherapy. One way we could do this is to use Deviation Coding. There are a few ways we can create our codes, but this is my preferred method:</p>
-<section id="create-dummy-variables-with-mutate-and-case_when" class="level3">
-<h3 class="anchored" data-anchor-id="create-dummy-variables-with-mutate-and-case_when">Create dummy variables with <code>mutate()</code> and <code>case_when()</code></h3>
-<p>Now, we can run the linear model using this new dummy variable as the IV.</p>
-<blockquote class="blockquote">
-<p><strong>Question:</strong> What does the intercept mean? What does the slope mean?</p>
-</blockquote>
-<hr>
+<section id="effect-size" class="level1">
+<h1>Effect size</h1>
+<p>We are interested in the scores on the final test (<code>Total Final)</code> as a function of Condition (<code>Condition</code>). We will only be looking at three conditions: <code>Restudy</code>, <code>Overt retrieval</code> (retrieval practice), and <code>Cue-Only JOL</code>.</p>
+<p>First, we will filter the data to remove <code>Cue-target J</code> from the <code>Condition</code> column.</p>
+<section id="examine-data." class="level2">
+<h2 class="anchored" data-anchor-id="examine-data.">Examine data.</h2>
+<p>Let’s take a look at the data, what changes might you want to make?</p>
+<p>Visualize the differences between the three groups.</p>
+<p>The visualization we are using is called a raincloud plot.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06-lab-worksheet_files/figure-html/visualization-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Run a model using <code>lm()</code> predicting Total_Final from Condition. Get a summary of your model.</p>
+<p>What is your interpretation of each of the predictors? What does the F value tell you? What is the overall effect size?</p>
+<p>Maybe instead we want all possible comparisons. One option is to change the reference level and run another regression. Another option is to use <code>emmeans</code>.</p>
+<p>Use <code>emmeans</code> to get all pairwise comparisons. Apply a bonferroni adjustment.</p>
+<p>Interpret your comparisons. How do these comparisons differ (or not) from your model summary above?</p>
+<p>Calculate Cohen’s d “by hand” for each of the pairwise comparisons.</p>
+<p>Cohen’s d: <span class="math inline">\(d = \frac{\overline{X}_1 - \overline{X}_2}{S_p}\)</span></p>
+<p>Pooled SD (equal ns): <span class="math inline">\(S_p = \sqrt{\frac{(S_1^2 + S_2^2)}{2}}\)</span></p>
+<p>Pooled SD (unequal ns): <span class="math inline">\(S_p = \sqrt{\frac{(n_1 - 1)S_1^2 + (n_2 - 1)S_2^2}{n_1 + n_2 - 2}}\)</span></p>
+<p>First get means, standard deviations and ns.</p>
+<p>Which equation for Pooled SD should we use?</p>
+<p>Note: our Pooled SD will differ based on the comparison we’re testing.</p>
+<p>Calculate Cohen’s d for each paired comparison.</p>
+<p>Take a look at your effect sizes. Are they small, medium, or large?</p>
+<p>There is an easier way!</p>
+<p>We can also use the <code>MOTE</code> package to get an estimate of our effect size and a confidence interval around our effect size.</p>
+<p>Let’s first check out the <code>d.ind.t</code> function. What information do you need to provide?</p>
+<p>Compare these to the Cohen’s d values that you calculated “by hand.” How do they compare?</p>
+<p>Now, write an APA style summary of your results. This should include information about your overall model (e.g., <em>F</em> and <em>R</em><sup>2</sup>) as well as each of the pairwise comparisons and all relevant information (<em>t</em>, <em>p</em>, effect size, 95% CIs). Make sure you have corrected for pairwise comparisons and state which correction you used.</p>
+<p>We ran a linear regression to examine the effect of delayed judgments of learning (JOLs), retrieval practice, and overt retries on memory. An omibus test revealed a significant effect of condition on memory, F(2, 120) = 3.26, <em>p</em> .042). The model explained a small proportion of variance in memory, with an R<sup>2</sup> = 0.05 and an adjusted R<sup>2</sup> = 0.04. To find the source of this effect, we computed pairwise comparisons for each of our conditions. Participants’ memory in the delayed judgment condition (<em>M</em> = 0.5, SD 0.17) did not differ significantly from participants’ memory in the overt retrieval condition (<em>M</em> = 0.52, SD 0.14), <span class="math inline">\(t(120) = -0.7, p &gt; .999\)</span>, <span class="math inline">\(d_s\)</span> = -0.16, 95% CI [-0.59, 0.27], nor did it differ from participants’ memory in the restudy condition (<em>M</em> = 0.44, SD 0.17), <span class="math inline">\(t(120) = 1.81, p = .220\)</span>, <span class="math inline">\(d_s\)</span> = 0.37, 95% CI [-0.06, 0.81]. However, participants in the overt retrieval condition had significantly greater memory scores than participants in the restudy condition (<em>M</em> = 0.44, SD 0.17), <span class="math inline">\(t(120) = 2.47, p = .040\)</span>, <span class="math inline">\(d_s\)</span> = 0.57, 95% CI [0.12, 1.01]. In summary, we found that overt retrieval resulted in better memory than restudying, but neither of these methods differed from delayed judgment.</p>
 </section>
 </section>
+<section id="power" class="level1">
+<h1>Power</h1>
+<section id="calculate-power-with-webpower" class="level2">
+<h2 class="anchored" data-anchor-id="calculate-power-with-webpower">Calculate Power with <code>WebPower</code></h2>
+<p>Using the WebPower package, calculate the the number of participants per group we need to have 90% power in our model to detect a difference.</p>
+<p>Note that most power calculators ask for Cohen’s <span class="math inline">\(f^2\)</span> instead of <span class="math inline">\(R^2\)</span>, so we’ll need to calculate that first.</p>
+<p><span class="math inline">\(f^2 = R^2 / (1 - R^2)\)</span></p>
+<p>How many participants do we need for our study?</p>
 </section>
-<section id="now-lets-take-a-look-at-variables-with-more-than-2-levels." class="level1">
-<h1>Now, let’s take a look at variables with more than 2 levels.</h1>
-<p>For this, we’ll go back to using <code>cat_data</code> as our data file.</p>
-<section id="traditional-anova" class="level2">
-<h2 class="anchored" data-anchor-id="traditional-anova">Traditional ANOVA</h2>
-<p>We will first review how to generate a “traditional ANOVA” table.</p>
-<p>To get an ANOVA table, you can use the same <code>lm()</code> as regression, and use <code>anova()</code> to get the ANOVA summary table. Importantly, you want to make sure that the categorical IV is a factor (which we did above).</p>
-<p>To calculate post-hod pairwise comparisons between group levels, we can use <code>emmeans::emmeans()</code>. This function takes an <code>lm()</code> output, an equation that indicates we want to perform pairwise t-tests (<code>pairwise</code>) on the left, and the IV (<code>group</code>) on the right, as well as an <code>adjust</code> (e.g.&nbsp;“bonferroni” or “holm”).</p>
-<p>Since we are running a lot of tests (and number of tests grow as we add more levels), we need to correct for multiple comparisons so that we don’t have an inflated type I error rate.</p>
-<ul>
-<li>Bonferroni correction: multiplies the p-values by the number of comparisons. We’ll talk about this more in class on Tuesday!</li>
-</ul>
-<blockquote class="blockquote">
-<p><strong>Question:</strong> Compare the p-values from these two emmeans summaries. What do you notice?</p>
-</blockquote>
-<hr>
-</section>
-<section id="regression-with-categorical-predictors-1" class="level2">
-<h2 class="anchored" data-anchor-id="regression-with-categorical-predictors-1">Regression with categorical predictors</h2>
-<p>Running the ANOVA within a linear regression framework will give us the same information we already got from our regression model, and something more!</p>
-</section>
-<section id="dummy-coding-1" class="level2">
-<h2 class="anchored" data-anchor-id="dummy-coding-1">Dummy coding</h2>
-<p>In regression, categorical predictors with more than two levels are broken up into more than one predictor. This actually happens under the hood in R when our independent variable is a factor. Let’s put <code>group</code> as the predictor in our model as before.</p>
-<blockquote class="blockquote">
-<p><strong>Question:</strong> What does the F test tell us?</p>
-</blockquote>
-<p>Here is our regression equation:</p>
-<p><span class="math display">\[Depression_i = \beta_0 + \beta_1psychotherapy_i +
-\beta_2control_i + e_i\]</span></p>
-<p>R is creating two dummy variables for us under the hood: <code>groupPsychotherapy</code> and <code>groupControl</code>. Let’s look at what R is doing.</p>
-<p>By default, R treats whatever the first level of the factor variable is as the reference group. In this case, CBT was the first level of <code>group</code> (because it was initially coded as <code>1</code> in our raw data), so the model treated CBT as our reference group.</p>
-<p>Here is our regression equation, derived from the output:</p>
-<p><span class="math display">\[Depression_i = 7.20 -3.80psychotherapy + 2.60control\]</span></p>
-<blockquote class="blockquote">
-<p><strong>Question:</strong> Using this equation, determine the mean depression score of each group.</p>
-</blockquote>
-<p>Now, let’s revisit the output.</p>
-<blockquote class="blockquote">
-<p><strong>Question:</strong> Interpret the intercept. What does a significant p-value signify?</p>
-</blockquote>
-<blockquote class="blockquote">
-<p><strong>Question:</strong> Interpret the slopes. What do the significant p-values signify?</p>
-</blockquote>
-<p>Let’s imagine that we have the following (more intuitive) research questions:</p>
-<ol type="1">
-<li>Is CBT effective (relative to no therapy)?</li>
-<li>Is psychotherapy effective (relative to no therapy)?</li>
-</ol>
-<blockquote class="blockquote">
-<p><strong>Question:</strong> What do want our reference group to be to answer these research questions?</p>
-</blockquote>
-<p>Now let’s make the appropriate dummy codes. Recall that we need <em>k</em>-1 dummy codes (where <em>k</em> is the number of groups). We have 3 groups, so we need 2 dummy codes.</p>
-<p>Remember, our decision of how to set the dummy codes (which group to set as the <strong>reference group</strong>) should be guided by our research questions.</p>
-<section id="create-dummy-variables-with-mutate-and-case_when-1" class="level3">
-<h3 class="anchored" data-anchor-id="create-dummy-variables-with-mutate-and-case_when-1">Create dummy variables with <code>mutate()</code> and <code>case_when()</code></h3>
-<p>Now, we can run the linear model using these new dummy variables as the IV’s.</p>
-<blockquote class="blockquote">
-<p><strong>Question:</strong> What does the intercept mean? What do the slopes mean?</p>
-</blockquote>
-<p>Another reasonable question might be whether the treatments, on average) are better than the control.</p>
-<p>Rules for DIY / Planned Contrasts:</p>
-<ol type="1">
-<li>Groups coded with positive weights will be compared to groups with negative weights</li>
-<li>The sum of weights you use should be zero</li>
-<li>If a group is not involved in a comparison, assign it a weight of 0</li>
-<li>Initial weight assigned to groups should be equal to # groups in opposite chunk of variation</li>
-<li>To get final weights, divide initial weight by number of groups with non-zero weights</li>
-</ol>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Step</th>
-<th style="text-align: left;">CBT and Psychotherapy</th>
-<th style="text-align: left;">Control</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Positive vs.&nbsp;Negative</td>
-<td style="text-align: left;">Positive</td>
-<td style="text-align: left;">Negative</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Initial Weights</td>
-<td style="text-align: left;">1, 1</td>
-<td style="text-align: left;">-2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Final Weights</td>
-<td style="text-align: left;">1/3, 1/3</td>
-<td style="text-align: left;">-2/3</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="heres-an-alternative-way-to-create-contrasts-using-a-matrix." class="level3">
-<h3 class="anchored" data-anchor-id="heres-an-alternative-way-to-create-contrasts-using-a-matrix.">Here’s an alternative way to create contrasts, using a matrix.</h3>
-<blockquote class="blockquote">
-<p><strong>Question:</strong> What does the intercept mean? What do the slopes mean?</p>
-</blockquote>
-<p>We can have k-1 contrasts. So, we might want to add another contrast testing the two treatment groups. We can do the same thing to add another contrast.</p>
-<p>Now, write up an APA Style Summary!</p>
-<p>We ran a linear regression to examine the effect of different kinds of treatment on depression. We used custom contrast coding to examine the difference between the average of the treatment groups and the control group (CBT: 1/3, Psychotherapy: 1/3, Control: -2/3) and between the two types of treatment (CBT: 1/2, Psychotherapy: -1/2, Control: 0). Our omnibus test revealed a significant effect of treatment group on depression scores, F(2, 12) = 18.95, <em>p</em> &lt; .001), and the model explained a substantial proportion of variance in weight, with an R<sup>2</sup> = 0.76 and an adjusted R<sup>2</sup> = 0.72. Participants in a treatment group (<em>M</em> = 5.3, <em>SD</em> = 2.5) had significantly lower depression scores than participants in the control group (<em>M</em> = 9.8, <em>SD</em> = 1.79), <span class="math inline">\(\beta\)</span> = -4.5, 95% CI[-6.47, -2.53], <em>p</em> &lt; .001. Within treatment groups, participants who received CBT (<em>M</em> = 7.2, <em>SD</em> = 1.3) had significantly higher depression scores than participants who received Psychotherapy (<em>M</em> = 3.4, <em>SD</em> = 1.82), <span class="math inline">\(\beta\)</span> = -2.69, 95% CI[-4.3, -1.08], <em>p</em> =.003. In summary, we found that treatment had an effect on participants’ depression scores and Psychotherapy may be a better treatment option than CBT.</p>
+<section id="simulation-power-analysis-with-superpower" class="level2">
+<h2 class="anchored" data-anchor-id="simulation-power-analysis-with-superpower">Simulation Power Analysis with <code>Superpower</code></h2>
+<p>Book going over <a href="https://aaroncaldwell.us/SuperpowerBook/">Superpower</a></p>
+<p>Reviewer 2 asked you to calculate the power of Tekin et al (2021) Experiment 1 after you ran it. Set up a study design using the <code>ANOVA_design</code> function from <code>Superpower</code>. Use the same means, SD, and n (use 40 per group as <code>SuperPower</code>cannot do unequal sample sizes for one-way designs) from their Experiment 1 study (excluding the one condition). Run a power analysis on this data.</p>
+<p>Now, let’s check out how much power we have. Here, we will run our analysis many times (nsims below) and seeing how many of those times we get a significant result.</p>
+<p>What is our power to detect the overall effect of <code>Condition</code>? What about the pairwise comparisons between the groups?</p>
+<p>What kind of power analysis would this be?</p>
+<p>What do you think of the power for this study design?</p>
 </section>
 </section>
+<section id="now-we-want-to-run-a-replication-study.-lets-plan-a-study-where-we-want-to-collect-100-ps-per-group." class="level1">
+<h1>Now, we want to run a replication study. Let’s plan a study where we want to collect 100 Ps per group.</h1>
+<p>Change <code>ANOVA_design</code> to reflect <em>just this difference</em>. Set N = 100.</p>
+<p>What would are power be using the current study parameters to detect overall effect? How about each pairwise comparison?</p>
+<p>What kind of power analysis would this be?</p>
+<p>What do you think of the power for this study design?</p>
+</section>
+<section id="lets-say-i-want-to-power-the-study-to-be-able-to-detect-a-.05-point-difference-on-the-final-test-between-the-cue-only-jols-and-overt-retrieval-groups-e.g.-the-difference-between-their-means." class="level1">
+<h1>Let’s say I want to power the study to be able to detect a .05 point difference on the final test between the Cue-Only JOLs and Overt Retrieval groups (e.g., the difference between their means).</h1>
+<p>Change <code>ANOVA_design</code> to reflect <em>just this difference</em>. Set N = 40.</p>
+<p>What is our power to detect a .05 point difference with 40 per group?</p>
+</section>
+<section id="plot-a-power-curve-just-for-this-difference.-what-sample-size-is-needed-to-achieve-90-power" class="level1">
+<h1>Plot a power curve just for this difference. What sample size is needed to achieve 90% power?</h1>
+<p>How many participants would you need to achieve 90% power?</p>
 </section>
 
 </main>

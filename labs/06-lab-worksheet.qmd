@@ -1,0 +1,374 @@
+---
+title: "Module 6: Lab Instructions"
+format: html
+editor: visual
+---
+
+# Purpose
+
+In today's lab, we will practice calculating effect sizes and estimating power using different methods.
+
+For today's lab, you will need to load the following libraries (lots of them today!).
+
+```{r libraries, message=FALSE}
+
+library(tidyverse)
+library(papaja) #for formatting p values
+library(emmeans) #for post-hoc t-tests
+library(knitr) #for formatting tables
+library(ggrain) #for creating raincloud plots
+library(MOTE) #for getting ci around effect sizes
+library(WebPower) #for calculating power
+library(Superpower) #for simulating power
+
+```
+
+# Research scenario
+
+In today's lab, we will be using data from [Tekin et al., 2021](https://link.springer.com/article/10.1007/s11409-021-09260-0); Experiment 1. In their study, participants viewed cue-target pairs (e.g., DOOR - HOUSE) during a study phase. After, groups either provided delayed judgments of learning (JOLs; e.g., given a cue word, how likely is it on a scale of 0-100 you will recall the target on a later test), attempted to retrieve the target word (DOOR-?), or restudied the same cue-target pairs (DOOR-HOUSE). Each group then took a final test over the pairs. The aim of their study was to determine whether engaging in retrieval practice or providing delayed JOLs had similar effects on memory.
+
+## Read in the data
+
+First, let's read in the data and then use `View()` to check it out.
+
+Today's dataset is called `cue_data.csv`. Let's read it in and name it `cue_data`.
+
+```{r read-and-view, message= FALSE, echo=FALSE}
+
+cue_data <- read_csv("data/cue_data.csv")
+
+```
+
+The data has 3 columns:
+
+-   Participant: a numeric indicator of participant number
+-   Total_Final: scores on the final test (percent correct)
+-   Condition: delayed judgment (`Cue-only JOL`), retrieval (`Overt retrie`), or restudy the same pairs (`Restudy`) - there is also a condition called `Cue-target J` that we are not using.
+
+# Effect size
+
+We are interested in the scores on the final test (`Total Final)` as a function of Condition (`Condition`). We will only be looking at three conditions: `Restudy`, `Overt retrieval` (retrieval practice), and `Cue-Only JOL`.
+
+First, we will filter the data to remove `Cue-target J` from the `Condition` column.
+
+```{r filter-data, echo=FALSE, message=FALSE}
+
+cue_data <- cue_data %>%
+  filter(Condition!="Cue-target J")
+
+```
+
+## Examine data.
+
+Let's take a look at the data, what changes might you want to make?
+
+```{r examine-data, echo=FALSE, message=FALSE}
+
+
+# we might want to make `Condition` a factor -- do that!
+
+cue_data <- cue_data %>% 
+  mutate(Condition = as.factor(Condition))
+
+
+
+```
+
+Visualize the differences between the three groups.
+
+The visualization we are using is called a raincloud plot.
+
+```{r visualization, echo=FALSE, message=FALSE}
+
+ggplot(cue_data, aes(x = Condition, y = Total_Final, fill = Condition)) +
+  geom_rain(rain.side="l") + 
+  labs(x="Group", y="Final Test Score", title="Performance by Group") + #always label your axes!
+  theme_minimal() + #gives you the minimal background in the plot
+  theme(legend.position = "none") #we don't need a legend because the X axis is clearly labeled
+
+
+```
+
+Run a model using `lm()` predicting Total_Final from Condition. Get a summary of your model.
+
+What is your interpretation of each of the predictors? What does the F value tell you? What is the overall effect size?
+
+```{r linear-model, echo=FALSE, message=FALSE}
+
+model <- lm(Total_Final ~ Condition, data=cue_data) 
+
+
+# F-value says there is a difference somewhere, but we don't see one in our summary!
+# we might want to look at the contrasts
+#contrasts(cue_data$Condition)
+
+```
+
+Maybe instead we want all possible comparisons. One option is to change the reference level and run another regression. Another option is to use `emmeans`.
+
+Use `emmeans` to get all pairwise comparisons. Apply a bonferroni adjustment.
+
+Interpret your comparisons. How do these comparisons differ (or not) from your model summary above?
+
+```{r pairwise-comparisons, echo=FALSE, message=FALSE}
+
+pairs <- emmeans(model, pairwise ~ Condition, adjust = "bonferroni")
+
+
+
+
+```
+
+Calculate Cohen's d "by hand" for each of the pairwise comparisons.
+
+Cohen's d: $d = \frac{\overline{X}_1 - \overline{X}_2}{S_p}$
+
+Pooled SD (equal ns): $S_p = \sqrt{\frac{(S_1^2 + S_2^2)}{2}}$
+
+Pooled SD (unequal ns): $S_p = \sqrt{\frac{(n_1 - 1)S_1^2 + (n_2 - 1)S_2^2}{n_1 + n_2 - 2}}$
+
+First get means, standard deviations and ns.
+
+```{r means-sds-ns}
+
+
+
+```
+
+Which equation for Pooled SD should we use?
+
+Note: our Pooled SD will differ based on the comparison we're testing.
+
+Calculate Cohen's d for each paired comparison.
+
+Take a look at your effect sizes. Are they small, medium, or large?
+
+```{r cohens-d, echo=FALSE, message=FALSE}
+
+cue_overt <- (.500-.5245)/ sqrt( ((43 - 1) * 0.168 ^ 2 + (40 - 1) * .135 ^ 2) / (43 + 40 - 2))
+
+cue_restudy <- (.500-.437)/ sqrt( ((43 - 1) * 0.168 ^ 2 + (40 - 1) * .169 ^ 2) / (43 + 40 - 2))
+
+overt_restudy <- (.525-.437)/ sqrt((0.135^2 + .169^2)/2)
+
+
+
+```
+
+There is an easier way!
+
+We can also use the `MOTE` package to get an estimate of our effect size and a confidence interval around our effect size.
+
+Let's first check out the `d.ind.t` function. What information do you need to provide?
+
+```{r effect-ci, echo=FALSE, message=FALSE}
+
+
+cue_overt_d <- d.ind.t(.500, .524, .168, .135, 43, 40)
+
+cue_restudy_d <- d.ind.t(.500, .437, .168, .169, 43, 40)
+                    
+overt_restudy_d <- d.ind.t(.524, .437, .135, .169, 40, 40)
+
+
+```
+
+Compare these to the Cohen's d values that you calculated "by hand." How do they compare?
+
+Now, write an APA style summary of your results. This should include information about your overall model (e.g., *F* and *R*<sup>2</sup>) as well as each of the pairwise comparisons and all relevant information (*t*, *p*, effect size, 95% CIs). Make sure you have corrected for pairwise comparisons and state which correction you used.
+
+```{r APA-summary, echo=FALSE, message=FALSE}
+
+# First, let's get all of the objects we will need. You can also do some of this within your summary, but I like to lay it all out here.
+
+mod_summary <- summary(model)
+aov_model <- anova(model)
+
+#descriptives
+descriptives <- cue_data %>%
+  group_by(Condition)%>%
+  summarise(mean=mean(Total_Final), sd=sd(Total_Final), n=n())
+
+cue_mean <- round(descriptives$mean[1], 2)
+cue_sd <- round(descriptives$sd[1], 2)
+overt_mean <- round(descriptives$mean[2], 2)
+overt_sd <- round(descriptives$sd[2], 2)
+restudy_mean <- round(descriptives$mean[3], 2)
+restudy_sd <- round(descriptives$sd[3], 2)
+
+#omnibus effects
+aov_df_1 <- aov_model$Df[1]
+aov_df_2 <- aov_model$Df[2]
+aov_f_val <- round(aov_model$F[1], 2)
+aov_p_val <- aov_model$`Pr(>F)`[1]
+r_squared <- round(mod_summary$r.squared, 2)
+adj_r_squared <- round(mod_summary$adj.r.squared, 2)
+
+#get df for contrasts
+contrast_df <- summary(pairs)$contrasts$df[1]
+
+#Cue v. Overt (note: use t and p values from emmeans because it has the correction!)
+cvo_tval <- round(summary(pairs)$contrasts$t[1], 2)
+cvo_pval <- round(summary(pairs)$contrasts$p.value[1], 2)
+cvo_d <- cue_overt_d$estimate
+
+#Cue v. Restudy (note: use t and p values from emmeans because it has the correction!)
+cvr_tval <- round(summary(pairs)$contrasts$t[2], 2)
+cvr_pval <- round(summary(pairs)$contrasts$p.value[2], 2)
+cvr_d <- cue_restudy_d$estimate
+
+#Overt v. Restudy (note: use t and p values from emmeans because it has the correction!)
+ovr_tval <- round(summary(pairs)$contrasts$t[3], 2)
+ovr_pval <- round(summary(pairs)$contrasts$p.value[3], 2)
+ovr_d <- overt_restudy_d$estimate
+
+```
+
+We ran a linear regression to examine the effect of delayed judgments of learning (JOLs), retrieval practice, and overt retries on memory. An omibus test revealed a significant effect of condition on memory, F(`r aov_df_1`, `r aov_df_2`) = `r aov_f_val`, *p* `r papaja::printp(aov_p_val)`). The model explained a small proportion of variance in memory, with an R<sup>2</sup> = `r r_squared` and an adjusted R<sup>2</sup> = `r adj_r_squared`. To find the source of this effect, we computed pairwise comparisons for each of our conditions. Participants' memory in the delayed judgment condition (*M* = `r cue_mean`, SD `r cue_sd`) did not differ significantly from participants' memory in the overt retrieval condition (*M* = `r overt_mean`, SD `r overt_sd`), $t(`r contrast_df`) = `r cvo_tval`, p `r papaja::printp(cvo_pval)`$, `r cvo_d`, nor did it differ from participants' memory in the restudy condition (*M* = `r restudy_mean`, SD `r restudy_sd`), $t(`r contrast_df`) = `r cvr_tval`, p = `r papaja::printp(cvr_pval)`$, `r cvr_d`. However, participants in the overt retrieval condition had significantly greater memory scores than participants in the restudy condition (*M* = `r restudy_mean`, SD `r restudy_sd`), $t(`r contrast_df`) = `r ovr_tval`, p = `r papaja::printp(ovr_pval)`$, `r ovr_d`. In summary, we found that overt retrieval resulted in better memory than restudying, but neither of these methods differed from delayed judgment.
+
+# Power
+
+## Calculate Power with `WebPower`
+
+Using the WebPower package, calculate the the number of participants per group we need to have 90% power in our model to detect a difference.
+
+Note that most power calculators ask for Cohen's $f^2$ instead of $R^2$, so we'll need to calculate that first.
+
+$f^2 = R^2 / (1 - R^2)$
+
+How many participants do we need for our study?
+
+```{r webpower, message= FALSE, echo=FALSE, eval=FALSE}
+
+r_squared <- summary(model)$r.squared
+
+f_squared <- r_squared/(1-r_squared)
+
+
+
+```
+
+## Simulation Power Analysis with `Superpower`
+
+Book going over [Superpower](https://aaroncaldwell.us/SuperpowerBook/)
+
+Reviewer 2 asked you to calculate the power of Tekin et al (2021) Experiment 1 after you ran it. Set up a study design using the `ANOVA_design` function from `Superpower`. Use the same means, SD, and n (use 40 per group as `SuperPower`cannot do unequal sample sizes for one-way designs) from their Experiment 1 study (excluding the one condition). Run a power analysis on this data.
+
+```{r superpower-design, message= FALSE, echo=FALSE, eval=FALSE}
+
+
+
+#create objects for each parameter
+design <- "3b" # 3 levels of `condition` varying between subjects
+n <- 40 # unequal ns dont work yet for this
+mu <- c(.50,.52, .43)# each group mean
+sd <- c(0.17, .14, 0.17) # each group sd
+label_list = list("condition" = c("Cue-JOL", "OR","RS")) # labels for each group
+
+#now, use ANOVA_design to specify the parameters of the data
+design_result <- ANOVA_design(design = design,
+                              n = n,
+                              mu = mu, 
+                              sd = sd, 
+                              label_list = label_list)
+
+#check out the simulated data!
+design_result$dataframe
+
+```
+
+Now, let's check out how much power we have. Here, we will run our analysis many times (nsims below) and seeing how many of those times we get a significant result.
+
+```{r superpower-analysis, echo=FALSE, message=FALSE, eval=FALSE}
+
+nsims=500 #number of times we do this should be larger than this, but it takes a while to run so we'll stick with 500 for this example!
+
+power_result <- ANOVA_power(design_result, 
+                                  nsims = nsims, 
+                                  seed = 1234)
+
+```
+
+What is our power to detect the overall effect of `Condition`? What about the pairwise comparisons between the groups?
+
+
+What kind of power analysis would this be?
+
+
+What do you think of the power for this study design?
+
+
+# Now, we want to run a replication study. Let's plan a study where we want to collect 100 Ps per group.
+
+Change `ANOVA_design` to reflect *just this difference*. Set N = 100.
+
+```{r new-design, echo=FALSE, message=FALSE, eval=FALSE}
+
+#create objects for each parameter
+design <- "3b" # 3 levels of `condition` varying between subjects
+n <- 100 # unequal ns dont work yet for this
+mu <- c(.50,.52, .43)# each group mean
+sd <- c(0.17, .14, 0.17) # each group sd
+label_list = list("condition" = c("Cue-JOL", "OR","RS")) # labels for each group
+
+#now, use ANOVA_design to specify the parameters of the data
+design_result <- ANOVA_design(design = design,
+                              n = n,
+                              mu = mu, 
+                              sd = sd, 
+                              label_list = label_list)
+
+nsims=500# number of times we do this should be larger than this!
+
+power_result_vig_2 <- ANOVA_power(design_result, 
+                                  nsims = nsims, 
+                                  seed = 1234)
+
+```
+
+What would are power be using the current study parameters to detect overall effect? How about each pairwise comparison?
+
+What kind of power analysis would this be?
+
+What do you think of the power for this study design?
+
+# Let's say I want to power the study to be able to detect a .05 point difference on the final test between the Cue-Only JOLs and Overt Retrieval groups (e.g., the difference between their means).
+
+Change `ANOVA_design` to reflect *just this difference*. Set N = 40.
+
+```{r new-design-2, echo=FALSE, message=FALSE, eval=FALSE}
+
+design <- "2b" #now there are only 2 levels of the variable!
+n <- 40 #unequal ns dont work yet for this
+mu <- c(.50,.55) #each group mean
+sd <- c(0.17, .14) #each group sd
+label_list = list("condition" = c("Cue-JOL", "OR")) # labels for each group
+
+
+design_result <- ANOVA_design(design = design,
+                              n = n,
+                              mu = mu, 
+                              sd = sd, 
+                              label_list = label_list)
+
+nsims=500 #number of times we do this should be larger than this!
+
+power_result <- ANOVA_power(design_result, 
+                                  nsims = nsims, 
+                                  seed = 1234)
+
+```
+
+What is our power to detect a .05 point difference with 40 per group?
+
+
+# Plot a power curve just for this difference. What sample size is needed to achieve 90% power?
+
+```{r plot-power, echo=FALSE, message=FALSE, eval=FALSE}
+
+plot_power(design_result, min_n = 10, max_n = 400)
+
+```
+
+How many participants would you need to achieve 90% power?
+

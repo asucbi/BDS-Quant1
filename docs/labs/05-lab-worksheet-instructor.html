@@ -936,63 +936,7 @@ F-statistic: 18.95 on 2 and 12 DF,  p-value: 0.0001934</code></pre>
 </div>
 </div>
 <p>Now, write up an APA Style Summary!</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, let's get all of the objects we will need. You can also do some of this within your summary, but I like to lay it all out here.</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>summary_tvc <span class="ot">&lt;-</span> <span class="fu">summary</span>(model_tvc)</span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>conf_tvc <span class="ot">&lt;-</span> <span class="fu">confint</span>(model_tvc) <span class="co">#don't forget confidence intervals!</span></span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>aov_tvc <span class="ot">&lt;-</span> <span class="fu">anova</span>(model_tvc)</span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="co">#descriptives</span></span>
-<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>descriptives <span class="ot">&lt;-</span> cat_data <span class="sc">%&gt;%</span> </span>
-<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> </span>
-<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(depress, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(depress, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a><span class="co">#omnibus effects</span></span>
-<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>aov_df_1 <span class="ot">&lt;-</span> aov_tvc<span class="sc">$</span>Df[<span class="dv">1</span>]</span>
-<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>aov_df_2 <span class="ot">&lt;-</span> aov_tvc<span class="sc">$</span>Df[<span class="dv">2</span>]</span>
-<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a>aov_f_val <span class="ot">&lt;-</span> <span class="fu">round</span>(aov_tvc<span class="sc">$</span>F[<span class="dv">1</span>], <span class="dv">2</span>)</span>
-<span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a>aov_p_val <span class="ot">&lt;-</span> aov_tvc<span class="sc">$</span><span class="st">`</span><span class="at">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">1</span>]</span>
-<span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a>r_squared <span class="ot">&lt;-</span> summary_tvc<span class="sc">$</span>r.squared</span>
-<span id="cb54-19"><a href="#cb54-19" aria-hidden="true" tabindex="-1"></a>adj_r_squared <span class="ot">&lt;-</span> summary_tvc<span class="sc">$</span>adj.r.squared</span>
-<span id="cb54-20"><a href="#cb54-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-21"><a href="#cb54-21" aria-hidden="true" tabindex="-1"></a><span class="co">#treat vs. control</span></span>
-<span id="cb54-22"><a href="#cb54-22" aria-hidden="true" tabindex="-1"></a>mean_treat <span class="ot">&lt;-</span> cat_data <span class="sc">%&gt;%</span> </span>
-<span id="cb54-23"><a href="#cb54-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">!=</span> <span class="st">"Control"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb54-24"><a href="#cb54-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(depress))</span>
-<span id="cb54-25"><a href="#cb54-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-26"><a href="#cb54-26" aria-hidden="true" tabindex="-1"></a>sd_treat <span class="ot">&lt;-</span> cat_data <span class="sc">%&gt;%</span> </span>
-<span id="cb54-27"><a href="#cb54-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">!=</span> <span class="st">"Control"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb54-28"><a href="#cb54-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sd =</span> <span class="fu">sd</span>(depress)) <span class="sc">%&gt;%</span> </span>
-<span id="cb54-29"><a href="#cb54-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb54-30"><a href="#cb54-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-31"><a href="#cb54-31" aria-hidden="true" tabindex="-1"></a>mean_control <span class="ot">&lt;-</span> cat_data <span class="sc">%&gt;%</span> </span>
-<span id="cb54-32"><a href="#cb54-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">"Control"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb54-33"><a href="#cb54-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(depress))</span>
-<span id="cb54-34"><a href="#cb54-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-35"><a href="#cb54-35" aria-hidden="true" tabindex="-1"></a>sd_control <span class="ot">&lt;-</span> cat_data <span class="sc">%&gt;%</span> </span>
-<span id="cb54-36"><a href="#cb54-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">"Control"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb54-37"><a href="#cb54-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sd =</span> <span class="fu">sd</span>(depress)) <span class="sc">%&gt;%</span> </span>
-<span id="cb54-38"><a href="#cb54-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb54-39"><a href="#cb54-39" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb54-40"><a href="#cb54-40" aria-hidden="true" tabindex="-1"></a>tvc_beta <span class="ot">&lt;-</span> summary_tvc<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">1</span>]</span>
-<span id="cb54-41"><a href="#cb54-41" aria-hidden="true" tabindex="-1"></a>tvc_ci_low <span class="ot">&lt;-</span> <span class="fu">round</span>(conf_tvc[<span class="dv">2</span>,<span class="dv">1</span>], <span class="dv">2</span>)</span>
-<span id="cb54-42"><a href="#cb54-42" aria-hidden="true" tabindex="-1"></a>tvc_ci_high <span class="ot">&lt;-</span> <span class="fu">round</span>(conf_tvc[<span class="dv">2</span>,<span class="dv">2</span>], <span class="dv">2</span>)</span>
-<span id="cb54-43"><a href="#cb54-43" aria-hidden="true" tabindex="-1"></a>tvc_pval <span class="ot">&lt;-</span> summary_tvc<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">4</span>]</span>
-<span id="cb54-44"><a href="#cb54-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-45"><a href="#cb54-45" aria-hidden="true" tabindex="-1"></a>mean_CBT <span class="ot">&lt;-</span> <span class="fu">round</span>(descriptives[<span class="dv">1</span>,<span class="dv">2</span>], <span class="dv">2</span>)</span>
-<span id="cb54-46"><a href="#cb54-46" aria-hidden="true" tabindex="-1"></a>sd_CBT <span class="ot">&lt;-</span> <span class="fu">round</span>(descriptives[<span class="dv">1</span>,<span class="dv">3</span>], <span class="dv">2</span>)</span>
-<span id="cb54-47"><a href="#cb54-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-48"><a href="#cb54-48" aria-hidden="true" tabindex="-1"></a>mean_Psy <span class="ot">&lt;-</span> <span class="fu">round</span>(descriptives[<span class="dv">2</span>,<span class="dv">2</span>], <span class="dv">2</span>)</span>
-<span id="cb54-49"><a href="#cb54-49" aria-hidden="true" tabindex="-1"></a>sd_Psy <span class="ot">&lt;-</span> <span class="fu">round</span>(descriptives[<span class="dv">2</span>,<span class="dv">3</span>], <span class="dv">2</span>)</span>
-<span id="cb54-50"><a href="#cb54-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-51"><a href="#cb54-51" aria-hidden="true" tabindex="-1"></a>cvp_beta <span class="ot">&lt;-</span> summary_tvc<span class="sc">$</span>coefficients[<span class="dv">3</span>,<span class="dv">1</span>]</span>
-<span id="cb54-52"><a href="#cb54-52" aria-hidden="true" tabindex="-1"></a>cvp_ci_low <span class="ot">&lt;-</span> <span class="fu">round</span>(conf_tvc[<span class="dv">3</span>,<span class="dv">1</span>], <span class="dv">2</span>)</span>
-<span id="cb54-53"><a href="#cb54-53" aria-hidden="true" tabindex="-1"></a>cvp_ci_high <span class="ot">&lt;-</span> <span class="fu">round</span>(conf_tvc[<span class="dv">3</span>,<span class="dv">2</span>], <span class="dv">2</span>)</span>
-<span id="cb54-54"><a href="#cb54-54" aria-hidden="true" tabindex="-1"></a>cvp_pval <span class="ot">&lt;-</span> summary_tvc<span class="sc">$</span>coefficients[<span class="dv">3</span>,<span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We ran a linear regression to examine the effect of different kinds of treatment on depression. We used custom contrast coding to examine the difference between the average of the treatment groups and the control group (CBT: 1/3, Psychotherapy: 1/3, Control: -2/3) and between the two types of treatment (CBT: 1/2, Psychotherapy: -1/2, Control: 0). Our omnibus test revealed a significant effect of treatment group on depression scores, F(2, 12) = 18.95, <em>p</em> &lt; .001), and the model explained a substantial proportion of variance in weight, with an R<sup>2</sup> = 0.7595308 and an adjusted R<sup>2</sup> = 0.7194526. Participants in a treatment group (<em>M</em> = 5.3, <em>SD</em> = 2.5) had significantly lower depression scores than participants in the control group (<em>M</em> = 9.8, <em>SD</em> = 1.79), <span class="math inline">\(\beta\)</span> = -4.5, 95% CI[-6.47, -2.53], <em>p</em> &lt; .001. Within treatment groups, participants who received CBT (<em>M</em> = 7.2, <em>SD</em> = 1.3) had significantly higher depression scores than participants who received Psychotherapy (<em>M</em> = 3.4, <em>SD</em> = 1.82), <span class="math inline">\(\beta\)</span> = 3.8, 95% CI[1.52, 6.08], <em>p</em> =.003. In summary, we found that treatment had an effect on participants’ depression scores and Psychotherapy may be a better treatment option than CBT.</p>
+<p>We ran a linear regression to examine the effect of different kinds of treatment on depression. We used custom contrast coding to examine the difference between the average of the treatment groups and the control group (CBT: 1/3, Psychotherapy: 1/3, Control: -2/3) and between the two types of treatment (CBT: 1/2, Psychotherapy: -1/2, Control: 0). Our omnibus test revealed a significant effect of treatment group on depression scores, F(2, 12) = 18.95, <em>p</em> &lt; .001), and the model explained a substantial proportion of variance in weight, with an R<sup>2</sup> = 0.76 and an adjusted R<sup>2</sup> = 0.72. Participants in a treatment group (<em>M</em> = 5.3, <em>SD</em> = 2.5) had significantly lower depression scores than participants in the control group (<em>M</em> = 9.8, <em>SD</em> = 1.79), <span class="math inline">\(\beta\)</span> = -4.5, 95% CI[-6.47, -2.53], <em>p</em> &lt; .001. Within treatment groups, participants who received CBT (<em>M</em> = 7.2, <em>SD</em> = 1.3) had significantly higher depression scores than participants who received Psychotherapy (<em>M</em> = 3.4, <em>SD</em> = 1.82), <span class="math inline">\(\beta\)</span> = 3.8, 95% CI[1.52, 6.08], <em>p</em> =.003. In summary, we found that treatment had an effect on participants’ depression scores and Psychotherapy may be a better treatment option than CBT.</p>
 </section>
 </section>
 </section>
