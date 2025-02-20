@@ -298,7 +298,7 @@ What kind of power analysis would this be?
 What do you think of the power for this study design?
 
 
-# Now, we want to run a replication study. Let's plan a study where we want to collect 100 Ps per group.
+## Now, we want to run a replication study. Let's plan a study where we want to collect 100 Ps per group.
 
 Change `ANOVA_design` to reflect *just this difference*. Set N = 100.
 
@@ -332,7 +332,7 @@ What kind of power analysis would this be?
 
 What do you think of the power for this study design?
 
-# Let's say I want to power the study to be able to detect a .05 point difference on the final test between the Cue-Only JOLs and Overt Retrieval groups (e.g., the difference between their means).
+## Let's say I want to power the study to be able to detect a .05 point difference on the final test between the Cue-Only JOLs and Overt Retrieval groups (e.g., the difference between their means).
 
 Change `ANOVA_design` to reflect *just this difference*. Set N = 40.
 
@@ -362,7 +362,7 @@ power_result <- ANOVA_power(design_result,
 What is our power to detect a .05 point difference with 40 per group?
 
 
-# Plot a power curve just for this difference. What sample size is needed to achieve 90% power?
+## Plot a power curve just for this difference. What sample size is needed to achieve 90% power?
 
 ```{r plot-power, echo=FALSE, message=FALSE, eval=FALSE}
 
