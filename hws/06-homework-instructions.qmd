@@ -102,7 +102,7 @@ ggplot(salary, aes(x = region, y = teacher_salary, fill = region)) +
 
 Run a regression to determine whether there is a relationship between `salary` and `region`.
 
-Answer these questions: 
+Answer the following questions: 
 
 1. What does the omnibus test tell you?
 
