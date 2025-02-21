@@ -172,7 +172,7 @@ Now, write an APA style summary of your results. This should include information
 
 ```
 
-## Exercise 7:
+## Exercise 6:
 
 Now, let's say we want to run a replication study. How many participants do we need to achieve 90% power? 
 
