@@ -266,7 +266,6 @@ summary(model_newref)
 
 Now, let's say we're interested in the difference between CBT and Psychotherapy. One way we could do this is to use Deviation Coding. There are a few ways we can create our codes, but this is my preferred method:
 
-
 ### Create dummy variables with `mutate()` and `case_when()`
 
 ```{r dev-codes}

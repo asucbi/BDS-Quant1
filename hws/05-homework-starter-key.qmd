@@ -79,8 +79,12 @@ Answer this question: What does this tell you?
 
 ```{r omnibus-anova}
 
+depression_drug <- depression_drug %>% 
+  mutate(drug = as.factor(drug))
 
-
+model <- lm(depression ~ drug, data = depression_drug)
+anova(model)
+summary(model)
 
 ```
 
@@ -90,8 +94,7 @@ Conduct *post-hoc* pairwise comparisons for `depression` scores across all level
 
 ```{r pariwise-comparisons}
 
-
-
+emmeans(model, pairwise ~ drug, adjust = "bonferroni")
 
 ```
 
@@ -105,6 +108,17 @@ Write an APA-style summary.
 
 ```{r drug-v-none}
 
+depression_drug <- depression_drug %>%
+  mutate(low.v.none = case_when(drug == "low" ~ 1,
+                                   TRUE ~ 0),
+         med.v.none = case_when(drug == "medium" ~ 1,
+                                             TRUE ~ 0),
+         high.v.none = case_when(drug == "high" ~ 1,
+                                             TRUE ~ 0))
+
+model_2 <- lm(depression ~ low.v.none + med.v.none + high.v.none, data = depression_drug)
+
+summary(model_2)
 
 
 

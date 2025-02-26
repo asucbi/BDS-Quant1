@@ -102,13 +102,13 @@ ggplot(salary, aes(x = region, y = teacher_salary, fill = region)) +
 
 Run a regression to determine whether there is a relationship between `salary` and `region`.
 
-Answer the following questions: 
+Answer the following questions:
 
-1. What does the omnibus test tell you?
+1.  What does the omnibus test tell you?
 
-2. What comparisons are being tested?
+2.  What comparisons are being tested?
 
-3. Interpret each of the coefficients (e.g., the intercept and each of the region contrasts). Make sure to include information about significance and the direction of the effect.
+3.  Interpret each of the coefficients (e.g., the intercept and each of the region contrasts). Make sure to include information about significance and the direction of the effect.
 
 ```{r omnibus-anova, echo=FALSE, message=FALSE, eval=FALSE}
 
@@ -120,13 +120,13 @@ summary(model)
 
 ## Exercise 3:
 
-Conduct pairwise comparisons for `teacher_salary` values across all levels of `region`. Because we preregistered our test of differences between groups (assume we did this), we _do not_ need to correct for multiple comparisons. To remove the adjustment, make sure to include `adjust = "none"` in your `emmeans` code (if you don't specify "none" it will apply a different adjustment). 
+Conduct pairwise comparisons for `teacher_salary` values across all levels of `region`. Because we preregistered our test of differences between groups (assume we did this), we *do not* need to correct for multiple comparisons. To remove the adjustment, make sure to include `adjust = "none"` in your `emmeans` code (if you don't specify "none" it will apply a different adjustment).
 
 Answer the following questions:
 
-1. Which of the comparisons are significant? Which are not?
+1.  Which of the comparisons are significant? Which are not?
 
-2. How does this differ if you include the bonferroni adjustment? Why does it differ?
+2.  How does this differ if you include the bonferroni adjustment? Why does it differ?
 
 ```{r pariwise-comparisons, echo=FALSE, message=FALSE, eval=FALSE}
 
@@ -136,13 +136,13 @@ pairs <- emmeans(model, pairwise ~ region, adjust = "none")
 
 ## Exercise 4:
 
-Use the `MOTE` package to calculate the effect size and effect size confidence interval around each of the comparisons. 
+Use the `MOTE` package to calculate the effect size and effect size confidence interval around each of the comparisons.
 
 Answer the following questions:
 
-1. What are the effect sizes for each comparison?
+1.  What are the effect sizes for each comparison?
 
-2. Is each effect small, medium, or large?
+2.  Is each effect small, medium, or large?
 
 ```{r effsize-ci, echo=FALSE, message=FALSE, eval=FALSE}
 
@@ -163,7 +163,7 @@ wvs <- d.ind.t(m1=28.6, m2=27.2, sd1=3.87, sd2=3.89, n1=11, n2=16)
 
 ## Exercise 5:
 
-Now, write an APA style summary of your results. This should include information about your overall model (e.g., *F* and *R*<sup>2</sup>) as well as each of the pairwise comparisons and all relevant information (e.g., *t*, *p*, effect size, 95% CIs). 
+Now, write an APA style summary of your results. This should include information about your overall model (e.g., *F* and *R*<sup>2</sup>) as well as each of the pairwise comparisons and all relevant information (e.g., *t*, *p*, effect size, 95% CIs).
 
 ```{r apa-summary, echo=FALSE, message=FALSE, eval=FALSE}
 
@@ -174,7 +174,7 @@ Now, write an APA style summary of your results. This should include information
 
 ## Exercise 6:
 
-Now, let's say we want to run a replication study. How many participants do we need to achieve 90% power? 
+Now, let's say we want to run a replication study. How many participants do we need to achieve 90% power?
 
 First, create a power plot for sample sizes ranging from 2-50. Use this to determine what sample size you need to achieve 90% power for the omnibus test.
 
@@ -182,13 +182,13 @@ Now, run an analysis to determine how much power would you have, given this samp
 
 Answer the following questions:
 
-1. From the power plot, what sample size do you need to achieve 90% power for the overall test?
+1.  From the power plot, what sample size do you need to achieve 90% power for the overall test?
 
-2. What is your power estimate for each of the paired comparisons?
+2.  What is your power estimate for each of the paired comparisons?
 
-3. Are you surprised by these values? Why or why not?
+3.  Are you surprised by these values? Why or why not?
 
-4. In your replication study, will you recruit 12 participants or do something differently? If so, what? (No need to run any additional analysis for this question if you're thinking of that - just tell me what you would do!)
+4.  In your replication study, will you recruit 12 participants or do something differently? If so, what? (No need to run any additional analysis for this question if you're thinking of that - just tell me what you would do!)
 
 ```{r power-analysis, echo=FALSE, message=FALSE, eval=FALSE}
 
