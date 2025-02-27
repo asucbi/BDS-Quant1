@@ -48,7 +48,7 @@ The data has 4 columns:
 
 Let's start by using the `describe()` function in the `{psych}` package to examine our data.
 
-```{r describe, echo=FALSE, message=FALSE, eval=FALSE}
+```{r describe}
 
 # students: write this code!
 
@@ -76,13 +76,12 @@ describe(pop)
 
 
 
-ANSWER: they look pretty different; zero isn't a meaningful number; "winter" looks quite a bit different in scale than the others(mean and sd)
 
 # Centering
 
 First, without doing any transformations, run a model predicting population from income. Get a summary of your model.
 
-```{r pop-income, echo=FALSE, message=FALSE}
+```{r pop-income}
 
 model <- lm(population ~ income, data = pop)
 summary(model)
@@ -100,11 +99,10 @@ summary(model)
 
 
 
-ANSWER: predicted population for a state with 0 average income; not meaningful (population is negative!)
 
 Now, let's center the income variable and re-run the regression.
 
-```{r centered, echo=FALSE, message=FALSE}
+```{r centered}
 
 # students: fill in `mutate()` function to create income variable
 
@@ -157,7 +155,6 @@ summary(model_2)
 
 
 
-ANSWER: predicted population for a state with an average income; much more meaningful!
 
 > **Question: How would you interpret the slope?**
 
@@ -170,11 +167,10 @@ ANSWER: predicted population for a state with an average income; much more meani
 
 
 
-ANSWER: predicted increase in population for each one-unit increase in income
 
 Now, let's try a multiple regression. Predict population from income centered and winter temperature. Get a summary of your model.
 
-```{r multi-regression, echo=FALSE, message=FALSE}
+```{r multi-regression}
 
 # students: fill in model
 
@@ -203,7 +199,6 @@ summary(model_3)
 
 
 
-ANSWER: predicted population for a state with an average salary and 0 degree average winter temperature -- tricky! you might want to center `winter` too!
 
 > **Question: How would you interpret the slope for income_c?**
 
@@ -216,7 +211,6 @@ ANSWER: predicted population for a state with an average salary and 0 degree ave
 
 
 
-ANSWER: predicted increase in population for each one-unit increase in income, holding winter temp constant; significant!
 
 > **Question: How would you interpret the slope for winter?**
 
@@ -229,7 +223,6 @@ ANSWER: predicted increase in population for each one-unit increase in income, h
 
 
 
-ANSWER: predicted increase in population for each one-unit increase in winter temp, holding income constant; significant!
 
 > **Question: How would you summarize your findings?**
 
@@ -242,13 +235,12 @@ ANSWER: predicted increase in population for each one-unit increase in winter te
 
 
 
-ANSWER: both income and winter temp positively predict population; states with higher income have larger populations and states with higher winter temperatures have larger populations
 
 Now, let's get confidence intervals and effect sizes for each of our predictors.
 
 We get CIs using the `confint()` function and effect size using `eta_squared()` in the `{effectsize}` package. We want eta squared, NOT partial eta squared. How would you specify that in the function? (hint: check out the `help` info)
 
-```{r effect-size, echo=FALSE, message=FALSE}
+```{r effect-size}
 
 # students: fill in eta squared code
 
@@ -273,7 +265,7 @@ Now, let's say we want to know whether income or winter temperature is the stron
 
 First, let's z-score each of our variables.
 
-```{r z-scores, echo=FALSE, message=FALSE}
+```{r z-scores}
 
 # students: create z-scores
 
@@ -299,7 +291,7 @@ INST NOTE: mean of z-scored variables is 0 and sd is 1 -- this is what we'd expe
 
 Next, run a regression predicting population from the z-scored variables you just created. Check out a summary.
 
-```{r stand-reg, echo=FALSE, message=FALSE}
+```{r stand-reg}
 
 # students: fill in model
 
@@ -328,7 +320,6 @@ summary(model_4)
 
 
 
-ANSWER: predicted population for a state at mean age and mean winter temp
 
 > **Question: How would you interpret the effect of income?**
 
@@ -341,7 +332,6 @@ ANSWER: predicted population for a state at mean age and mean winter temp
 
 
 
-ANSWER: for each 1SD increase in income, we expect population to increase by 1977
 
 > **Question: How would you interpret the effect of winter?**
 
@@ -354,7 +344,6 @@ ANSWER: for each 1SD increase in income, we expect population to increase by 197
 
 
 
-ANSWER: for each 1SD increase in winter temp, we expect population to increase by 2465
 
 > **Question: Which is the stronger predictor?**
 
@@ -367,11 +356,10 @@ ANSWER: for each 1SD increase in winter temp, we expect population to increase b
 
 
 
-ANSWER: winter
 
 Compare the summary for your current model (model_4) to the summary for the previous model (model_3).
 
-```{r compare-summaries, echo=FALSE, message=FALSE, eval=FALSE}
+```{r compare-summaries}
 
 summary(model_4)
 summary(model_3)
@@ -389,7 +377,6 @@ summary(model_3)
 
 
 
-ANSWER: intercept and slope (intercept because last time we only centered income), overall model fit, t-values, and p-values stay the same
 
 # Log Transformation
 
@@ -397,7 +384,7 @@ Now, let's focus on the effect of winter temperature on population size.
 
 First, let's look at the distribution of our variables.
 
-```{r examine-dist, echo=FALSE, message=FALSE, eval=FALSE}
+```{r examine-dist}
 
 pop %>% 
   ggplot(aes(x = population)) +
@@ -424,11 +411,10 @@ pop %>%
 
 
 
-ANSWER: population, because it is skewed
 
 Log transform the population variable, then examine the distribution again.
 
-```{r log-population, echo=FALSE, message=FALSE, eval=FALSE}
+```{r log-population}
 
 # students: log transform the `population` variable; use it to create a histogram
 
@@ -464,11 +450,10 @@ pop %>%
 
 
 
-ANSWER: more normally distributed
 
 Now, run a regression predicting population from winter temperature. Examine the summary.
 
-```{r log-regression, echo=FALSE, message=FALSE, eval=FALSE}
+```{r log-regression}
 
 model_5 <- lm(population_log ~ winter, data = pop)
 summary(model_5)
@@ -486,7 +471,6 @@ summary(model_5)
 
 
 
-ANSWER: put the outcome variable back into original units
 
 Recall that:
 
@@ -494,7 +478,7 @@ $log_b(n) = x \leftrightarrow b^x = n$
 
 To interpret the intercept, use the `exp()` function to put the outcome variable back into original units.
 
-```{r interpret-intercept, echo=FALSE, message=FALSE, eval=FALSE}
+```{r interpret-intercept}
 
 # students: expotentiate the intercept
 
@@ -522,7 +506,6 @@ exp(6.72416)
 
 
 
-ANSWER: at zero average temperature, the predicted population is 832
 
 Now, use the following steps to interpret the slope:
 
@@ -532,7 +515,7 @@ Now, use the following steps to interpret the slope:
 
 For every one-unit increase in our predictor, our dependent variable increases/decreases by this percent.
 
-```{r interpret-slope, echo=FALSE, message=FALSE, eval=FALSE}
+```{r interpret-slope}
 
 # students: fill in code below
 
@@ -564,7 +547,6 @@ winter_exp <- exp(0.04079)
 
 
 
-ANSWER: for each one-unit increase in winter temperature, we expect population to increase by 4.16%
 
 # Polynomials
 
@@ -583,7 +565,6 @@ Using cross-sectional data, we will examine the development (change and/or stabi
 
 
 
-ANSWER: "increase in conscientiousness with age"
 
 > **Question: Which part of the above paragraph refers to a *quadratic* trend of age?**
 
@@ -596,7 +577,6 @@ ANSWER: "increase in conscientiousness with age"
 
 
 
-ANSWER: "greatest during early adulthood (20s and 30s) and slow thereafter" -- suggests a curve
 
 ## Read in the data
 
@@ -619,7 +599,7 @@ The data has 2 columns:
 
 Let's start by plotting the relation between conscientiousness and age.
 
-```{r plot-polynomial, echo=FALSE, message=FALSE, eval=FALSE}
+```{r plot-polynomial}
 
 polynomial %>% 
   ggplot(aes(x = age, y = conscientiousness)) +
@@ -638,11 +618,10 @@ polynomial %>%
 
 
 
-ANSWER: does seem to increase and then start to flatten out a little bit
 
 Fist, we will examine a linear trend of age. Run a model predicting conscientiousness from age. Check out the summary.
 
-```{r con-age-linear, , echo=FALSE, message=FALSE, eval=FALSE}
+```{r con-age-linear}
 
 # students: test the linear effect 
 
@@ -672,7 +651,6 @@ summary(model_linear)
 
 
 
-ANSWER: predicted conscientiousness for someone at age 0
 
 > **Question: How would you interpret the slope?**
 
@@ -685,13 +663,12 @@ ANSWER: predicted conscientiousness for someone at age 0
 
 
 
-ANSWER: predicted increase in conscientiousness for each one-unit increase in age
 
 Even if we found a significant linear trend, we had a hypothesis about a quadratic, so let's test that!
 
 First, create the quadratic term. Then, run a model predicting conscientiousness from linear and quadratic effects of age. Check out the summary.
 
-```{r con-age-quad, , echo=FALSE, message=FALSE, eval=FALSE}
+```{r con-age-quad}
 
 # students: create quadratic term, run model
 
@@ -724,11 +701,10 @@ summary(model_quad)
 
 
 
-ANSWER: Both linear and quadratic trends.
 
 Let's test a cubic trend as well. Add a cubic term to your data (age\^3) and run a third model. Check out the summary.
 
-```{r con-age-cubic, echo=FALSE, message=FALSE, eval=FALSE}
+```{r con-age-cubic}
 
 polynomial <- polynomial %>% 
   mutate(age_3 = age^3)
@@ -749,11 +725,10 @@ summary(model_cubic)
 
 
 
-ANSWER: Quadratic, it's the most parsimonious model that explains the data.
 
 Let's compare our models using the `anova()` function and also examine the change in *R\^2* across our models.
 
-```{r compare-models, echo=FALSE, message=FALSE, eval=FALSE}
+```{r compare-models}
 
 # students: fill in model comparison
 
@@ -786,11 +761,10 @@ summary(model_cubic)$r.squared - summary(model_quad)$r.squared
 
 
 
-ANSWER: Still quadratic -- it improves fit over linear and increases r squared by 0.03; cubic doesn't improve fit much over quadratic
 
 BUT: Let's see if we have multicollinaerity issues with our chosen model. Use `check_collinaerity()` from the `{performance}` package to test the quadratic model.
 
-```{r check-coll, echo=FALSE, message=FALSE, eval=FALSE}
+```{r check-coll}
 
 check_collinearity(model_quad)
 
@@ -807,11 +781,10 @@ check_collinearity(model_quad)
 
 
 
-ANSWER: YES! VIF = 73.77!
 
 Center your predictor, create the quadratic term, and run the model again. Check for multicollinaerity.
 
-```{r quad-centered, echo=FALSE, message=FALSE, eval=FALSE}
+```{r quad-centered}
 
 polynomial <- polynomial %>% 
   mutate(age_c = age-mean(age, na.rm =TRUE),
@@ -835,7 +808,6 @@ check_collinearity(model_quad_c)
 
 
 
-ANSWER: Nope!
 
 > **Question: What is your final interpretation of the relation between age and conscientiousness?**
 
@@ -848,7 +820,6 @@ ANSWER: Nope!
 
 
 
-ANSWER: There are both linear and quadratic effects.
 
 > **Question: What information would you include in a summary?**
 

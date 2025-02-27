@@ -127,7 +127,7 @@ window.Quarto = {
 
 <section id="purpose" class="level1">
 <h1>Purpose</h1>
-<p>In today’s lab, we will practice centering, standardizing, and log transforming data. We will also work with polynonial data and, for all topics, we will discuss interpretation.</p>
+<p>In today’s lab, we will practice centering, standardizing, and log transforming data. We will also work with polynomial data and, for all topics, we will discuss interpretation.</p>
 <p>For today’s lab, you will need to load the following libraries.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -160,7 +160,6 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p><strong>Question: What do you noticed about the means and standard deviations of our variables? …range? …scale?</strong></p>
 </blockquote>
-<p>ANSWER: they look pretty different; zero isn’t a meaningful number; “winter” looks quite a bit different ini scale than the others(mean and sd)</p>
 </section>
 <section id="centering" class="level1">
 <h1>Centering</h1>
@@ -191,7 +190,6 @@ F-statistic: 4.547 on 1 and 46 DF,  p-value: 0.03834</code></pre>
 <blockquote class="blockquote">
 <p><strong>Question: How would you interpret the intercept? Is this meaningful?</strong></p>
 </blockquote>
-<p>ANSWER: predicted population for a state with 0 average income; not meaningful (population is negative!)</p>
 <p>Now, let’s center the income variable and re-run the regression.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -251,11 +249,9 @@ F-statistic: 4.547 on 1 and 46 DF,  p-value: 0.03834</code></pre>
 <blockquote class="blockquote">
 <p><strong>Question: How would you interpret the intercept? Is this meaningful?</strong></p>
 </blockquote>
-<p>ANSWER: predicted population for a state with an average income; much more meaningful!</p>
 <blockquote class="blockquote">
 <p><strong>Question: How would you interpret the slope?</strong></p>
 </blockquote>
-<p>ANSWER: predicted increase in population for each one-unit increase in income</p>
 <p>Now, let’s try a multiple regression. Predict population from income centered and winter temperature. Get a summary of your model.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -284,21 +280,17 @@ F-statistic: 9.053 on 2 and 45 DF,  p-value: 0.0004962</code></pre>
 <blockquote class="blockquote">
 <p><strong>Question: How would you interpret the intercept? Is this meaningful?</strong></p>
 </blockquote>
-<p>ANSWER: predicted population for a state with an average salary and 0 degree average winter temperature – tricky! you might want to center <code>winter</code> too!</p>
 <blockquote class="blockquote">
 <p><strong>Question: How would you interpret the slope for income_c?</strong></p>
 </blockquote>
-<p>ANSWER: predicted increase in population for each one-unit increase in income, holding winter temp constant; significant!</p>
 <blockquote class="blockquote">
 <p><strong>Question: How would you interpret the slope for winter?</strong></p>
 </blockquote>
-<p>ANSWER: predicted increase in population for each one-unit increase in winter temp, holding income constant; significant!</p>
 <blockquote class="blockquote">
 <p><strong>Question: How would you summarize your findings?</strong></p>
 </blockquote>
-<p>ANSWER: both income and winter temp positively predict population; states with higher income have larger populations and states with higher winter temperatures have larger populations</p>
 <p>Now, let’s get confidence intervals and effect sizes for each of our predictors.</p>
-<p>We get CIs using the <code>confint()</code> function and effect size using <code>eta_squared</code> in the <code>{effectsize}</code> package. We want eta squared, NOT partial eta squared. How would you specify that in the function? (hint: check out the <code>help</code> info)</p>
+<p>We get CIs using the <code>confint()</code> function and effect size using <code>eta_squared()</code> in the <code>{effectsize}</code> package. We want eta squared, NOT partial eta squared. How would you specify that in the function? (hint: check out the <code>help</code> info)</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>                    2.5 %       97.5 %
@@ -371,24 +363,19 @@ F-statistic: 9.053 on 2 and 45 DF,  p-value: 0.0004962</code></pre>
 <blockquote class="blockquote">
 <p><strong>Question: How would you interpret the intercept?</strong></p>
 </blockquote>
-<p>ANSWER: predicted population for a state at mean age and mean winter temp</p>
 <blockquote class="blockquote">
 <p><strong>Question: How would you interpret the effect of income?</strong></p>
 </blockquote>
-<p>ANSWER: for each 1SD increase in income, we expect population to increase by 1977</p>
 <blockquote class="blockquote">
 <p><strong>Question: How would you interpret the effect of winter?</strong></p>
 </blockquote>
-<p>ANSWER: for each 1SD increase in winter temp, we expect population to increase by 2465</p>
 <blockquote class="blockquote">
 <p><strong>Question: Which is the stronger predictor?</strong></p>
 </blockquote>
-<p>ANSWER: winter</p>
 <p>Compare the summary for your current model (model_4) to the summary for the previous model (model_3).</p>
 <blockquote class="blockquote">
 <p><strong>Question: What changes? What stays the same?</strong></p>
 </blockquote>
-<p>ANSWER: intercept and slope (intercept because last time we only centered income), overall model fit, t-values, and p-values stay the same</p>
 </section>
 <section id="log-transformation" class="level1">
 <h1>Log Transformation</h1>
@@ -397,35 +384,30 @@ F-statistic: 9.053 on 2 and 45 DF,  p-value: 0.0004962</code></pre>
 <blockquote class="blockquote">
 <p><strong>Question: Which variable might we want to log transform? Why?</strong></p>
 </blockquote>
-<p>ANSWER: population, because it is skewed</p>
 <p>Log transform the population variable, then examine the distribution again.</p>
 <blockquote class="blockquote">
 <p><strong>Question: How does the data distribution look now?</strong></p>
 </blockquote>
-<p>ANSWER: more normally distributed</p>
 <p>Now, run a regression predicting population from winter temperature. Examine the summary.</p>
 <blockquote class="blockquote">
 <p><strong>Question: What do you need to do before you can interpret the effect of winter temp on population?</strong></p>
 </blockquote>
-<p>ANSWER: put the outcome variable back into original units</p>
 <p>Recall that:</p>
 <p><span class="math inline">\(log_b(n) = x \leftrightarrow b^x = n\)</span></p>
 <p>To interpret the intercept, use the <code>exp()</code> function to put the outcome variable back into original units.</p>
 <blockquote class="blockquote">
 <p><strong>Question: How would you interpret the intercept?</strong></p>
 </blockquote>
-<p>ANSWER: at zero average temperature, the predicted population is 832</p>
 <p>Now, use the following steps to interpret the slope:</p>
 <ol type="1">
 <li>expotentiate the coefficient</li>
 <li>subtract one from this number</li>
-<li>multiply by zero to get a percentage</li>
+<li>multiply by one hundred to get a percentage</li>
 </ol>
 <p>For every one-unit increase in our predictor, our dependent variable increases/decreases by this percent.</p>
 <blockquote class="blockquote">
 <p><strong>Question: How would you interpret the slope?</strong></p>
 </blockquote>
-<p>ANSWER: for each one-unit increase in winter temperature, we expect population to increase by 4.16%</p>
 </section>
 <section id="polynomials" class="level1">
 <h1>Polynomials</h1>
@@ -436,11 +418,9 @@ F-statistic: 9.053 on 2 and 45 DF,  p-value: 0.0004962</code></pre>
 <blockquote class="blockquote">
 <p><strong>Question: Which part of the above paragraph refers to a <em>linear</em> trend of age?</strong></p>
 </blockquote>
-<p>ANSWER: “increase in conscientiousness with age”</p>
 <blockquote class="blockquote">
 <p><strong>Question: Which part of the above paragraph refers to a <em>quadratic</em> trend of age?</strong></p>
 </blockquote>
-<p>ANSWER: “greatest during early adulthood (20s and 30s) and slow thereafter” – suggests a curve</p>
 <section id="read-in-the-data-1" class="level2">
 <h2 class="anchored" data-anchor-id="read-in-the-data-1">Read in the data</h2>
 <p>First, let’s read in the data and then use <code>View()</code> to check it out.</p>
@@ -458,46 +438,37 @@ F-statistic: 9.053 on 2 and 45 DF,  p-value: 0.0004962</code></pre>
 <blockquote class="blockquote">
 <p><strong>Question: What do you notice about the relation between age and conscientiousness?</strong></p>
 </blockquote>
-<p>ANSWER: does seem to increase and then start to flatten out a little bit</p>
 <p>Fist, we will examine a linear trend of age. Run a model predicting conscientiousness from age. Check out the summary.</p>
 <blockquote class="blockquote">
 <p><strong>Question: How would you interpret the intercept?</strong></p>
 </blockquote>
-<p>ANSWER: predicted conscientiousness for someone at age 0</p>
 <blockquote class="blockquote">
 <p><strong>Question: How would you interpret the slope?</strong></p>
 </blockquote>
-<p>ANSWER: predicted increase in conscientiousness for each one-unit increase in age</p>
 <p>Even if we found a significant linear trend, we had a hypothesis about a quadratic, so let’s test that!</p>
 <p>First, create the quadratic term. Then, run a model predicting conscientiousness from linear and quadratic effects of age. Check out the summary.</p>
 <blockquote class="blockquote">
 <p><strong>Question: What can you say about the relation between conscientiousness and age?</strong></p>
 </blockquote>
-<p>ANSWER: Both linear and quadratic trends.</p>
 <p>Let’s test a cubic trend as well. Add a cubic term to your data (age^3) and run a third model. Check out the summary.</p>
 <blockquote class="blockquote">
 <p><strong>Question: Which model would you choose?</strong></p>
 </blockquote>
-<p>ANSWER: Quadratic, it’s the most parsimonious model that explains the data.</p>
 <p>Let’s compare our models using the <code>anova()</code> function and also examine the change in <em>R^2</em> across our models.</p>
 <blockquote class="blockquote">
 <p><strong>Question: Which model is the best fit for the data?</strong></p>
 </blockquote>
-<p>ANSWER: Still quadratic – it improves fit over linear and increases r squared by 0.03; cubic doesn’t improve fit much over quadratic</p>
 <p>BUT: Let’s see if we have multicollinaerity issues with our chosen model. Use <code>check_collinaerity()</code> from the <code>{performance}</code> package to test the quadratic model.</p>
 <blockquote class="blockquote">
 <p><strong>Question: Do we have a problem with multicollinaerity?</strong></p>
 </blockquote>
-<p>ANSWER: YES! VIF = 73.77!</p>
 <p>Center your predictor, create the quadratic term, and run the model again. Check for multicollinaerity.</p>
 <blockquote class="blockquote">
 <p><strong>Question: NOW, do we have a problem with multicollinaerity?</strong></p>
 </blockquote>
-<p>ANSWER: Nope!</p>
 <blockquote class="blockquote">
 <p><strong>Question: What is your final interpretation of the relation between age and conscientiousness?</strong></p>
 </blockquote>
-<p>ANSWER: There are both linear and quadratic effects.</p>
 <blockquote class="blockquote">
 <p><strong>Question: What information would you include in a summary?</strong></p>
 </blockquote>
@@ -506,9 +477,9 @@ F-statistic: 9.053 on 2 and 45 DF,  p-value: 0.0004962</code></pre>
 <li>describe the model</li>
 <li>mention both linear and quadratic terms</li>
 <li>report <em>overall</em> model fit ( <em>R</em><sup>2</sup>, <em>F</em>, <em>df</em>, <em>p</em>-value)</li>
-<li>report linear effect ( <em>b</em>, <em>SE</em>, <em>t</em> statistic with associated <em>df</em>, 95%CI, <em>p</em>-value)</li>
+<li>report linear effect ( <em>b</em>, <em>SE</em>, <em>t</em> statistic with associated <em>df</em>, 95%CI, <em>p</em>-value, effect size)</li>
 <li>interpret linear effect (e.g., as x increases/decreases, y increases/decreases)</li>
-<li>report quadratic effect ( <em>b</em>, <em>SE</em>, <em>t</em> statistic with associated <em>df</em>, 95%CI, <em>p</em>-value)</li>
+<li>report quadratic effect ( <em>b</em>, <em>SE</em>, <em>t</em> statistic with associated <em>df</em>, 95%CI, <em>p</em>-value, effect size)</li>
 <li>interpret quadratic effect (e.g., the negative quadratic term suggests an inverted u-shape, where X increases with Y up to a point and then it decreases)</li>
 <li>in one sentence, summarize what you found in non-statistical language</li>
 </ul>
