@@ -595,8 +595,8 @@ ANSWER: There are both linear and quadratic effects.
 -   describe the model
 -   mention both linear and quadratic terms
 -   report *overall* model fit ( *R*<sup>2</sup>, *F*, *df*, *p*-value)
--   report linear effect ( *b*, *SE*, *t* statistic with associated *df*, 95%CI, *p*-value)
+-   report linear effect ( *b*, *SE*, *t* statistic with associated *df*, 95%CI, *p*-value, effect size)
 -   interpret linear effect (e.g., as x increases/decreases, y increases/decreases)
--   report quadratic effect ( *b*, *SE*, *t* statistic with associated *df*, 95%CI, *p*-value)
+-   report quadratic effect ( *b*, *SE*, *t* statistic with associated *df*, 95%CI, *p*-value, effect size)
 -   interpret quadratic effect (e.g., the negative quadratic term suggests an inverted u-shape, where X increases with Y up to a point and then it decreases)
 -   in one sentence, summarize what you found in non-statistical language

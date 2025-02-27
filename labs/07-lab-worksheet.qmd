@@ -56,7 +56,6 @@ describe(pop)
 
 > **Question: What do you noticed about the means and standard deviations of our variables? ...range? ...scale?**
 
-
 # Centering
 
 First, without doing any transformations, run a model predicting population from income. Get a summary of your model.
@@ -69,7 +68,6 @@ summary(model)
 ```
 
 > **Question: How would you interpret the intercept? Is this meaningful?**
-
 
 Now, let's center the income variable and re-run the regression.
 
@@ -98,9 +96,7 @@ summary(model_2)
 
 > **Question: How would you interpret the intercept? Is this meaningful?**
 
-
 > **Question: How would you interpret the slope?**
-
 
 Now, let's try a multiple regression. Predict population from income centered and winter temperature. Get a summary of your model.
 
@@ -113,15 +109,11 @@ summary(model_3)
 
 > **Question: How would you interpret the intercept? Is this meaningful?**
 
-
 > **Question: How would you interpret the slope for income_c?**
-
 
 > **Question: How would you interpret the slope for winter?**
 
-
 > **Question: How would you summarize your findings?**
-
 
 Now, let's get confidence intervals and effect sizes for each of our predictors.
 
@@ -163,15 +155,11 @@ summary(model_4)
 
 > **Question: How would you interpret the intercept?**
 
-
 > **Question: How would you interpret the effect of income?**
-
 
 > **Question: How would you interpret the effect of winter?**
 
-
 > **Question: Which is the stronger predictor?**
-
 
 Compare the summary for your current model (model_4) to the summary for the previous model (model_3).
 
@@ -183,7 +171,6 @@ summary(model_3)
 ```
 
 > **Question: What changes? What stays the same?**
-
 
 # Log Transformation
 
@@ -209,7 +196,6 @@ pop %>%
 
 > **Question: Which variable might we want to log transform? Why?**
 
-
 Log transform the population variable, then examine the distribution again.
 
 ```{r log-population, echo=FALSE, message=FALSE, eval=FALSE}
@@ -227,7 +213,6 @@ pop %>%
 
 > **Question: How does the data distribution look now?**
 
-
 Now, run a regression predicting population from winter temperature. Examine the summary.
 
 ```{r log-regression, echo=FALSE, message=FALSE, eval=FALSE}
@@ -238,7 +223,6 @@ summary(model_5)
 ```
 
 > **Question: What do you need to do before you can interpret the effect of winter temp on population?**
-
 
 Recall that:
 
@@ -253,7 +237,6 @@ exp(6.72416)
 ```
 
 > **Question: How would you interpret the intercept?**
-
 
 Now, use the following steps to interpret the slope:
 
@@ -275,7 +258,6 @@ winter_exp <- exp(0.04079)
 
 > **Question: How would you interpret the slope?**
 
-
 # Polynomials
 
 # Research scenario
@@ -284,9 +266,7 @@ Using cross-sectional data, we will examine the development (change and/or stabi
 
 > **Question: Which part of the above paragraph refers to a *linear* trend of age?**
 
-
 > **Question: Which part of the above paragraph refers to a *quadratic* trend of age?**
-
 
 ## Read in the data
 
@@ -319,7 +299,6 @@ polynomial %>%
 
 > **Question: What do you notice about the relation between age and conscientiousness?**
 
-
 Fist, we will examine a linear trend of age. Run a model predicting conscientiousness from age. Check out the summary.
 
 ```{r con-age-linear, , echo=FALSE, message=FALSE, eval=FALSE}
@@ -331,9 +310,7 @@ summary(model_linear)
 
 > **Question: How would you interpret the intercept?**
 
-
 > **Question: How would you interpret the slope?**
-
 
 Even if we found a significant linear trend, we had a hypothesis about a quadratic, so let's test that!
 
@@ -351,7 +328,6 @@ summary(model_quad)
 
 > **Question: What can you say about the relation between conscientiousness and age?**
 
-
 Let's test a cubic trend as well. Add a cubic term to your data (age\^3) and run a third model. Check out the summary.
 
 ```{r con-age-cubic, echo=FALSE, message=FALSE, eval=FALSE}
@@ -365,7 +341,6 @@ summary(model_cubic)
 ```
 
 > **Question: Which model would you choose?**
-
 
 Let's compare our models using the `anova()` function and also examine the change in *R\^2* across our models.
 
@@ -381,7 +356,6 @@ summary(model_cubic)$r.squared - summary(model_quad)$r.squared
 
 > **Question: Which model is the best fit for the data?**
 
-
 BUT: Let's see if we have multicollinaerity issues with our chosen model. Use `check_collinaerity()` from the `{performance}` package to test the quadratic model.
 
 ```{r check-coll, echo=FALSE, message=FALSE, eval=FALSE}
@@ -391,7 +365,6 @@ check_collinearity(model_quad)
 ```
 
 > **Question: Do we have a problem with multicollinaerity?**
-
 
 Center your predictor, create the quadratic term, and run the model again. Check for multicollinaerity.
 
@@ -410,9 +383,7 @@ check_collinearity(model_quad_c)
 
 > **Question: NOW, do we have a problem with multicollinaerity?**
 
-
 > **Question: What is your final interpretation of the relation between age and conscientiousness?**
-
 
 > **Question: What information would you include in a summary?**
 
@@ -420,8 +391,8 @@ check_collinearity(model_quad_c)
 -   describe the model
 -   mention both linear and quadratic terms
 -   report *overall* model fit ( *R*<sup>2</sup>, *F*, *df*, *p*-value)
--   report linear effect ( *b*, *SE*, *t* statistic with associated *df*, 95%CI, *p*-value)
+-   report linear effect ( *b*, *SE*, *t* statistic with associated *df*, 95%CI, *p*-value, effect size)
 -   interpret linear effect (e.g., as x increases/decreases, y increases/decreases)
--   report quadratic effect ( *b*, *SE*, *t* statistic with associated *df*, 95%CI, *p*-value)
+-   report quadratic effect ( *b*, *SE*, *t* statistic with associated *df*, 95%CI, *p*-value, effect size)
 -   interpret quadratic effect (e.g., the negative quadratic term suggests an inverted u-shape, where X increases with Y up to a point and then it decreases)
 -   in one sentence, summarize what you found in non-statistical language

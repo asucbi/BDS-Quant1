@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Module 7: Lab Instructions</title>
+<title>Module 7: Homework Instructions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,83 +20,20 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="07-lab-worksheet_files/libs/clipboard/clipboard.min.js"></script>
-<script src="07-lab-worksheet_files/libs/quarto-html/quarto.js"></script>
-<script src="07-lab-worksheet_files/libs/quarto-html/popper.min.js"></script>
-<script src="07-lab-worksheet_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="07-lab-worksheet_files/libs/quarto-html/anchor.min.js"></script>
-<link href="07-lab-worksheet_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="07-lab-worksheet_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="07-lab-worksheet_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="07-lab-worksheet_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="07-lab-worksheet_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="07-homework-instructions_files/libs/clipboard/clipboard.min.js"></script>
+<script src="07-homework-instructions_files/libs/quarto-html/quarto.js"></script>
+<script src="07-homework-instructions_files/libs/quarto-html/popper.min.js"></script>
+<script src="07-homework-instructions_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="07-homework-instructions_files/libs/quarto-html/anchor.min.js"></script>
+<link href="07-homework-instructions_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="07-homework-instructions_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="07-homework-instructions_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="07-homework-instructions_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="07-homework-instructions_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -108,7 +45,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Module 7: Lab Instructions</h1>
+<h1 class="title">Module 7: Homework Instructions</h1>
 </div>
 
 
@@ -125,199 +62,141 @@ window.Quarto = {
 </header>
 
 
-<section id="purpose" class="level1">
-<h1>Purpose</h1>
-<p>In today’s lab, we will practice centering, standardizing, and log transforming data. We will also work with polynonial data and, for all topics, we will discuss interpretation.</p>
-<p>For today’s lab, you will need to load the following libraries.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(papaja) <span class="co">#for formatting p values</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co">#for formatting tables</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych) <span class="co">#for generating easy descriptives</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effectsize) <span class="co">#for generating effect sizes</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co">#for checking multicollinaerity</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="purpose" class="level2">
+<h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
+<p>In this week’s homework, you will be asked to demonstrate your understanding of transformations.</p>
 </section>
-<section id="research-scenario" class="level1">
-<h1>Research scenario</h1>
-<p>For the first part of today’s lab, we will be examining predictors of population size in the US.</p>
-<section id="read-in-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="read-in-the-data">Read in the data</h2>
-<p>First, let’s read in the data and then use <code>View()</code> to check it out.</p>
-<p>Today’s dataset is called <code>pop_predictors.csv</code>. Let’s read it in and name it <code>pop</code>.</p>
-<p>The data has 4 columns:</p>
+<section id="access-the-starter-files-for-module-7" class="level2">
+<h2 class="anchored" data-anchor-id="access-the-starter-files-for-module-7">Access the Starter Files for Module 7</h2>
 <ul>
-<li>state: the state in which the data were collected</li>
-<li>population: population size (in the late 80s / early 90s)</li>
-<li>income: average income (in the late 80s / early 90s)</li>
-<li>winter: average temperature during winter months</li>
+<li><p>Go to <a href="posit.cloud">posit.cloud</a> and then <strong>navigate to the course workspace</strong> via the left sidebar.</p>
+<ul>
+<li>Look for the course workspace called “Statistical Methods Spring 2025”</li>
+</ul></li>
+<li><p>Open the project titled <strong>Module 7</strong> This module contains the starter files that you will use for this lab and for your homework.</p></li>
 </ul>
 </section>
-<section id="we-should-always-examine-our-data-first" class="level2">
-<h2 class="anchored" data-anchor-id="we-should-always-examine-our-data-first">We should always examine our data first!</h2>
-<p>Let’s start by using the <code>describe()</code> function in the <code>{psych}</code> package to examine our data.</p>
-<blockquote class="blockquote">
-<p><strong>Question: What do you noticed about the means and standard deviations of our variables? …range? …scale?</strong></p>
-</blockquote>
+<section id="starter-files" class="level2">
+<h2 class="anchored" data-anchor-id="starter-files">Starter Files</h2>
+<p>In the Files pane you should see these two R Notebooks:</p>
+<ul>
+<li>mod-07-lab-starter.qmd</li>
+<li>mod-07-hw-starter.qmd</li>
+</ul>
+<p>Open up <code>mod-07-hw-starter.qmd</code>.</p>
 </section>
+<section id="render-it" class="level2">
+<h2 class="anchored" data-anchor-id="render-it">Render it!</h2>
+<p>Click the button called “Render” (circled in the image below) and then double check to see that your document rendered in the <strong>Viewer</strong> pane. It is always a good idea to occasionally check that the document still renders correctly after making changes.</p>
+<p><img src="images/render.png" class="img-fluid"></p>
 </section>
-<section id="centering" class="level1">
-<h1>Centering</h1>
-<p>First, without doing any transformations, run a model predicting population from income. Get a summary of your model.</p>
-<blockquote class="blockquote">
-<p><strong>Question: How would you interpret the intercept? Is this meaningful?</strong></p>
-</blockquote>
-<p>Now, let’s center the income variable and re-run the regression.</p>
-<blockquote class="blockquote">
-<p><strong>Question: How would you interpret the intercept? Is this meaningful?</strong></p>
-</blockquote>
-<blockquote class="blockquote">
-<p><strong>Question: How would you interpret the slope?</strong></p>
-</blockquote>
-<p>Now, let’s try a multiple regression. Predict population from income centered and winter temperature. Get a summary of your model.</p>
-<blockquote class="blockquote">
-<p><strong>Question: How would you interpret the intercept? Is this meaningful?</strong></p>
-</blockquote>
-<blockquote class="blockquote">
-<p><strong>Question: How would you interpret the slope for income_c?</strong></p>
-</blockquote>
-<blockquote class="blockquote">
-<p><strong>Question: How would you interpret the slope for winter?</strong></p>
-</blockquote>
-<blockquote class="blockquote">
-<p><strong>Question: How would you summarize your findings?</strong></p>
-</blockquote>
-<p>Now, let’s get confidence intervals and effect sizes for each of our predictors.</p>
-<p>We get CIs using the <code>confint()</code> function and effect size using <code>eta_squared</code> in the <code>{effectsize}</code> package. We want eta squared, NOT partial eta squared. How would you specify that in the function? (hint: check out the <code>help</code> info)</p>
+<section id="load-packages" class="level2">
+<h2 class="anchored" data-anchor-id="load-packages">Load Packages</h2>
+<p>Today, we’ll be using the following packages:</p>
+<ul>
+<li><strong>tidyverse</strong>: a collection of packages for doing data analysis in a “tidy” way</li>
+<li><strong>papaja</strong>: a package that supports the formatting of APA style documents</li>
+<li><strong>psych</strong>: a package for getting descriptives</li>
+<li><strong>effectsize</strong>: a package for calculating effect size</li>
+<li><strong>performance</strong>: a packge for checking model assumptions (e.g., multicollinaerity)</li>
+</ul>
+<p>Please load these packages using the <code>library()</code> function. If the packages don’t load, you may need to <code>install.packages()</code> first.</p>
 </section>
-<section id="standardizing" class="level1">
-<h1>Standardizing</h1>
-<p>Now, let’s say we want to know whether income or winter temperature is the stronger predictor of population. In the previous model, we found the the expected increase in population for a one-unit increase in income (holding winter temp constant) is 0.38 and the expected increase for a one-unit increase in winter temp (holding income constant) is 206.65. However, because these measures are on different scales, we can’t say that the effect of temperature is bigger just because the value is larger. To make this comparison possible, we can <em>scale</em> our variables.</p>
-<p>First, let’s z-score each of our variables.</p>
-<p>Next, run a regression predicting population from the z-scored variables you just created. Check out a summary.</p>
-<blockquote class="blockquote">
-<p><strong>Question: How would you interpret the intercept?</strong></p>
-</blockquote>
-<blockquote class="blockquote">
-<p><strong>Question: How would you interpret the effect of income?</strong></p>
-</blockquote>
-<blockquote class="blockquote">
-<p><strong>Question: How would you interpret the effect of winter?</strong></p>
-</blockquote>
-<blockquote class="blockquote">
-<p><strong>Question: Which is the stronger predictor?</strong></p>
-</blockquote>
-<p>Compare the summary for your current model (model_4) to the summary for the previous model (model_3).</p>
-<blockquote class="blockquote">
-<p><strong>Question: What changes? What stays the same?</strong></p>
-</blockquote>
+<section id="data-summary" class="level2">
+<h2 class="anchored" data-anchor-id="data-summary">Data Summary</h2>
+<p>In the first 3 exercises, we will be analyzing data from the following paper:</p>
+<p>Winter, B., Perlman, M., Perry, L. K., &amp; Lupyan, G. (2017). Which words are most iconic? Iconicity in English sensory words. Interaction Studies, 18(3), 433-454.</p>
+<p>For this study, Winter et al.&nbsp;collected iconicity ratings from 2,500 native American English speakers for 3,000 words. Participants were asked to rate each word for whether “it sounds like what it means” or “it sounds like the opposite of what it means” on a scale from -5.0 to +5.0. Here, we will be looking at each word’s average iconicity score, and we want to look at what words are most iconic (i.e., sound more like what they mean).</p>
 </section>
-<section id="log-transformation" class="level1">
-<h1>Log Transformation</h1>
-<p>Now, let’s focus on the effect of winter temperature on population size.</p>
-<p>First, let’s look at the distribution of our variables.</p>
-<blockquote class="blockquote">
-<p><strong>Question: Which variable might we want to log transform? Why?</strong></p>
-</blockquote>
-<p>Log transform the population variable, then examine the distribution again.</p>
-<blockquote class="blockquote">
-<p><strong>Question: How does the data distribution look now?</strong></p>
-</blockquote>
-<p>Now, run a regression predicting population from winter temperature. Examine the summary.</p>
-<blockquote class="blockquote">
-<p><strong>Question: What do you need to do before you can interpret the effect of winter temp on population?</strong></p>
-</blockquote>
-<p>Recall that:</p>
-<p><span class="math inline">\(log_b(n) = x \leftrightarrow b^x = n\)</span></p>
-<p>To interpret the intercept, use this to put the outcome variable back into original units.</p>
-<blockquote class="blockquote">
-<p><strong>Question: How would you interpret the intercept?</strong></p>
-</blockquote>
-<p>Now, use the following steps to interpret the slope:</p>
+<section id="read-in-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="read-in-the-data">Read in the Data</h2>
+<p>The data file is called <code>icon_data.csv</code>. Read in the data, name it <code>icon</code>. Check it out using <code>View()</code>.</p>
+<p>The data has 8 columns:</p>
+<ul>
+<li>Word: the word</li>
+<li>SER: sensory experience ratings from Juhasz &amp; Jap (2013)</li>
+<li>imageability: imageability ratings from Cortese &amp; Fugett (2004)</li>
+<li>Concreteness: concreteness ratings from Brysbaert et al.&nbsp;(2014)</li>
+<li>systematicity: systematicity ratings from Monaghan et al.&nbsp;(2014)</li>
+<li>frequency: frequency of words from SUBTLEX (Brysbaert &amp; New, 2009)</li>
+</ul>
+</section>
+<section id="exercise-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1">Exercise 1:</h2>
 <ol type="1">
-<li>expotentiate the coefficient</li>
-<li>subtract one from this number</li>
-<li>multiply by zero to get a percentage</li>
+<li>Run a model predicting iconicity from SER (sensory experience ratings). Write out your interpretations of the intercept and the slope.</li>
+<li>Answer the question: Why might we want to center the SER variable?</li>
+<li>Center the SER variable, rerun the model. Write out your interpretations of the intercept and the slope. (no APA style summary required for this exercise)</li>
 </ol>
-<p>For every one-unit increase in our predictor, our dependent variable increases/decreases by this percent.</p>
-<blockquote class="blockquote">
-<p><strong>Question: How would you interpret the slope?</strong></p>
-</blockquote>
 </section>
-<section id="polynomials" class="level1">
-<h1>Polynomials</h1>
+<section id="exercise-2" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2">Exercise 2:</h2>
+<p>Now, we want to know whether SER or systematicity is the stronger predictor of iconicity.</p>
+<ol type="1">
+<li>Run a model predicting iconicity from SER and systematicity. Write out your interpretations of the intercept and slopes. Don’t do anyting to the predictors.</li>
+<li>Answer the question: From this model, can we determine which is the stronger predictor? Why or why not?</li>
+<li>Scale (z-score) the SER and systematicity variables, rerun the model. Write out your interpretations of the intercept and the slope.</li>
+<li>Answer the question: Which of the variables is the stronger predictor of iconicity?</li>
+<li>Write an APA style summary for the model you ran <em>in question 3</em>, make sure your summary also addresses the answer to question 4.</li>
+</ol>
 </section>
-<section id="research-scenario-1" class="level1">
-<h1>Research scenario</h1>
-<p>Using cross-sectional data, we will examine the development (change and/or stability) of conscientiousness in adulthood (age 21 to 60). Based on previous research, we hypothesize that people will increase in conscientiousness with age; however, the rate of increase will be greatest during early adulthood (20s and 30s) and slow thereafter.</p>
-<blockquote class="blockquote">
-<p><strong>Question: Which part of the above paragraph refers to a <em>linear</em> trend of age?</strong></p>
-</blockquote>
-<blockquote class="blockquote">
-<p><strong>Question: Which part of the above paragraph refers to a <em>quadratic</em> trend of age?</strong></p>
-</blockquote>
-<section id="read-in-the-data-1" class="level2">
-<h2 class="anchored" data-anchor-id="read-in-the-data-1">Read in the data</h2>
-<p>First, let’s read in the data and then use <code>View()</code> to check it out.</p>
-<p>Today’s dataset is called <code>polynomial.csv</code>. Let’s read it in and name it <code>polynomial</code>.</p>
+<section id="exercise-3" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3">Exercise 3:</h2>
+<p>Now, let’s examine the effect of frequency on iconicity.</p>
+<ol type="1">
+<li>Create a histogram of the frequency variable. Answer the question: What do you notice about the distribution?</li>
+<li>Log transform the frequency variable Create a histogram of this log transformed variable. Answer the question: What do you notice about the distribution now?</li>
+<li>Run a regression predicting iconicity from the log-transformed frequency variable. Use <code>kable()</code> to create a table of your model results. Hint: you’ll make a table of summary(model)$coefficients.</li>
+<li>Write out an interpretation for the intercept and the slope. Do any necessary adjustments to assist in interpretation.</li>
+<li>What is the expected increase in iconicity if frequency doubles (increases by 100%)? Hint: see lecture slides about X transformations. (no APA style summary required for this exercise)</li>
+</ol>
+</section>
+<section id="new-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="new-dataset">New Dataset!</h2>
+<p>Now, we’ll use a different dataset! A researcher is interested in the relation between age and life satisfaction.</p>
+<p>The data file is called <code>age_sat.csv</code>. Read in the data, name it <code>age_sat</code>. Check it out using <code>View()</code>.</p>
 <p>The data has 2 columns:</p>
 <ul>
 <li>age: participant age</li>
-<li>conscientiousness: score on conscientiousness measure</li>
+<li>life_satisfaction: a measure of participants’ satisfaction with their life</li>
 </ul>
 </section>
-<section id="we-should-always-examine-our-data-first-1" class="level2">
-<h2 class="anchored" data-anchor-id="we-should-always-examine-our-data-first-1">We should always examine our data first!</h2>
-<p>Let’s start by plotting the relation between conscientiousness and age.</p>
-<blockquote class="blockquote">
-<p><strong>Question: What do you notice about the relation between age and conscientiousness?</strong></p>
-</blockquote>
-<p>Fist, we will examine a linear trend of age. Run a model predicting conscientiousness from age. Check out the summary.</p>
-<blockquote class="blockquote">
-<p><strong>Question: How would you interpret the intercept?</strong></p>
-</blockquote>
-<blockquote class="blockquote">
-<p><strong>Question: How would you interpret the slope?</strong></p>
-</blockquote>
-<p>Even if we found a significant linear trend, we had a hypothesis about a quadratic, so let’s test that!</p>
-<p>First, create the quadratic term. Then, run a model predicting conscientiousness from linear and quadratic effects of age. Check out the summary.</p>
-<blockquote class="blockquote">
-<p><strong>Question: What can you say about the relation between conscientiousness and age?</strong></p>
-</blockquote>
-<p>Let’s test a cubic trend as well. Add a cubic term to your data (age^3) and run a third model. Check out the summary.</p>
-<blockquote class="blockquote">
-<p><strong>Question: Which model would you choose?</strong></p>
-</blockquote>
-<p>Let’s compare our models using the <code>anova()</code> function and also examine the change in <em>R^2</em> across our models.</p>
-<blockquote class="blockquote">
-<p><strong>Question: Which model is the best fit for the data?</strong></p>
-</blockquote>
-<p>BUT: Let’s see if we have multicollinaerity issues with our chosen model. Use <code>check_collinaerity()</code> from the <code>{performance}</code> package to test the quadratic model.</p>
-<blockquote class="blockquote">
-<p><strong>Question: Do we have a problem with multicollinaerity?</strong></p>
-</blockquote>
-<p>Center your predictor, create the quadratic term, and run the model again. Check for multicollinaerity.</p>
-<blockquote class="blockquote">
-<p><strong>Question: NOW, do we have a problem with multicollinaerity?</strong></p>
-</blockquote>
-<blockquote class="blockquote">
-<p><strong>Question: What is your final interpretation of the relation between age and conscientiousness?</strong></p>
-</blockquote>
-<blockquote class="blockquote">
-<p><strong>Question: What information would you include in a summary?</strong></p>
-</blockquote>
+<section id="exercise-4" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4">Exercise 4:</h2>
+<p>To understand the relation between age and life satisfaction:</p>
+<ol type="1">
+<li>Plot the relation between life satisfaction from age. Answer the question: What do you notice about this relation (i.e, do you expect a linear or quadratic model to fit better)?</li>
+<li>Run a linear model predicting life satisfaction from age. Write out your interpretations of the intercept and slope.</li>
+<li>Answer the question: From this (linear) model, does it seem that age predicts life satisfaction?</li>
+<li>Now, run a model testing the linear and quadratic effects of age on life satisfaction (you’ll need to create the variable(s) necessary to do this!).</li>
+<li>Run a model comparison (using <code>anova()</code>) to determine which model is a better fit for the data. Answer the questions: (1) What is the change in R-squared across the two models? (2) Is the linear or quadratic model a better fit?</li>
+<li>Test for issues with multicollinaerity in the better fitting model. Answer the questions: (1) What is the VIF? (2) What does this mean regarding multicollinaerity in the model?</li>
+<li>Take steps to fix the multicollinaerity issue. Answer the questions: (1) What is the VIF? (2) Has the multicollinaerity improved?</li>
+<li>Write an APA style summary for the best fitting model in which the multicollinaerity issues have been corrected.</li>
+</ol>
+</section>
+<section id="render-and-submit-your-document." class="level2">
+<h2 class="anchored" data-anchor-id="render-and-submit-your-document.">Render and submit your document.</h2>
+<p><strong>Make sure that you I can see all of your answers in the rendered document!</strong></p>
+<p>To receive credit for this homework, submit a rendered PDF version of your file to “Module 7: Homework Submission” on Canvas.</p>
 <ul>
-<li>clearly define the variables</li>
-<li>describe the model</li>
-<li>mention both linear and quadratic terms</li>
-<li>report <em>overall</em> model fit ( <em>R</em><sup>2</sup>, <em>F</em>, <em>df</em>, <em>p</em>-value)</li>
-<li>report linear effect ( <em>b</em>, <em>SE</em>, <em>t</em> statistic with associated <em>df</em>, 95%CI, <em>p</em>-value, effect size)</li>
-<li>interpret linear effect (e.g., as x increases/decreases, y increases/decreases)</li>
-<li>report quadratic effect ( <em>b</em>, <em>SE</em>, <em>t</em> statistic with associated <em>df</em>, 95%CI, <em>p</em>-value, effect size)</li>
-<li>interpret quadratic effect (e.g., the negative quadratic term suggests an inverted u-shape, where X increases with Y up to a point and then it decreases)</li>
-<li>in one sentence, summarize what you found in non-statistical language</li>
+<li>At the top of the .qmd file, change “format: html” to “format: pdf”</li>
+<li>Click “Render” at the top of the document</li>
+<li>Your document will open in a browser tab
+<ul>
+<li>If your document opens in the “Viewer” pane, click the “sidebar” button (circled in image below).</li>
+<li>If you get a popup warning, click “Try Again” (may be specific to Mac)</li>
+</ul></li>
 </ul>
-</section>
+<p><img src="images/sidebar.png" class="img-fluid"></p>
+<ul>
+<li>Click the “Save” icon on the top right (circled in the image below)</li>
+</ul>
+<p><img src="images/save_pdf.png" class="img-fluid"></p>
+<ul>
+<li>Save wherever you keep your class documents and upload your file to Canvas</li>
+</ul>
+<hr>
 </section>
 
 </main>
