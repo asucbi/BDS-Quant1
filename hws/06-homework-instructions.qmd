@@ -207,7 +207,7 @@ design_result <- ANOVA_design(design = design,
 plot_power(design_result, min_n = 2, max_n = 50)
 
 n <- 12
-
+nsims <- 1000
 design_result <- ANOVA_design(design = design,
                               n = n,
                               mu = mu, 

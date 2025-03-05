@@ -1,0 +1,405 @@
+---
+title: "Module 8: Lab Instructions"
+format: html
+editor: visual
+---
+
+# Purpose
+
+Today we will review how to run models containing interactions: (1) between a continuous and categorical predictor and (2) between two continuous predictors. We will go over how to specify interaction terms in R, how to interpret the model output, and how to visualize the results.
+
+For today's lab, you will need to load the following libraries.
+
+```{r libraries, message=FALSE}
+
+library(tidyverse)
+library(psych) #for generating easy descriptives
+library(emmeans) #for examining simple slopes
+library(performance) #for examining multicollinaerity
+library(interactions) #for plotting simple slopes
+
+```
+
+# Research scenario
+
+Today's dataset was inspired by a recent study by [Markowitz & Levine (2021)](https://journals.sagepub.com/doi/pdf/10.1177/1948550619898976?casa_token=kum1VwoltKAAAAAA:jQngdX1FojAVb_8GQF5ZGBAnRvMoK2dFdzcvIqFyOPRWTbyhQ1p0fWvzz0zZHS7i2LpJIr-VTA) (the data you will be working with has been simulated). In the study, participants completed a matrix task under time pressure and then self-reported their scores. For each matrix problem that they got right, they could earn 25 cents, so it was tempting to cheat and self-report a higher score. Half of the participants shredded their worksheet before self-reporting and half of the participants handed the worksheet to the experimenter before self-reporting. Honesty scores were also self-reported from the HEXACO Personality Inventory (from 1 = extremely low honesty to 5 = extremely high honesty). The researchers hypothesized that personality and situation would interact to predict dishonest behavior.
+
+## Read in the data
+
+First, let's read in the data and then use `View()` to check it out.
+
+Today's first dataset is called `cheating_data.csv`. Let's read it in and name it `cheat`.
+
+```{r read-and-view, message= FALSE, echo=FALSE}
+
+cheat <- read_csv("data/new_df.csv")
+
+```
+## Explore the data
+
+-   Use `str()` to look at the structure of the data
+-   Use `head()` to look at the first few rows of the data
+-   Calculate descriptives (i.e., mean and sd) for the variables `honesty` and
+    `claimed_solved`
+-   Calculate descriptives (i.e., mean and sd) for the variables `honesty` and
+    `claimed_solved`, grouped by `condition` 
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+# your code here
+str(cheat)
+head(cheat)
+
+cheat %>%
+  summarize(mean = mean(honesty, na.rm = TRUE),
+            sd = sd(honesty, na.rm = TRUE))
+# or
+describe(cheat$honesty)
+
+cheat %>%
+  summarize(mean = mean(claimed_solved, na.rm = TRUE),
+            sd = sd(claimed_solved, na.rm = TRUE))
+# or
+describe(cheat$claimed_solved)
+
+cheat %>%
+  group_by(condition) %>%
+  summarize(n = n(),
+            mean_honesty = mean(honesty, na.rm = TRUE),
+            sd_honesty = sd(honesty, na.rm = TRUE),
+            mean_claimed = mean(claimed_solved, na.rm = TRUE),
+            sd_claimed = sd(claimed_solved, na.rm = TRUE))
+```
+
+
+# Simple regression
+
+First, let's look at what the overall relation between honesty and number of problems people claimed they solved looks like. 
+
+Graph in `ggplot()`.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+cheat %>% 
+ggplot(aes(x = honesty, y = claimed_solved)) +
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)+
+  theme_minimal()
+
+```
+> Question: From the graph, what can you say about the relation betwen honesty and the number of problems people claimed the solved?
+
+
+Second, let's perform a simple regression model using `honesty` as a single predictor of number of problems people claimed they solved, `claimed_solved`.
+
+$$\hat{claimed_i} = \beta_0 + \beta_1honesty $$ 
+
+Run this model using `lm()`.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+# your code here
+model_simple <- lm(claimed_solved ~ honesty, data = cheat)
+summary(model_simple)
+
+```
+
+> Question: Write the full model with parameter estimates filled in.
+
+
+> Question: What do each of the parameter estimates mean?
+
+
+
+# Main Effects of Categorical & Continuous Variables
+
+Let's look at a model that investigates both `honesty` and `condition` as predictors of `claimed_solved`, but not their interaction.
+
+$$\hat{claimed_i} = \beta_0 + \beta_1honesty + \beta_2condition$$ 
+
+Run this model using `lm()`.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+# your code here
+model_main_effects <- lm(claimed_solved ~ honesty + condition, data = cheat)
+summary(model_main_effects)
+
+```
+
+> Question: Write the full model with parameter estimates filled in.
+
+
+
+> Question: What do each of the parameter estimates mean?
+
+
+> Question: How would you simplify the above equation to represent the relationship between honesty and number of problems people claim to have solved for the non-shredder (condition = 0) and shredder conditions (condition = 1)?
+
+
+Notice that the only difference between these two equations are their intercepts. If we graphed the two models, let's see what it would look like.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+cheat %>% 
+ggplot(aes(x = honesty, y = claimed_solved)) +
+  geom_point() +
+  geom_abline(slope = -.45, intercept = 6.04, color = "red", size = 1) +
+  geom_abline(slope = -.45, intercept = 7.16, color = "blue", size = 1) +
+  geom_label(x = 1.5, y = 5.2, label = "shredder") +
+  geom_label(x = 1.5, y =6.5, label = "non-shredder") +
+  theme_minimal()
+
+```
+
+We are not allowing the relationship between `honesty` and `claimed_solved` to differ between the two *shredder* and *non-shredder* conditions. 
+
+However, our theory predicts that people will act differently depending on the condition that they were in. To investigate this, we need to include the *interaction effect* to examine whether the relationship between honesty and number of problems people claimed they solves *differs depending on whether people were in the non-shredder or shredder condition*.
+
+
+# Continuous x Categorical Interaction
+
+## Visualization
+
+First, let's graph the continuous X categorical interaction between honesty and condition.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+# on a single graph
+cheat %>% 
+ggplot(aes(x = honesty, y = claimed_solved)) +
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE, aes(color = condition)) +
+  scale_color_manual(values = c("red", "blue")) +
+  theme_minimal()
+
+# on two separate graphs
+cheat %>% 
+ggplot(aes(x = honesty, y = claimed_solved)) +
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE, aes(color = condition))+
+  facet_wrap(~condition) +
+  scale_color_manual(values = c("red", "blue")) +
+  theme_minimal()
+
+```
+
+It certainly looks like there could be a significant interaction effect. Let's run the multiple regression model to examine it further.
+
+## Centering
+
+Notice that in this case, honesty has been measured on a 1 to 5 scale. If we do *not* center honesty first, the model intercept will correspond to the predicted `claimed_solved` score when honesty = 0, a value that falls outside of the range of possible ones.
+
+Typically, the continuous variables will be centered prior to running the analysis. This guarantees that the intercept will intersect the y-axis at a meaningful value (when the predictor is equal to its mean). 
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+cheat <- cheat %>%
+   mutate(honesty_c = honesty - mean(honesty, na.rm = TRUE)) # subtract the mean
+
+```
+
+## Running the Interaction Model
+
+Run a multiple regression model predicting `claimed_solved` from `honest_c`, `condition`, and the interaction between the two.
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+# Your code here
+model_int <- lm(claimed_solved ~ honesty_c*condition, data = cheat)
+summary(model_int)
+
+```
+> Question: What is the full model with parameter estimates filled in?
+
+> Question: What do each of the parameter estimates mean?
+
+
+
+The *simple slopes* are the slopes representing the relationship between predictor 1 and Y at specific levels of predictor 2. We can get simple slopes to examine what the relationship is between `honesty_c` and `claimed_solved` at different levels of `condition`.
+
+
+## Testing Significance of Simple Slopes
+
+To get the *simple slopes* and associated signfiicance we can use the `emtrends` function from the `emmeans` package. 
+
+Is the slope for the non-shredder condition significantly different from the slope for the shredder condition?
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+emtrends(model_int, pairwise~condition, var = "honesty_c")
+
+```
+
+In the interest of practicing Continuous x Continuous interactions, I have added a variable to the dataset called `confidence` that is a general measure of participants confidence trait. This variable ranges from -12 to 12.
+
+# Main Effects of Two Categorical Variables
+
+As we did above, let's look at a model that investigates both `honesty` and `confidence` as predictors of `claimed_solved`, but not their interaction.
+
+$$\hat{Claimed_i} = \beta_0 + \beta_1honesty + \beta_2confidence$$ 
+
+Run this model using `lm()`.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+# your code here
+model2_main_effects <- lm(claimed_solved ~ honesty + confidence, data = cheat)
+summary(model2_main_effects)
+
+```
+
+> Question: Write the full model with parameter estimates filled in.
+
+
+
+> Question: What do each of the parameter estimates mean?
+
+
+# Check Collinaerity
+
+Let's examine our model to see if we have any multicolinaerity issues.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+check_collinearity(model2_main_effects)
+
+```
+> Question: Do you see any multicollinearity issues?
+
+
+## Visualization
+
+Next, let's examine the relation between `honesty` and `claimed_solved` and `confidence` and `claimed_solved`.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+cheat %>% 
+ggplot(aes(x = honesty, y = claimed_solved)) +
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)+
+  theme_minimal()
+
+cheat %>% 
+ggplot(aes(x = confidence, y = claimed_solved)) +
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)+
+  theme_minimal()
+
+```
+> Question: What is the relation between `claimed_solved` and each of these variables?
+
+
+# Continuous x Categorical Interaction
+
+Now, let's add the interaction term to test whether the effect of `confidence` on `claimed_solved` depends on `honesty` (or vice versa).
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+model2_int <- lm(claimed_solved ~ honesty*confidence, data = cheat)
+summary(model2_int)
+
+```
+> Question: Is the interaction significant?
+
+
+Let's check for multicollinearity in this model.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+check_collinearity(model2_int)
+
+```
+> Question: Is there multicollinaerity? What could you do to fix it?
+
+
+## Centering
+
+Typically, when you have an interaction, it is good practice to center your continuous predictors.
+
+We already created the centered honesty predictor. Let's do the same for `confidence`.
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+cheat <- cheat %>%
+   mutate(confidence_c = confidence - mean(confidence, na.rm = TRUE)) # subtract the mean
+
+```
+
+## Running the Interaction Model
+
+Run a multiple regression model predicting `claimed_solved` from `honest_c`, `confidence_c`, and the interaction between the two. 
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+# Your code here
+model2_int_c <- lm(claimed_solved ~ honesty_c*confidence_c, data = cheat)
+summary(model2_int_c)
+
+```
+Let's check this model for multicollinearity.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+check_collinearity(model2_int_c)
+
+```
+> Question: Did centering sufficiently reduce multicollinearity?
+
+
+> Question: What is the full model with parameter estimates filled in?
+
+
+> Question: What do each of the parameter estimates mean?
+
+
+# Simple Slopes
+
+The *simple slopes* are the slopes representing the relationship between predictor 1 and Y at specific levels of predictor 2. As above, we can get simple slopes to examine what the relationship is between `honesty_c` and `claimed_solved` at different levels of [VARIABLE]. However, because [VARIABLE] is continuous, we need to determine what constitutes low, medium, and high levels. 
+
+## Calculating Simple Slopes
+
+First, let's determine what constitutes low, medium, and high. We don't have any pre-existing theories about what these values should be, so we'll use -1SD (low) and +1SD (high). 
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+#What is the standard deviation of our confidence variable?
+sd(cheat$confidence_c, na.rm = TRUE)
+
+#Now, use this to create low, medium, and high values
+low <- mean(cheat$confidence_c, na.rm = TRUE) - sd(cheat$confidence_c, na.rm = TRUE)
+medium <- mean(cheat$confidence_c, na.rm = TRUE) #technically this should be zero, but this is close enough!
+high <- mean(cheat$confidence_c, na.rm = TRUE) + sd(cheat$confidence_c, na.rm = TRUE)
+
+```
+> Question: How would we rearrange our equation to isolate the effect of `honesty_c` on `claimed_solved` at various levels of `confidence_c`?
+
+
+> Question: Use this equation to calculate the intercept and slope of `honesty_c` at low, medium, and high levels of `confidence_c`?
+
+
+## Plotting Simple Slopes
+
+Now, we will use the `interact_plot()` function from the `{interactions}` package to plot the slope of `honesty_c` on `claimed_solved` at low, medium, and high levels of [VARIABLE].
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+interact_plot(model2_int_c, pred = honesty_c, modx = confidence_c, interval = TRUE, plot.points = TRUE)
+
+```
+## Testing Significance of Simple Slopes
+
+To get the *simple slopes* and associated significance we can use the `emtrends` function from the `emmeans` package. 
+
+Does the slope of `honesty` on `claimed_solve` differ from zero across different values of `confidence_c`?
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+# create a list for values at a, b, and mean and round 
+
+mylist <- list(confidence_c=c(round(high, 1), round(medium,1), round(low, 1)))
+
+emtrends(model2_int_c,~confidence_c, var="honesty_c", at=mylist) %>%
+  test(adjust="holm")
+
+```
+> Question: Which slopes differ from zero? Which do not?
+
+
+> Question: Given the plot and simple slopes test, what can we say about the effect of `honesty_c` on `claimed_solved` at low, medium, and high levels of `confidence_c`?
+
+
+
+

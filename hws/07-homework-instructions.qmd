@@ -115,7 +115,7 @@ summary(model3)
 
 icon <- icon %>% 
   mutate(SER_z = (SER-mean(SER, na.rm = TRUE))/sd(SER, na.rm = TRUE),
-         sys_z = (systematicity-mean(systematicity))/sd(systematicity, na.rm = TRUE))
+         sys_z = (systematicity-mean(systematicity, na.rm = TRUE))/sd(systematicity, na.rm = TRUE))
 
 model4 <- lm(iconicity ~ SER_z + sys_z, data = icon)
 summary(model4)
