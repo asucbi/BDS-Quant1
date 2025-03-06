@@ -426,7 +426,7 @@ ggplot(aes(x = confidence, y = claimed_solved)) +
 
 ANSWER: honesty looks negative, confidence is slightly positive but not significant
 
-# Continuous x Categorical Interaction
+# Continuous x Continuous Interaction
 
 Now, let's add the interaction term to test whether the effect of `confidence` on `claimed_solved` depends on `honesty` (or vice versa).
 

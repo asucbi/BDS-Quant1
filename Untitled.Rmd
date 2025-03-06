@@ -217,4 +217,6 @@ ggsave("simple_slopes.png", height=8, width=12)
 ggpredict(d, terms=c("video_games_c", "caunts_c")) %>% plot()
 
 
+
+new_var = 0.4 * honesty + 0.4 * claimed_solved + 1.5 * interaction + rnorm(n(), sd = 0.4)
 ```
