@@ -1,5 +1,5 @@
 ---
-title: "Module 8: Lab Instructions (Instructor File)"
+title: "Module 8: Lab Starter KEY"
 format: html
 editor: visual
 ---
@@ -44,6 +44,20 @@ cheat <- read_csv("data/new_df.csv")
 -   Calculate descriptives (i.e., mean and sd) for the variables `honesty` and `claimed_solved`, grouped by `condition`
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+#students: take a few minutes to check out the data
+
+
+
+
+
+
+
+
+
+
+
+
 # your code here
 str(cheat)
 head(cheat)
@@ -77,6 +91,19 @@ Graph in `ggplot()`.
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
+#students: fill in the code below
+
+
+
+
+
+
+
+
+
+
+
+
 cheat %>% 
 ggplot(aes(x = honesty, y = claimed_solved)) +
   geom_point()+
@@ -97,7 +124,17 @@ Run this model using `lm()`.
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
-# your code here
+#students: fill in the model
+
+
+
+
+
+
+
+
+
+
 model_simple <- lm(claimed_solved ~ honesty, data = cheat)
 summary(model_simple)
 
@@ -122,6 +159,19 @@ $$\hat{claimed_i} = \beta_0 + \beta_1honesty + \beta_2condition$$
 Run this model using `lm()`.
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+#students: fill in the model
+
+
+
+
+
+
+
+
+
+
+
 
 # your code here
 model_main_effects <- lm(claimed_solved ~ honesty + condition, data = cheat)
@@ -151,7 +201,7 @@ $$\hat{claimed_i} = 6.04 -0.45honesty + 1.12(0) = 6.04 - 0.45honesty$$
 
 $$\hat{claimed_i} = 6.04 -0.45honesty + 1.12(1) = 7.16 - 0.45honesty$$
 
-Notice that the only difference between these two equations are their intercepts. If we graphed the two models, let's see what it would looke like.
+Notice that the only difference between these two equations are their intercepts. If we graphed the two models, let's see what it would look like.
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
@@ -177,6 +227,19 @@ However, our theory predicts that people will act differently depending on the c
 First, let's graph the continuous X categorical interaction between honesty and condition.
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+#students: fill in the code below
+
+
+
+
+
+
+
+
+
+
+
 # on a single graph
 cheat %>% 
 ggplot(aes(x = honesty, y = claimed_solved)) +
@@ -217,7 +280,19 @@ Run a multiple regression model predicting `claimed_solved` from `honest_c`, `co
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
-# Your code here
+#students: create the interaction model
+
+
+
+
+
+
+
+
+
+
+
+
 model_int <- lm(claimed_solved ~ honesty_c*condition, data = cheat)
 summary(model_int)
 
@@ -276,7 +351,19 @@ Run this model using `lm()`.
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
-# your code here
+#students: fill in the code
+
+
+
+
+
+
+
+
+
+
+
+
 model2_main_effects <- lm(claimed_solved ~ honesty + confidence, data = cheat)
 summary(model2_main_effects)
 
@@ -367,6 +454,19 @@ We already created the centered honesty predictor. Let's do the same for `confid
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
+#students: fill in code
+
+
+
+
+
+
+
+
+
+
+
+
 cheat <- cheat %>%
    mutate(confidence_c = confidence - mean(confidence, na.rm = TRUE)) # subtract the mean
 
@@ -378,7 +478,19 @@ Run a multiple regression model predicting `claimed_solved` from `honest_c`, `co
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
-# Your code here
+#students: fill in the code and run this model
+
+
+
+
+
+
+
+
+
+
+
+
 model2_int_c <- lm(claimed_solved ~ honesty_c*confidence_c, data = cheat)
 summary(model2_int_c)
 
@@ -434,7 +546,7 @@ high <- mean(cheat$confidence_c, na.rm = TRUE) + sd(cheat$confidence_c, na.rm = 
 
 ANSWER: $$\hat{claimed_i} = 5.26 + 0.05confidence_c + (-0.52 - 0.07confidence_c)honesty_c$$
 
-> Question: Use this equation to calculate the intercept and slope of `honesty_c` at low, medium, and high levels of `confidence_c`?
+> Question: Use this equation to calculate the intercept and slope of `honesty_c` at low, medium, and high levels of `confidence_c`.
 
 ANSWER:
 
@@ -461,8 +573,6 @@ To get the *simple slopes* and associated significance we can use the `emtrends`
 Does the slope of `honesty` on `claimed_solve` differ from zero across different values of `confidence_c`?
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
-
-# create a list for values at a, b, and mean and round 
 
 mylist <- list(confidence_c=c(round(high, 1), round(medium,1), round(low, 1)))
 
