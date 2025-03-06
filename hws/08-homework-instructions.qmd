@@ -1,0 +1,232 @@
+---
+title: "Module 8: Homework Instructions"
+format: html
+editor: visual
+---
+
+## Purpose
+
+In this week's homework, you will be asked to demonstrate your understanding of transformations.
+
+## Access the Starter Files for Module 8
+
+-   Go to [posit.cloud](posit.cloud) and then **navigate to the course workspace** via the left sidebar.
+
+    -   Look for the course workspace called "Statistical Methods Spring 2025"
+
+-   Open the project titled **Module 8** This module contains the starter files that you will use for the lab and for your homework.
+
+## Starter Files
+
+In the Files pane you should see these two R Notebooks:
+
+-   mod-08-lab-starter.qmd
+-   mod-08-hw-starter.qmd
+
+Open up `mod-08-hw-starter.qmd`.
+
+## Render it!
+
+Click the button called "Render" (circled in the image below) and then double check to see that your document rendered in the **Viewer** pane. It is always a good idea to occasionally check that the document still renders correctly after making changes.
+
+![](images/render.png)
+
+## Load Packages
+
+Today, we'll be using the following packages:
+
+-   **tidyverse**: a collection of packages for doing data analysis in a "tidy" way
+-   **papaja**: a package that supports the formatting of APA style documents
+-   **psych**: a package for getting descriptives
+-   **emmeans**: a package for calculating marginal effects
+-   **performance**: a package for checking model assumptions (e.g., multicollinaerity)
+
+Please load these packages using the `library()` function. If the packages don't load, you may need to `install.packages()` first.
+
+```{r load-packages, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(papaja) #for formatting p values
+library(psych) #for generating easy descriptives
+library(emmeans) #for examining simple slopes
+library(performance) #for checking multicollinaerity
+
+```
+
+## Data Summary
+
+In the first 3 exercises, we will be analyzing data from the following paper:
+
+Winter, B., Perlman, M., Perry, L. K., & Lupyan, G. (2017). Which words are most iconic? Iconicity in English sensory words. Interaction Studies, 18(3), 433-454.
+
+For this study, Winter et al. collected iconicity ratings from 2,500 native American English speakers for 3,000 words. Participants were asked to rate each word for whether "it sounds like what it means" or "it sounds like the opposite of what it means" on a scale from -5.0 to +5.0. Here, we will be looking at each word's average iconicity score, and we want to look at what words are most iconic (i.e., sound more like what they mean).
+
+## Read in the Data
+
+The data file is called `icon_data.csv`. Read in the data, name it `icon`. Check it out using `View()`.
+
+```{r read-data, echo=FALSE, message=FALSE}
+
+icon <- read_csv("data/icon_data.csv")
+
+```
+
+The data has 8 columns:
+
+-   Word: the word
+-   SER: sensory experience ratings from Juhasz & Jap (2013)
+-   imageability: imageability ratings from Cortese & Fugett (2004)
+-   Concreteness: concreteness ratings from Brysbaert et al. (2014)
+-   systematicity: systematicity ratings from Monaghan et al. (2014)
+-   frequency: frequency of words from SUBTLEX (Brysbaert & New, 2009)
+
+## Exercise 1:
+
+1.  Run a model predicting iconicity from SER (sensory experience ratings). Write out your interpretations of the intercept and the slope.
+2.  Answer the question: Why might we want to center the SER variable?
+3.  Center the SER variable, rerun the model. Write out your interpretations of the intercept and the slope. (no APA style summary required for this exercise)
+
+```{r ex-1, echo=FALSE, message=FALSE, eval=FALSE}
+
+model1 <- lm(iconicity ~ SER, data = icon)
+summary(model1)
+
+icon <- icon %>% 
+  mutate(SER_c = SER-mean(SER, na.rm =TRUE))
+
+model2 <- lm(iconicity ~ SER_c, data = icon)
+summary(model2)
+
+```
+
+## Exercise 2:
+
+Now, we want to know whether SER or systematicity is the stronger predictor of iconicity.
+
+1.  Run a model predicting iconicity from SER and systematicity. Write out your interpretations of the intercept and slopes. Don't do anyting to the predictors.
+2.  Answer the question: From this model, can we determine which is the stronger predictor? Why or why not?
+3.  Scale (z-score) the SER and systematicity variables, rerun the model. Write out your interpretations of the intercept and the slope.
+4.  Answer the question: Which of the variables is the stronger predictor of iconicity?
+5.  Write an APA style summary for the model you ran *in question 3*, make sure your summary also addresses the answer to question 4.
+
+```{r ex-2, echo=FALSE, message=FALSE, eval=FALSE}
+
+model3 <- lm(iconicity ~ SER + systematicity, data = icon)
+summary(model3)
+
+icon <- icon %>% 
+  mutate(SER_z = (SER-mean(SER, na.rm = TRUE))/sd(SER, na.rm = TRUE),
+         sys_z = (systematicity-mean(systematicity, na.rm = TRUE))/sd(systematicity, na.rm = TRUE))
+
+model4 <- lm(iconicity ~ SER_z + sys_z, data = icon)
+summary(model4)
+
+```
+
+## Exercise 3:
+
+Now, let's examine the effect of frequency on iconicity.
+
+1.  Create a histogram of the frequency variable. Answer the question: What do you notice about the distribution?
+2.  Log transform the frequency variable. Create a histogram of this log transformed variable. Answer the question: What do you notice about the distribution now?
+3.  Run a regression predicting iconicity from the log-transformed frequency variable. Use `kable()` to create a table of your model results. Hint: you'll make a table of summary(model)\$coefficients.
+4.  Write out an interpretation for the intercept and the slope. Do any necessary adjustments to assist in interpretation.
+5.  What is the expected increase in iconicity if frequency doubles (increases by 100%)? Hint: see lecture slides about X transformations. (no APA style summary required for this exercise)
+
+```{r ex-3, echo=FALSE, message=FALSE, eval=FALSE}
+
+ggplot(icon, aes(x=frequency))+
+  geom_histogram()
+
+icon <- icon %>% 
+  mutate(frequency_log = log(frequency))
+
+ggplot(icon, aes(x=frequency_log))+
+  geom_histogram()
+
+model5 <- lm(iconicity ~ frequency_log, data = icon)
+summary(model5)
+
+#Intercept: expected iconicity for a word at frequency = 1
+#Slope: -0.1326/100 is the expected increase in iconicity for a 1% increase in frequency
+
+-0.1326*log(2)
+
+#If frequency doubles, we expect iconicity to decrease by .09
+
+```
+
+## New Dataset!
+
+Now, we'll use a different dataset! A researcher is interested in the relation between age and life satisfaction.
+
+The data file is called `age_sat.csv`. Read in the data, name it `age_sat`. Check it out using `View()`.
+
+```{r read-data-2, echo=FALSE, message=FALSE}
+
+age_sat <- read_csv("data/age_sat.csv")
+
+```
+
+The data has 2 columns:
+
+-   age: participant age
+-   life_satisfaction: a measure of participants' satisfaction with their life
+
+## Exercise 4:
+
+To understand the relation between age and life satisfaction:
+
+1.  Plot the relation between life satisfaction and age. Answer the question: What do you notice about this relation (i.e, do you expect a linear or quadratic model to fit better)?
+2.  Run a linear model predicting life satisfaction from age. Write out your interpretations of the intercept and slope.
+3.  Answer the question: From this (linear) model, does it seem that age predicts life satisfaction?
+4.  Now, run a model testing the linear and quadratic effects of age on life satisfaction (you'll need to create the variable(s) necessary to do this!).
+5.  Run a model comparison (using `anova()`) to determine which model is a better fit for the data. Answer the questions: (1) What is the change in R-squared across the two models? (2) Is the linear or quadratic model a better fit?
+6.  Test for issues with multicollinaerity in the better fitting model. Answer the questions: (1) What is the VIF? (2) What does this mean regarding multicollinaerity in the model?
+7.  Take steps to fix the multicollinaerity issue. Answer the questions: (1) What is the VIF? (2) Has the multicollinaerity improved?
+8.  Write an APA style summary for the best fitting model in which the multicollinaerity issues have been corrected.
+
+```{r ex-4, echo=FALSE, message=FALSE, eval=FALSE}
+
+model6 <- lm(life_satisfaction ~ age, data = age_sat)
+summary(model6)
+
+age_sat <- age_sat %>% 
+  mutate(age2 = age^2)
+
+model7 <- lm(life_satisfaction ~ age + age2, data = age_sat)
+summary(model7)
+
+anova(model6, model7)
+
+age_sat <- age_sat %>% 
+  mutate(age_c = age-mean(age, na.rm =TRUE),
+         age_c_2 = age_c^2)
+
+model8 <- lm(life_satisfaction ~ age_c + age_c_2, data = age_sat)
+summary(model8)
+
+check_collinearity(model8)
+
+```
+
+## Render and submit your document.
+
+**Make sure that you I can see all of your answers in the rendered document!**
+
+To receive credit for this homework, submit a rendered PDF version of your file to "Module 7: Homework Submission" on Canvas.
+
+-   At the top of the .qmd file, change "format: html" to "format: pdf"
+-   Click "Render" at the top of the document
+-   Your document will open in a browser tab
+    -   If your document opens in the "Viewer" pane, click the "sidebar" button (circled in image below).
+    -   If you get a popup warning, click "Try Again" (may be specific to Mac)
+
+![](images/sidebar.png)
+
+-   Click the "Save" icon on the top right (circled in the image below)
+
+![](images/save_pdf.png)
+
+-   Save wherever you keep your class documents and upload your file to Canvas
+
+------------------------------------------------------------------------

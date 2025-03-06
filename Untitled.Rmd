@@ -1,0 +1,220 @@
+---
+title: "Untitled"
+author: "Jessica E. Kosie"
+date: "2025-03-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse); library(broom); library(knitr)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+evals_agegend=read.csv("https://raw.githubusercontent.com/jgeller112/psy503-psych_stats/master/evals.csv")
+evals1= evals_agegend %>%
+dplyr::select(ID, score, age, gender)
+```
+
+## Research question
+
+-   Does Age and Sex (Males, Females) of the instructor influence
+    instructor ratings?
+
+    -   DV: Evals
+    -   IV:
+        -   Age (continuous)
+        -   Gender (categorical)
+        -   Age\*Gender interaction
+
+::: callout-note
+ANCOVA is a special case of a categorical x continuous regression model
+:::
+
+## Scatter plot
+
+```{r}
+#| fig-align: center
+
+ggplot(evals1, aes(x = age, y = score, color = gender)) +
+  geom_point() +
+  labs(x = "Age", y = "Teaching Quality Rating", color = "Gender") +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_minimal() +
+  theme(text = element_text(size = 20)) 
+
+ggsave("agexgender.png", height=8, width=8)
+```
+
+## How to conduct moderation analysis?
+
+-   Moderation analysis can be conducted by adding one or multiple
+    interaction terms in a regression analysis
+-   Z is a moderator for the relation between X and Y, we can fit a
+    regression model
+
+$$\begin{eqnarray*} 
+Y & = & b_{0}+b_{1}*X+b_{2}*Z+b_{3}*X*Z+e \\ & = & \begin{cases} b_{0}+b_{1}*X+e & \mbox{For females}(Z=0)\\ b_{0}+b_{2}+(b_{1}+b_{3})*X+e & \mbox{For males}(Z=1) \end{cases} \end{eqnarray*}$$
+
+-   When Z=0 (females),the effect of X on Y is $b_1+b_3∗0=b_1$
+
+-   When Z=1 (males), the effect of X on Y is $b_1 + b_3*(1)$
+
+## Steps for moderation analysis
+
+A moderation analysis typically consists of the following steps:
+
+1.  Compute the interaction term XZ=X\*Z
+
+2.  Fit a multiple regression model with X, Z, and X\*Z as predictors
+
+3.  Test whether the regression coefficient for XZ (interaction) is
+    significant
+
+    3.1 If so, interpret the moderation effect
+
+4.  Display the moderation effect graphically
+
+## Steps for moderation analysis
+
+-   Compute the interaction term XZ=X\*Z
+
+```{r}
+
+#center continuous predictor
+evals_interact <- evals1 %>% 
+  mutate(age_c = age-mean(age, na.rm = TRUE))
+
+
+evals_interact <- evals_interact %>%
+ mutate(gender_trt=ifelse(gender=="female", 0, 1), inter=age_c*gender_trt, inter2=age*gender_trt)
+
+```
+
+## Steps for moderation analysis
+
+-   Center continuous variables
+
+    -   Centering solves two problems:
+
+        -   Interpretation
+
+        -   Multicollinearity
+
+
+## Steps for moderation analysis
+
+-   Fit a multiple regression model with X, Z, and X\*Z as predictors
+-   Test whether the regression coefficient for X\*Z is significant
+
+```{r run-model}
+lm(score~age_c*gender_trt, data=evals_interact) %>%
+  tidy(conf.int=TRUE) %>%
+  knitr::kable() 
+```
+```{r}
+evals_interact %>%
+  mutate(gender_dev=ifelse(gender=="female", 0.5, -0.5)) %>%
+  lm(score~age_c*gender_dev, data=.) %>%
+  tidy(conf.int=TRUE) %>%
+  kable()
+```
+```{r}
+
+ggplot(evals1, aes(x = age, y = score, color = gender)) +
+  geom_point() +
+  labs(x = "Age", y = "Teaching Quality Rating", color = "Gender") +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_minimal() +
+  theme(text = element_text(size = 20), legend.position="none") +
+  facet_wrap(~gender)
+
+ggsave("age_by_gender.png", height=5, width=8)
+
+library(emmeans)
+d=lm(score~age_c*gender_trt, data=evals_interact)
+
+emtrends(d, ~ gender_trt, var="age_c") %>%
+  kable()
+emtrends(d, ~ gender_trt, var="age_c") %>%
+  test() %>%
+  kable()
+
+```
+```{r}
+
+# no inter
+main<-lm(score~age_c + gender_trt, data=evals_interact) 
+
+# inter
+inter<- lm(score~age_c*gender_trt, data=evals_interact)
+
+anova(main, inter) %>% 
+  kable()
+```
+```{r}
+
+# ggplot(evals1, aes(x = age, y = score, color = gender)) +
+#   geom_point() +
+#   labs(x = "Age", y = "Teaching Score", color = "Gender") +
+#   geom_parallel_slopes(se = FALSE) +
+#   theme_minimal() +
+#   theme(text = element_text(size = 20), legend.position="none")
+# 
+# #ggsave("parallel_slopes.png", height=8, width=8)
+
+ggplot(evals_interact, aes(x = age, y = score, color = gender)) +
+  geom_point() +
+  labs(x = "Age", y = "Teaching Score", color = "Gender") +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_minimal() +
+  theme(text = element_text(size = 20), legend.position="none")
+
+ggsave("not_parallel_slopes.png", height=8, width=8)
+
+```
+```{r}
+moderation_vio=read.csv("https://raw.githubusercontent.com/jgeller112/psy503-psych_stats/master/moderation.csv")
+
+moderation_vio <- moderation_vio %>% 
+  mutate(video_games_c = (Vid_Games - mean(Vid_Games, na.rm = TRUE)),
+         caunts_c = (CaUnTs - mean(CaUnTs, na.rm = TRUE)))
+
+lm(Aggression~ video_games_c*caunts_c,  data=moderation_vio) %>%
+  tidy(conf.int=TRUE) %>%
+  kable()
+
+#create the low and high z score variables 
+a <- mean(moderation_vio$caunts_c) + sd(moderation_vio$caunts_c)
+
+at <- mean(moderation_vio$caunts_c)
+
+b <- mean(moderation_vio$caunts_c) - sd(moderation_vio$caunts_c)
+
+# create a list for values at a, b, and mean and round 
+
+mylist <- list(caunts_c=c(round(b, 1), round(at,1), round(a, 1)))
+
+# run lm again
+d=lm(Aggression~video_games_c*caunts_c,data=moderation_vio)
+
+# get simple slopes at each level at b a
+#adjust for multiple tests
+emtrends(d,~caunts_c, var="video_games_c", at=mylist) %>%
+  test(adjust="holm") %>% 
+  kable()
+
+library(interactions)
+interact_plot(d, pred = video_games_c, modx = caunts_c, interval = TRUE, plot.points = TRUE)
+
+ggsave("simple_slopes.png", height=8, width=12)
+
+ggpredict(d, terms=c("video_games_c", "caunts_c")) %>% plot()
+
+
+```

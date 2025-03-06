@@ -32,7 +32,7 @@ Today's first dataset is called `cheating_data.csv`. Let's read it in and name i
 
 ```{r read-and-view, message= FALSE, echo=FALSE}
 
-cheat <- read_csv("data/new_df.csv")
+cheat <- read_csv("data/cheating_data.csv")
 
 ```
 
@@ -329,15 +329,22 @@ The *simple slopes* are the slopes representing the relationship between predict
 
 ## Testing Significance of Simple Slopes
 
-To get the *simple slopes* and associated signfiicance we can use the `emtrends` function from the `emmeans` package.
+To get the *simple slopes* we can use the `emtrends` function from the `emmeans` package. 
 
-Is the slope for the non-shredder condition significantly different from the slope for the shredder condition?
+There are different questions we can ask by calculating simple slopes and performing hypothesis tests with them.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
-
-emtrends(model_int, pairwise~condition, var = "honesty_c")
-
+Q1: Is honesty a significant predictor of number of problems people claim to have solved at each level of condition (non-shredder & shredder conditions)?
+```{r}
+emtrends(model_int, ~condition, var = "honesty_c") %>% 
+  test()
 ```
+
+Q2: Is the slope for the non-shredder condition (-0.85) significantly different from the slope for the shredder condition (-0.08)?
+```{r}
+emtrends(model_int, pairwise~condition, var = "honesty_c")
+```
+
+This is the same as the test of the interaction effect from the overall model.
 
 In the interest of practicing Continuous x Continuous interactions, I have added a variable to the dataset called `confidence` that is a general measure of participants confidence trait. This variable ranges from -12 to 12.
 

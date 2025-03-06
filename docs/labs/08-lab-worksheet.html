@@ -215,8 +215,11 @@ window.Quarto = {
 </section>
 <section id="testing-significance-of-simple-slopes" class="level2">
 <h2 class="anchored" data-anchor-id="testing-significance-of-simple-slopes">Testing Significance of Simple Slopes</h2>
-<p>To get the <em>simple slopes</em> and associated signfiicance we can use the <code>emtrends</code> function from the <code>emmeans</code> package.</p>
-<p>Is the slope for the non-shredder condition significantly different from the slope for the shredder condition?</p>
+<p>To get the <em>simple slopes</em> we can use the <code>emtrends</code> function from the <code>emmeans</code> package.</p>
+<p>There are different questions we can ask by calculating simple slopes and performing hypothesis tests with them.</p>
+<p>Q1: Is honesty a significant predictor of number of problems people claim to have solved at each level of condition (non-shredder &amp; shredder conditions)?</p>
+<p>Q2: Is the slope for the non-shredder condition (-0.85) significantly different from the slope for the shredder condition (-0.08)?</p>
+<p>This is the same as the test of the interaction effect from the overall model.</p>
 <p>In the interest of practicing Continuous x Continuous interactions, I have added a variable to the dataset called <code>confidence</code> that is a general measure of participants confidence trait. This variable ranges from -12 to 12.</p>
 </section>
 </section>
@@ -278,7 +281,7 @@ window.Quarto = {
 </section>
 <section id="simple-slopes" class="level1">
 <h1>Simple Slopes</h1>
-<p>The <em>simple slopes</em> are the slopes representing the relationship between predictor 1 and Y at specific levels of predictor 2. As above, we can get simple slopes to examine what the relationship is between <code>honesty_c</code> and <code>claimed_solved</code> at different levels of [VARIABLE]. However, because [VARIABLE] is continuous, we need to determine what constitutes low, medium, and high levels.</p>
+<p>The <em>simple slopes</em> are the slopes representing the relationship between predictor 1 and Y at specific levels of predictor 2. As above, we can get simple slopes to examine what the relationship is between <code>honesty_c</code> and <code>claimed_solved</code> at different levels of <code>confidence</code>. However, because <code>confidence</code> is continuous, we need to determine what constitutes low, medium, and high levels.</p>
 <section id="calculating-simple-slopes" class="level2">
 <h2 class="anchored" data-anchor-id="calculating-simple-slopes">Calculating Simple Slopes</h2>
 <p>First, let’s determine what constitutes low, medium, and high. We don’t have any pre-existing theories about what these values should be, so we’ll use -1SD (low) and +1SD (high).</p>
@@ -291,7 +294,7 @@ window.Quarto = {
 </section>
 <section id="plotting-simple-slopes" class="level2">
 <h2 class="anchored" data-anchor-id="plotting-simple-slopes">Plotting Simple Slopes</h2>
-<p>Now, we will use the <code>interact_plot()</code> function from the <code>{interactions}</code> package to plot the slope of <code>honesty_c</code> on <code>claimed_solved</code> at low, medium, and high levels of [VARIABLE].</p>
+<p>Now, we will use the <code>interact_plot()</code> function from the <code>{interactions}</code> package to plot the slope of <code>honesty_c</code> on <code>claimed_solved</code> at low, medium, and high levels of <code>confidence</code>.</p>
 </section>
 <section id="testing-significance-of-simple-slopes-1" class="level2">
 <h2 class="anchored" data-anchor-id="testing-significance-of-simple-slopes-1">Testing Significance of Simple Slopes</h2>
