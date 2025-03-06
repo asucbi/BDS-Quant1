@@ -135,29 +135,37 @@ summary(model)
 
 ANSWER: XXX
 
-4. Test whether each simple slope is significantly different from 0. Answer the question: Which of the slopes are significantly different from zero?
+4. Write out the three equations for examining the effect of `prev_score` on `perf` at low, medium, and high levels of `study_time`.
 
 ```{r}
-emtrends(model, ~anxiety, var = "study_time_c") %>% 
-  test()
+
+sd(test_perf$study_time_c)
+
+low <- mean(test_perf$study_time_c) - sd(test_perf$study_time_c)
+medium <- 0
+high <- mean(test_perf$study_time_c)+ sd(test_perf$study_time_c)
+
 ```
 
-5. Test whether the simple slopes for low anxiety and high anxiety are significantly different from each other. Answer the question: Do the slopes differ significantly from each other?
+5. Use the `interact_plot()` function from the `{interactions}` package to plot the slope of `prev_score` on `perf` at low, medium, and high levels of `study_time`.
 
 ```{r}
-emtrends(model, pairwise~anxiety, var = "study_time_c")
-```
 
-6. Write an APA style summary of your results. We have had a lot of practice extracting values from objects, and I know this can be tedious (though its a good skill to have!). If you would like to type out the numbers rather than extracting them from objects, that is fine. However, be careful to double-check your values! If you want to practice extracting values from objects, I encourage you to keep doing it!
-
-
-
-
-
-
-
+interact_plot(model, pred = prev_score_c, modx = study_time_c, interval = TRUE, plot.points = TRUE)
 
 ```
+6. Test the slope of `prev_score` on `perf` differ from zero across different values of `study_time`?
+
+```{r}
+
+mylist <- list(study_time_c=c(round(high, 1), round(medium,1), round(low, 1)))
+
+emtrends(model,~study_time_c, var="prev_score_c", at=mylist) %>%
+  test(adjust="holm")
+
+```
+
+7. Write an APA style summary of your results. We have had a lot of practice extracting values from objects, and I know this can be tedious (though its a good skill to have!). If you would like to type out the numbers rather than extracting them from objects, that is fine. However, be careful to double-check your values! If you want to practice extracting values from objects, I encourage you to keep doing it!
 
 ## Render and submit your document.
 
