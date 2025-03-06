@@ -8,38 +8,7 @@ editor: visual
 
 In this week's homework, you will be asked to demonstrate your understanding of categorical x continuous interactions and continuous x continuous interactions.
 
-## Access the Starter Files for Module 8
-
--   Go to [posit.cloud](posit.cloud) and then **navigate to the course workspace** via the left sidebar.
-
-    -   Look for the course workspace called "Statistical Methods Spring 2025"
-
--   Open the project titled **Module 8** This module contains the starter files that you will use for the lab and for your homework.
-
-## Starter Files
-
-In the Files pane you should see these two R Notebooks:
-
--   mod-08-lab-starter.qmd
--   mod-08-hw-starter.qmd
-
-Open up `mod-08-hw-starter.qmd`.
-
-## Render it!
-
-Click the button called "Render" (circled in the image below) and then double check to see that your document rendered in the **Viewer** pane. It is always a good idea to occasionally check that the document still renders correctly after making changes.
-
-![](images/render.png)
-
 ## Load Packages
-
-Today, we'll be using the following packages:
-
--   **tidyverse**: a collection of packages for doing data analysis in a "tidy" way
--   **papaja**: a package that supports the formatting of APA style documents
--   **psych**: a package for getting descriptives
--   **emmeans**: a package for calculating marginal effects
--   **performance**: a package for checking model assumptions (e.g., multicollinaerity)
 
 Please load these packages using the `library()` function. If the packages don't load, you may need to `install.packages()` first.
 
@@ -61,9 +30,8 @@ In today's exercises, we are interested in (1) whether the time students spend s
 
 The data file is called `test_perf.csv`. Read in the data, name it `test_perf`. Check it out using `View()`.
 
-```{r read-data, echo=FALSE, message=FALSE}
+```{r}
 
-test_perf <- read_csv("data/test_perf.csv")
 
 ```
 
@@ -78,14 +46,7 @@ The data has 4 columns:
 
 1. Run a model testing whether test anxiety moderates the relationship between time spent studying and test performance. Take steps to reduce multicollinearity before running the model. 
 
-```{r message = FALSE, echo = FALSE, eval = FALSE}
-test_perf <- test_perf %>% 
-  mutate(anxiety = factor(anxiety,
-                          levels= c("low", "high")),
-         study_time_c = study_time - mean(study_time, na.rm = TRUE))
-
-model <- lm(data= test_perf, perf ~ anxiety*study_time_c)
-summary(model)
+```{r} 
 
 ```
 
@@ -93,23 +54,20 @@ summary(model)
 
 3. Visualize the interaction using `ggplot`. Make sure to clearly label your axes.
 
-```{r message = FALSE, echo = FALSE, eval = FALSE}
-test_perf %>% 
-ggplot(aes(x= study_time, y = perf, color = anxiety)) + 
-  geom_smooth(method = "lm")
+```{r}
+
 ```
 
 4. Test whether each simple slope is significantly different from 0. Answer the question: Which of the slopes are significantly different from zero?
 
-```{r message = FALSE, echo = FALSE, eval = FALSE}
-emtrends(model, ~anxiety, var = "study_time_c") %>% 
-  test()
+```{r}
+
 ```
 
 5. Test whether the simple slopes for low anxiety and high anxiety are significantly different from each other. Answer the question: Do the slopes differ significantly from each other?
 
-```{r message = FALSE, echo = FALSE, eval = FALSE}
-emtrends(model, pairwise~anxiety, var = "study_time_c")
+```{r}
+
 ```
 
 6. Write an APA style summary of your results. We have had a lot of practice extracting values from objects, and I know this can be tedious (though its a good skill to have!). If you would like to type out the numbers rather than extracting them from objects, that is fine. However, be careful to double-check your values! If you want to practice extracting values from objects, I encourage you to keep doing it!
@@ -120,12 +78,7 @@ emtrends(model, pairwise~anxiety, var = "study_time_c")
 
 1. Now, run a model testing whether students' previous test score moderates the relationship between time spent studying and test performance. Take steps to reduce multicollinearity before running the model. 
 
-```{r message = FALSE, echo = FALSE, eval = FALSE}
-test_perf <- test_perf %>% 
-  mutate(prev_score_c = prev_score - mean(prev_score, na.rm = TRUE))
-
-model <- lm(data= test_perf, perf ~ prev_score_c*study_time_c)
-summary(model)
+```{r}
 
 ```
 
@@ -134,31 +87,18 @@ summary(model)
 
 4. Write out the three equations for examining the effect of `prev_score` on `perf` at low, medium, and high levels of `study_time`.
 
-```{r message = FALSE, echo = FALSE, eval = FALSE}
-
-sd(test_perf$study_time_c)
-
-low <- mean(test_perf$study_time_c) - sd(test_perf$study_time_c)
-medium <- 0
-high <- mean(test_perf$study_time_c)+ sd(test_perf$study_time_c)
+```{r}
 
 ```
 
 5. Use the `interact_plot()` function from the `{interactions}` package to plot the slope of `prev_score` on `perf` at low, medium, and high levels of `study_time`.
 
-```{r message = FALSE, echo = FALSE, eval = FALSE}
-
-interact_plot(model, pred = prev_score_c, modx = study_time_c, interval = TRUE, plot.points = TRUE)
+```{r}
 
 ```
 6. Test whether the slope of `prev_score` on `perf` differs from zero across low, medium, and high levels of `study_time`?
 
-```{r message = FALSE, echo = FALSE, eval = FALSE}
-
-mylist <- list(study_time_c=c(round(high, 1), round(medium,1), round(low, 1)))
-
-emtrends(model,~study_time_c, var="prev_score_c", at=mylist) %>%
-  test(adjust="holm")
+```{r}
 
 ```
 
