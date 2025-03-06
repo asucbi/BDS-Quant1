@@ -76,7 +76,7 @@ The data has 4 columns:
 
 ## Exercise 1:
 
-1. Run a model testing whether test anxiety moderates the relationship between time spent studying and test performance. Take steps to reduce multicollinearity before running the model. 
+1.  Run a model testing whether test anxiety moderates the relationship between time spent studying and test performance. Take steps to reduce multicollinearity before running the model.
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 test_perf <- test_perf %>% 
@@ -89,9 +89,9 @@ summary(model)
 
 ```
 
-2. Interpret each of the model coefficients.  
+2.  Interpret each of the model coefficients.
 
-3. Visualize the interaction using `ggplot`. Make sure to clearly label your axes.
+3.  Visualize the interaction using `ggplot`. Make sure to clearly label your axes.
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 test_perf %>% 
@@ -99,26 +99,26 @@ ggplot(aes(x= study_time, y = perf, color = anxiety)) +
   geom_smooth(method = "lm")
 ```
 
-4. Test whether each simple slope is significantly different from 0. Answer the question: Which of the slopes are significantly different from zero?
+4.  Test whether each simple slope is significantly different from 0. Answer the question: Which of the slopes are significantly different from zero?
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 emtrends(model, ~anxiety, var = "study_time_c") %>% 
   test()
 ```
 
-5. Test whether the simple slopes for low anxiety and high anxiety are significantly different from each other. Answer the question: Do the slopes differ significantly from each other?
+5.  Test whether the simple slopes for low anxiety and high anxiety are significantly different from each other. Answer the question: Do the slopes differ significantly from each other?
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 emtrends(model, pairwise~anxiety, var = "study_time_c")
 ```
 
-6. Write an APA style summary of your results. We have had a lot of practice extracting values from objects, and I know this can be tedious (though its a good skill to have!). If you would like to type out the numbers rather than extracting them from objects, that is fine. However, be careful to double-check your values! If you want to practice extracting values from objects, I encourage you to keep doing it!
+6.  Write an APA style summary of your results. We have had a lot of practice extracting values from objects, and I know this can be tedious (though its a good skill to have!). If you would like to type out the numbers rather than extracting them from objects, that is fine. However, be careful to double-check your values! If you want to practice extracting values from objects, I encourage you to keep doing it!
 
-7. Answer the questions: (a) What contrast codes were applied to the `anxiety` factor in the model you ran? (b) How would your interpretation of each of the coefficients change if you instead assigned these contrasts: -0.5 = low, 0.5 = high?
+7.  Answer the questions: (a) What contrast codes were applied to the `anxiety` factor in the model you ran? (b) How would your interpretation of each of the coefficients change if you instead assigned these contrasts: -0.5 = low, 0.5 = high?
 
 ## Exercise 2:
 
-1. Now, run a model testing whether students' previous test score moderates the relationship between time spent studying and test performance. Take steps to reduce multicollinearity before running the model. 
+1.  Now, run a model testing whether students' previous test score moderates the relationship between time spent studying and test performance. Take steps to reduce multicollinearity before running the model.
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 test_perf <- test_perf %>% 
@@ -129,10 +129,9 @@ summary(model)
 
 ```
 
-2. Interpret each of the model coefficients.  
+2.  Interpret each of the model coefficients.
 
-
-4. Write out the three equations for examining the effect of `prev_score` on `perf` at low, medium, and high levels of `study_time`.
+3.  Write out the three equations for examining the effect of `prev_score` on `perf` at low, medium, and high levels of `study_time`.
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 
@@ -144,14 +143,15 @@ high <- mean(test_perf$study_time_c)+ sd(test_perf$study_time_c)
 
 ```
 
-5. Use the `interact_plot()` function from the `{interactions}` package to plot the slope of `prev_score` on `perf` at low, medium, and high levels of `study_time`.
+5.  Use the `interact_plot()` function from the `{interactions}` package to plot the slope of `prev_score` on `perf` at low, medium, and high levels of `study_time`.
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 
 interact_plot(model, pred = prev_score_c, modx = study_time_c, interval = TRUE, plot.points = TRUE)
 
 ```
-6. Test whether the slope of `prev_score` on `perf` differs from zero across low, medium, and high levels of `study_time`?
+
+6.  Test whether the slope of `prev_score` on `perf` differs from zero across low, medium, and high levels of `study_time`?
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 
@@ -162,13 +162,13 @@ emtrends(model,~study_time_c, var="prev_score_c", at=mylist) %>%
 
 ```
 
-7. Write an APA style summary of your results. We have had a lot of practice extracting values from objects, and I know this can be tedious (though its a good skill to have!). If you would like to type out the numbers rather than extracting them from objects, that is fine. However, be careful to double-check your values! If you want to practice extracting values from objects, I encourage you to keep doing it!
+7.  Write an APA style summary of your results. We have had a lot of practice extracting values from objects, and I know this can be tedious (though its a good skill to have!). If you would like to type out the numbers rather than extracting them from objects, that is fine. However, be careful to double-check your values! If you want to practice extracting values from objects, I encourage you to keep doing it!
 
 ## Render and submit your document.
 
 **Make sure that you I can see all of your answers in the rendered document!**
 
-To receive credit for this homework, submit a rendered PDF version of your file to "Module 7: Homework Submission" on Canvas.
+To receive credit for this homework, submit a rendered PDF version of your file to "Module 8: Homework Submission" on Canvas.
 
 -   At the top of the .qmd file, change "format: html" to "format: pdf"
 -   Click "Render" at the top of the document
