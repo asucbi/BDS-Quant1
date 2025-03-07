@@ -153,18 +153,171 @@ window.Quarto = {
 <li>Calculate descriptives (i.e., mean and sd) for the variables <code>honesty</code> and <code>claimed_solved</code></li>
 <li>Calculate descriptives (i.e., mean and sd) for the variables <code>honesty</code> and <code>claimed_solved</code>, grouped by <code>condition</code></li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#students: take a few minutes to check out the data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(cheat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>spc_tbl_ [164 × 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ condition     : chr [1:164] "shredder" "shredder" "shredder" "shredder" ...
+ $ honesty       : num [1:164] 1.44 3.3 1.83 1.22 2.72 ...
+ $ claimed_solved: num [1:164] 6 6 4 8 7 5 5 5 7 6 ...
+ $ confidence    : num [1:164] 0.9162 -0.9379 5.1178 2.0934 0.0824 ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   condition = col_character(),
+  ..   honesty = col_double(),
+  ..   claimed_solved = col_double(),
+  ..   confidence = col_double()
+  .. )
+ - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cheat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  condition honesty claimed_solved confidence
+  &lt;chr&gt;       &lt;dbl&gt;          &lt;dbl&gt;      &lt;dbl&gt;
+1 shredder     1.44              6     0.916 
+2 shredder     3.30              6    -0.938 
+3 shredder     1.83              4     5.12  
+4 shredder     1.22              8     2.09  
+5 shredder     2.72              7     0.0824
+6 shredder     2.00              5    -0.631 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cheat <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(honesty, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(honesty, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+   mean    sd
+  &lt;dbl&gt; &lt;dbl&gt;
+1  2.95  1.03</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(cheat<span class="sc">$</span>honesty)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   vars   n mean   sd median trimmed  mad  min max range skew kurtosis   se
+X1    1 164 2.95 1.03   2.96    2.94 1.28 1.01 4.9  3.89 0.02    -1.07 0.08</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>cheat <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(claimed_solved, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(claimed_solved, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+   mean    sd
+  &lt;dbl&gt; &lt;dbl&gt;
+1  5.28  1.50</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(cheat<span class="sc">$</span>claimed_solved)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   vars   n mean  sd median trimmed  mad min max range  skew kurtosis   se
+X1    1 164 5.28 1.5      5    5.33 1.48   1   8     7 -0.43    -0.02 0.12</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>cheat <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_honesty =</span> <span class="fu">mean</span>(honesty, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_honesty =</span> <span class="fu">sd</span>(honesty, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_claimed =</span> <span class="fu">mean</span>(claimed_solved, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_claimed =</span> <span class="fu">sd</span>(claimed_solved, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  condition        n mean_honesty sd_honesty mean_claimed sd_claimed
+  &lt;chr&gt;        &lt;int&gt;        &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;
+1 non-shredder    81         3.05       1.02         4.67       1.60
+2 shredder        83         2.85       1.05         5.88       1.11</code></pre>
+</div>
+</div>
 </section>
 </section>
 <section id="simple-regression" class="level1">
 <h1>Simple regression</h1>
 <p>First, let’s look at what the overall relation between honesty and number of problems people claimed they solved looks like.</p>
 <p>Graph in <code>ggplot()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#students: fill in the code below</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>cheat <span class="sc">%&gt;%</span> </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> honesty, <span class="at">y =</span> claimed_solved)) <span class="sc">+</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-lab-starter-key-shared_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <blockquote class="blockquote">
 <p>Question: From the graph, what can you say about the relation betwen honesty and the number of problems people claimed the solved?</p>
 </blockquote>
 <p>Second, let’s perform a simple regression model using <code>honesty</code> as a single predictor of number of problems people claimed they solved, <code>claimed_solved</code>.</p>
 <p><span class="math display">\[\hat{claimed_i} = \beta_0 + \beta_1honesty \]</span></p>
 <p>Run this model using <code>lm()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#students: fill in the model</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>model_simple <span class="ot">&lt;-</span> <span class="fu">lm</span>(claimed_solved <span class="sc">~</span> honesty, <span class="at">data =</span> cheat)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_simple)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = claimed_solved ~ honesty, data = cheat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.7943 -0.9189  0.0864  0.8906  3.2935 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   6.7614     0.3334  20.282  &lt; 2e-16 ***
+honesty      -0.5019     0.1067  -4.706  5.4e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.408 on 162 degrees of freedom
+Multiple R-squared:  0.1202,    Adjusted R-squared:  0.1148 
+F-statistic: 22.14 on 1 and 162 DF,  p-value: 5.396e-06</code></pre>
+</div>
+</div>
 <blockquote class="blockquote">
 <p>Question: Write the full model with parameter estimates filled in.</p>
 </blockquote>
@@ -177,6 +330,45 @@ window.Quarto = {
 <p>Let’s look at a model that investigates both <code>honesty</code> and <code>condition</code> as predictors of <code>claimed_solved</code>, but not their interaction.</p>
 <p><span class="math display">\[\hat{claimed_i} = \beta_0 + \beta_1honesty + \beta_2condition\]</span></p>
 <p>Run this model using <code>lm()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#students: fill in the model</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>model_main_effects <span class="ot">&lt;-</span> <span class="fu">lm</span>(claimed_solved <span class="sc">~</span> honesty <span class="sc">+</span> condition, <span class="at">data =</span> cheat)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_main_effects)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = claimed_solved ~ honesty + condition, data = cheat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.2772 -0.8752 -0.0496  0.8876  3.0237 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        6.03706    0.33345  18.105  &lt; 2e-16 ***
+honesty           -0.44900    0.09856  -4.556 1.03e-05 ***
+conditionshredder  1.12294    0.20322   5.526 1.29e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.295 on 161 degrees of freedom
+Multiple R-squared:  0.2605,    Adjusted R-squared:  0.2513 
+F-statistic: 28.36 on 2 and 161 DF,  p-value: 2.816e-11</code></pre>
+</div>
+</div>
 <blockquote class="blockquote">
 <p>Question: Write the full model with parameter estimates filled in.</p>
 </blockquote>
@@ -187,6 +379,27 @@ window.Quarto = {
 <p>Question: How would you simplify the above equation to represent the relationship between honesty and number of problems people claim to have solved for the non-shredder (condition = 0) and shredder conditions (condition = 1)?</p>
 </blockquote>
 <p>Notice that the only difference between these two equations are their intercepts. If we graphed the two models, let’s see what it would look like.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>cheat <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> honesty, <span class="at">y =</span> claimed_solved)) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="sc">-</span>.<span class="dv">45</span>, <span class="at">intercept =</span> <span class="fl">6.04</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="sc">-</span>.<span class="dv">45</span>, <span class="at">intercept =</span> <span class="fl">7.16</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="at">x =</span> <span class="fl">1.5</span>, <span class="at">y =</span> <span class="fl">5.2</span>, <span class="at">label =</span> <span class="st">"shredder"</span>) <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="at">x =</span> <span class="fl">1.5</span>, <span class="at">y =</span><span class="fl">6.5</span>, <span class="at">label =</span> <span class="st">"non-shredder"</span>) <span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-lab-starter-key-shared_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>We are not allowing the relationship between <code>honesty</code> and <code>claimed_solved</code> to differ between the two <em>shredder</em> and <em>non-shredder</em> conditions.</p>
 <p>However, our theory predicts that people will act differently depending on the condition that they were in. To investigate this, we need to include the <em>interaction effect</em> to examine whether the relationship between honesty and number of problems people claimed they solves <em>differs depending on whether people were in the non-shredder or shredder condition</em>.</p>
 </section>
@@ -195,16 +408,108 @@ window.Quarto = {
 <section id="visualization" class="level2">
 <h2 class="anchored" data-anchor-id="visualization">Visualization</h2>
 <p>First, let’s graph the continuous X categorical interaction between honesty and condition.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#students: fill in the code below</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co"># on a single graph</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>cheat <span class="sc">%&gt;%</span> </span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> honesty, <span class="at">y =</span> claimed_solved)) <span class="sc">+</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="fu">aes</span>(<span class="at">color =</span> condition)) <span class="sc">+</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-lab-starter-key-shared_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># on two separate graphs</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>cheat <span class="sc">%&gt;%</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> honesty, <span class="at">y =</span> claimed_solved)) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="fu">aes</span>(<span class="at">color =</span> condition))<span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>condition) <span class="sc">+</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-lab-starter-key-shared_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>It certainly looks like there could be a significant interaction effect. Let’s run the multiple regression model to examine it further.</p>
 </section>
 <section id="centering" class="level2">
 <h2 class="anchored" data-anchor-id="centering">Centering</h2>
 <p>Notice that in this case, honesty has been measured on a 1 to 5 scale. If we do <em>not</em> center honesty first, the model intercept will correspond to the predicted <code>claimed_solved</code> score when honesty = 0, a value that falls outside of the range of possible ones.</p>
 <p>Typically, the continuous variables will be centered prior to running the analysis. This guarantees that the intercept will intersect the y-axis at a meaningful value (when the predictor is equal to its mean).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>cheat <span class="ot">&lt;-</span> cheat <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">honesty_c =</span> honesty <span class="sc">-</span> <span class="fu">mean</span>(honesty, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="co"># subtract the mean</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="running-the-interaction-model" class="level2">
 <h2 class="anchored" data-anchor-id="running-the-interaction-model">Running the Interaction Model</h2>
 <p>Run a multiple regression model predicting <code>claimed_solved</code> from <code>honest_c</code>, <code>condition</code>, and the interaction between the two.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#students: create the interaction model</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>model_int <span class="ot">&lt;-</span> <span class="fu">lm</span>(claimed_solved <span class="sc">~</span> honesty_c<span class="sc">*</span>condition, <span class="at">data =</span> cheat)</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = claimed_solved ~ honesty_c * condition, data = cheat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.9265 -0.8677  0.0491  1.0581  3.3533 
+
+Coefficients:
+                            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                   4.7531     0.1379  34.476  &lt; 2e-16 ***
+honesty_c                    -0.8532     0.1356  -6.294 2.84e-09 ***
+conditionshredder             1.1190     0.1938   5.775 3.89e-08 ***
+honesty_c:conditionshredder   0.7781     0.1881   4.137 5.66e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.235 on 160 degrees of freedom
+Multiple R-squared:  0.332, Adjusted R-squared:  0.3194 
+F-statistic:  26.5 on 3 and 160 DF,  p-value: 5.695e-14</code></pre>
+</div>
+</div>
 <blockquote class="blockquote">
 <p>Question: What is the full model with parameter estimates filled in?</p>
 </blockquote>
@@ -218,7 +523,31 @@ window.Quarto = {
 <p>To get the <em>simple slopes</em> we can use the <code>emtrends</code> function from the <code>emmeans</code> package.</p>
 <p>There are different questions we can ask by calculating simple slopes and performing hypothesis tests with them.</p>
 <p>Q1: Is honesty a significant predictor of number of problems people claim to have solved at each level of condition (non-shredder &amp; shredder conditions)?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emtrends</span>(model_int, <span class="sc">~</span>condition, <span class="at">var =</span> <span class="st">"honesty_c"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">test</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> condition    honesty_c.trend    SE  df t.ratio p.value
+ non-shredder         -0.8532 0.136 160  -6.294  &lt;.0001
+ shredder             -0.0751 0.130 160  -0.576  0.5655</code></pre>
+</div>
+</div>
 <p>Q2: Is the slope for the non-shredder condition (-0.85) significantly different from the slope for the shredder condition (-0.08)?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emtrends</span>(model_int, pairwise<span class="sc">~</span>condition, <span class="at">var =</span> <span class="st">"honesty_c"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$emtrends
+ condition    honesty_c.trend    SE  df lower.CL upper.CL
+ non-shredder         -0.8532 0.136 160   -1.121   -0.586
+ shredder             -0.0751 0.130 160   -0.333    0.182
+
+Confidence level used: 0.95 
+
+$contrasts
+ contrast                  estimate    SE  df t.ratio p.value
+ (non-shredder) - shredder   -0.778 0.188 160  -4.137  0.0001</code></pre>
+</div>
+</div>
 <p>This is the same as the test of the interaction effect from the overall model.</p>
 <p>In the interest of practicing Continuous x Continuous interactions, I have added a variable to the dataset called <code>confidence</code> that is a general measure of participants confidence trait. This variable ranges from -12 to 12.</p>
 </section>
@@ -228,6 +557,44 @@ window.Quarto = {
 <p>As we did above, let’s look at a model that investigates both <code>honesty</code> and <code>confidence</code> as predictors of <code>claimed_solved</code>, but not their interaction.</p>
 <p><span class="math display">\[\hat{Claimed_i} = \beta_0 + \beta_1honesty + \beta_2confidence\]</span></p>
 <p>Run this model using <code>lm()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#students: fill in the code</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>model2_main_effects <span class="ot">&lt;-</span> <span class="fu">lm</span>(claimed_solved <span class="sc">~</span> honesty <span class="sc">+</span> confidence, <span class="at">data =</span> cheat)</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2_main_effects)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = claimed_solved ~ honesty + confidence, data = cheat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.8686 -0.9405  0.0942  0.9235  3.1882 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  6.71736    0.34447  19.501  &lt; 2e-16 ***
+honesty     -0.49930    0.10701  -4.666 6.43e-06 ***
+confidence   0.01244    0.02364   0.526    0.599    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.411 on 161 degrees of freedom
+Multiple R-squared:  0.1218,    Adjusted R-squared:  0.1108 
+F-statistic: 11.16 on 2 and 161 DF,  p-value: 2.89e-05</code></pre>
+</div>
+</div>
 <blockquote class="blockquote">
 <p>Question: Write the full model with parameter estimates filled in.</p>
 </blockquote>
@@ -238,12 +605,56 @@ window.Quarto = {
 <section id="check-collinaerity" class="level1">
 <h1>Check Collinaerity</h1>
 <p>Let’s examine our model to see if we have any multicolinaerity issues.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_collinearity</span>(model2_main_effects)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Check for Multicollinearity
+
+Low Correlation
+
+       Term  VIF  VIF 95% CI Increased SE Tolerance Tolerance 95% CI
+    honesty 1.00 [1.00, Inf]         1.00      1.00     [0.00, 1.00]
+ confidence 1.00 [1.00, Inf]         1.00      1.00     [0.00, 1.00]</code></pre>
+</div>
+</div>
 <blockquote class="blockquote">
 <p>Question: Do you see any multicollinearity issues?</p>
 </blockquote>
 <section id="visualization-1" class="level2">
 <h2 class="anchored" data-anchor-id="visualization-1">Visualization</h2>
 <p>Next, let’s examine the relation between <code>honesty</code> and <code>claimed_solved</code> and <code>confidence</code> and <code>claimed_solved</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>cheat <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> honesty, <span class="at">y =</span> claimed_solved)) <span class="sc">+</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-lab-starter-key-shared_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>cheat <span class="sc">%&gt;%</span> </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> confidence, <span class="at">y =</span> claimed_solved)) <span class="sc">+</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-lab-starter-key-shared_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <blockquote class="blockquote">
 <p>Question: What is the relation between <code>claimed_solved</code> and each of these variables?</p>
 </blockquote>
@@ -252,10 +663,61 @@ window.Quarto = {
 <section id="continuous-x-continuous-interaction" class="level1">
 <h1>Continuous x Continuous Interaction</h1>
 <p>Now, let’s add the interaction term to test whether the effect of <code>confidence</code> on <code>claimed_solved</code> depends on <code>honesty</code> (or vice versa).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>model2_int <span class="ot">&lt;-</span> <span class="fu">lm</span>(claimed_solved <span class="sc">~</span> honesty<span class="sc">*</span>confidence, <span class="at">data =</span> cheat)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = claimed_solved ~ honesty * confidence, data = cheat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.6763 -0.9548  0.1051  0.9335  3.5488 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)         6.06318    0.42321  14.327  &lt; 2e-16 ***
+honesty            -0.32235    0.12562  -2.566  0.01120 *  
+confidence          0.25486    0.09691   2.630  0.00938 ** 
+honesty:confidence -0.06864    0.02664  -2.577  0.01088 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.387 on 160 degrees of freedom
+Multiple R-squared:  0.1567,    Adjusted R-squared:  0.1409 
+F-statistic: 9.914 on 3 and 160 DF,  p-value: 4.944e-06</code></pre>
+</div>
+</div>
 <blockquote class="blockquote">
 <p>Question: Is the interaction significant?</p>
 </blockquote>
 <p>Let’s check for multicollinearity in this model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_collinearity</span>(model2_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Model has interaction terms. VIFs might be inflated.
+  Try to center the variables used for the interaction, or check
+  multicollinearity among predictors of a model without interaction terms.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Check for Multicollinearity
+
+Low Correlation
+
+    Term  VIF     VIF 95% CI Increased SE Tolerance Tolerance 95% CI
+ honesty 1.43 [ 1.23,  1.81]         1.20      0.70     [0.55, 0.81]
+
+High Correlation
+
+               Term   VIF     VIF 95% CI Increased SE Tolerance
+         confidence 17.43 [13.13, 23.25]         4.17      0.06
+ honesty:confidence 17.61 [13.27, 23.49]         4.20      0.06
+ Tolerance 95% CI
+     [0.04, 0.08]
+     [0.04, 0.08]</code></pre>
+</div>
+</div>
 <blockquote class="blockquote">
 <p>Question: Is there multicollinaerity? What could you do to fix it?</p>
 </blockquote>
@@ -263,11 +725,84 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="centering-1">Centering</h2>
 <p>Typically, when you have an interaction, it is good practice to center your continuous predictors.</p>
 <p>We already created the centered honesty predictor. Let’s do the same for <code>confidence</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#students: fill in code</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>cheat <span class="ot">&lt;-</span> cheat <span class="sc">%&gt;%</span></span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">confidence_c =</span> confidence <span class="sc">-</span> <span class="fu">mean</span>(confidence, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="co"># subtract the mean</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="running-the-interaction-model-1" class="level2">
 <h2 class="anchored" data-anchor-id="running-the-interaction-model-1">Running the Interaction Model</h2>
 <p>Run a multiple regression model predicting <code>claimed_solved</code> from <code>honest_c</code>, <code>confidence_c</code>, and the interaction between the two.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#students: fill in the code and run this model</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>model2_int_c <span class="ot">&lt;-</span> <span class="fu">lm</span>(claimed_solved <span class="sc">~</span> honesty_c<span class="sc">*</span>confidence_c, <span class="at">data =</span> cheat)</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2_int_c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = claimed_solved ~ honesty_c * confidence_c, data = cheat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.6763 -0.9548  0.1051  0.9335  3.5488 
+
+Coefficients:
+                       Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)             5.26531    0.10848  48.538  &lt; 2e-16 ***
+honesty_c              -0.52347    0.10560  -4.957 1.81e-06 ***
+confidence_c            0.05232    0.02792   1.874   0.0628 .  
+honesty_c:confidence_c -0.06864    0.02664  -2.577   0.0109 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.387 on 160 degrees of freedom
+Multiple R-squared:  0.1567,    Adjusted R-squared:  0.1409 
+F-statistic: 9.914 on 3 and 160 DF,  p-value: 4.944e-06</code></pre>
+</div>
+</div>
 <p>Let’s check this model for multicollinearity.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_collinearity</span>(model2_int_c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Check for Multicollinearity
+
+Low Correlation
+
+                   Term  VIF       VIF 95% CI Increased SE Tolerance
+              honesty_c 1.01 [1.00, 29176.65]         1.01      0.99
+           confidence_c 1.45 [1.24,     1.83]         1.20      0.69
+ honesty_c:confidence_c 1.46 [1.25,     1.85]         1.21      0.69
+ Tolerance 95% CI
+     [0.00, 1.00]
+     [0.55, 0.81]
+     [0.54, 0.80]</code></pre>
+</div>
+</div>
 <blockquote class="blockquote">
 <p>Question: Did centering sufficiently reduce multicollinearity?</p>
 </blockquote>
@@ -285,6 +820,17 @@ window.Quarto = {
 <section id="calculating-simple-slopes" class="level2">
 <h2 class="anchored" data-anchor-id="calculating-simple-slopes">Calculating Simple Slopes</h2>
 <p>First, let’s determine what constitutes low, medium, and high. We don’t have any pre-existing theories about what these values should be, so we’ll use -1SD (low) and +1SD (high).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">#What is the standard deviation of our confidence variable?</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(cheat<span class="sc">$</span>confidence_c, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.680503</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Now, use this to create low, medium, and high values</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>low <span class="ot">&lt;-</span> <span class="fu">mean</span>(cheat<span class="sc">$</span>confidence_c, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">sd</span>(cheat<span class="sc">$</span>confidence_c, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>medium <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#technically this should be zero, but this is close enough!</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>high <span class="ot">&lt;-</span> <span class="fu">mean</span>(cheat<span class="sc">$</span>confidence_c, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">sd</span>(cheat<span class="sc">$</span>confidence_c, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <blockquote class="blockquote">
 <p>Question: How would we rearrange our equation to isolate the effect of <code>honesty_c</code> on <code>claimed_solved</code> at various levels of <code>confidence_c</code>?</p>
 </blockquote>
@@ -295,11 +841,35 @@ window.Quarto = {
 <section id="plotting-simple-slopes" class="level2">
 <h2 class="anchored" data-anchor-id="plotting-simple-slopes">Plotting Simple Slopes</h2>
 <p>Now, we will use the <code>interact_plot()</code> function from the <code>{interactions}</code> package to plot the slope of <code>honesty_c</code> on <code>claimed_solved</code> at low, medium, and high levels of [VARIABLE].</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interact_plot</span>(model2_int_c, <span class="at">pred =</span> honesty_c, <span class="at">modx =</span> confidence_c, <span class="at">interval =</span> <span class="cn">TRUE</span>, <span class="at">plot.points =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-lab-starter-key-shared_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="testing-significance-of-simple-slopes-1" class="level2">
 <h2 class="anchored" data-anchor-id="testing-significance-of-simple-slopes-1">Testing Significance of Simple Slopes</h2>
 <p>To get the <em>simple slopes</em> and associated significance we can use the <code>emtrends</code> function from the <code>emmeans</code> package.</p>
 <p>Does the slope of <code>honesty</code> on <code>claimed_solve</code> differ from zero across different values of <code>confidence_c</code>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>mylist <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">confidence_c=</span><span class="fu">c</span>(<span class="fu">round</span>(high, <span class="dv">1</span>), <span class="fu">round</span>(medium,<span class="dv">1</span>), <span class="fu">round</span>(low, <span class="dv">1</span>)))</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="fu">emtrends</span>(model2_int_c,<span class="sc">~</span>confidence_c, <span class="at">var=</span><span class="st">"honesty_c"</span>, <span class="at">at=</span>mylist) <span class="sc">%&gt;%</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">test</span>(<span class="at">adjust=</span><span class="st">"holm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> confidence_c honesty_c.trend    SE  df t.ratio p.value
+          4.7          -0.846 0.171 160  -4.953  &lt;.0001
+          0.0          -0.523 0.106 160  -4.957  &lt;.0001
+         -4.7          -0.201 0.156 160  -1.284  0.2011
+
+P value adjustment: holm method for 3 tests </code></pre>
+</div>
+</div>
 <blockquote class="blockquote">
 <p>Question: Which slopes differ from zero? Which do not?</p>
 </blockquote>

@@ -43,7 +43,7 @@ cheat <- read_csv("data/cheating_data.csv")
 -   Calculate descriptives (i.e., mean and sd) for the variables `honesty` and `claimed_solved`
 -   Calculate descriptives (i.e., mean and sd) for the variables `honesty` and `claimed_solved`, grouped by `condition`
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 #students: take a few minutes to check out the data
 
@@ -89,7 +89,7 @@ First, let's look at what the overall relation between honesty and number of pro
 
 Graph in `ggplot()`.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 #students: fill in the code below
 
@@ -132,7 +132,7 @@ $$\hat{claimed_i} = \beta_0 + \beta_1honesty $$
 
 Run this model using `lm()`.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 #students: fill in the model
 
@@ -186,7 +186,7 @@ $$\hat{claimed_i} = \beta_0 + \beta_1honesty + \beta_2condition$$
 
 Run this model using `lm()`.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 #students: fill in the model
 
@@ -252,7 +252,7 @@ summary(model_main_effects)
 
 Notice that the only difference between these two equations are their intercepts. If we graphed the two models, let's see what it would look like.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 cheat %>% 
 ggplot(aes(x = honesty, y = claimed_solved)) +
@@ -275,7 +275,7 @@ However, our theory predicts that people will act differently depending on the c
 
 First, let's graph the continuous X categorical interaction between honesty and condition.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 #students: fill in the code below
 
@@ -316,7 +316,7 @@ Notice that in this case, honesty has been measured on a 1 to 5 scale. If we do 
 
 Typically, the continuous variables will be centered prior to running the analysis. This guarantees that the intercept will intersect the y-axis at a meaningful value (when the predictor is equal to its mean).
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 cheat <- cheat %>%
    mutate(honesty_c = honesty - mean(honesty, na.rm = TRUE)) # subtract the mean
@@ -327,7 +327,7 @@ cheat <- cheat %>%
 
 Run a multiple regression model predicting `claimed_solved` from `honest_c`, `condition`, and the interaction between the two.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 #students: create the interaction model
 
@@ -384,13 +384,13 @@ To get the *simple slopes* we can use the `emtrends` function from the `emmeans`
 There are different questions we can ask by calculating simple slopes and performing hypothesis tests with them.
 
 Q1: Is honesty a significant predictor of number of problems people claim to have solved at each level of condition (non-shredder & shredder conditions)?
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 emtrends(model_int, ~condition, var = "honesty_c") %>% 
   test()
 ```
 
 Q2: Is the slope for the non-shredder condition (-0.85) significantly different from the slope for the shredder condition (-0.08)?
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 emtrends(model_int, pairwise~condition, var = "honesty_c")
 ```
 
@@ -406,7 +406,7 @@ $$\hat{Claimed_i} = \beta_0 + \beta_1honesty + \beta_2confidence$$
 
 Run this model using `lm()`.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 #students: fill in the code
 
@@ -459,7 +459,7 @@ summary(model2_main_effects)
 
 Let's examine our model to see if we have any multicolinaerity issues.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 check_collinearity(model2_main_effects)
 
@@ -483,7 +483,7 @@ check_collinearity(model2_main_effects)
 
 Next, let's examine the relation between `honesty` and `claimed_solved` and `confidence` and `claimed_solved`.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 cheat %>% 
 ggplot(aes(x = honesty, y = claimed_solved)) +
@@ -518,7 +518,7 @@ ggplot(aes(x = confidence, y = claimed_solved)) +
 
 Now, let's add the interaction term to test whether the effect of `confidence` on `claimed_solved` depends on `honesty` (or vice versa).
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 model2_int <- lm(claimed_solved ~ honesty*confidence, data = cheat)
 summary(model2_int)
@@ -541,7 +541,7 @@ summary(model2_int)
 
 Let's check for multicollinearity in this model.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 check_collinearity(model2_int)
 
@@ -567,7 +567,7 @@ Typically, when you have an interaction, it is good practice to center your cont
 
 We already created the centered honesty predictor. Let's do the same for `confidence`.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 #students: fill in code
 
@@ -591,7 +591,7 @@ cheat <- cheat %>%
 
 Run a multiple regression model predicting `claimed_solved` from `honest_c`, `confidence_c`, and the interaction between the two.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 #students: fill in the code and run this model
 
@@ -613,7 +613,7 @@ summary(model2_int_c)
 
 Let's check this model for multicollinearity.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 check_collinearity(model2_int_c)
 
@@ -672,7 +672,7 @@ The *simple slopes* are the slopes representing the relationship between predict
 
 First, let's determine what constitutes low, medium, and high. We don't have any pre-existing theories about what these values should be, so we'll use -1SD (low) and +1SD (high).
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 #What is the standard deviation of our confidence variable?
 sd(cheat$confidence_c, na.rm = TRUE)
@@ -717,7 +717,7 @@ high <- mean(cheat$confidence_c, na.rm = TRUE) + sd(cheat$confidence_c, na.rm = 
 
 Now, we will use the `interact_plot()` function from the `{interactions}` package to plot the slope of `honesty_c` on `claimed_solved` at low, medium, and high levels of \[VARIABLE\].
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 interact_plot(model2_int_c, pred = honesty_c, modx = confidence_c, interval = TRUE, plot.points = TRUE)
 
@@ -729,7 +729,7 @@ To get the *simple slopes* and associated significance we can use the `emtrends`
 
 Does the slope of `honesty` on `claimed_solve` differ from zero across different values of `confidence_c`?
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 mylist <- list(confidence_c=c(round(high, 1), round(medium,1), round(low, 1)))
 
