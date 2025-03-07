@@ -125,7 +125,6 @@ ggplot(aes(x = honesty, y = claimed_solved)) +
 
 
 
-ANSWER: as honesty increases, people claim they solved fewer problems
 
 Second, let's perform a simple regression model using `honesty` as a single predictor of number of problems people claimed they solved, `claimed_solved`.
 
@@ -164,7 +163,6 @@ summary(model_simple)
 
 
 
-ANSWER: $$\hat{claimed_i} = 6.76 -0.50honesty $$
 
 > Question: What do each of the parameter estimates mean?
 
@@ -179,9 +177,6 @@ ANSWER: $$\hat{claimed_i} = 6.76 -0.50honesty $$
 
 
 
-ANSWER: b0: 6.76, predicted number of problems people claim to have solved when honesty = 0
-
-b1: -0.50, for every 1-unit increase in honesty, the model predicts a decrease of 0.50 in number of problems people claim to have solved
 
 # Main Effects of Categorical & Continuous Variables
 
@@ -225,7 +220,6 @@ summary(model_main_effects)
 
 
 
-ANSWER: $$\hat{claimed_i} = 6.04 -0.45honesty + 1.12condition$$
 
 > Question: What do each of the parameter estimates mean?
 
@@ -240,11 +234,7 @@ ANSWER: $$\hat{claimed_i} = 6.04 -0.45honesty + 1.12condition$$
 
 
 
-ANSWER: b0: 6.04, predicted number of problems people claim to have solved when `honesty` = 0 and `condition` = 0 (non-shredder condition)
 
-b1: -0.45, for a one-unit change in `honesty`, we predict a 0.45 *decrease* in `claimed_solved` for the non-shredder condition (condition = 0).
-
-b2: 1.12, the difference in `claimed_solved` between the non-shredder and shredder conditions while controlling for `honesty` (when honesty = 0)
 
 > Question: How would you simplify the above equation to represent the relationship between honesty and number of problems people claim to have solved for the non-shredder (condition = 0) and shredder conditions (condition = 1)?
 
@@ -259,13 +249,6 @@ b2: 1.12, the difference in `claimed_solved` between the non-shredder and shredd
 
 
 
-ANSWER: \* Non-shredder (Condition = 0):
-
-$$\hat{claimed_i} = 6.04 -0.45honesty + 1.12(0) = 6.04 - 0.45honesty$$
-
--   Shredder (Condition = 1):
-
-$$\hat{claimed_i} = 6.04 -0.45honesty + 1.12(1) = 7.16 - 0.45honesty$$
 
 Notice that the only difference between these two equations are their intercepts. If we graphed the two models, let's see what it would look like.
 
@@ -377,8 +360,6 @@ summary(model_int)
 
 
 
-ANSWER: $$\hat{claimed_i} = 4.75 -0.85honesty_C + 1.12condition + 0.78honest_C*condition$$
-
 > Question: What do each of the parameter estimates mean?
 
 
@@ -392,26 +373,7 @@ ANSWER: $$\hat{claimed_i} = 4.75 -0.85honesty_C + 1.12condition + 0.78honest_C*c
 
 
 
-ANSWER: b0: 4.75, the predicted `claimed_solved` for someone with a mean honesty score (honesty_c = 0) and in the non-shredder condition (non-shredder = 0)
 
-b1: -0.85, for every 1-unit increase in honesty_c, the model predicts a *decrease* in `claimed_solved` of 0.85 while controlling for `condition` (when condition = 0, which is the non-shredder condition)
-
-b2: 1.12, the difference in `claimed_solved` between the non-shredder and shredder conditions while controlling for `honesty_c` (when honesty_c = 0, which is the mean of honesty)
-
-Claimed = 4.75 -0.85Honesty_c + 1.12Condition + 0.78(Honesty_c X Condition)
-
-Mean_Non-shredder: 4.75 - 0.85(0) + 1.12(0) + 0.78(0x0) = 4.75 Mean_Shredder: 4.75 -0.85(0) + 1.12(1) + 0.78(0x1) = 5.87
-
-These are called *adjusted means*. Another way of obtaining these adjusted means is by ussing the `emmeans` function.
-
-```{r message= FALSE, echo=FALSE, eval=FALSE}
-
-marg_means <- emmeans(model_int, "condition", by = "honesty_c")
-marg_means
-
-```
-
-b3: 0.78, the change in the slope representing the relationship between `honesty_c` and `claimed_solved` between the *non-shredder* condition and the *shredder* condition (aka, the change in the simple slopes)
 
 The *simple slopes* are the slopes representing the relationship between predictor 1 and Y at specific levels of predictor 2. We can get simple slopes to examine what the relationship is between `honesty_c` and `claimed_solved` at different levels of `condition`.
 
@@ -422,13 +384,13 @@ To get the *simple slopes* we can use the `emtrends` function from the `emmeans`
 There are different questions we can ask by calculating simple slopes and performing hypothesis tests with them.
 
 Q1: Is honesty a significant predictor of number of problems people claim to have solved at each level of condition (non-shredder & shredder conditions)?
-```{r}
+```{r message= FALSE, echo=FALSE, eval=FALSE}
 emtrends(model_int, ~condition, var = "honesty_c") %>% 
   test()
 ```
 
 Q2: Is the slope for the non-shredder condition (-0.85) significantly different from the slope for the shredder condition (-0.08)?
-```{r}
+```{r message= FALSE, echo=FALSE, eval=FALSE}
 emtrends(model_int, pairwise~condition, var = "honesty_c")
 ```
 
@@ -477,7 +439,6 @@ summary(model2_main_effects)
 
 
 
-ANSWER: $$\hat{claimed_i} = 6.72 -0.50honesty + 0.01confidence$$
 
 > Question: What do each of the parameter estimates mean?
 
@@ -492,11 +453,7 @@ ANSWER: $$\hat{claimed_i} = 6.72 -0.50honesty + 0.01confidence$$
 
 
 
-ANSWER: b0: 6.72, predicted number of problems people claim to have solved when honesty = 0 and confidence = 0 (not centered, so true 0 values)
 
-b1: -0.50, for a one-unit increase in `honesty`, we expect a decrease of 0.50 in `claimed_solved`, holding confidence constant
-
-b2: 0.01, for one-unit increase in confidence, we expect an increase of 0.01 in `claimed_solved`, holding `honesty` constant.
 
 # Check Collinaerity
 
@@ -521,7 +478,6 @@ check_collinearity(model2_main_effects)
 
 
 
-ANSWER: Nope!
 
 ## Visualization
 
@@ -556,7 +512,7 @@ ggplot(aes(x = confidence, y = claimed_solved)) +
 
 
 
-ANSWER: honesty looks negative, confidence is slightly positive but not significant
+
 
 # Continuous x Continuous Interaction
 
@@ -582,7 +538,6 @@ summary(model2_int)
 
 
 
-ANSWER: YES!
 
 Let's check for multicollinearity in this model.
 
@@ -605,7 +560,6 @@ check_collinearity(model2_int)
 
 
 
-ANSWER: Yes -- Centering!
 
 ## Centering
 
@@ -678,7 +632,6 @@ check_collinearity(model2_int_c)
 
 
 
-ANSWER: YES!
 
 > Question: What is the full model with parameter estimates filled in?
 
@@ -693,7 +646,6 @@ ANSWER: YES!
 
 
 
-ANSWER: $$\hat{claimed_i} = 5.27 - 0.52honesty_c + 0.05confidence_c - 0.07honesty_c*confidence_c$$
 
 > Question: What do each of the parameter estimates mean?
 
@@ -708,13 +660,9 @@ ANSWER: $$\hat{claimed_i} = 5.27 - 0.52honesty_c + 0.05confidence_c - 0.07honest
 
 
 
-ANSWER: b0: 5.27, the predicted `claimed_solved` for someone with a mean `honesty` score (honesty_c = 0) and mean `confidence` (confidence_c = 0) score.
 
-b1: -0.52, for every 1-unit increase in `honesty_c`, the model predicts a *decrease* in `claimed_solved` of 0.52 when `confidence_c` is 0 (at its mean).
 
-b2: 0.05, for every 1-unit increase in `confidence_c`, the model predicts an *increase* in `claimed_solved` of 0.05 when `honesty_c` is 0 (at its mean).
 
-b3: -0.07, the interaction between `honesty_c` and `confidence_c`. the difference in slope of `honesty_c` for a 1-unit increase in `confidence_c`. For a one-unit increase in `confidence_c` there is a -0.07 change in the slope between `honesty_c` and `claimed_solved`
 
 # Simple Slopes
 
@@ -749,7 +697,6 @@ high <- mean(cheat$confidence_c, na.rm = TRUE) + sd(cheat$confidence_c, na.rm = 
 
 
 
-ANSWER: $$\hat{claimed_i} = 5.26 + 0.05confidence_c + (-0.52 - 0.07confidence_c)honesty_c$$
 
 > Question: Use this equation to calculate the intercept and slope of `honesty_c` at low, medium, and high levels of `confidence_c`.
 
@@ -764,13 +711,7 @@ ANSWER: $$\hat{claimed_i} = 5.26 + 0.05confidence_c + (-0.52 - 0.07confidence_c)
 
 
 
-ANSWER:
 
-low: $$\hat{claimed_i} = 5.26 + 0.05(-0.87) + (-0.52 - 0.07(-0.87))honesty_c$$ $$\hat{claimed_i} = 5.22 - 0.46*honesty_c$$
-
-medium: $$\hat{claimed_i} = 5.26 + 0.05(0) + (-0.52 - 0.07(0))honesty_c$$ $$\hat{claimed_i} = 5.26 - 0.52*honesty_c$$
-
-high: $$\hat{claimed_i} = 5.26 + 0.05(0.87) + (-0.52 - 0.07(0.87))honesty_c$$ $$\hat{claimed_i} = 5.30 - 0.58*honesty_c$$
 
 ## Plotting Simple Slopes
 
@@ -810,19 +751,6 @@ emtrends(model2_int_c,~confidence_c, var="honesty_c", at=mylist) %>%
 
 
 
-ANSWER: high and medium differ, low doesn't differ from zero
 
 > Question: Given the plot and simple slopes test, what can we say about the effect of `honesty_c` on `claimed_solved` at low, medium, and high levels of `confidence_c`?
 
-
-
-
-
-
-
-
-
-
-
-
-ANSWER: with high confidence, as `honesty_c` increases, `claimed_solved` decreases; with medium confidence, the same direction of effect happens (decrease), but the slope isn't as steep; with low confidence, the slope is much flatter suggesting that `honesty_c` has less of an effect on `claimed_solved`. In fact, the effect of `honesty_c` on `claimed_solved` is not significant at low levels of `confidence_c`. we also see a crossover interaction where, at low levels of `honesty_c` those with high confidence have the highest values of `claimed_solved` while, at higher levels of `honesty_c` those with low confidence have the highest values of `claimed_solved`, though there is still a general decrease in `claimed_solved` with increasing honesty.
