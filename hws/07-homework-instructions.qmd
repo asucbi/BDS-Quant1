@@ -187,6 +187,9 @@ To understand the relation between age and life satisfaction:
 
 ```{r ex-4, echo=FALSE, message=FALSE, eval=FALSE}
 
+ggplot(aes(x = age, y = life_satisfaction), data = age_sat) +
+  geom_line()
+
 model6 <- lm(life_satisfaction ~ age, data = age_sat)
 summary(model6)
 
@@ -197,6 +200,11 @@ model7 <- lm(life_satisfaction ~ age + age2, data = age_sat)
 summary(model7)
 
 anova(model6, model7)
+
+summary(model7)$r.squared - summary(model6)$r.squared
+
+check_collinearity(model7)
+
 
 age_sat <- age_sat %>% 
   mutate(age_c = age-mean(age, na.rm =TRUE),
