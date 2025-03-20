@@ -1,0 +1,288 @@
+---
+title: "Module 9: Homework Instructions"
+format: html
+editor: visual
+---
+
+## Purpose
+
+In this week's homework, you will be asked to demonstrate your understanding of categorical x categorical interactions and power analysis for these models.
+
+## Access the Starter Files for Module 9
+
+-   Go to [posit.cloud](posit.cloud) and then **navigate to the course workspace** via the left sidebar.
+
+    -   Look for the course workspace called "Statistical Methods Spring 2025"
+
+-   Open the project titled **Module 9** This module contains the starter files that you will use for the lab and for your homework.
+
+## Starter Files
+
+In the Files pane you should see these two R Notebooks:
+
+-   mod-09-lab-starter.qmd
+-   mod-09-hw-starter.qmd
+
+Open up `mod-09-hw-starter.qmd`.
+
+## Render it!
+
+Click the button called "Render" (circled in the image below) and then double check to see that your document rendered in the **Viewer** pane. It is always a good idea to occasionally check that the document still renders correctly after making changes.
+
+![](images/render.png)
+
+## Load Packages
+
+Today, we'll be using the following packages:
+
+-   **tidyverse**: a collection of packages for doing data analysis in a "tidy" way
+-   **apaTables**: a package that will allow us to generate a table of means and marginal means
+-   **afex**: a package that we will use to run ANOVA models
+-   **ggrain**: a package for creating raincloud plots
+-   **emmeans**: a package for examining simple effects
+-   **effectsize**: a package for calculating effect size
+-   **broom**: a package for cleaning up models
+-   **kableExtra**: a package for viewing tables produced by `kable`
+-   **Superpower**: a package for running power analysis simulations
+
+Please load these packages using the `library()` function. If the packages don't load, you may need to `install.packages()` first.
+
+```{r load-packages, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(afex) 
+library(ggrain) 
+library(emmeans) 
+library(effectsize) 
+library(broom)
+library(kableExtra)
+library(Superpower)
+
+```
+# Purpose
+
+Factorial ANOVA (aka multiple regression with categorical predictors) refers to a special case of the general linear model in which there is an interaction of two or more categorical variables (i.e. *factors*). A factorial design is used when there is an interest in how two or more variables (or factors) affect some outcomes variable. Rather than conduct separate one-way ANOVAs for each factor, they are all included in one analysis. In this homework you will demonstrate your ability to run Factorial ANOVA models in R, how to interpret and visualize the results, and how to conduct a power analysis for a Factorical ANOVA design.
+
+
+# Research scenario
+
+Based on subjects' self-reports of rejection sensitivity (N = 80), a researcher divides subjects into two equal groups (low RS and high RS).  Whereas half of the subjects in each group interact with a partner who displays a happy emotional expression during the interaction, the other half of the subjects in each group interact with a partner who displays a neutral emotional expression during the interaction.  After the interaction, subjects are asked to rate the statement, "My interaction partner likes me", on a scale from 1 (strongly disagree) to 7 (strongly agree).
+
+## Read in the Data
+
+The data file is called `reject.csv`. Read in the data, name it `reject`. Check it out using `View()`.
+
+```{r read-data, echo=FALSE, message=FALSE}
+
+reject <- read_csv("data/reject.csv")
+
+```
+
+The data has 3 columns:
+
+-   rs: participants' rejection sensitivity level (Low vs. High)
+-   partner: the emotion that their partner displayed during the interaction (Neutral vs. Happy)
+-   liking: participants' rating of how much their interaction partner likes them
+
+## Exercise 1: Factorial ANOVA as Regression
+
+1.  Prepare your data for analysis:
+
+First, check out the structure of the data. If any variables need to be turned into factors, do that now. 
+
+Recall that, by default, R orders factor levels alphabetically. In our case, this means that `High` will be the reference group of rejection sensitivity and `Happy` will be the reference group of interaction partner's emotional expression. However, it might be more intuitive to have `Low` and `Neutral` be the reference groups, respectively. Change the levels of `rs` and `partner` to make `Low` and `Neutral` the reference groups.
+ 
+```{r message = FALSE, echo = FALSE, eval = FALSE}
+
+reject <- reject %>% 
+  mutate(rs = as.factor(rs),
+         partner = as.factor(partner)) %>% 
+  mutate(rs = fct_relevel(rs, c("Low", "High")), 
+         partner = fct_relevel(partner, c("Neutral", "Happy")))
+
+str(reject) # Notice the re-ordering of levels
+
+```
+
+2. Use `lm()` to performs a factorial ANOVA analysis as *regression.* Use functions from the `{broom}` package (as we did in lab) to create a clean table of the coefficients. Make sure to include CIs.
+
+```{r message = FALSE, echo = FALSE, eval = FALSE}
+
+model <- lm(liking ~ rs*partner, data = reject)
+
+model %>%
+  tidy(conf.int=TRUE) %>% 
+  kable() %>% 
+  kable_styling()
+
+```
+3. Interpret each of the regression coefficients (intercept, effect of rejection sensitivity, effect of partner, interaction).
+
+4. Use the `eta_squared` function from the `{effectsize}` package to generate effect sizes for each of the effects in the model. For each effect (rejection sensitivity, partner, interaction) report whether the effect size is small, medium, or large.
+
+```{r message = FALSE, echo = FALSE, eval = FALSE}
+
+eta_squared(model)
+
+```
+
+5. Write an APA-style summary of these results. 
+
+## Exercise 2: Factorial ANOVA as ANOVA 
+
+1. What are the three hypothesis tests involved in a Factorial ANOVA? For each of the three hypothesis tests, write out the null and alternative hypothesis. 
+
+2. Obtain a table of means:
+
+We did not review this in lab, but the `apa.2way.table()` function from the apaTables package is a very convenient way to get our cell means and marginal means. This function works for any type of 2-way ANOVA, regardless of the number of levels of your factors, e.g. it would work for a 3 x 3 ANOVA. All you need to do is indicate what the IV's (aka factors) and DV are and specify `show.marginal.means = TRUE`. Check out the `help` info for the `apa.2way.table()` function and use it to create a table of means. Make sure that the table is visible in the output you turn in.
+
+```{r message = FALSE, echo = FALSE, eval = FALSE}
+
+table_of_means <- apa.2way.table(iv1 = rs, 
+               iv2 = partner, 
+               dv = liking, 
+               data = reject,
+               show.marginal.means = TRUE)
+table_of_means
+
+```
+3. Answer the following questions:
+
+(A) Which means are being compared in the *main effect* of rejection sensitivity?
+
+(B) Which means are being compared in the *main effect* of interaction partner?
+
+(C) Which means are involved in the *interaction*?
+
+4. Use the `aov_ez` function in the `{afex}` package to perform a factorial ANOVA analysis as *ANOVA*. Note that you will need to add a `subid` variable to your data. You can assume each row is an individual subject.
+
+```{r message = FALSE, echo = FALSE, eval = FALSE}
+
+reject <- reject %>% 
+  mutate(subid = 1:nrow(reject))
+
+aov_ez(id="subid", between=c("rs", "partner"), dv="liking", data=reject,  anova_table = list(es = "pes")) %>% 
+  nice()%>% 
+  kable() %>% 
+  kable_styling()
+
+```
+5. Interpret each of the regression coefficients (intercept, effect of rejection sensitivity, effect of partner, interaction).
+
+6. Use `emmeans` to explore the effect of `rs` at each level of `partner`.
+
+```{r message = FALSE, echo = FALSE, eval = FALSE}
+
+model %>%
+  emmeans::emmeans(pairwise~rs|partner) %>%
+  joint_tests(by="rs") %>%
+  kable() %>% 
+  kable_styling()
+
+```
+7. Use the `F_to_eta2` function to generate an eta-squared effect size for the effect of `rs` at each level of `partner`. For each effect (e.g., partner at low rejection sensitivity, partner at high rejection sensitivity) report whether the effect size is small, medium, or large.
+
+```{r message = FALSE, echo = FALSE, eval = FALSE}
+
+F_to_eta2(f = c(3.134, 334.686), 
+          df=c(1,1), 
+             df_error=76)%>% # for full model
+  kable() %>% 
+  kable_styling()
+
+```
+8. How does this model (the one created using `aov_ez`) differ from the previous model (the one created using `lm()`)? What differs? What is the same? Comment on what the models are testing as well as the results.
+
+9. Create a raincloud plot to visualize the interaction effect.
+
+```{r message = FALSE, echo = FALSE, eval = FALSE}
+
+ggplot(reject, aes(x = rs, y = liking, fill = rs)) +
+  geom_rain(rain.side="l") + 
+  facet_wrap(~partner) +
+  labs(x="Rejection Sensitivity", y="Liking", title="Effect of Rejection Sensitivity by Partner") + #always label your axes!
+  theme(legend.position = "none") #we don't need a legend because the X axis is clearly labeled
+
+```
+10. Write an APA-style summary of these results. 
+
+11. In this model (using the `aov_ez` function), what type of sums of squares did we use? If we ran the same model using a different type of sums of squares (e.g., using the `aov()` function in base R), would you expect the results *for THIS model* to change? Why or why not?
+
+
+## Exercise 3: Power for Factorial ANOVA
+
+1. Let's say we want to replicate this study. How would our power be if we had approximately the same sample size? Run the simulation 1000 times. Answer the following questions:
+
+(A) What would the power be for each of the main effects? 
+
+(B) What would the power be for each pairwise comparison?
+
+(C) Is this sample size adequate? Why or why not?
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+#first, get means for each condition
+reject %>% 
+  group_by(rs, partner) %>% 
+  summarise(mean = mean(liking, na.rm = TRUE),
+            sd = sd(liking, na.rm = TRUE),
+            n = n())
+
+string <- "2b*2b"
+n <- 20
+# about 20 per condition
+mu <- c(5.55, 6, 1.8, 6.45)
+# Enter means in the order that matches the labels below.
+sd <-c(1.05, 0.725, 0.696, 0.686)
+# SDs
+labelnames <- c("rs", "Low", "High", "partner", "Neutral", "Happy")
+# the label names should be in the order of the means specified above.
+
+#create design object
+design_result <- ANOVA_design(design = string,
+                   n = n,
+                   mu = mu,
+                   sd = sd,
+                   labelnames = labelnames)
+
+#run simulation
+
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = .05, 
+                                 nsims = 1000,
+                                 verbose = FALSE)
+
+simulation_result
+
+```
+
+2. Use the `power_plot` function to example power with a sample size ranging from 5 to 50. This may take a little while to run!
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+plot_power(design_result, min_n = 5, max_n = 50)
+
+```
+3. How many *total participants* would we need to achieve over 90% power for the main effects and interaction?
+
+
+## Render and submit your document.
+
+**Make sure that you I can see all of your answers in the rendered document!**
+
+To receive credit for this homework, submit a rendered PDF version of your file to "Module 9: Homework Submission" on Canvas.
+
+-   At the top of the .qmd file, change "format: html" to "format: pdf"
+-   Click "Render" at the top of the document
+-   Your document will open in a browser tab
+    -   If your document opens in the "Viewer" pane, click the "sidebar" button (circled in image below).
+    -   If you get a popup warning, click "Try Again" (may be specific to Mac)
+
+![](images/sidebar.png)
+
+-   Click the "Save" icon on the top right (circled in the image below)
+
+![](images/save_pdf.png)
+
+-   Save wherever you keep your class documents and upload your file to Canvas
+
+------------------------------------------------------------------------
