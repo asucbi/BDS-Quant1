@@ -58,14 +58,14 @@ library(kableExtra)
 library(Superpower)
 
 ```
+
 # Purpose
 
 Factorial ANOVA (aka multiple regression with categorical predictors) refers to a special case of the general linear model in which there is an interaction of two or more categorical variables (i.e. *factors*). A factorial design is used when there is an interest in how two or more variables (or factors) affect some outcomes variable. Rather than conduct separate one-way ANOVAs for each factor, they are all included in one analysis. In this homework you will demonstrate your ability to run Factorial ANOVA models in R, how to interpret and visualize the results, and how to conduct a power analysis for a Factorical ANOVA design.
 
-
 # Research scenario
 
-Based on subjects' self-reports of rejection sensitivity (N = 80), a researcher divides subjects into two equal groups (low RS and high RS).  Whereas half of the subjects in each group interact with a partner who displays a happy emotional expression during the interaction, the other half of the subjects in each group interact with a partner who displays a neutral emotional expression during the interaction.  After the interaction, subjects are asked to rate the statement, "My interaction partner likes me", on a scale from 1 (strongly disagree) to 7 (strongly agree).
+Based on subjects' self-reports of rejection sensitivity (N = 80), a researcher divides subjects into two equal groups (low RS and high RS). Whereas half of the subjects in each group interact with a partner who displays a happy emotional expression during the interaction, the other half of the subjects in each group interact with a partner who displays a neutral emotional expression during the interaction. After the interaction, subjects are asked to rate the statement, "My interaction partner likes me", on a scale from 1 (strongly disagree) to 7 (strongly agree).
 
 ## Read in the Data
 
@@ -87,10 +87,10 @@ The data has 3 columns:
 
 1.  Prepare your data for analysis:
 
-First, check out the structure of the data. If any variables need to be turned into factors, do that now. 
+First, check out the structure of the data. If any variables need to be turned into factors, do that now.
 
 Recall that, by default, R orders factor levels alphabetically. In our case, this means that `High` will be the reference group of rejection sensitivity and `Happy` will be the reference group of interaction partner's emotional expression. However, it might be more intuitive to have `Low` and `Neutral` be the reference groups, respectively. Change the levels of `rs` and `partner` to make `Low` and `Neutral` the reference groups.
- 
+
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 
 reject <- reject %>% 
@@ -103,7 +103,7 @@ str(reject) # Notice the re-ordering of levels
 
 ```
 
-2. Use `lm()` to performs a factorial ANOVA analysis as *regression.* Use functions from the `{broom}` package (as we did in lab) to create a clean table of the coefficients. Make sure to include CIs.
+2.  Use `lm()` to performs a factorial ANOVA analysis as *regression.* Use functions from the `{broom}` package (as we did in lab) to create a clean table of the coefficients. Make sure to include CIs.
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 
@@ -115,9 +115,10 @@ model %>%
   kable_styling()
 
 ```
-3. Interpret each of the regression coefficients (intercept, effect of rejection sensitivity, effect of partner, interaction).
 
-4. Use the `eta_squared` function from the `{effectsize}` package to generate effect sizes for each of the effects in the model. For each effect (rejection sensitivity, partner, interaction) report whether the effect size is small, medium, or large.
+3.  Interpret each of the regression coefficients (intercept, effect of rejection sensitivity, effect of partner, interaction).
+
+4.  Use the `eta_squared` function from the `{effectsize}` package to generate effect sizes for each of the effects in the model. For each effect (rejection sensitivity, partner, interaction) report whether the effect size is small, medium, or large.
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 
@@ -125,13 +126,13 @@ eta_squared(model)
 
 ```
 
-5. Write an APA-style summary of these results. 
+5.  Write an APA-style summary of these results.
 
-## Exercise 2: Factorial ANOVA as ANOVA 
+## Exercise 2: Factorial ANOVA as ANOVA
 
-1. What are the three hypothesis tests involved in a Factorial ANOVA? For each of the three hypothesis tests, write out the null and alternative hypothesis. 
+1.  What are the three hypothesis tests involved in a Factorial ANOVA? For each of the three hypothesis tests, write out the null and alternative hypothesis.
 
-2. Obtain a table of means:
+2.  Obtain a table of means:
 
 We did not review this in lab, but the `apa.2way.table()` function from the apaTables package is a very convenient way to get our cell means and marginal means. This function works for any type of 2-way ANOVA, regardless of the number of levels of your factors, e.g. it would work for a 3 x 3 ANOVA. All you need to do is indicate what the IV's (aka factors) and DV are and specify `show.marginal.means = TRUE`. Check out the `help` info for the `apa.2way.table()` function and use it to create a table of means. Make sure that the table is visible in the output you turn in.
 
@@ -145,7 +146,10 @@ table_of_means <- apa.2way.table(iv1 = rs,
 table_of_means
 
 ```
-3. Answer the following questions:
+
+3.  Answer the following questions:
+
+<!-- -->
 
 (A) Which means are being compared in the *main effect* of rejection sensitivity?
 
@@ -153,7 +157,9 @@ table_of_means
 
 (C) Which means are involved in the *interaction*?
 
-4. Use the `aov_ez` function in the `{afex}` package to perform a factorial ANOVA analysis as *ANOVA*. Note that you will need to add a `subid` variable to your data. You can assume each row is an individual subject.
+<!-- -->
+
+4.  Use the `aov_ez` function in the `{afex}` package to perform a factorial ANOVA analysis as *ANOVA*. Note that you will need to add a `subid` variable to your data. You can assume each row is an individual subject.
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 
@@ -166,9 +172,10 @@ aov_ez(id="subid", between=c("rs", "partner"), dv="liking", data=reject,  anova_
   kable_styling()
 
 ```
-5. Interpret each of the regression coefficients (intercept, effect of rejection sensitivity, effect of partner, interaction).
 
-6. Use `emmeans` to explore the effect of `rs` at each level of `partner`.
+5.  Interpret each of the regression coefficients (intercept, effect of rejection sensitivity, effect of partner, interaction).
+
+6.  Use `emmeans` to explore the effect of `rs` at each level of `partner`.
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 
@@ -179,7 +186,8 @@ model %>%
   kable_styling()
 
 ```
-7. Use the `F_to_eta2` function to generate an eta-squared effect size for the effect of `rs` at each level of `partner`. For each effect (e.g., partner at low rejection sensitivity, partner at high rejection sensitivity) report whether the effect size is small, medium, or large.
+
+7.  Use the `F_to_eta2` function to generate a partial eta-squared effect size for the effect of `rs` at each level of `partner`. For each effect (e.g., partner at low rejection sensitivity, partner at high rejection sensitivity) report whether the effect size is small, medium, or large.
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 
@@ -190,9 +198,10 @@ F_to_eta2(f = c(3.134, 334.686),
   kable_styling()
 
 ```
-8. How does this model (the one created using `aov_ez`) differ from the previous model (the one created using `lm()`)? What differs? What is the same? Comment on what the models are testing as well as the results.
 
-9. Create a raincloud plot to visualize the interaction effect.
+8.  How does this model (the one created using `aov_ez`) differ from the previous model (the one created using `lm()`)? What differs? What is the same? Comment on what the models are testing as well as the results.
+
+9.  Create a raincloud plot to visualize the interaction effect.
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 
@@ -203,16 +212,18 @@ ggplot(reject, aes(x = rs, y = liking, fill = rs)) +
   theme(legend.position = "none") #we don't need a legend because the X axis is clearly labeled
 
 ```
-10. Write an APA-style summary of these results. 
+
+10. Write an APA-style summary of these results.
 
 11. In this model (using the `aov_ez` function), what type of sums of squares did we use? If we ran the same model using a different type of sums of squares (e.g., using the `aov()` function in base R), would you expect the results *for THIS model* to change? Why or why not?
 
-
 ## Exercise 3: Power for Factorial ANOVA
 
-1. Let's say we want to replicate this study. How would our power be if we had approximately the same sample size? Run the simulation 1000 times. Answer the following questions:
+1.  Let's say we want to replicate this study. How would our power be if we had approximately the same sample size? Run the simulation 1000 times. Answer the following questions:
 
-(A) What would the power be for each of the main effects? 
+<!-- -->
+
+(A) What would the power be for each of the main effects?
 
 (B) What would the power be for each pairwise comparison?
 
@@ -255,15 +266,15 @@ simulation_result
 
 ```
 
-2. Use the `power_plot` function to example power with a sample size ranging from 5 to 50. This may take a little while to run!
+2.  Use the `power_plot` function to example power with a sample size ranging from 5 to 50. This may take a little while to run!
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
 plot_power(design_result, min_n = 5, max_n = 50)
 
 ```
-3. How many *total participants* would we need to achieve over 90% power for the main effects and interaction?
 
+3.  How many *total participants* would we need to achieve over 90% power for the main effects and interaction?
 
 ## Render and submit your document.
 

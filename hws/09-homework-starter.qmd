@@ -1,0 +1,150 @@
+---
+title: "Module 9: Homework Starter"
+format: html
+editor: visual
+---
+
+Please load these packages using the `library()` function. If the packages don't load, you may need to `install.packages()` first.
+
+```{r load-packages, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(afex) 
+library(ggrain) 
+library(emmeans) 
+library(effectsize) 
+library(broom)
+library(kableExtra)
+library(Superpower)
+
+```
+# Research scenario
+
+Based on subjects' self-reports of rejection sensitivity (N = 80), a researcher divides subjects into two equal groups (low RS and high RS).  Whereas half of the subjects in each group interact with a partner who displays a happy emotional expression during the interaction, the other half of the subjects in each group interact with a partner who displays a neutral emotional expression during the interaction.  After the interaction, subjects are asked to rate the statement, "My interaction partner likes me", on a scale from 1 (strongly disagree) to 7 (strongly agree).
+
+## Read in the Data
+
+The data file is called `reject.csv`. Read in the data, name it `reject`. Check it out using `View()`.
+
+```{r}
+
+
+
+```
+
+The data has 3 columns:
+
+-   rs: participants' rejection sensitivity level (Low vs. High)
+-   partner: the emotion that their partner displayed during the interaction (Neutral vs. Happy)
+-   liking: participants' rating of how much their interaction partner likes them
+
+## Exercise 1: Factorial ANOVA as Regression
+
+1.  Prepare your data for analysis:
+
+First, check out the structure of the data. If any variables need to be turned into factors, do that now. 
+
+Recall that, by default, R orders factor levels alphabetically. In our case, this means that `High` will be the reference group of rejection sensitivity and `Happy` will be the reference group of interaction partner's emotional expression. However, it might be more intuitive to have `Low` and `Neutral` be the reference groups, respectively. Change the levels of `rs` and `partner` to make `Low` and `Neutral` the reference groups.
+ 
+```{r}
+
+
+```
+
+2. Use `lm()` to performs a factorial ANOVA analysis as *regression.* Use functions from the `{broom}` package (as we did in lab) to create a clean table of the coefficients. Make sure to include CIs.
+
+```{r}
+
+
+```
+3. Interpret each of the regression coefficients (intercept, effect of rejection sensitivity, effect of partner, interaction).
+
+4. Use the `eta_squared` function from the `{effectsize}` package to generate effect sizes for each of the effects in the model. For each effect (rejection sensitivity, partner, interaction) report whether the effect size is small, medium, or large.
+
+```{r}
+
+
+```
+
+5. Write an APA-style summary of these results. 
+
+## Exercise 2: Factorial ANOVA as ANOVA 
+
+1. What are the three hypothesis tests involved in a Factorial ANOVA? For each of the three hypothesis tests, write out the null and alternative hypothesis. 
+
+2. Obtain a table of means:
+
+We did not review this in lab, but the `apa.2way.table()` function from the apaTables package is a very convenient way to get our cell means and marginal means. This function works for any type of 2-way ANOVA, regardless of the number of levels of your factors, e.g. it would work for a 3 x 3 ANOVA. All you need to do is indicate what the IV's (aka factors) and DV are and specify `show.marginal.means = TRUE`. Check out the `help` info for the `apa.2way.table()` function and use it to create a table of means. Make sure that the table is visible in the output you turn in.
+
+```{r}
+
+
+```
+3. Answer the following questions:
+
+(A) Which means are being compared in the *main effect* of rejection sensitivity?
+
+(B) Which means are being compared in the *main effect* of interaction partner?
+
+(C) Which means are involved in the *interaction*?
+
+4. Use the `aov_ez` function in the `{afex}` package to perform a factorial ANOVA analysis as *ANOVA*. Note that you will need to add a `subid` variable to your data. You can assume each row is an individual subject.
+
+```{r}
+
+
+```
+5. Interpret each of the regression coefficients (intercept, effect of rejection sensitivity, effect of partner, interaction).
+
+6. Use `emmeans` to explore the effect of `rs` at each level of `partner`.
+
+```{r}
+
+
+```
+7. Use the `F_to_eta2` function to generate a partial eta-squared effect size for the effect of `rs` at each level of `partner`. For each effect (e.g., partner at low rejection sensitivity, partner at high rejection sensitivity) report whether the effect size is small, medium, or large.
+
+```{r}
+
+
+
+```
+8. How does this model (the one created using `aov_ez`) differ from the previous model (the one created using `lm()`)? What differs? What is the same? Comment on what the models are testing as well as the results.
+
+9. Create a raincloud plot to visualize the interaction effect.
+
+```{r}
+
+
+```
+10. Write an APA-style summary of these results. 
+
+11. In this model (using the `aov_ez` function), what type of sums of squares did we use? If we ran the same model using a different type of sums of squares (e.g., using the `aov()` function in base R), would you expect the results *for THIS model* to change? Why or why not?
+
+
+## Exercise 3: Power for Factorial ANOVA
+
+1. Let's say we want to replicate this study. How would our power be if we had approximately the same sample size? Run the simulation 1000 times. Answer the following questions:
+
+(A) What would the power be for each of the main effects? 
+
+(B) What would the power be for each pairwise comparison?
+
+(C) Is this sample size adequate? Why or why not?
+
+```{r}
+
+
+```
+
+2. Use the `power_plot` function to example power with a sample size ranging from 5 to 50. This may take a little while to run!
+
+```{r}
+
+
+```
+3. How many *total participants* would we need to achieve over 90% power for the main effects and interaction?
+
+
+## Render and submit your document.
+
+------------------------------------------------------------------------

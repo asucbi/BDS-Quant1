@@ -151,11 +151,13 @@ ul.task-list li input[type="checkbox"] {
 <ol start="3" type="1">
 <li>Answer the following questions:</li>
 </ol>
+<!-- -->
 <ol type="A">
 <li><p>Which means are being compared in the <em>main effect</em> of rejection sensitivity?</p></li>
 <li><p>Which means are being compared in the <em>main effect</em> of interaction partner?</p></li>
 <li><p>Which means are involved in the <em>interaction</em>?</p></li>
 </ol>
+<!-- -->
 <ol start="4" type="1">
 <li>Use the <code>aov_ez</code> function in the <code>{afex}</code> package to perform a factorial ANOVA analysis as <em>ANOVA</em>. Note that you will need to add a <code>subid</code> variable to your data. You can assume each row is an individual subject.</li>
 </ol>
@@ -164,7 +166,7 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Use <code>emmeans</code> to explore the effect of <code>rs</code> at each level of <code>partner</code>.</p></li>
 </ol>
 <ol start="7" type="1">
-<li>Use the <code>F_to_eta2</code> function to generate an eta-squared effect size for the effect of <code>rs</code> at each level of <code>partner</code>. For each effect (e.g., partner at low rejection sensitivity, partner at high rejection sensitivity) report whether the effect size is small, medium, or large.</li>
+<li>Use the <code>F_to_eta2</code> function to generate a partial eta-squared effect size for the effect of <code>rs</code> at each level of <code>partner</code>. For each effect (e.g., partner at low rejection sensitivity, partner at high rejection sensitivity) report whether the effect size is small, medium, or large.</li>
 </ol>
 <ol start="8" type="1">
 <li><p>How does this model (the one created using <code>aov_ez</code>) differ from the previous model (the one created using <code>lm()</code>)? What differs? What is the same? Comment on what the models are testing as well as the results.</p></li>
@@ -180,6 +182,7 @@ ul.task-list li input[type="checkbox"] {
 <ol type="1">
 <li>Let’s say we want to replicate this study. How would our power be if we had approximately the same sample size? Run the simulation 1000 times. Answer the following questions:</li>
 </ol>
+<!-- -->
 <ol type="A">
 <li><p>What would the power be for each of the main effects?</p></li>
 <li><p>What would the power be for each pairwise comparison?</p></li>
