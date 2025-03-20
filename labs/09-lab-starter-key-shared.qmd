@@ -43,7 +43,7 @@ pain <- read_csv("data/drug_dose.csv")
 -   Use `str()` to look at the structure of the data
 -   Use `head()` to look at the first few rows of the data
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 View(pain)
 str(pain)
@@ -63,13 +63,12 @@ head(pain)
 
 
 
-ANSWER: drug and dose are not factors and we might want to make them factors
 
 # Turn `drug` and `dose` into factors.
 
 Examine the structure of the data to confirm that these changes were made.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 pain <- pain %>% 
   mutate(drug = as.factor(drug),
@@ -85,7 +84,7 @@ For our first analysis, let's only compare the `Low` and `Medium` dose levels.
 
 Create a new data object called `pain_red` (pain reduced) in which you have filtered out the `High` dose levels.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 pain_red <- pain %>% 
   filter(dose != "High") %>% 
@@ -97,7 +96,7 @@ pain_red <- pain %>%
 
 Group the data by `drug` and `dose` and get the means.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 #students: fill in this code to get the means
 
@@ -132,7 +131,6 @@ pain_red %>%
 
 
 
-ANSWER: it looks like maybe there is no effect of drug at Low doses but pain may be higher for Drug_A than Drug_B at Medium doses.
 
 ## Linear modeling approach: treatment/dummy-coding
 
@@ -142,7 +140,7 @@ $$\hat{pain_i} = \beta_0 + \beta_1drug + \beta_2dose + \beta_3drugxdose $$
 
 Run this model using `lm()`.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 #students: create and run the model
 
@@ -191,23 +189,13 @@ $$\hat{pain_i} = 8.50 - .28(drug) - .79(dose) - .54(drugxdose) $$
 
 
 
-ANSWER:
 
-Plug in different values for combinations into the model.
-
-Intercept: predicted outcome when drug = 0 (Drug_A) and dose = 0 (Low)
-
-Drug: the mean difference in the intercept for a one-unit change in drug when dose = 0; change from the intercept for a low dose for Drug_B
-
-Dose: the mean difference in the intercept for a one-unit change in dose when drug = 0; change from the intercept for Drug_A for a medium dose
-
-Interaction: Does the difference between Drug_A and Drug_B differ across Low and Medium doses?
 
 ## Linear modeling approach: deviation-coding
 
 Now, let's deviation code our predictors and run the model again!
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 #students: fill in values for deviation coding
 
@@ -264,23 +252,13 @@ $$\hat{pain_i} = 7.83 - .55(drug) + 1.05(dose) - .54(drugxdose) $$
 
 
 
-ANSWER:
 
-Intercept: the grand mean (overall mean of all the cells)
-
-Drug: the main effect of drug
-
-Dose: the main effect of dose
-
-Interaction: interaction betwen drug and dose
-
-No significant effects.
 
 ## ANOVA approach
 
 Now, we will run the same model using the ANOVA approach. We are going to use the `aov_ez` function in the `{afex}` package so that we can use Type III sums of squares!
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 #students: try to fill in the code below
 
@@ -312,13 +290,12 @@ aov_ez(id="subid", between=c("drug", "dose"), dv="pain_level", data=pain_red,  a
 
 
 
-ANSWER: They are essentially the same (t^2 = F)
 
 ## 2x3 Factorial ANOVA
 
 Now, we will use the full dataset to compare all levels of dose. First, lets check that the levels of our `dose` variable make sense. If not, change the order.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 levels(pain$dose)
 
@@ -350,13 +327,11 @@ pain <- pain %>%
 
 
 
-ANSWER:
 
-Drug: H0: pain level is equal across all drugs; H1: at least one drug differs Dose: H0: pain level is equal across dosages; H1: at least one dosage differs DrugxDose: H0: the effect of dose does not depend on drug (and vice versa); H1: the effect of dose depends on drug (or vice versa)
 
 Next, run a linear model predicting pain_level from `drug`, `dose`, and their interaction. Make sure you're using the `pain` dataset.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 model3 <- lm(pain_level ~ drug * dose, data = pain)
 summary(model3)
@@ -367,7 +342,7 @@ The output becomes a little more challenging to interpret and doesn't give us in
 
 One way we can make it more interpretable is using an ANOVA approach. Let's use the `aov_ez` function in the `{afex}` package again to run the ANOVA.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 aov_ez(id="subid", between=c("drug", "dose"), dv="pain_level", data=pain,  anova_table = list(es = "pes")) %>% 
   nice()%>% 
@@ -388,11 +363,10 @@ aov_ez(id="subid", between=c("drug", "dose"), dv="pain_level", data=pain,  anova
 
 
 
-ANSWER: No effect of drug. Difference somewhere in dose. Interaction between drug and dose.
 
 # Let's compare this to the same ANOVA using the `aov()` function in base R.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 model_aov <- aov(pain_level ~ drug * dose, data = pain)
 
@@ -412,7 +386,6 @@ summary(model_aov)
 
 
 
-ANSWER: Yes! In particular, `drug` goes from non-significant (with Type III SS) to significant (with Type I SS). This is because Type I asks how much of the *total variance* `drug` explains and Type III asks how much of the variance left over after `dose` and `drug x dose` is explained by `drug`.
 
 ## Explore the significant interaction
 
@@ -420,7 +393,7 @@ We found both a significant effect of `dose` and a significant interaction. Beca
 
 First, let's plot our interaction.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 #students: fill in the code below to create the plot
 
@@ -453,11 +426,10 @@ ggplot(pain, aes(x = dose, y = pain_level, fill = dose)) +
 
 
 
-ANSWER: For Drug A, high dose levels are really effective at reducing pain while Low and Medium levels don't differ as much. For Drug B there doesn't seem to be a huge difference in pain across the three dosage levels.
 
 Now, we will use emmeans to explore the effect of `dose` at each level of `drug`.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 lm(pain_level ~ drug * dose, data = pain) %>%
   emmeans::emmeans(pairwise~drug|dose) %>%
@@ -469,7 +441,7 @@ lm(pain_level ~ drug * dose, data = pain) %>%
 
 Don't forget effect sizes!
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 #students: plug in the f values for each test below
 
@@ -494,7 +466,7 @@ In our model, the main effect of `dose` was significant. While we are being care
 
 We can get this information using emmeans as well!
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 emmeans::emmeans(model3, ~dose, adjust="bonferroni") %>% 
   test() %>% 
@@ -515,7 +487,6 @@ emmeans::emmeans(model3, ~dose, adjust="bonferroni") %>%
 
 
 
-ANSWER: For Drug A, high dose levels are really effective at reducing pain while Low and Medium levels don't differ as much. For Drug B there doesn't seem to be a huge difference in pain across the three dosage levels.
 
 > Question: What information would you include in a summary?
 
@@ -529,13 +500,12 @@ ANSWER: For Drug A, high dose levels are really effective at reducing pain while
 
 
 
-ANSWER: What you did, significant effects (include means, sds, F, df, p-values, effect size, confidence intervals, etc), report non-significant effects but no need to go into detail, general interpretation of what you found. Include a figure depicting the interaction effect.
 
 ## ANOVA power
 
 Let's say we want to replicate this study. How would our power be if we had approximately the same sample size?
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 #first, get means for each condition
 pain %>% 
@@ -585,11 +555,10 @@ simulation_result
 
 
 
-ANSWER: Drug: 33%, Dose: 100%, Interaction: 87%
 
 Now, let's look at how much power we would have with different sample sizes (this will take a while to run!)
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r}
 
 plot_power(design_result, min_n = 10, max_n = 100)
 
@@ -607,4 +576,3 @@ plot_power(design_result, min_n = 10, max_n = 100)
 
 
 
-ANSWER: We get 37, but remember that it's 37 per cell of the design. We have 6 cells (each combo of drug and dose), so the total sample size would be 37x6 = 222!
