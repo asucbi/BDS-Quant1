@@ -1,0 +1,295 @@
+---
+title: "Module 10: Homework Instructions"
+format: html
+editor: visual
+---
+
+## Purpose
+
+This week's lab / homework is a little different, and the goal is to practice implementing the statistical analyses you have learned so far with "real" data.
+
+## Access the Starter Files for Module 10
+
+-   Go to [posit.cloud](posit.cloud) and then **navigate to the course workspace** via the left sidebar.
+
+    -   Look for the course workspace called "Statistical Methods Spring 2025"
+
+-   Open the project titled **Module 10** This module contains the starter files that you will use for the lab and for your homework.
+
+## Starter Files
+
+In the Files pane you should see this (only one) R Notebook:
+
+-   mod-10-hw-starter.qmd
+
+Open the file.
+
+## Render it!
+
+Click the button called "Render" (circled in the image below) and then double check to see that your document rendered in the **Viewer** pane. It is always a good idea to occasionally check that the document still renders correctly after making changes.
+
+![](images/render.png)
+
+## Load Packages
+
+I have loaded some packages that you might want to use into the Posit workspace. However, there may be other packages that you choose to load as well.
+
+Please load these packages using the `library()` function. If the packages don't load, you may need to `install.packages()` first.
+
+```{r load-packages, echo=FALSE, message=FALSE}
+
+library(tidyverse)
+library(psych) 
+library(papaja) 
+library(broom) 
+library(knitr) 
+library(afex) 
+library(ggrain) 
+library(emmeans) 
+library(effectsize) 
+library(broom)
+library(kableExtra)
+library(janitor)
+
+```
+
+# Instructions
+
+For each exercise (except the last one) you will be given a research question. It is your job to identify the correct statistical test to use and the relevant variables in the dataset. You will first clean the data as necessary to answer the research question (this might involve things like reverse coding variables, creating a composite score, identifying and dealing with unusual cases, removing outliers, etc). Then, you will run your analyses, making sure to identify any issues with model assumptions, correcting them if you can (using methods we covered in this course), generating all descriptives (e.g., means, standard deviations) and model statistics (e.g., estimates, confidence intervals, p-values, effect sizes, etc), writing an APA-style summary reporting your results, and generating a figure to illustrate your results.
+
+For each exercise, make sure to answer the following questions:
+
+(1) Which variables from the dataset are you going to use to answer the research question?
+
+(2) Which statistical test(s) are you going to use to answer the research question?
+
+(3) What are the null and alternative hypotheses for your test?
+
+You *must explicitly answer* these questions (e.g., write out the answer to each before your analysis). After answering these questions, run your analyses, generate a figure, and write up your APA-style summary.
+
+## Read in the Data
+
+I have compiled the survey data, but I have not yet done any data cleaning. The data file is called `stats_survey.csv`. Read in the data, name it `survey`. Check it out using `View()`.
+
+Note that there is a codebook that provides additional details about the data. Make sure to check that out!
+
+We will spend a little time looking at the data. What do you notice about the different variables? What do you think might be useful to keep in mind as we run our analyses?
+
+```{r read-data, echo=FALSE, message=FALSE}
+
+survey <- read_csv("data/stats_survey.csv")
+
+```
+
+## Exercise 1
+
+A researcher is trying to identify predictors of sleep. In a first analysis, the researcher wants to examine whether stress and the amount of coffee someone drinks independently (i.e., no interaction) impact the number of hours of sleep that they get. In a second analysis, the researcher wants to know whether the number of pets someone has and the time they spend commuting (both variables together) improve model fit above and beyond a model with stress and amount of coffee. In the final interpretation, they want to comment on the effect of each of the predictors (stress, coffee, pets, and commuting) on sleep as well as whether pets and commuting (together) explain more variance in sleep than stress and coffee.
+
+```{r exercise-1, message = FALSE, echo = FALSE, eval = FALSE}
+
+survey$stress_level
+survey$cups_of_coffee
+survey$sleep_hours
+survey$num_pets
+survey$communte_mins
+
+hist(survey$stress_level)
+
+ex1_df <- survey %>% 
+  mutate(sleep_hours_new = case_when(sleep_hours == "4-5" ~ "4.5",
+                              sleep_hours == "7/8" ~ "7.5",
+                              sleep_hours == "five and a half" ~ "5.5", 
+                              sleep_hours == "6-7" ~ "6.5",
+                              sleep_hours == "Around 6 to 7 hours" ~ "6.5",
+                              sleep_hours == "7 to 8" ~ "7.5",
+                              sleep_hours == "-5" ~ NA_character_,
+                              TRUE ~ sleep_hours),
+         sleep_hours_new = parse_number(sleep_hours_new),
+         cups_of_coffee = as.factor(cups_of_coffee),
+         num_pets = tolower(num_pets),
+         num_pets_new = case_when(num_pets == "too many" ~ NA_character_,
+                                  num_pets == "one" ~ "1",
+                                  num_pets == "none" ~ "0",
+                                  num_pets == "seventeen" ~ "17",
+                                  num_pets == "zero" ~ "0",
+                                  num_pets == "two" ~ "2",
+                                  TRUE ~ num_pets),
+         num_pets_new = as.integer(num_pets_new),
+         communte_mins = tolower(communte_mins),
+         commute_mins_new = case_when(communte_mins == "20 minute walking distance" ~ "20",
+                                      communte_mins == "60mins" ~ "60",
+                                      communte_mins == "15 minutes" ~ "15",
+                                      communte_mins == "90mins" ~ "90",
+                                      communte_mins == "15 min" ~ "15",
+                                      communte_mins == "15-oct" ~ "12.5",
+                                      communte_mins == "30min" ~ "30",
+                                      TRUE ~ communte_mins),
+         commute_mins_new = as.integer(commute_mins_new))
+
+ex1_df <- na.omit(ex1_df)
+
+hist(ex1_df$sleep_hours_new)
+
+reduced_model <- lm(sleep_hours_new ~ stress_level + cups_of_coffee, data = ex1_df)
+anova(reduced_model)
+                                  
+full_model <- lm(sleep_hours_new ~ stress_level + cups_of_coffee + num_pets_new + commute_mins_new, data = ex1_df)
+anova(full_model)
+
+anova(reduced_model, full_model)
+
+ex1_df %>% 
+  ggplot(aes(x = stress_level, y = sleep_hours_new)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+
+ex1_df %>% 
+  ggplot(aes(x = cups_of_coffee, y = sleep_hours_new, fill = cups_of_coffee)) +
+  geom_rain(rain.side="l") + 
+  labs(x="Cups of Coffee", y="Hours of Sleep", title="Effect of Cups of Coffee on Sleep") + #always label your axes!
+  theme(legend.position = "none") #we don't need a legend because the X axis is clearly labeled
+
+emmeans(reduced_model, pairwise ~ cups_of_coffee, adjust = "bonferroni")
+
+```
+
+## Exercise 2
+
+In an earlier homework assignment, we examined the relation between age and life satisfaction. Now, we want to replicate and extend those results. Specifically, we want to ask: Is the effect of age on life satisfaction moderated by how much exercise someone gets?
+
+```{r exercise-2, message = FALSE, echo = FALSE, eval = FALSE}
+
+survey$age_months
+survey$life_sat
+survey$hrs_exercise
+
+ex2_df <- survey %>% 
+  select(age_months, life_sat, hrs_exercise)
+
+ex2_df <- ex2_df %>% 
+  mutate(age_new = case_when(age_months == "24y 8m" ~ "296",
+                             age_months == "23" ~ NA_character_,
+                             age_months == "275 months" ~ "275",
+                             age_months == "80" ~ NA_character_,
+                             TRUE ~ age_months))
+
+ex2_df$age_new
+
+ex2_df <- ex2_df %>% 
+  mutate(age_years = as.integer(age_new) / 12) %>% 
+  na.omit()
+
+ex2_model <- lm(life_sat ~ age_years * hrs_exercise, data = ex2_df)
+summary(ex2_model)
+
+```
+
+## Exercise 3
+
+A researcher observes that people who are very outgoing and talkative generally seem to be happier and she wants to explore this relation. First, she wants to know about the strength and direction of the relation between extraversion and happiness. Then, she wants to predict happiness from extraversion. Note that, in our dataset, there are multiple variables that must be averaged to create an overall "extraversion" score. Some of these questions may need to be reverse coded before averaging (see codebook).
+
+Here's a hint for this one:
+
+mutate(mean_across_cols = rowMeans(select(., col1, col2, col3)))
+
+```{r exercise-3, message = FALSE, echo = FALSE, eval = FALSE}
+
+ex3_df <- survey %>% 
+  select(happy_person, starts_with("ex"))
+
+#reverse code some extraversion questions
+ex3_df <- ex3_df %>% 
+  mutate(ex_keep_to_self_rev = 6 - ex_keep_to_self,
+         ex_quiet_around_strangers_rev = 6 - ex_quiet_around_strangers) %>% 
+  select(-ex_keep_to_self, -ex_quiet_around_strangers)
+
+#create extraversion variable
+ex3_df <- ex3_df %>% 
+  mutate(extraversion = rowMeans(select(., ex_life_of_party:ex_quiet_around_strangers_rev)))
+
+ex3_df %>% 
+  ggplot(aes(x = extraversion, y = happy_person)) +
+    geom_point() +
+    geom_smooth(method="lm")
+
+cor.test(ex3_df$happy_person, ex3_df$extraversion)
+
+ex3_mod <- lm(happy_person ~ extraversion, data = ex3_df)
+summary(ex3_mod)
+
+```
+
+## Exercise 4
+
+Now, let's test this research question: Does sleep quality interact with gender to predict stress levels?
+
+```{r exercise-4, message = FALSE, echo = FALSE, eval = FALSE}
+
+survey$sleep_quality
+survey$stress_level
+survey$gender
+
+ex4_df <- survey %>% 
+  select(sleep_quality, stress_level, gender)
+
+ex4_df <- ex4_df %>% 
+  mutate(gender = tolower(gender),
+         gender_new = case_when(gender == "woman" ~ "female",
+                                gender == "f" ~ "female",
+                                gender == "m" ~ "male",
+                                gender == "femal" ~ "female",
+                                gender == "cisgender" ~ NA_character_,
+                                gender == "cisgender male" ~ "male",
+                                gender == "heterosexual male" ~ "male",
+                                TRUE ~ gender),
+         sleep_quality = as.factor(sleep_quality),
+         sleep_quality = fct_relevel(sleep_quality, c("Very Good", "Fairly Good", "Fairly Bad", "Very Bad", "I prefer not to answer.")),
+         sleep_quality = case_when(sleep_quality == "I prefer not to answer." ~ NA_character_,
+                                   TRUE ~ sleep_quality))
+
+
+ex4_df <- ex4_df %>% 
+  na.omit()
+
+ex4_mod <- lm(stress_level ~ sleep_quality * gender_new, data = ex4_df)
+anova(ex4_mod)
+
+emmeans(ex4_mod, pairwise ~ sleep_quality, adjust = "bonferroni")
+
+ex4_df %>% 
+  ggplot(aes(x = sleep_quality, y = stress_level, fill = sleep_quality)) +
+  geom_rain(rain.side="l") + 
+  labs(x="Sleep Quality", y="Stress Level", title="Effect of Sleep Quality on Stress") + #always label your axes!
+  theme(legend.position = "none")
+
+```
+
+## Exercise 5
+
+Identify a NEW question that you can ask using these data, conduct that analysis, and write an APA-style summary interpreting the results. Make sure to tell me what your research question is. Your results do not have to be significant. I am going to have an independent judge (blindly) rate how interesting each research question is, and the winner will receive a prize!
+
+```{r exercise-5, message = FALSE, echo = FALSE, eval = FALSE}
+
+```
+
+## Render and submit your document.
+
+**Make sure that you I can see all of your answers in the rendered document!**
+
+To receive credit for this homework, submit a rendered PDF version of your file to "Module 10: Homework Submission" on Canvas.
+
+-   At the top of the .qmd file, change "format: html" to "format: pdf"
+-   Click "Render" at the top of the document
+-   Your document will open in a browser tab
+    -   If your document opens in the "Viewer" pane, click the "sidebar" button (circled in image below).
+    -   If you get a popup warning, click "Try Again" (may be specific to Mac)
+
+![](images/sidebar.png)
+
+-   Click the "Save" icon on the top right (circled in the image below)
+
+![](images/save_pdf.png)
+
+-   Save wherever you keep your class documents and upload your file to Canvas
+
+------------------------------------------------------------------------

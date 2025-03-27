@@ -149,6 +149,9 @@ high <- mean(test_perf$study_time_c)+ sd(test_perf$study_time_c)
 
 interact_plot(model, pred = prev_score_c, modx = study_time_c, interval = TRUE, plot.points = TRUE)
 
+sim_slopes(model, pred = prev_score_c, modx = study_time_c, johnson_neyman = TRUE,
+           control.fdr = FALSE, cond.int = TRUE)
+
 ```
 
 6.  Test whether the slope of `prev_score` on `perf` differs from zero across low, medium, and high levels of `study_time`?

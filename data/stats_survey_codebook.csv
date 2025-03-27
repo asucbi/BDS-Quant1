@@ -1,0 +1,28 @@
+﻿original_question,label,entry_type,choices,notes
+"During the past month, how would you rate your sleep quality overall?",sleep_quality,options,"Very Good, Fairly Good, Fairly Bad, Very Bad, I prefer not to answer.",
+"During the past month, how many hours of sleep did you get per night (on average)?",sleep_hours,free_response,N/A,
+"During the past month, how would you rate your stress level overall?",stress_level,options,1 (No Stress at All) to 10 (Completely Stressed),
+"What is your age, in months? (multiply your age in years by 12 and add the number of months since your last birthday)",age_months,free_response,N/A,
+What is your gender?,gender,free_response,N/A,
+What is the highest degree or level of education you have completed?,ed_level,options,"Some High School, High School Diploma, Bachelor's Degree, Master's Degree, Ph.D./J.D./M.D. or Similar, Trade School, I prefer not to answer.",
+What language or languages can you speak fluently?,lgs_fluent,free_response,N/A,
+What language or languages can you speak with at least beginner level proficiency?,lgs_beginner,free_response,N/A,
+"In a typical week, how many days do you engage in moderate (like brisk walking) or vigorous (like running or intense exercise) physical activity for at least 30 minutes?",hrs_exercise,options,0 to 7,
+"Overall, how satisfied are you with your life currently?",life_sat,options,0 to 10,
+How much do you agree with the statement: I prefer to keep to myself.,ex_keep_to_self,options,1 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
+How much do you agree with the statement: I am the life of the party.,ex_life_of_party,options,2 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
+How much do you agree with the statement: I feel comfortable around people.,ex_comfort_around_people,options,3 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
+How much do you agree with the statement: I am quiet around strangers.,ex_quiet_around_strangers,options,4 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
+How much do you agree with the statement: I start conversations.,ex_start_convos,options,5 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
+How much do you agree with the statement: I talk to a lot of different people at parties.,ex_diff_people,options,6 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
+How much do you agree with the statement: I don't mind being the center of attention.,ex_center_of_attn,options,7 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
+What is your favorite animal?,fave_animal,free_response,N/A,
+"If you could have any superpower, what would it be?",superpower,free_response,N/A,
+Do you prefer cats or dogs?,cats_or_dogs,options,"Cats, Dogs, I prefer not to answer.",
+"On average, how many cups of coffee do you drink in a day?",cups_of_coffee,options,"None, 1 Cup, 2+ Cups, I prefer not to answer.",
+How many pets do you currently have?,num_pets,free_response,N/A,
+What brand of toothpaste are you currently using?,toothpaste_brand,free_response,N/A,
+How many days a week do you floss your teeth?,days_floss,options,0 to 7,
+"If you are currently working, how many minutes is your commute (one way) to work? If you work from home, enter 0. If you are not currently working or prefer not to answer, enter NA.",communte_mins,free_response,N/A,
+How much do you enjoy reading books?,enjoy_reading,options,1 (Not At All) to 10 (It's My Favorite Hobby),
+How much would you agree with the statement: I am a happy person.,happy_person,options,1 (Disagree Completely) to 10 (Agree Completely),

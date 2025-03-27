@@ -1,0 +1,243 @@
+---
+title: "Module 10: Review Session"
+format: html
+editor: visual
+---
+
+## Purpose
+
+This is code for the PSY/BDS 515 Review Session covering: linear regression, multiple regression, categorical predictors, interactions, transformations, effect size, and power. 
+
+Load all packages
+```{r load packages}
+
+library(tidyverse)
+library(psych) #for correlation analysis
+library(papaja) #for formatting p values
+library(broom) #for formatting tables
+library(knitr) #for formatting tables
+library(afex) 
+library(ggrain) 
+library(emmeans) 
+library(effectsize) 
+library(broom)
+library(kableExtra)
+
+```
+
+## Linear Regression
+
+```{r linear regression}
+
+age_pitch <- read_csv("data/age_pitch.csv")
+
+age_pitch %>% 
+  ggplot(aes(x = age, y = pitch)) +
+  geom_point() +
+  theme_minimal(base_size = 20) +
+  labs(x = "Age", y = "Pitch")
+
+ggsave("plots/correlation.png", height=6, width=6)
+
+r_age_pitch <- age_pitch %>% 
+  select(age, pitch) %>% 
+  corr.test()
+
+r_age_pitch$ci 
+r_age_pitch$n
+
+#regression
+
+age_pitch %>% 
+  ggplot(aes(x = age, y = pitch)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_minimal(base_size = 20) +
+  labs(x = "Age", y = "Pitch")
+
+ggsave("plots/regression.png", height=6, width=6)
+
+model <- lm(pitch ~ age, data = age_pitch)
+
+model %>%
+  tidy(conf.int=TRUE) %>% 
+  kable() %>% 
+  kable_styling()
+
+#assumptions: linearity
+plot_df <- tibble(fitted = model$fitted.values, residuals = model$residuals)
+
+ggplot(aes(x=fitted, y=residuals), data = plot_df) +
+  geom_point() +
+  geom_hline(yintercept = 0, color = "red") +
+  theme_minimal(base_size = 20) +
+  labs(x = "Fitted Values", y = "Residuals")
+
+ggsave("plots/fitted_v_resid.png", height=6, width=6)
+
+#assumptions: constant variance
+plot_df <- tibble(predictor = age_pitch$pitch, residuals = model$residuals)
+
+ggplot(aes(x=predictor, y=residuals), data = plot_df) +
+  geom_point() +
+  geom_hline(yintercept = 0, color = "red") +
+  theme_minimal(base_size = 20) +
+  labs(x = "Fitted Values", y = "Residuals")
+
+ggsave("plots/fitted_v_resid.png", height=6, width=6)
+
+#assumptions: normality
+
+ggplot(aes(x = residuals), data = plot_df) +
+  geom_histogram(bins = 15) +
+  theme_minimal(base_size = 20) +
+  labs(x = "Residuals", y = "Count")
+
+ggsave("plots/hist_of_resid.png", height=6, width=6)
+
+qqnorm(model$residuals)
+qqline(model$residuals)
+
+summary(model)
+
+eta_squared(model, partial = TRUE)
+eta_squared(model, partial = FALSE)
+
+confint(model)
+
+```
+
+## Multiple Regression
+
+```{r multiple regression}
+
+kay2021 <- read_csv("data/data_kay2021.csv")
+
+model_1 <- lm(conspiracy ~ paranoia + delusions, data = kay2021)
+summary(model_1)
+confint(model_1)
+
+check_collinearity(model_1)
+
+eta_squared(model_1, partial = TRUE)
+eta_squared(model_1, partial = FALSE)
+
+confint(model_1)
+
+model_2 <- lm(conspiracy ~ paranoia + delusions + uniqueness + control, data = kay2021)
+summary(model_2)
+
+anova(model_1, model_2)
+
+```
+
+## Categorical Predictors
+
+```{r categorical predictors}
+
+depression_drug <- read_csv("data/depression_drug.csv")
+
+#omnibus
+depression_drug <- depression_drug %>% 
+  mutate(drug = as.factor(drug))
+
+model <- lm(depression ~ drug, data = depression_drug)
+anova(model)
+summary(model)
+
+depression_drug <- depression_drug %>%
+  mutate(low.v.none = case_when(drug == "low" ~ 1,
+                                   TRUE ~ 0),
+         med.v.none = case_when(drug == "medium" ~ 1,
+                                             TRUE ~ 0),
+         high.v.none = case_when(drug == "high" ~ 1,
+                                             TRUE ~ 0))
+
+model_2 <- lm(depression ~ low.v.none + med.v.none + high.v.none, data = depression_drug)
+
+summary(model_2)
+eta_squared(model_2)
+confint(model_2)
+
+depression_drug <- depression_drug %>%
+  mutate(dev.low.v.none = case_when(drug == "low" ~ .75,
+                                   TRUE ~ -.25),
+         dev.med.v.none = case_when(drug == "medium" ~ .75,
+                                             TRUE ~ -.25),
+         dev.high.v.none = case_when(drug == "high" ~ .75,
+                                             TRUE ~ -.25))
+
+model_3 <- lm(depression ~ dev.low.v.none + dev.med.v.none + dev.high.v.none, data = depression_drug)
+
+summary(model_3)
+eta_squared(model_3, partial = FALSE)
+confint(model_3)
+
+
+```
+
+## Polynomials
+
+```{r polynomials}
+
+age_sat <- read_csv("data/age_sat.csv")
+
+ggplot(aes(x = age, y = life_satisfaction), data = age_sat) +
+  geom_point() +
+  theme_minimal(base_size = 20) +
+  labs(x = "Age", y = "Life Satisfaction")
+
+ggsave("plots/polynomial.png", height=6, width=10)
+
+age_sat <- age_sat %>% 
+  mutate(age_c = age-mean(age, na.rm =TRUE),
+         age_c_2 = age_c^2)
+
+model_4 <- lm(life_satisfaction ~ age_c, data = age_sat)
+summary(model_4)
+
+model_5 <- lm(life_satisfaction ~ age_c + age_c_2, data = age_sat)
+summary(model_5)
+
+anova(model_4, model_5)
+summary(model_4)$r.squared - summary(model_5)$r.squared
+
+
+anova(model_5)
+
+confint(model_5)
+eta_squared(model_5, partial = FALSE)
+
+```
+## Interactions
+
+```{r interactions}
+
+test_perf <- read_csv("data/test_perf.csv")
+
+test_perf <- test_perf %>% 
+  mutate(anxiety = factor(anxiety,
+                          levels= c("low", "high")),
+         study_time_c = study_time - mean(study_time, na.rm = TRUE))
+
+test_perf <- test_perf %>% 
+  mutate(prev_score_c = prev_score - mean(prev_score, na.rm = TRUE))
+
+model_6 <- lm(data= test_perf, perf ~ study_time_c*prev_score_c)
+summary(model_6)
+
+interact_plot(model_6, pred = prev_score_c, modx = study_time_c, interval = TRUE, plot.points = TRUE)
+
+low <- mean(test_perf$study_time_c) - sd(test_perf$study_time_c)
+medium <- 0
+high <- mean(test_perf$study_time_c)+ sd(test_perf$study_time_c)
+
+mylist <- list(study_time_c=c(round(high, 1), round(medium,1), round(low, 1)))
+
+emtrends(model_6,~study_time_c, var="prev_score_c", at=mylist) %>%
+  test(adjust="bonferroni")
+
+emtrends(model_6,~study_time_c, var="prev_score_c", at=mylist) %>%
+  pairs(adjust="bonferroni")
+
+```

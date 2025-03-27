@@ -84,6 +84,18 @@ Provide an APA-style summary of your results.
 
 ```{r correlation}
 
+age_pitch %>% 
+  ggplot(aes(x = age, y = pitch)) +
+  geom_point() +
+  theme_minimal(base_size = 20) +
+  labs(x = "Age", y = "Pitch")
+
+r_age_pitch <- age_pitch %>% 
+  select(age, pitch) %>% 
+  corr.test()
+
+r_age_pitch$ci 
+r_age_pitch$n
 
 
 ```
@@ -106,6 +118,11 @@ Provide an APA-style summary of your results (make sure it follow the example su
 
 ```{r regression}
 
+age_pitch %>% 
+  ggplot(aes(x = age, y = pitch)) +
+  geom_point() +
+  theme_minimal(base_size = 20) +
+  labs(x = "Age", y = "Pitch")
 
 ```
 
