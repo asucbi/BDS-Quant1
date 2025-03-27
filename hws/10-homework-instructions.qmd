@@ -266,7 +266,9 @@ ex4_df %>%
 
 ## Exercise 5
 
-Identify a NEW question that you can ask using these data, conduct that analysis, create a figure, and write an APA-style summary interpreting the results. Make sure to tell me what your research question is. Your results do not have to be significant. I am going to have an independent judge (blindly) rate how interesting each research question is, and the winner will receive a prize!
+Identify a NEW question that you can ask using these data, conduct that analysis, create a figure, and write an APA-style summary interpreting the results. Make sure to tell me what your research question is. Your results do not have to be significant. I am going to have an independent judge blindly rate how innovative each research question is (in the spirit of ASU), and the person who comes up with the most innovative question will receive a prize!
+
+*Guidelines:* The analysis you do must not be an analysis or part of an analysis that we did in Exercises 1 through 4; the analysis must use statistical tests that we have covered in class up to this point; you are welcome to recode variables in ways that might be informative.
 
 ```{r exercise-5, message = FALSE, echo = FALSE, eval = FALSE}
 
