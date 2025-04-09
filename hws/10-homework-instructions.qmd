@@ -63,8 +63,6 @@ For each exercise, make sure to answer the following questions:
 
 (2) Which statistical test(s) are you going to use to answer the research question?
 
-(3) What are the null and alternative hypotheses for your test?
-
 You *must explicitly answer* these questions (e.g., write out the answer to each before your analysis). After answering these questions, run your analyses, generate a figure, and write up your APA-style summary.
 
 ## Read in the Data
@@ -181,6 +179,13 @@ ex2_df <- ex2_df %>%
 
 ex2_model <- lm(life_sat ~ age_years * hrs_exercise, data = ex2_df)
 summary(ex2_model)
+
+ex2_df <- ex2_df %>% 
+  mutate(age_c = age_years - mean(age_years),
+         ex_c = hrs_exercise - mean(hrs_exercise))
+
+ex2c_model <- lm(life_sat ~ age_c * ex_c, data = ex2_df)
+summary(ex2c_model)
 
 ```
 

@@ -1,0 +1,307 @@
+---
+title: "Module 12: Lab Instructions"
+format: html
+editor: visual
+---
+
+# Purpose
+
+In today's lab, we will work through a set of analyses that will:
+
+1.  Highlight core concepts of multilevel variation.
+2.  Illustrate how group-level predictors function.
+3.  Contrast multilevel and single-level models.
+4.  Facilitate interpretation of the parameters of multilevel models.
+
+For today's lab, we just need tidyverse!
+
+```{r libraries, message=FALSE}
+
+library(tidyverse)
+
+```
+
+# Research scenario
+
+Today's dataset examines the effect of time spent on math homework on math achievement scores.
+
+## Read in the data
+
+Today's dataset is called `NELS88.csv`. Let's read it in and name it `nels`.
+
+```{r read-and-view, message= FALSE, echo=FALSE}
+
+nels <- read_csv("data/NELS88.csv")
+
+```
+
+## Examine the Data
+
+-   Use `View()` to examine the full dataset
+-   Use `str()` to look at the structure of the data
+-   Use `head()` to look at the first few rows of the data
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+View(nels)
+str(nels)
+head(nels)
+
+```
+
+As we discussed in lecture on Tuesday, the world we live in is highly interdependent.
+
+> Question: What kind of clustering might we have in these data?
+
+For our analyses, we want Schoolid to be a factor. Let's make that change to the data.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+nels <- nels %>% 
+  mutate(Schoolid = as.factor(Schoolid))
+
+```
+
+We will start by discussing some key concepts related to multilevel models.
+
+## Disaggregation versus Aggregation
+
+In classical analyses (e.g., ANOVA), we often aggregate to the group level (e.g., calculate a mean that averages across all trials for a participant). While disaggregated analyses allow us to keep all of the data that we collect, they may also ignore potential clustering in the data.
+
+Aggregation: Ignores within-level data (discards within-group variability)
+
+Disaggregation: Ignores group-level data (discards between-group variability)
+
+*Disaggregation:* Estimate a disaggregated model predicting math achievement from time spent on math homework each week. Since disaggregation ignores group-level data, we will not use the `schoolid` variable in our regression model.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+disag <- lm(mathscore ~ timeonmath, data=nels)
+summary(disag)
+anova(disag)
+
+```
+
+> Question: What do the results suggest?
+
+> Question: What is the problem with conducting the analysis in this manner?
+
+*Aggregation:* Estimate an aggregated model predicting mean math achievement from mean hours spent on homework each week. Since aggregation ignores individual-level data, we need to compute the mean math score and the mean time spent on math homework for each of the 10 schools.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+#First, get the averaege math score and time on math for each school
+nelsagg <- nels %>% 
+  group_by(Schoolid) %>% 
+  summarise(mathagg = mean(mathscore, na.rm = TRUE),
+            timeagg = mean(timeonmath, na.rm = TRUE))
+
+# Now, using the aggregated data, run the model
+agg <- lm(mathagg ~ timeagg, data=nelsagg)
+summary(agg)
+anova(agg)
+
+```
+
+> Question: What do the results suggest?
+
+> Question: What is the problem with conducting the analysis in this manner?
+
+## Assessing the effect of the grouping variable.
+
+We might want to know how much of an effect our grouping variable (`Schoolid`) has on our outcome (`mathscore`). To assess this, we can use the ICC or intraclass correlation coefficient. The ICC is an index of within-group similarity.
+
+Recall that:
+
+$$
+\text{Total Variance} = \text{Between Group Variance} + \text{Within Group Variance}
+$$ The ICC is calculated as:
+
+$$
+\text{ICC} = \frac{\text{Between Group Variance}}{\text{Total Variance}}
+$$
+
+or
+
+$$
+\text{ICC} = \frac{\text{Between Group Variance}}{ \text{Between Group Variance} + \text{Within Group Variance}}
+$$ In summary, we can use the ICC to answer the question: How much of the total variance in our dependent variable can be accounted for by the groping effect?
+
+> Question: How can we get the between-schools variability, within-schools variability, and the total variability in math achievement?
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+# run a one-way ANOVA predicting mathscore from Schoolid
+icc_mod <- lm(mathscore ~ Schoolid, data=nels)
+
+summary(icc_mod)
+icc_aov <- anova(icc_mod)
+icc_aov
+
+```
+
+> Question: What is the sums of squares for the effect of school? How can we calculate the total sums of squares?
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+# extract the ss_between and ss_total
+ss_b <- icc_aov[1,2]
+ss_t <-(icc_aov[1,2] + icc_aov[2,2])
+
+# calculate the ICC
+ICC <- ss_b/ss_t
+ICC
+
+# turn the ICC into a percentage
+print(paste("The grouping factor accounts for", round(ICC*100, digits=2),"% of the variance in math scores."))
+
+```
+
+> Question: What is the sums of squares for the effect of school? How can we calculate the total sums of squares?
+
+In the *disaggregated model* we ran above (predicting `mathscore` from `timeonmath`), we are assuming that school (the grouping variable) explains 0% of the variance in math scores. This assumes that we have 260 unique values (the number of entries in our data).
+
+In the *aggregated model*, we ran above (using `mathscore` from `timeonmath` averaged for each school), we are assuming that school (the grouping variable) explains 100% of the variance in math scores (i.e., that everyone in the school has the same math score). This assumes that we have 10 unique values (the number of schools in our data).
+
+However, the amount of unique data we have falls actually somewhere in the middle.
+
+## Examining Variability in Intercepts and Slopes
+
+Because we have a high ICC for the group effect, it’s useful to visualize our data to see if they vary in slopes, intercepts, or both. This will help us understand the source of the group effect.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+nels %>% 
+  ggplot(aes(x = timeonmath, y = mathscore)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(~Schoolid)
+
+nels %>% 
+  ggplot(aes(x = timeonmath, y = mathscore, color = Schoolid)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) 
+
+```
+
+> Question: From these plots, what can you say about the slopes and intercepts?
+
+If there is real variability due to the grouping effect, we usually want to try to figure out what characteristics of the group (i.e., a school) predict its regression line (i.e., its slope and intercept) so we can say something more substantial than just “the way time spent on homework predicts math scores is different school to school”.
+
+## Slopes and Intercepts as Outcomes 
+
+First, let's run an ANOVA-style regression to see whether `Schoolid` improves our model fit over a model with just `timeonmath`.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+model1 <- lm(mathscore ~ timeonmath + Schoolid, data = nels)
+summary(model1)
+anova(model1)
+
+```
+
+> Question: What does this model tell us about the impact of `Schoolid` on `mathscore`? What does it suggest about the intercepts? ...the slopes?
+
+> Question: What do I need to do to get information about the effect of `Schoolid` on the slopes (i.e., the relation between `timeonmath` and `mathscore`?
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+model2 <- lm(mathscore ~ timeonmath * Schoolid, data = nels)
+summary(model2)
+anova(model2)
+
+```
+
+> Question: Does `Schoolid` impact the intercepts, the slope, or both?
+
+Now we know that there is significant between-school variance in both the intercepts and the slopes and can try to predict this variance using school-level predictors. In this dataset, we have a variable that indicates whether the school is public or private (`schooltype`).
+
+First, we need to find the unique intercept and slope for each of the 10 schools.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+# This script tells R to run our regression (model) for each school. It will then save the coefficents (i.e., the slopes and the intercepts) from each regression. The saved intercepts and slopes will be in the object "slopesints".
+
+slopesints <- nels %>%
+  group_by(Schoolid, schooltype) %>%
+  summarise(
+    intercept = coef(lm(mathscore ~ timeonmath))[1],
+    slope = coef(lm(mathscore ~ timeonmath))[2]
+  )
+
+# make `schooltype` a factor
+slopesints <- slopesints %>% 
+  mutate(schooltype = as.factor(schooltype))
+
+# check out the contrasts
+contrasts(slopesints$schooltype) 
+
+```
+
+Now, let's try to predict the *intercepts* from whether a school is public or private.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+int <- lm(intercept ~ schooltype, data=slopesints)
+summary(int)
+
+```
+
+> Question: What is the regression equation predicting intercept from school type?
+
+> Question: What is the expected math achievement for a private school? How about for a public school?
+
+> Question: What is the implied "time spent on homework" in this model?
+
+> Question: The effect of school type (the slope in this model) has a p value of .07. What does this mean?
+
+Now, let's try to predict the *slopes* from whether a school is public or private.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+slope<-lm(slope~schooltype,data=slopesints)
+summary(slope)
+
+```
+
+> Question: What is the regression equation predicting slope from school type?
+
+> Question: What is the relationship (slope) between time spent on homework and math achievement for a private school? How about for a public school?
+
+> Question: Is the relationship (slope) significantly different for the two types of schools?
+
+You might be asking: Why do we need multilevel models? Can we just do this slopes and intercepts as outcomes analysis?
+
+While the idea of intercepts and slopes being outcomes is central to understanding what MLM does, simply treating them as outcomes in a standard single-level regression wouldn't capture the crucial aspects and benefits of running a full multilevel model. Here's why:
+
+1.  Ignoring the Hierarchical Structure and Dependencies:
+
+-   Non-Independence of Errors: In hierarchical data, observations within the same group are likely to be more similar to each other than observations from different groups. This violates the assumption of independence of errors in standard regression. Treating intercepts and slopes as outcomes in a single-level model wouldn't account for this non-independence, leading to:
+
+-   Underestimated Standard Errors: This can result in inflated Type I error rates (incorrectly rejecting the null hypothesis).
+
+-   Inaccurate Statistical Significance: Conclusions about the effects of predictors might be unreliable.
+
+Ignoring Group-Level Variance: A single-level model wouldn't explicitly model the variance between groups in their intercepts and slopes. MLM quantifies this variance, providing valuable information about the extent to which groups differ.
+
+2.  Inefficient and Biased Estimates:
+
+-   Pooling Data Inappropriately: Treating intercepts and slopes as outcomes in a single-level model would essentially involve estimating separate intercepts and slopes for each group without the benefits of partial pooling (also known as shrinkage) that MLM offers.
+
+-   Lack of Shrinkage: MLM uses information from all groups to inform the estimates for each individual group. Groups with less data are "shrunk" towards the overall average, leading to more stable and reliable estimates, especially for groups with small sample sizes. A single-level approach wouldn't have this borrowing of strength across groups.
+
+-   Increased Number of Parameters: Estimating separate intercepts and slopes for each group in a single-level model significantly increases the number of parameters to be estimated, potentially leading to overfitting, especially with a large number of groups and small group sizes. MLM estimates variance components instead of individual group parameters, leading to a more parsimonious model.
+
+3.  Inability to Model Group-Level Predictors of Intercepts and Slopes:
+
+-   The "Why" Behind the Variation: The core strength of MLM is its ability to explain why intercepts and slopes vary across groups by including group-level predictors. A single-level model treating intercepts and slopes as outcomes wouldn't allow you to directly model how group characteristics (e.g., school resources, hospital size) influence these group-specific parameters.
+
+-   Cross-Level Interactions: MLM allows for the examination of how group-level variables moderate the relationships between individual-level predictors and the outcome (cross-level interactions). This is impossible to model directly in a single-level framework treating intercepts and slopes as simple outcomes.
+
+4.  Conceptual Misunderstanding of Random Effects:
+
+-   Fixed vs. Random: Treating each group's intercept and slope as a fixed parameter in a single-level model implies that these are the only groups of interest and that their specific values are the primary focus. MLM, with its random effects, assumes that the observed groups are a sample from a larger population of groups, and we are interested in the distribution of intercepts and slopes in that population.
+
+In essence, while the idea of intercepts and slopes varying across groups is the foundation of MLM, simply trying to estimate separate intercepts and slopes for each group in a standard regression ignores the fundamental principles of hierarchical data analysis, leading to statistical problems and a loss of valuable insights into the group-level influences.
+
+MLM provides a statistically rigorous and conceptually sound framework for simultaneously modeling individual-level relationships and the variation and predictors of group-level intercepts and slopes, while accounting for the non-independence of data within groups. It's not just about seeing intercepts and slopes as outcomes; it's about modeling the structure of that variation.

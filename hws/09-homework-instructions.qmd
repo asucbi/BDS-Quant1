@@ -185,6 +185,13 @@ model %>%
   kable() %>% 
   kable_styling()
 
+
+model %>%
+  emmeans::emmeans(pairwise~rs|partner) %>%
+  joint_tests(by="partner") %>%
+  kable() %>% 
+  kable_styling()
+
 ```
 
 7.  Use the `F_to_eta2` function to generate a partial eta-squared effect size for the effect of `rs` at each level of `partner`. For each effect (e.g., partner at low rejection sensitivity, partner at high rejection sensitivity) report whether the effect size is small, medium, or large.
