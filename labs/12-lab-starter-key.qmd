@@ -13,13 +13,11 @@ In today's lab, we will work through a set of analyses that will:
 3.  Contrast multilevel and single-level models.
 4.  Facilitate interpretation of the parameters of multilevel models.
 
-For today's lab, you will need to load the following libraries.
+For today's lab, you will only need tidyverse!
 
 ```{r libraries, message=FALSE}
 
 library(tidyverse)
-library(lmer) #for running multilevel (aka mixed-effects) models
-library(lmerTest) #for generating test statistics for multilevel models
 
 ```
 
@@ -76,9 +74,20 @@ Aggregation: Ignores within-level data (discards within-group variability)
 
 Disaggregation: Ignores group-level data (discards between-group variability)
 
-## Disaggregation: Estimate a disaggregated model predicting math achievement from time spent on math homework each week. Since disaggregation ignores group-level data, we will not use the `schoolid` variable in our regression model.
+*Disaggregation:* Estimate a disaggregated model predicting math achievement from time spent on math homework each week. Since disaggregation ignores group-level data, we will not use the `schoolid` variable in our regression model.
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+# students: run the disaggregated model
+
+
+
+
+
+
+
+
+
 
 disag <- lm(mathscore ~ timeonmath, data=nels)
 summary(disag)
@@ -94,11 +103,22 @@ ANSWER: Students who spend more time on math have higher math scores.
 
 ANSWER: It ignores the group level variable. If there is an effect of group, we have possibly overestimated our df (amount of unique information that we have) and consequently inflated our t-value and made a Type I error.
 
-## Aggregation: Estimate an aggregated model predicting mean math achievement from mean hours spent on homework each week. Since aggregation ignores individual-level data, we need to compute the mean math score and the mean time spent on math homework for each of the 10 schools.
+*Aggregation:* Estimate an aggregated model predicting mean math achievement from mean hours spent on homework each week. Since aggregation ignores individual-level data, we need to compute the mean math score and the mean time spent on math homework for each of the 10 schools.
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
-#First, get the averaege math score and time on math for each school
+#First, get the average math score and time on math for each school
+# students: use `group_by` and `summarise()` to generate a new dataset with these values
+
+
+
+
+
+
+
+
+
+
 nelsagg <- nels %>% 
   group_by(Schoolid) %>% 
   summarise(mathagg = mean(mathscore, na.rm = TRUE),
@@ -125,19 +145,17 @@ We might want to know how much of an effect our grouping variable (`Schoolid`) h
 
 Recall that:
 
-$$
-\text{Total Variance} = \text{Between Group Variance} + \text{Within Group Variance}
-$$ The ICC is calculated as:
+Total Variance = Between Group Variance + Within Group Variance
 
-$$
-\text{ICC} = \frac{\text{Between Group Variance}}{\text{Total Variance}}
-$$
+The ICC is calculated as:
+
+ICC = Between Group Variance / Total Variance
 
 or
 
-$$
-\text{ICC} = \frac{\text{Between Group Variance}}{ \text{Between Group Variance} + \text{Within Group Variance}}
-$$ In summary, we can use the ICC to answer the question: How much of the total variance in our dependent variable can be accounted for by the groping effect?
+ICC = Between Group Variance / Between Group Variance + Within Group Variance
+
+In summary, we can use the ICC to answer the question: How much of the total variance in our dependent variable can be accounted for by the grouping effect?
 
 > Question: How can we get the between-schools variability, within-schools variability, and the total variability in math achievement?
 
@@ -165,6 +183,17 @@ ss_b <- icc_aov[1,2]
 ss_t <-(icc_aov[1,2] + icc_aov[2,2])
 
 # calculate the ICC
+# students: calculate the ICC
+
+
+
+
+
+
+
+
+
+
 ICC <- ss_b/ss_t
 ICC
 
@@ -188,6 +217,17 @@ However, the amount of unique data we have falls actually somewhere in the middl
 Because we have a high ICC for the group effect, it’s useful to visualize our data to see if they vary in slopes, intercepts, or both. This will help us understand the source of the group effect.
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+# students: generate a visualization
+
+
+
+
+
+
+
+
+
 
 nels %>% 
   ggplot(aes(x = timeonmath, y = mathscore)) +
@@ -213,6 +253,17 @@ If there is real variability due to the grouping effect, we usually want to try 
 First, let's run an ANOVA-style regression to see whether `Schoolid` improves our model fit over a model with just `timeonmath`.
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+# students: run this model (hint: we're just adding ONE additional predictor!)
+
+
+
+
+
+
+
+
+
 
 model1 <- lm(mathscore ~ timeonmath + Schoolid, data = nels)
 summary(model1)
@@ -267,6 +318,17 @@ contrasts(slopesints$schooltype)
 Now, let's try to predict the *intercepts* from whether a school is public or private.
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+# students: run a model predicting the `intercept` from `schooltype`
+
+
+
+
+
+
+
+
+
 
 int <- lm(intercept ~ schooltype, data=slopesints)
 summary(int)
