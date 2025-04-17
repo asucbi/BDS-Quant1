@@ -1,0 +1,331 @@
+---
+title: "Module 13: Lab Instructions (Instructor)"
+format: html
+editor: visual
+---
+
+# Purpose
+
+The goal of today's lab is to provide you with experience running and interpreting mixed effects models.
+
+For today's lab, you will need to load the following libraries.
+
+```{r libraries, message=FALSE}
+
+library(tidyverse)
+library(ggrain) #for making raincloud plots
+library(easystats) #to get ICC
+library(lme4) #for running multilevel (aka mixed-effects) models
+library(lmerTest) #for generating test statistics for multilevel models
+library(partR2) #for generating semi-partial R^2
+library(performance) #for examining model assumptions
+
+```
+
+# Research scenario
+
+We will use the same data we worked with last week, the data examines the effect of time spent on math homework on math achievement scores and how school type (public versus private) influences this effect.
+
+## Read in the data
+
+Today's dataset is called `NELS88.csv`. Let's read it in and name it `nels`.
+
+```{r read-and-view, message= FALSE, echo=FALSE}
+
+nels <- read_csv("data/NELS88.csv")
+
+```
+
+## Examine the Data
+
+-   Use `View()` to examine the full dataset
+-   Use `str()` to look at the structure of the data
+-   Use `head()` to look at the first few rows of the data
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+View(nels)
+str(nels)
+head(nels)
+
+```
+
+> Question: What is the fixed effect?
+
+ANSWER: time spent on math homework
+
+> Question: What is the random factor?
+
+ANSWER: classrooms
+
+> Question: What changes might you want to make to the data structure?
+
+ANSWER: make Schoolid a factor, make public or private a factor
+
+## Let's make that change to the data.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+nels <- nels %>% 
+  mutate(Schoolid = as.factor(Schoolid),
+         schooltype = as.factor(schooltype))
+
+```
+
+## Now, let's get some summary statistics about our data.
+
+```{r message= FALSE, echo=FALSE}
+
+summary_stats <- nels %>%
+  group_by(Schoolid) %>%
+  summarise(n_students = n()) %>%
+  ungroup() %>%
+  summarise(
+    n_clusters = n(),
+    total_students = sum(n_students),
+    average_students_per_classroom = mean(n_students),
+    SD_students_per_classroom = sd(n_students),
+    min_students_in_classroom = min(n_students),
+    max_students_in_classroom = max(n_students)
+  )
+
+# Extracting the values to variables for easier printing later
+n_clusters <- summary_stats$n_clusters
+total_students <- summary_stats$total_students
+average_students <- summary_stats$average_students_per_classroom
+sd_students <- summary_stats$SD_students_per_classroom
+min_students <- summary_stats$min_students_in_classroom
+max_students <- summary_stats$max_students_in_classroom
+  
+```
+
+## To aid in interpretation, lets center the `timeonmath` variable.
+
+> Question: Do we want to group mean center or grand mean center?
+
+ANSWER: depends on your research question, since we're less interested in overall differences between the schools let's group mean center
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+#lots of ways to do this, first get means for each school
+school_means <- nels %>% 
+  group_by(Schoolid) %>% 
+  summarise(mean_time = mean(timeonmath, na.rm = TRUE))
+
+#join with nels data and then center
+nels <- nels %>% 
+  left_join(school_means) %>% 
+  mutate(timeonmath_c = timeonmath - mean_time)
+
+  
+```
+
+## Now, we will visualize the relations in our data. Let's create one visualization examining the relation between `timeonmath`and `mathscore` and another examining the relation between `schooltype` and `mathscore`. 
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+ggplot(nels, aes(x = timeonmath, y = mathscore, group = Schoolid)) +
+  geom_point(aes(color = as.factor(Schoolid))) +
+  geom_smooth(method = "lm", se = FALSE, aes(group = Schoolid, color = as.factor(Schoolid))) +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  labs(title = "Effect of Time on Math on Math Score by School", x = "Time on Math", y = "Math Score")
+
+ggplot(nels, aes(x = schooltype, y = mathscore, fill = schooltype)) +
+  geom_rain(rain.side="l") + 
+  labs(x="School Type", y="Math Score", title="Effect of School Type on Math Score") + 
+  theme(legend.position = "none") 
+
+```
+> Question: What do these plots suggest?
+
+ANSWER: intercept and slope differences, school type interacts with time on math)
+
+## First, we may want to know how much of the variance in `mathscore` is explained by `Schoolid`. We did this last week, but let's get the ICC using the null model.  
+
+> Question: What goes into the null model?
+
+ANSWER: predict `mathscore` from just a random intercept for schools
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+#fit the null model
+null <- lmer(mathscore ~ (1|Schoolid), data = nels)
+summary(null)
+
+#first, lets calculate the ICC "by hand" from the output
+34.01 / (34.01+72.26)
+
+#now, let's use the `icc` function in `{easystats}` to generate the ICC.
+icc(null)
+
+```
+
+> Question: How do you interpret the ICC? Should we be concerned about clustering in our data?
+
+ANSWER: 32% of the variance in `mathscore` is explained by `Schoolid`, yes we should be concerned.
+
+## We will now build up from the last model. Fit a model that includes `timeonmath` and `schooltype` (no interaction). Include a random intercept for `Schoolid`.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+model_1 <- lmer(mathscore ~ timeonmath_c + schooltype + (1|Schoolid), data = nels)
+summary(model_1)
+
+```
+> Question: How would you interpret the fixed effects in this model? ...the random effects?
+
+ANSWER: coefficients interpreted as usual (private = 0, public = 1); random effects: how much variance due to each predictor
+
+## Let's continue building our model. Fit a model that includes an interaction between `timeonmath` and `schooltype`.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+model_2 <- lmer(mathscore ~ timeonmath_c * schooltype + (1|Schoolid), data = nels)
+summary(model_2)
+
+```
+
+## Now, we'll use a likelihood ratio test to compare the model with just main effects and the interaction model.
+
+> Question: What method of maximum likelihood estimation should we use here (FIML or REML)? Why?
+
+ANSWER: FIML because the fixed-effects structure differs.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+test_likelihoodratio(model_1, model_2, REML=FALSE)
+
+```
+
+## For completeness, let's also take a look at the AIC and BIC values. 
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+model_performance(model_1)
+model_performance(model_2)
+
+model_performance(model_1)$AIC - model_performance(model_2)$AIC 
+model_performance(model_1)$BIC - model_performance(model_2)$BIC 
+
+
+```
+> Question: What can we say from the AIC/BIC analysis?
+
+ANSWER: AIC difference is 5.33, which is moderate evidence for the lower AIC model (model_2)
+BIC difference is 1.76, so not quite evidence for the lower BIC model
+
+## Using the best fitting model from above, fit a model that adds random slopes for `timeonmath_c`
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+model_3 <- lmer(mathscore ~ timeonmath_c * schooltype + (timeonmath_c|Schoolid), data = nels)
+summary(model_3)
+
+```
+
+## Let's additionally add a random slope for `schooltype`.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+model_4 <- lmer(mathscore ~ timeonmath_c * schooltype + (timeonmath_c + schooltype|Schoolid), data = nels)
+summary(model_4)
+
+```
+
+> Question: What happened when you added the random slope for `schooltype`? Why do you think this happened? What should you do?
+
+ANSWER: The model failed to converge. Only one school in our sample is private, so it couldn't estimate a random slope because there is not enough variation. So, we can only have a random slope for timeonmath_c. 
+
+## We might want to know whether its useful to include a random slope for `timeonmath_c`. To assess this, let's compare the model with only a random intercept (model_2) to a model with a random intercept and random slope for `timeonmath_c` (model_3). 
+
+> Question: What method of maximum likelihood estimation should we use here (FIML or REML)? Why?
+
+ANSWER: REML because we are only changing random effects!
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+test_likelihoodratio(model_2, model_3)
+
+```
+> Question: Which is the best fitting model?
+
+ANSWER: model_3 with a random intercept and random slope for `timeonmath_c`.
+
+## Using the best model, interpret the fixed and random effects. 
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+summary(model_3)
+
+model_parameters(model_3, effects="fixed")
+model_parameters(model_3, effects="random") #note that the pulls out the SD, not the variance
+
+```
+
+## Note: If there was an issue with the intercept and slope correlation (e.g., the model was singular because the correlation was 1 or -1), I could remove it from the model.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+#here's how I'd do that. notice that the correlation is no longer part of the summary.
+model_5 <- lmer(mathscore ~ timeonmath_c * schooltype + (timeonmath_c||Schoolid), data = nels)
+summary(model_5)
+model_parameters(model_5, effects="random") 
+
+```
+
+## Examine the effect size. Use pseudo-R^2 for the overall model, semi-R^2 for the `timeonmath` effect and Cohen's d for the `schooltype` effect.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+#pseudo R^2 (conditional = full model, marginal = fixed effects only)
+r2(model_3)
+
+#semi-R^2
+partR2(model_3, data = nels, partvars = c("timeonmath_c"), R2_type = "marginal", nboot = 10, CI = 0.95) #VERY small effect!
+
+#cohen's d = effect / sqrt(var(int) + var(slope) + var(resid))
+-15.605 / sqrt(9.683+25.577+25.577)
+
+```
+
+## Visualize variation in the intercept and slope.
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+random <- estimate_grouplevel(model_3)
+plot(random)
+
+```
+
+## Finally, let's check the assumptions of our model. 
+
+```{r message= FALSE, echo=FALSE, eval=FALSE}
+
+check_model(model_3)
+
+```
+
+> Question: How does this look? 
+
+ANSWER: Not bad. Collinaerity is kind of high. To fix this we could "center" (i.e., deviation code school type)
+
+> Question: Why would we *NOT* want to use these data in a real assessment of the effect of school type on the relation between time spent on math homework and math scores? 
+
+ANSWER: We only have one private school, so we'd want to collect more data. 
+
+## The last step is to write up the results of our model.
+
+The present study examined the effect of school type on the relation between time spent on math homework and math scores, using a nested data structure with two levels: students (Level 1) nested within classrooms (Level 2). The analysis included `r summary_stats$total_students` distributed across `r summary_stats$n_clusters` classrooms. Classrooms varied in size, with an average of approximately `r summary_stats$average_students_per_classroom` students per classroom ($SD$ = `r round(summary_stats$SD_students_per_classroom, 2)`, $range$ = [`r summary_stats$min_students_in_classroom`, `r summary_stats$min_students_in_classroom`]). 
+
+The effect of school type on the relation between time spent on math homework and math scores was modeled using a multilevel linear model, represented by the following equation: 
+
+\text{mathscore} \sim \text{timeonmath\_c} * \text{schooltype} + (\text{timeonmath\_c}|\text{Schoolid})
+
+Where `mathscore` is the students' score on a mathematics assessment, `schooltype` indicates whether the school was public or private, `timonmath_c` is the number of hours the student spends on math per week, and (\text{timeonmath\_c}|\text{Schoolid}) represents random intercepts and slopes for `timeonmath_c` across schools. We group mean centered `timeonmath` (around the mean for each school) for our analyses. 
+
+
+
+
+
+
