@@ -6,29 +6,25 @@ editor: visual
 
 ## Purpose
 
+In this week's homework, you will be asked to demonstrate your ability to run and interpret mixed effects models. 
 
-Today's dataset comes from [ManyBabies](manybabies.org). As described on the website, ManyBabies is: "...a collaborative project for replication and best practices in developmental psychology research. Our goal is to bring researchers together to address difficult outstanding theoretical and methodological questions about the nature of early development and how it is studied."
 
-The specific data we will be using comes from the first ManyBabies effort (MB1), the goal of which was to replicate a robust finding in infancy research, specifically that infants prefer to listen to infant-directed over adult-directed speech. Sixty-nine labs from 16 different countries participated. Infants listened to clips of infant- and adult-directed speech as their looking to a central fixation stimulus (a bright checkerboard) was measured. Researchers hypothesized that infants would look longer at the checkerboard when hearing infant-directed speech. Each infant was presented with 16 total trials (half infant-directed, half adult-directed). The final dataset contains observations from 2,282 infants (this is a MASSIVE sample for infant research!).
-
-In this week's homework, you will be asked to demonstrate your understanding of categorical x categorical interactions and power analysis for these models.
-
-## Access the Starter Files for Module 9
+## Access the Starter Files for Module 13
 
 -   Go to [posit.cloud](posit.cloud) and then **navigate to the course workspace** via the left sidebar.
 
     -   Look for the course workspace called "Statistical Methods Spring 2025"
 
--   Open the project titled **Module 9** This module contains the starter files that you will use for the lab and for your homework.
+-   Open the project titled **Module 13** This module contains the starter files that you will use for the lab and for your homework.
 
 ## Starter Files
 
 In the Files pane you should see these two R Notebooks:
 
--   mod-09-lab-starter.qmd
--   mod-09-hw-starter.qmd
+-   mod-13-lab-starter.qmd
+-   mod-13-hw-starter.qmd
 
-Open up `mod-09-hw-starter.qmd`.
+Open up `mod-13-hw-starter.qmd`.
 
 ## Render it!
 
@@ -64,21 +60,21 @@ library(Superpower)
 
 ```
 
-# Purpose
-
-Factorial ANOVA (aka multiple regression with categorical predictors) refers to a special case of the general linear model in which there is an interaction of two or more categorical variables (i.e. *factors*). A factorial design is used when there is an interest in how two or more variables (or factors) affect some outcomes variable. Rather than conduct separate one-way ANOVAs for each factor, they are all included in one analysis. In this homework you will demonstrate your ability to run Factorial ANOVA models in R, how to interpret and visualize the results, and how to conduct a power analysis for a Factorical ANOVA design.
-
 # Research scenario
 
-Based on subjects' self-reports of rejection sensitivity (N = 80), a researcher divides subjects into two equal groups (low RS and high RS). Whereas half of the subjects in each group interact with a partner who displays a happy emotional expression during the interaction, the other half of the subjects in each group interact with a partner who displays a neutral emotional expression during the interaction. After the interaction, subjects are asked to rate the statement, "My interaction partner likes me", on a scale from 1 (strongly disagree) to 7 (strongly agree).
+This dataset comes from [ManyBabies](manybabies.org). As described on the website, ManyBabies is: "...a collaborative project for replication and best practices in developmental psychology research. Our goal is to bring researchers together to address difficult outstanding theoretical and methodological questions about the nature of early development and how it is studied."
+
+The specific data we will be using is data that I collected in my lab at the University of Oregon to contribute to the first ManyBabies effort (MB1), the goal of which was to replicate a robust finding in infancy research, specifically that infants prefer to listen to infant-directed over adult-directed speech. Sixty-nine labs from 16 different countries participated. **However, you will be analyzing the data from only one lab.** 
+
+In the study, infants listened to clips of infant- and adult-directed speech as their looking to a central fixation stimulus (a bright checkerboard) was measured. Researchers hypothesized that infants would look longer at the checkerboard when hearing infant-directed speech. Each infant was presented with 16 total trials, and each trial was a different recording of infant-directed or adult-directed speech.  
 
 ## Read in the Data
 
-The data file is called `reject.csv`. Read in the data, name it `reject`. Check it out using `View()`.
+The data file is called `mb_oregon.csv`. Read in the data, name it `mb_oregon`. Check it out using `View()`.
 
 ```{r read-data, echo=FALSE, message=FALSE}
 
-reject <- read_csv("data/reject.csv")
+mb_oregon <- read_csv("data/reject.csv")
 
 ```
 

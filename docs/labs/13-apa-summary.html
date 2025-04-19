@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Module 13: Lab Instructions (Instructor)</title>
+<title>Module 13: APA Summary for Multilevel Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,53 +20,19 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="13-lab-worksheet-instructor_files/libs/clipboard/clipboard.min.js"></script>
-<script src="13-lab-worksheet-instructor_files/libs/quarto-html/quarto.js"></script>
-<script src="13-lab-worksheet-instructor_files/libs/quarto-html/popper.min.js"></script>
-<script src="13-lab-worksheet-instructor_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="13-lab-worksheet-instructor_files/libs/quarto-html/anchor.min.js"></script>
-<link href="13-lab-worksheet-instructor_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="13-lab-worksheet-instructor_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="13-lab-worksheet-instructor_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="13-lab-worksheet-instructor_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="13-lab-worksheet-instructor_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="13-apa-summary_files/libs/clipboard/clipboard.min.js"></script>
+<script src="13-apa-summary_files/libs/quarto-html/quarto.js"></script>
+<script src="13-apa-summary_files/libs/quarto-html/popper.min.js"></script>
+<script src="13-apa-summary_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="13-apa-summary_files/libs/quarto-html/anchor.min.js"></script>
+<link href="13-apa-summary_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="13-apa-summary_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="13-apa-summary_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="13-apa-summary_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="13-apa-summary_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -108,7 +74,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Module 13: Lab Instructions (Instructor)</h1>
+<h1 class="title">Module 13: APA Summary for Multilevel Model</h1>
 </div>
 
 
@@ -125,219 +91,14 @@ window.Quarto = {
 </header>
 
 
-<section id="purpose" class="level1">
-<h1>Purpose</h1>
-<p>The goal of today’s lab is to provide you with experience running and interpreting mixed effects models.</p>
-<p>For today’s lab, you will need to load the following libraries.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrain) <span class="co">#for making raincloud plots</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(easystats) <span class="co">#to get ICC</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co">#for running multilevel (aka mixed-effects) models</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co">#for generating test statistics for multilevel models</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(partR2) <span class="co">#for generating semi-partial R^2</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co">#for examining model assumptions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="research-scenario" class="level1">
-<h1>Research scenario</h1>
-<p>We will use the same data we worked with last week, the data examines the effect of time spent on math homework on math achievement scores and how school type (public versus private) influences this effect.</p>
-<section id="read-in-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="read-in-the-data">Read in the data</h2>
-<p>Today’s dataset is called <code>NELS88.csv</code>. Let’s read it in and name it <code>nels</code>.</p>
-</section>
-<section id="examine-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="examine-the-data">Examine the Data</h2>
-<ul>
-<li>Use <code>View()</code> to examine the full dataset</li>
-<li>Use <code>str()</code> to look at the structure of the data</li>
-<li>Use <code>head()</code> to look at the first few rows of the data</li>
-</ul>
-<blockquote class="blockquote">
-<p>Question: What is the fixed effect?</p>
-</blockquote>
-<p>ANSWER: time spent on math homework</p>
-<blockquote class="blockquote">
-<p>Question: What is the random factor?</p>
-</blockquote>
-<p>ANSWER: classrooms</p>
-<blockquote class="blockquote">
-<p>Question: What changes might you want to make to the data structure?</p>
-</blockquote>
-<p>ANSWER: make Schoolid a factor, make public or private a factor</p>
-</section>
-<section id="lets-make-that-change-to-the-data." class="level2">
-<h2 class="anchored" data-anchor-id="lets-make-that-change-to-the-data.">Let’s make that change to the data.</h2>
-</section>
-<section id="now-lets-get-some-summary-statistics-about-our-data." class="level2">
-<h2 class="anchored" data-anchor-id="now-lets-get-some-summary-statistics-about-our-data.">Now, let’s get some summary statistics about our data.</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>summary_stats <span class="ot">&lt;-</span> nels <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Schoolid) <span class="sc">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_students =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_clusters =</span> <span class="fu">n</span>(),</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_students =</span> <span class="fu">sum</span>(n_students),</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">average_students_per_classroom =</span> <span class="fu">mean</span>(n_students),</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD_students_per_classroom =</span> <span class="fu">sd</span>(n_students),</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_students_in_classroom =</span> <span class="fu">min</span>(n_students),</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_students_in_classroom =</span> <span class="fu">max</span>(n_students)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting the values to variables for easier printing later</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>n_clusters <span class="ot">&lt;-</span> summary_stats<span class="sc">$</span>n_clusters</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>total_students <span class="ot">&lt;-</span> summary_stats<span class="sc">$</span>total_students</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>average_students <span class="ot">&lt;-</span> summary_stats<span class="sc">$</span>average_students_per_classroom</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>sd_students <span class="ot">&lt;-</span> summary_stats<span class="sc">$</span>SD_students_per_classroom</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>min_students <span class="ot">&lt;-</span> summary_stats<span class="sc">$</span>min_students_in_classroom</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>max_students <span class="ot">&lt;-</span> summary_stats<span class="sc">$</span>max_students_in_classroom</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="to-aid-in-interpretation-lets-center-the-timeonmath-variable." class="level2">
-<h2 class="anchored" data-anchor-id="to-aid-in-interpretation-lets-center-the-timeonmath-variable.">To aid in interpretation, lets center the <code>timeonmath</code> variable.</h2>
-<blockquote class="blockquote">
-<p>Question: Do we want to group mean center or grand mean center?</p>
-</blockquote>
-<p>ANSWER: depends on your research question, since we’re less interested in overall differences between the schools let’s group mean center</p>
-</section>
-<section id="now-we-will-visualize-the-relations-in-our-data.-lets-create-one-visualization-examining-the-relation-between-timeonmathand-mathscore-and-another-examining-the-relation-between-schooltype-and-mathscore." class="level2">
-<h2 class="anchored" data-anchor-id="now-we-will-visualize-the-relations-in-our-data.-lets-create-one-visualization-examining-the-relation-between-timeonmathand-mathscore-and-another-examining-the-relation-between-schooltype-and-mathscore.">Now, we will visualize the relations in our data. Let’s create one visualization examining the relation between <code>timeonmath</code>and <code>mathscore</code> and another examining the relation between <code>schooltype</code> and <code>mathscore</code>.</h2>
-<blockquote class="blockquote">
-<p>Question: What do these plots suggest?</p>
-</blockquote>
-<p>ANSWER: intercept and slope differences, school type interacts with time on math)</p>
-</section>
-<section id="first-we-may-want-to-know-how-much-of-the-variance-in-mathscore-is-explained-by-schoolid.-we-did-this-last-week-but-lets-get-the-icc-using-the-null-model." class="level2">
-<h2 class="anchored" data-anchor-id="first-we-may-want-to-know-how-much-of-the-variance-in-mathscore-is-explained-by-schoolid.-we-did-this-last-week-but-lets-get-the-icc-using-the-null-model.">First, we may want to know how much of the variance in <code>mathscore</code> is explained by <code>Schoolid</code>. We did this last week, but let’s get the ICC using the null model.</h2>
-<blockquote class="blockquote">
-<p>Question: What goes into the null model?</p>
-</blockquote>
-<p>ANSWER: predict <code>mathscore</code> from just a random intercept for schools</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
-lmerModLmerTest]
-Formula: mathscore ~ (1 | Schoolid)
-   Data: nels
-
-REML criterion at convergence: 1871.7
-
-Scaled residuals: 
-     Min       1Q   Median       3Q      Max 
--2.34027 -0.65554 -0.08304  0.54211  2.87452 
-
-Random effects:
- Groups   Name        Variance Std.Dev.
- Schoolid (Intercept) 34.01    5.832   
- Residual             72.26    8.500   
-Number of obs: 260, groups:  Schoolid, 10
-
-Fixed effects:
-            Estimate Std. Error     df t value Pr(&gt;|t|)    
-(Intercept)   48.861      1.927  9.631   25.35 3.85e-10 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3200339</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># Intraclass Correlation Coefficient
-
-    Adjusted ICC: 0.320
-  Unadjusted ICC: 0.320</code></pre>
-</div>
-</div>
-<blockquote class="blockquote">
-<p>Question: How do you interpret the ICC? Should we be concerned about clustering in our data?</p>
-</blockquote>
-<p>ANSWER: 32% of the variance in <code>mathscore</code> is explained by <code>Schoolid</code>, yes we should be concerned.</p>
-</section>
-<section id="we-will-now-build-up-from-the-last-model.-fit-a-model-that-includes-timeonmath-and-schooltype-no-interaction.-include-a-random-intercept-for-schoolid." class="level2">
-<h2 class="anchored" data-anchor-id="we-will-now-build-up-from-the-last-model.-fit-a-model-that-includes-timeonmath-and-schooltype-no-interaction.-include-a-random-intercept-for-schoolid.">We will now build up from the last model. Fit a model that includes <code>timeonmath</code> and <code>schooltype</code> (no interaction). Include a random intercept for <code>Schoolid</code>.</h2>
-<blockquote class="blockquote">
-<p>Question: How would you interpret the fixed effects in this model? …the random effects?</p>
-</blockquote>
-<p>ANSWER: coefficients interpreted as usual (private = 0, public = 1); random effects: how much variance due to each predictor</p>
-</section>
-<section id="lets-continue-building-our-model.-fit-a-model-that-includes-an-interaction-between-timeonmath-and-schooltype." class="level2">
-<h2 class="anchored" data-anchor-id="lets-continue-building-our-model.-fit-a-model-that-includes-an-interaction-between-timeonmath-and-schooltype.">Let’s continue building our model. Fit a model that includes an interaction between <code>timeonmath</code> and <code>schooltype</code>.</h2>
-</section>
-<section id="now-well-use-a-likelihood-ratio-test-to-compare-the-model-with-just-main-effects-and-the-interaction-model." class="level2">
-<h2 class="anchored" data-anchor-id="now-well-use-a-likelihood-ratio-test-to-compare-the-model-with-just-main-effects-and-the-interaction-model.">Now, we’ll use a likelihood ratio test to compare the model with just main effects and the interaction model.</h2>
-<blockquote class="blockquote">
-<p>Question: What method of maximum likelihood estimation should we use here (FIML or REML)? Why?</p>
-</blockquote>
-<p>ANSWER: FIML because the fixed-effects structure differs.</p>
-<div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: model3 are not supported models and have been dropped.</code></pre>
-</div>
-</div>
-</section>
-<section id="for-completeness-lets-also-take-a-look-at-the-aic-and-bic-values." class="level2">
-<h2 class="anchored" data-anchor-id="for-completeness-lets-also-take-a-look-at-the-aic-and-bic-values.">For completeness, let’s also take a look at the AIC and BIC values.</h2>
-<blockquote class="blockquote">
-<p>Question: What can we say from the AIC/BIC analysis?</p>
-</blockquote>
-<p>ANSWER: AIC difference is 5.33, which is moderate evidence for the lower AIC model (model_2) BIC difference is 1.76, so not quite evidence for the lower BIC model</p>
-</section>
-<section id="using-the-best-fitting-model-from-above-fit-a-model-that-adds-random-slopes-for-timeonmath_c" class="level2">
-<h2 class="anchored" data-anchor-id="using-the-best-fitting-model-from-above-fit-a-model-that-adds-random-slopes-for-timeonmath_c">Using the best fitting model from above, fit a model that adds random slopes for <code>timeonmath_c</code></h2>
-</section>
-<section id="lets-additionally-add-a-random-slope-for-schooltype." class="level2">
-<h2 class="anchored" data-anchor-id="lets-additionally-add-a-random-slope-for-schooltype.">Let’s additionally add a random slope for <code>schooltype</code>.</h2>
-<blockquote class="blockquote">
-<p>Question: What happened when you added the random slope for <code>schooltype</code>? Why do you think this happened? What should you do?</p>
-</blockquote>
-<p>ANSWER: The model failed to converge. Only one school in our sample is private, so it couldn’t estimate a random slope because there is not enough variation. So, we can only have a random slope for timeonmath_c.</p>
-</section>
-<section id="we-might-want-to-know-whether-its-useful-to-include-a-random-slope-for-timeonmath_c.-to-assess-this-lets-compare-the-model-with-only-a-random-intercept-model_2-to-a-model-with-a-random-intercept-and-random-slope-for-timeonmath_c-model_3." class="level2">
-<h2 class="anchored" data-anchor-id="we-might-want-to-know-whether-its-useful-to-include-a-random-slope-for-timeonmath_c.-to-assess-this-lets-compare-the-model-with-only-a-random-intercept-model_2-to-a-model-with-a-random-intercept-and-random-slope-for-timeonmath_c-model_3.">We might want to know whether its useful to include a random slope for <code>timeonmath_c</code>. To assess this, let’s compare the model with only a random intercept (model_2) to a model with a random intercept and random slope for <code>timeonmath_c</code> (model_3).</h2>
-<blockquote class="blockquote">
-<p>Question: What method of maximum likelihood estimation should we use here (FIML or REML)? Why?</p>
-</blockquote>
-<p>ANSWER: REML because we are only changing random effects!</p>
-<blockquote class="blockquote">
-<p>Question: Which is the best fitting model?</p>
-</blockquote>
-<p>ANSWER: model_3 with a random intercept and random slope for <code>timeonmath_c</code>.</p>
-</section>
-<section id="using-the-best-model-interpret-the-fixed-and-random-effects." class="level2">
-<h2 class="anchored" data-anchor-id="using-the-best-model-interpret-the-fixed-and-random-effects.">Using the best model, interpret the fixed and random effects.</h2>
-</section>
-<section id="note-if-there-was-an-issue-with-the-intercept-and-slope-correlation-e.g.-the-model-was-singular-because-the-correlation-was-1-or--1-i-could-remove-it-from-the-model." class="level2">
-<h2 class="anchored" data-anchor-id="note-if-there-was-an-issue-with-the-intercept-and-slope-correlation-e.g.-the-model-was-singular-because-the-correlation-was-1-or--1-i-could-remove-it-from-the-model.">Note: If there was an issue with the intercept and slope correlation (e.g., the model was singular because the correlation was 1 or -1), I could remove it from the model.</h2>
-</section>
-<section id="examine-the-effect-size.-use-pseudo-r2-for-the-overall-model-semi-r2-for-the-timeonmath-effect-and-cohens-d-for-the-schooltype-effect." class="level2">
-<h2 class="anchored" data-anchor-id="examine-the-effect-size.-use-pseudo-r2-for-the-overall-model-semi-r2-for-the-timeonmath-effect-and-cohens-d-for-the-schooltype-effect.">Examine the effect size. Use pseudo-R^2 for the overall model, semi-R^2 for the <code>timeonmath</code> effect and Cohen’s d for the <code>schooltype</code> effect.</h2>
-</section>
-<section id="visualize-variation-in-the-intercept-and-slope." class="level2">
-<h2 class="anchored" data-anchor-id="visualize-variation-in-the-intercept-and-slope.">Visualize variation in the intercept and slope.</h2>
-</section>
-<section id="finally-lets-check-the-assumptions-of-our-model." class="level2">
-<h2 class="anchored" data-anchor-id="finally-lets-check-the-assumptions-of-our-model.">Finally, let’s check the assumptions of our model.</h2>
-<blockquote class="blockquote">
-<p>Question: How does this look?</p>
-</blockquote>
-<p>ANSWER: Not bad. Collinaerity is kind of high. To fix this we could “center” (i.e., deviation code school type)</p>
-<blockquote class="blockquote">
-<p>Question: Why would we <em>NOT</em> want to use these data in a real assessment of the effect of school type on the relation between time spent on math homework and math scores?</p>
-</blockquote>
-<p>ANSWER: We only have one private school, so we’d want to collect more data.</p>
-</section>
-<section id="the-last-step-is-to-write-up-the-results-of-our-model." class="level2">
-<h2 class="anchored" data-anchor-id="the-last-step-is-to-write-up-the-results-of-our-model.">The last step is to write up the results of our model.</h2>
 <p>The present study examined the effect of school type on the relation between time spent on math homework and math scores, using a nested data structure with two levels: students (Level 1) nested within classrooms (Level 2). The analysis included 260 distributed across 10 classrooms. Classrooms varied in size, with an average of approximately 26 students per classroom (<span class="math inline">\(SD\)</span> = 14.47, <span class="math inline">\(range\)</span> = [20, 67]).</p>
 <p>The effect of school type on the relation between time spent on math homework and math scores was modeled using a multilevel linear model where <code>mathscore</code> is the students’ score on a mathematics assessment, <code>schooltype</code> indicates whether the school was public or private, <code>timonmath</code> is the number of hours the student spends on math per week, and (<code>timeonmath|schoolid</code>) represents random intercepts and slopes for <code>timeonmath</code> across schools. We group mean centered <code>timeonmath</code> (around the mean for each school) for our analyses.</p>
 <p>A maximal model, including main effects and interactions for school type and time spent on math as well as a random intercept for school and a random slopes for school type and time spent on math failed to converge. Before settling on a final model, we conducted a likelihood ratio test (using the <code>{easystats}</code> package, version 0.7.3) to compare three possible models; (1) a model that included only main effects for school type and time spent on math as well as a random intercept for school (<span class="math inline">\(df\)</span> = 5 (2) a model that included main effects and interactions for school type and time spent on math as well as a random intercept for school (<span class="math inline">\(df\)</span> = 6), and (3) a model that additionally included a random slope for time spent on math (<span class="math inline">\(df\)</span> = 8). We found that the model that included the interaction term significantly (model 2) improved model fit over a model without the interaction (model 1), <span class="math inline">\(\chi^2\)</span> = 6.06, <span class="math inline">\(p\)</span> = .014. However, the most complex model (model 3) additionally significantly improved model fit over model 2, <span class="math inline">\(\chi^2\)</span> = 74.62, <span class="math inline">\(p\)</span> &lt; .001.</p>
 <p>We checked our model assumptions (linearity, normality of residuals, homoscedasticity, collinearity) visually, using diagnostic plots from the performance package (version 0.13.0). Based on this visual assessment, we found that all our model assumptions were satisfied. The Intraclass Correlation Coefficient (ICC) for the outcome variable was calculated as 0.32, suggesting that 32% of the variance in math scores could be attributed to differences between classrooms. The models were estimated using Restricted Maximum Likelihood (REML) to account for the nested data structure. The lme4 package (version 1.1.35) was used for fitting the model.</p>
+<p>Overall, our final model explained 71% of the variance in math scores (marginal <span class="math inline">\(R^2\)</span> = 35%).</p>
 <p>Our fixed effects analysis revealed a significant intercept, <span class="math inline">\(\beta\)</span> = 62.82, <span class="math inline">\(SE\)</span> = 3.21), <span class="math inline">\(p\)</span> &lt; .001, indicating a high baseline level of math scores. The main effect of time on math was not significant, <span class="math inline">\(\beta\)</span> = 1.09, <span class="math inline">\(SE\)</span> = 5.05), <span class="math inline">\(p\)</span> = .834 nor was the interaction between time spent on my and school type <span class="math inline">\(\beta\)</span> = 1.07, <span class="math inline">\(SE\)</span> = 5.34), <span class="math inline">\(p\)</span> = .847. The main effect of school type was significant, <span class="math inline">\(\beta\)</span> = 1.09, <span class="math inline">\(SE\)</span> = 5.05), <span class="math inline">\(p\)</span> = .834 such that private schools (<span class="math inline">\(mean\)</span> = 62.82, <span class="math inline">\(sd\)</span> = 5.68) had higher math scores than public schools (<span class="math inline">\(mean\)</span> = 47.3, <span class="math inline">\(sd\)</span> = 9.69). However, only one of the schools in our sample was private.</p>
 <p>Regarding random effects, we observed a variance of 9.69 (<span class="math inline">\(SD\)</span> = 3.11) for the intercepts across different classrooms. This suggests that there is variability in the baseline math scores that can be attributed to differences between classrooms before considering time spent on math or school type. The variance associated with the effect of time spent on math 25.25 (<span class="math inline">\(SD\)</span> = 5.02). This suggests that there is variability in how the effect of time on math on math scores differs across classrooms. Finally, the variance of residuals was 43.11 (<span class="math inline">\(SD\)</span> = 6.57), indicating that within-classroom variance in math scores cannot be fully explained by the model’s fixed effects or the classroom-level random effects. Together, this suggests that multilevel modeling is, indeed, appropriate and necessary to account for the clustering of student scores within classrooms and the variability in the effect of time spent on math across classrooms.The correlation between the random intercepts and slopes for time spent on math within classrooms was estimated to be <span class="math inline">\(r\)</span> = 0.42, suggesting a positive relationship between the classroom baseline scores and the effect of time on math.</p>
 <p>Taken together, these results suggest that school type, but not time spent on math homework or the interaction between time on math and school type, is a significant predictor of math scores. These findings highlight the importance of considering school-level effects on student performance.</p>
-</section>
-</section>
 
 </main>
 <!-- /main column -->
