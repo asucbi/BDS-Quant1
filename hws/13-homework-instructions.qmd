@@ -6,22 +6,20 @@ editor: visual
 
 ## Purpose
 
-In this week's homework, you will be asked to demonstrate your ability to run and interpret mixed effects models. 
+In this week's homework, you will be asked to demonstrate your ability to run and interpret mixed effects models.
 
-
-## Access the Starter Files for Module 13
+## Access the Starter File for Module 13
 
 -   Go to [posit.cloud](posit.cloud) and then **navigate to the course workspace** via the left sidebar.
 
     -   Look for the course workspace called "Statistical Methods Spring 2025"
 
--   Open the project titled **Module 13** This module contains the starter files that you will use for the lab and for your homework.
+-   Open the project titled **Module 13: Homework** This module contains the starter files that you will use for the lab and for your homework.
 
 ## Starter Files
 
-In the Files pane you should see these two R Notebooks:
+In the Files pane you should see this R Notebook:
 
--   mod-13-lab-starter.qmd
 -   mod-13-hw-starter.qmd
 
 Open up `mod-13-hw-starter.qmd`.
@@ -37,26 +35,25 @@ Click the button called "Render" (circled in the image below) and then double ch
 Today, we'll be using the following packages:
 
 -   **tidyverse**: a collection of packages for doing data analysis in a "tidy" way
--   **apaTables**: a package that will allow us to generate a table of means and marginal means
--   **afex**: a package that we will use to run ANOVA models
 -   **ggrain**: a package for creating raincloud plots
 -   **emmeans**: a package for examining simple effects
--   **effectsize**: a package for calculating effect size
--   **broom**: a package for cleaning up models
--   **kableExtra**: a package for viewing tables produced by `kable`
--   **Superpower**: a package for running power analysis simulations
+-   **easystats**: to autmatically generate an ICC
+-   **lme4**: for running multilevel models
+-   **lmerTest**: for generating test statistics (with Satterthwaite df)
+-   **partR2**: for generating semi-partial R\^2
+-   **performance**: for assessing model assumptions
 
 Please load these packages using the `library()` function. If the packages don't load, you may need to `install.packages()` first.
 
 ```{r load-packages, echo=FALSE, message=FALSE}
 library(tidyverse)
-library(afex) 
 library(ggrain) 
-library(emmeans) 
-library(effectsize) 
-library(broom)
-library(kableExtra)
-library(Superpower)
+library(emmeans)
+library(easystats)
+library(lme4) 
+library(lmerTest)
+library(partR2)
+library(performance)
 
 ```
 
@@ -64,231 +61,210 @@ library(Superpower)
 
 This dataset comes from [ManyBabies](manybabies.org). As described on the website, ManyBabies is: "...a collaborative project for replication and best practices in developmental psychology research. Our goal is to bring researchers together to address difficult outstanding theoretical and methodological questions about the nature of early development and how it is studied."
 
-The specific data we will be using is data that I collected in my lab at the University of Oregon to contribute to the first ManyBabies effort (MB1), the goal of which was to replicate a robust finding in infancy research, specifically that infants prefer to listen to infant-directed over adult-directed speech. Sixty-nine labs from 16 different countries participated. **However, you will be analyzing the data from only one lab.** 
+The specific data we will be using is data that I collected in my lab at the University of Oregon to contribute to the first ManyBabies effort (MB1), the goal of which was to replicate a robust finding in infancy research, specifically that infants prefer to listen to infant-directed (IDS) over adult-directed speech (ADS). Sixty-nine labs from 16 different countries participated. **However, you will be analyzing the data from only one lab.** In the full study, we additionally included lab as a random effect, but you won't do that here.
 
-In the study, infants listened to clips of infant- and adult-directed speech as their looking to a central fixation stimulus (a bright checkerboard) was measured. Researchers hypothesized that infants would look longer at the checkerboard when hearing infant-directed speech. Each infant was presented with 16 total trials, and each trial was a different recording of infant-directed or adult-directed speech.  
+In the study, infants listened to clips of infant- and adult-directed speech as their looking to a central fixation stimulus (a bright checkerboard) was measured. Researchers hypothesized that infants would look longer at the checkerboard when hearing infant-directed speech. Each infant was presented with 16 total trials, and each trial was a different recording of infant-directed or adult-directed speech. The dependent variable is the time infants spent looking to the screen. In your model, you will examine how speech type (IDS vs. ADS) and infant age impact infants' looking time.
 
 ## Read in the Data
 
-The data file is called `mb_oregon.csv`. Read in the data, name it `mb_oregon`. Check it out using `View()`.
+The data file is called `mb_oregon.csv`. Read in the data, name it `mb_oregon`. Check it out using `View()`. **Make any necessary edits to the data (e.g., turning variables into factors).**
+
+The data has 6 columns:
+
+-   lab: you can ignore this variable, it is the same for everyone (Baldwin Lab \@ U Oregon)
+-   subid: unique subject identifier
+-   trial_num: trial number, you won't use this in analyses either
+-   trial_type: whether the infant listened to infant-directed speech (IDS) or adult-directed speech (ADS) on that trial
+-   age_mo: infant age, in months
+-   looking_time: time infants spent looking to the screen on each trial, in seconds
 
 ```{r read-data, echo=FALSE, message=FALSE}
 
-mb_oregon <- read_csv("data/reject.csv")
+mb_oregon <- read_csv("data/mb_oregon.csv") %>% 
+  na.omit()
+
+mb_oregon <- mb_oregon %>% 
+  mutate(trial_type = as.factor(trial_type),
+         subid = as.factor(subid))
+  
 
 ```
 
-The data has 3 columns:
+## Q1: What are the possible fixed factors for this model? What are the possible random factors?
 
--   rs: participants' rejection sensitivity level (Low vs. High)
--   partner: the emotion that their partner displayed during the interaction (Neutral vs. Happy)
--   liking: participants' rating of how much their interaction partner likes them
+\[answer Q1 here\]
 
-## Exercise 1: Factorial ANOVA as Regression
+## Q2: Generate a summary table that shows the mean, standard deviation, and range (i.e., minimum value and maximum value) of looking times for trials that presented IDS and trials that presented ADS.
 
-1.  Prepare your data for analysis:
+```{r summary table, eval=FALSE , echo=FALSE, message=FALSE}
 
-First, check out the structure of the data. If any variables need to be turned into factors, do that now.
-
-Recall that, by default, R orders factor levels alphabetically. In our case, this means that `High` will be the reference group of rejection sensitivity and `Happy` will be the reference group of interaction partner's emotional expression. However, it might be more intuitive to have `Low` and `Neutral` be the reference groups, respectively. Change the levels of `rs` and `partner` to make `Low` and `Neutral` the reference groups.
-
-```{r message = FALSE, echo = FALSE, eval = FALSE}
-
-reject <- reject %>% 
-  mutate(rs = as.factor(rs),
-         partner = as.factor(partner)) %>% 
-  mutate(rs = fct_relevel(rs, c("Low", "High")), 
-         partner = fct_relevel(partner, c("Neutral", "Happy")))
-
-str(reject) # Notice the re-ordering of levels
+mb_oregon %>% 
+  group_by(trial_type) %>% 
+  summarise(mean_lt = mean(looking_time, na.rm=TRUE),
+            sd_lt = sd(looking_time, na.rm=TRUE),
+            min_lt = min(looking_time, na.rm=TRUE),
+            max_lt = max(looking_time, na.rm=TRUE)) %>% 
+  kable() 
 
 ```
 
-2.  Use `lm()` to performs a factorial ANOVA analysis as *regression.* Use functions from the `{broom}` package (as we did in lab) to create a clean table of the coefficients. Make sure to include CIs.
+## Q3: Center the age variable across infants (i.e., grand-mean center).
 
-```{r message = FALSE, echo = FALSE, eval = FALSE}
+```{r center age , echo=FALSE, message=FALSE}
 
-model <- lm(liking ~ rs*partner, data = reject)
-
-model %>%
-  tidy(conf.int=TRUE) %>% 
-  kable() %>% 
-  kable_styling()
+mb_oregon <- mb_oregon %>% 
+  mutate(age_c = age_mo-mean(age_mo))
 
 ```
 
-3.  Interpret each of the regression coefficients (intercept, effect of rejection sensitivity, effect of partner, interaction).
+## Q4: What is the reason we might want to GRAND-mean center rather than group-mean center the age variable?
 
-4.  Use the `eta_squared` function from the `{effectsize}` package to generate effect sizes for each of the effects in the model. For each effect (rejection sensitivity, partner, interaction) report whether the effect size is small, medium, or large.
+\[answer Q4 here\]
 
-```{r message = FALSE, echo = FALSE, eval = FALSE}
+## Q5: Generate a raincloud plot to visualize the relation between trial type (IDS vs. ADS) and looking time.
 
-eta_squared(model)
+```{r raincloud plot , echo=FALSE, message=FALSE, eval=FALSE}
 
-```
-
-5.  Write an APA-style summary of these results.
-
-## Exercise 2: Factorial ANOVA as ANOVA
-
-1.  What are the three hypothesis tests involved in a Factorial ANOVA? For each of the three hypothesis tests, write out the null and alternative hypothesis.
-
-2.  Obtain a table of means:
-
-We did not review this in lab, but the `apa.2way.table()` function from the apaTables package is a very convenient way to get our cell means and marginal means. This function works for any type of 2-way ANOVA, regardless of the number of levels of your factors, e.g. it would work for a 3 x 3 ANOVA. All you need to do is indicate what the IV's (aka factors) and DV are and specify `show.marginal.means = TRUE`. Check out the `help` info for the `apa.2way.table()` function and use it to create a table of means. Make sure that the table is visible in the output you turn in.
-
-```{r message = FALSE, echo = FALSE, eval = FALSE}
-
-table_of_means <- apa.2way.table(iv1 = rs, 
-               iv2 = partner, 
-               dv = liking, 
-               data = reject,
-               show.marginal.means = TRUE)
-table_of_means
-
-```
-
-3.  Answer the following questions:
-
-<!-- -->
-
-(A) Which means are being compared in the *main effect* of rejection sensitivity?
-
-(B) Which means are being compared in the *main effect* of interaction partner?
-
-(C) Which means are involved in the *interaction*?
-
-<!-- -->
-
-4.  Use the `aov_ez` function in the `{afex}` package to perform a factorial ANOVA analysis as *ANOVA*. Note that you will need to add a `subid` variable to your data. You can assume each row is an individual subject.
-
-```{r message = FALSE, echo = FALSE, eval = FALSE}
-
-reject <- reject %>% 
-  mutate(subid = 1:nrow(reject))
-
-aov_ez(id="subid", between=c("rs", "partner"), dv="liking", data=reject,  anova_table = list(es = "pes")) %>% 
-  nice()%>% 
-  kable() %>% 
-  kable_styling()
-
-```
-
-5.  Interpret each of the regression coefficients (intercept, effect of rejection sensitivity, effect of partner, interaction).
-
-6.  Use `emmeans` to explore the effect of `rs` at each level of `partner`.
-
-```{r message = FALSE, echo = FALSE, eval = FALSE}
-
-model %>%
-  emmeans::emmeans(pairwise~rs|partner) %>%
-  joint_tests(by="rs") %>%
-  kable() %>% 
-  kable_styling()
-
-
-model %>%
-  emmeans::emmeans(pairwise~rs|partner) %>%
-  joint_tests(by="partner") %>%
-  kable() %>% 
-  kable_styling()
-
-```
-
-7.  Use the `F_to_eta2` function to generate a partial eta-squared effect size for the effect of `rs` at each level of `partner`. For each effect (e.g., partner at low rejection sensitivity, partner at high rejection sensitivity) report whether the effect size is small, medium, or large.
-
-```{r message = FALSE, echo = FALSE, eval = FALSE}
-
-F_to_eta2(f = c(3.134, 334.686), 
-          df=c(1,1), 
-             df_error=76)%>% # for full model
-  kable() %>% 
-  kable_styling()
-
-```
-
-8.  How does this model (the one created using `aov_ez`) differ from the previous model (the one created using `lm()`)? What differs? What is the same? Comment on what the models are testing as well as the results.
-
-9.  Create a raincloud plot to visualize the interaction effect.
-
-```{r message = FALSE, echo = FALSE, eval = FALSE}
-
-ggplot(reject, aes(x = rs, y = liking, fill = rs)) +
+ggplot(mb_oregon, aes(x = trial_type, y = looking_time, fill = trial_type)) +
   geom_rain(rain.side="l") + 
-  facet_wrap(~partner) +
-  labs(x="Rejection Sensitivity", y="Liking", title="Effect of Rejection Sensitivity by Partner") + #always label your axes!
-  theme(legend.position = "none") #we don't need a legend because the X axis is clearly labeled
+  labs(x="Trial Type", y="Looking Time", title="Effect of Trial Type on Looking Time") + 
+  theme(legend.position = "none") 
 
 ```
 
-10. Write an APA-style summary of these results.
+## Q6: What does this plot suggest about the relation bewteen trial type and looking time?
 
-11. In this model (using the `aov_ez` function), what type of sums of squares did we use? If we ran the same model using a different type of sums of squares (e.g., using the `aov()` function in base R), would you expect the results *for THIS model* to change? Why or why not?
+\[answer Q6 here\]
 
-## Exercise 3: Power for Factorial ANOVA
+## Q7: Generate a scatterplot with a linear regression line overlayed to visualize the relation bewteen age and looking time.
 
-1.  Let's say we want to replicate this study. How would our power be if we had approximately the same sample size? Run the simulation 1000 times. Answer the following questions:
+```{r scatterplot , echo=FALSE, message=FALSE, eval=FALSE}
 
-<!-- -->
-
-(A) What would the power be for each of the main effects?
-
-(B) What would the power be for each pairwise comparison?
-
-(C) Is this sample size adequate? Why or why not?
-
-```{r message= FALSE, echo=FALSE, eval=FALSE}
-
-#first, get means for each condition
-reject %>% 
-  group_by(rs, partner) %>% 
-  summarise(mean = mean(liking, na.rm = TRUE),
-            sd = sd(liking, na.rm = TRUE),
-            n = n())
-
-string <- "2b*2b"
-n <- 20
-# about 20 per condition
-mu <- c(5.55, 6, 1.8, 6.45)
-# Enter means in the order that matches the labels below.
-sd <-c(1.05, 0.725, 0.696, 0.686)
-# SDs
-labelnames <- c("rs", "Low", "High", "partner", "Neutral", "Happy")
-# the label names should be in the order of the means specified above.
-
-#create design object
-design_result <- ANOVA_design(design = string,
-                   n = n,
-                   mu = mu,
-                   sd = sd,
-                   labelnames = labelnames)
-
-#run simulation
-
-simulation_result <- ANOVA_power(design_result, 
-                                 alpha_level = .05, 
-                                 nsims = 1000,
-                                 verbose = FALSE)
-
-simulation_result
+ggplot(mb_oregon, aes(x = age_c, y = looking_time)) +
+  geom_point() +
+  geom_smooth(method="lm")
 
 ```
 
-2.  Use the `power_plot` function to example power with a sample size ranging from 5 to 50. This may take a little while to run!
+## Q8: What does this plot suggest about the relation bewteen age and looking time?
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+\[answer Q8 here\]
 
-plot_power(design_result, min_n = 5, max_n = 50)
+## Q9: Generate an ICC to determine how much variance in looking time is explained by trial type.
+
+```{r generate ICC , echo=FALSE, message=FALSE}
+
+null_mod <- lmer(looking_time ~ 1 + (1|subid), data = mb_oregon)
+ICC <- icc(null_mod)
 
 ```
 
-3.  How many *total participants* would we need to achieve over 90% power for the main effects and interaction?
+## Q10: Does this ICC suggest that we should include subjects as a grouping variable? Why or why not?
+
+\[answer Q10 here\]
+
+## Q11: Fit a model predicting `looking_time` from `trial_type` and `age_mo_centered` (no interaction). Include a random *intercept* for `subid`.
+
+```{r model_1 , echo=FALSE, message=FALSE}
+
+model_1 <- lmer(looking_time ~ trial_type + age_c + (1|subid), data = mb_oregon)
+
+```
+
+## Q12: Interpret the model parameters for the fixed effects. How much variance is attributable to the random intercept for subjects? How much variance is left over?
+
+\[answer Q12 here\]
+
+## Q13: Now, let's test the influence of adding a random slope for trial type. Fit a model predicting `looking_time` from `trial_type` and `age_mo_centered` (no interaction). This time, include a random *intercept* for `subid` and a random *slope* for `trial_type`.
+
+```{r model_2 , echo=FALSE, message=FALSE}
+
+model_2 <- lmer(looking_time ~ trial_type + age_c + (trial_type|subid), data = mb_oregon)
+
+```
+
+## Q14: Interpret the model parameters for the fixed effects. How much variance is attributable to the random intercept for subjects? ...the random slope for trial type? How much variance is left over?
+
+\[answer Q14 here\]
+
+## Q15: Can we include a random slope for age? Why or why not?
+
+\[answer Q15 here\]
+
+## Q16: Let's determine whether the random intercept and slope model fits the data better than the model with just a random intercept. To do this, use the `test_likelihoodratio()` function from the `{performance , echo=FALSE, message=FALSE}` package.
+
+```{r likelihood ratio 1 , echo=FALSE, message=FALSE}
+
+lrt_1 <- test_likelihoodratio(model_1, model_2)
+
+```
+
+## Q17: Does the model that includes a random slope for `trial_type` improve model fit over the model with just a random intercept for `subid`? Why or why not?
+
+\[answer Q17 here\]
+
+## Q18: Now, let's determine whether adding an interaction bewteen `trial_type` and `age_mo_centered` improves model fit. Add the interaction term to the better fitting model (based on your likelihood ratio test above).
+
+```{r model_3 , echo=FALSE, message=FALSE}
+
+model_3 <- lmer(looking_time ~ trial_type * age_c + (1|subid), data = mb_oregon)
+
+```
+
+## Q19: Interpret the model parameters for the fixed effects. How much variance is attributable to the random intercept for subjects? How much variance is left over?
+
+\[answer Q19 here\]
+
+## Q20: Let's determine whether the model with the interaction term fits the data better than the model with just main effects. To do this, use the `test_likelihoodratio()` function from the `{performance , echo=FALSE, message=FALSE}` package.
+
+```{r likelihood ratio 2 , echo=FALSE, message=FALSE}
+
+lrt_2 <- test_likelihoodratio(model_1, model_3)
+
+```
+
+## Q21: What is the best fitting model?
+
+\[answer Q21 here\]
+
+## Q22: What are the fixed effects in your final model?
+
+\[answer Q22 here\]
+
+## Q23: Generate effect sizes for the overall best fitting model and all of the fixed effects in your best fitting model (hint: you will use the `r2` and `partR2` functions as well as calculating a Cohen's d "by hand").
+
+```{r effect sizes , echo=FALSE, message=FALSE, eval=FALSE}
+
+#pseudo R^2 (conditional = full model, marginal = fixed effects only)
+r2(model_1)
+
+#semi-R^2
+partR2(model_1, data = mb_oregon, partvars = c("age_c"), R2_type = "marginal", nboot = 10, CI = 0.95) #VERY small effect!
+
+#cohen's d = effect / sqrt(var(int) + var(slope) + var(resid))
+1.22833 / sqrt(2.643+14.882)
+
+```
+
+## Q24: Use the `check_model()` function from the `{performance , echo=FALSE, message=FALSE}` package to check the assumptions of the best fitting model. How do these model assumptions look?
+
+```{r model assumptions , echo=FALSE, message=FALSE, eval=FALSE}
+
+check_model(model_1)
+
+```
+
+## Q25: Generate an APA Summary for the best fitting model. Make sure to include *all* necessary information (see Module 13 lecture slides and example shared on Canvas).
+
+\[answer Q25 here\]
+
+------------------------------------------------------------------------
 
 ## Render and submit your document.
 
 **Make sure that you I can see all of your answers in the rendered document!**
 
-To receive credit for this homework, submit a rendered PDF version of your file to "Module 9: Homework Submission" on Canvas.
+To receive credit for this homework, submit a rendered PDF version of your file to "Module 13: Homework Submission" on Canvas.
 
 -   At the top of the .qmd file, change "format: html" to "format: pdf"
 -   Click "Render" at the top of the document
