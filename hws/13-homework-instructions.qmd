@@ -132,11 +132,11 @@ ggplot(mb_oregon, aes(x = trial_type, y = looking_time, fill = trial_type)) +
 
 ```
 
-## Q6: What does this plot suggest about the relation bewteen trial type and looking time?
+## Q6: What does this plot suggest about the relation between trial type and looking time?
 
 \[answer Q6 here\]
 
-## Q7: Generate a scatterplot with a linear regression line overlayed to visualize the relation bewteen age and looking time.
+## Q7: Generate a scatterplot with a linear regression line overlayed to visualize the relation between age and looking time.
 
 ```{r scatterplot , echo=FALSE, message=FALSE, eval=FALSE}
 
@@ -146,7 +146,7 @@ ggplot(mb_oregon, aes(x = age_c, y = looking_time)) +
 
 ```
 
-## Q8: What does this plot suggest about the relation bewteen age and looking time?
+## Q8: What does this plot suggest about the relation between age and looking time?
 
 \[answer Q8 here\]
 
@@ -191,7 +191,7 @@ model_2 <- lmer(looking_time ~ trial_type + age_c + (trial_type|subid), data = m
 
 \[answer Q15 here\]
 
-## Q16: Let's determine whether the random intercept and slope model fits the data better than the model with just a random intercept. To do this, use the `test_likelihoodratio()` function from the `{performance , echo=FALSE, message=FALSE}` package.
+## Q16: Let's determine whether the random intercept and slope model fits the data better than the model with just a random intercept. To do this, use the `test_likelihoodratio()` function from the `{performance}` package.
 
 ```{r likelihood ratio 1 , echo=FALSE, message=FALSE}
 
@@ -203,7 +203,7 @@ lrt_1 <- test_likelihoodratio(model_1, model_2)
 
 \[answer Q17 here\]
 
-## Q18: Now, let's determine whether adding an interaction bewteen `trial_type` and `age_mo_centered` improves model fit. Add the interaction term to the better fitting model (based on your likelihood ratio test above).
+## Q18: Now, let's determine whether adding an interaction between `trial_type` and `age_mo_centered` improves model fit. Add the interaction term to the better fitting model (based on your likelihood ratio test above).
 
 ```{r model_3 , echo=FALSE, message=FALSE}
 
@@ -215,7 +215,7 @@ model_3 <- lmer(looking_time ~ trial_type * age_c + (1|subid), data = mb_oregon)
 
 \[answer Q19 here\]
 
-## Q20: Let's determine whether the model with the interaction term fits the data better than the model with just main effects. To do this, use the `test_likelihoodratio()` function from the `{performance , echo=FALSE, message=FALSE}` package.
+## Q20: Let's determine whether the model with the interaction term fits the data better than the model with just main effects. To do this, use the `test_likelihoodratio()` function from the `{performance}` package.
 
 ```{r likelihood ratio 2 , echo=FALSE, message=FALSE}
 
@@ -246,7 +246,7 @@ partR2(model_1, data = mb_oregon, partvars = c("age_c"), R2_type = "marginal", n
 
 ```
 
-## Q24: Use the `check_model()` function from the `{performance , echo=FALSE, message=FALSE}` package to check the assumptions of the best fitting model. How do these model assumptions look?
+## Q24: Use the `check_model()` function from the `{performance}` package to check the assumptions of the best fitting model. How do these model assumptions look?
 
 ```{r model assumptions , echo=FALSE, message=FALSE, eval=FALSE}
 
