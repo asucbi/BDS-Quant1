@@ -353,7 +353,7 @@ r2(model_3)
 partR2(model_2, data = nels, partvars = c("timeonmath_c"), R2_type = "marginal", nboot = 10, CI = 0.95) #VERY small effect!
 
 #cohen's d = effect / sqrt(var(int) + var(slope) + var(resid))
--15.605 / sqrt(9.683+25.577+25.577)
+-15.605 / sqrt(9.683+25.577+43.106)
 
 ```
 
