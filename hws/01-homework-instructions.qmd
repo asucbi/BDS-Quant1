@@ -8,11 +8,13 @@ editor: visual
 
 This week's homework is very simple. You will be asked to characterize distributions of data, just as you did in lab, and report your results.
 
+To receive full credit you *must* answer *all* parts of *all* questions below (both code and written answers).
+
 ## Access the Starter Files for Module 1
 
 -   Go to [posit.cloud](posit.cloud) and then **navigate to the course workspace** via the left sidebar.
 
-    -   Look for the course workspace called "Statistical Methods Spring 2025"
+    -   Look for the course workspace called "Spring 2026: Statistical Methods"
 
 -   Open the project titled **Module 1** This module contains the starter files that you will use for this lab and for your homework.
 
@@ -61,7 +63,7 @@ If you are having trouble reading in the data, remember that they are in the `da
 
 Now, use the `View()` function to take a look at your data.
 
-In lab we used the "Happiness" variable. For this first part of the homework (Exercises 1-5) we will be using the "Corruption" variable from that same dataset. For this variable, participants were asked: “Is corruption widespread throughout the government or not” and “Is corruption widespread within businesses or not?” Their score on the "Corruption" variable is the average of these two questions. 
+In lab we used the "Happiness" variable. For this first part of the homework (Exercises 1-5) we will be using the "Corruption" variable from that same dataset. For this variable, participants were asked: “Is corruption widespread throughout the government or not” and “Is corruption widespread within businesses or not?” Their score on the "Corruption" variable is the average of these two questions.
 
 ## Exercise 1:
 
@@ -73,13 +75,11 @@ Save your values as objects, as we'll be using them in our write-up!
 
 Now, create a pipe table using these values.
 
-
 ## Exercise 2:
 
 Construct a summary of the "Corruption" variable that contains each of the above parameters.
 
 Turn this summary into a table that renders nicely in your final document.
-
 
 ## Exercise 3:
 
@@ -87,7 +87,7 @@ Create a histogram of the "Corruption" variable. Make sure to label your plot.
 
 **NEW CHALLENGE**: Add a vertical line the indicates the location of the mean (using a solid red line) and median (using a dashed red line). Hint: use `geom_vline`.
 
-What do the descriptive statistics and histogram suggest about the shape of the "Corruption" distribution? Is it normally distributed or skewed in one direction? How can you tell?
+Describe what the descriptive statistics and histogram suggest about the shape of the "Corruption" distribution. Is it normally distributed or skewed in one direction? How can you tell?
 
 ## Exercise 4:
 
@@ -99,11 +99,11 @@ Again, save your values as objects, as we'll be using them in the write-up!
 
 ## Exercise 5:
 
-Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the objects you created earlier to insert the descriptive values directly into your summary.
+Write up a summary of what you found. Make sure to include information about which measure of central tendency is most appropriate given the distribution. Use the objects you created earlier to insert all of the descriptive values you calculated directly into your summary.
 
 ## Exercise 6:
 
-Choose one of the [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday/tree/main) datasets and find a **continuous** variable that you would like to examine. Repeat Exercises 1-5 for that variable. Make sure to include the year and title of that dataset (e.g., 2021 - Netflix Titles) in your summary. 
+Choose one of the [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday/tree/main) datasets and find a **continuous** variable that you would like to examine. Repeat Exercises 1-5 for that variable. Make sure to include the year and title of that dataset (e.g., 2021 - Netflix Titles) in your summary. If you do not include the year and title you will lose points.
 
 If you are working on this homework in a group, each member should please use a **different** dataset.
 
