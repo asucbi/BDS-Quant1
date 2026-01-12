@@ -12,7 +12,7 @@ The purpose of today's lab is to review how to calculate and visualize descripti
 
 -   Go to [posit.cloud](posit.cloud) and then **navigate to the course workspace** via the left sidebar.
 
-    -   Look for the course workspace called "Statistical Methods Spring 2025"
+    -   Look for the course workspace called "Spring 2026: Statistical Methods"
 
 -   Open the project titled **Module 1** This module contains the starter files that you will use for this lab and for your homework.
 
