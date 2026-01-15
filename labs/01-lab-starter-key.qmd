@@ -14,7 +14,6 @@ Note: you may have to install these packages first.
 
 library(tidyverse)
 library(knitr)
-library(moments)
 
 ```
 
@@ -148,6 +147,8 @@ Again, save your values as objects, as we'll be using them in the write-up!
 
 
 ###
+library(moments)
+
 skew_happiness <- world %>% 
   select(Happiness) %>% 
   skewness(na.rm=TRUE)
@@ -168,6 +169,11 @@ Write up a summary of what you found. Make sure to include information about whi
 ### 
 
 In the 2015 World Happiness Report, the average Happiness rating is `r round(mean_happiness, 2)`. The median Happiness rating is `r round(median_happiness, 2)`, the variance in Happiness ratings is `r round(var_happiness, 2)`, and the standard deviation is `r round(sd_happiness, 2)`. A histogram of the data reveals an approximately normally distribution. While the skewness of `r round(skew_happiness, 2)` is close to zero and suggests an approximately normal distribution, the kurtosis is slightly high at `r round(kurtosis_happiness, 2)`. Thus, for these data, the mean would be the most appropriate measure of central tendency.
+
+
+Here is a screenshot of what this summary looks like in R code:
+
+![](images/R_code_summary.png)
 
 ```{r}
 ```
