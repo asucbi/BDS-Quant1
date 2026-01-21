@@ -1,5 +1,5 @@
 ---
-title: "Module 2: Lab Starter File KEY"
+title: "Module 2: Lab Starter File"
 format: html
 editor: visual
 ---
@@ -22,8 +22,7 @@ library(knitr)
 
 ```{r read-and-view, message= FALSE}
 
-
-
+gapminder_2015 <- read_csv("data/gapminder_2015.csv")
 
 ```
 
@@ -35,21 +34,32 @@ First, let's plot the distribution and generate some descriptives. Create a tabl
 
 ```{r plot-distribution}
 
+gapminder_2015 %>% 
+  ggplot(aes(x = XXX)) +
+  XXX() 
 
+mortality_summary <- gapminder_2015 %>% 
+  summarise(Mean = XXX,
+            Median = XXX, 
+            Variance = XXX,
+            `Standard Deviation` = XXX)
 
+kable(t(XXX), digits = 2, col.names = c("Statistic", "Value"), caption = "Infant Mortality Descriptive Statistics") 
 
 ```
 
 Describe the shape of the distribution. If it is skewed, please specify the direction (positive/right skewed or negative/left skewed).
 
-The data are positively skewed (or right skewed).
-
 Next, let's take 1000 samples of size 5 and calcualte the mean for each sample. We will use the `rep_sample_n()` function from the *infer* package.
 
 ```{r sample-5}
 
+?rep_sample_n
 
-
+sample_5 <- rep_sample_n(XXX, size = XXX, reps = XXX) %>% #get 100 samples of size 5
+  group_by(XXX) %>% #group by sample (what is the "sample" indicator in our data?)
+  summarise(mean_infant_mortality = XXX) %>% #now, get the mean for each sample
+  mutate(n = XXX) #add a variable that indicates the sample size
 
 ```
 
@@ -57,6 +67,10 @@ Now, do the same thing for sample size of 30 and 100 (i.e., copy the above code 
 
 ```{r sample-30-100}
 
+sample_30
+
+
+sample_100
 
 
 ```
@@ -65,6 +79,13 @@ Next, combine your three data frames together and generate a plot to compare the
 
 ```{r comparison-plot}
 
+all_samples <- bind_rows(sample_5, sample_30, sample_100)
+
+ggplot(XXX) + #use all_samples data
+  geom_histogram(aes(x = XXX), color = "black")  + #create a histogram of infant mortality values, make the bars black
+  xlab("Infant mortality per 1,000 live births") + #label the x axis
+  ylab("Number of countries") + #label the y axis
+  XXX(~XXX, ncol = 1) #create a separate graph for each "n" value, put them all in one column
 
 
 
@@ -112,8 +133,15 @@ $\mu$ = 75
 
 ```{r define-distribution}
 
+# first, create objects for each of these values (some of which I'll use later)
+population_mean <- XXX
+sample_mean <- XXX
+estimated_sigma <- XXX
+sample_size <- XXX
 
+# then, I'll use those objects to calculate the SEM
 
+SEM <- XXX / sqrt(XXX)
 
 
 ```
@@ -124,9 +152,11 @@ $\mu$ = 75
 
 ```{r t-and-p}
 
+t_statistic <- (XXX - XXX) / XXX
 
+df_value <- XXX - 1
 
-
+p_value <- 2*pt(abs(XXX), df = XXX, lower.tail = FALSE)
 
 ```
 
@@ -140,23 +170,36 @@ $\mu$ = 75
 
 # remember that you've already created objects for xbar (sample_mean) and the SEM, round to 2 decimal places
 
+# if we didn't know the "critical value" (i.e., 1.96, the value that marks the cutoffs for 95% of the data), here's what we could do:
+critical_value <- qnorm(0.975) 
 
+# we use 0.975 instead of 0.95 because we have a two-tailed distribution and want 2.5% of data in each tail (and 95% in the middle between the tails)
+
+# remember that you've already created objects for xbar (sample_mean) and the SEM, round to 2 decimal places
+
+lower_bound <- round(XXX - (1.96*XXX), 2)
+upper_bound <- round(XXX + (1.96*XXX), 2)
+
+# OR
+
+lower_bound <- round(XXX - (critical_value*XXX), 2)
+upper_bound <- round(XXX + (critical_value*XXX), 2)
 
 
 ```
 
-\[type summary here\]
+TYPE SUMMARY HERE
 
 ## Consider the following alternative scenarios. What would you conclude?
 
 If observed sample mean was 72, the t statistic would be -1.25 and p-value would be 0.22. What do you conclude?
 
-\[type conclusion here\]
+TYPE CONCLUSION HERE
 
 If the observed sample mean was 82, the t statistic would be 2.92 and p-value would be .008. What do you conclude?
 
-\[type conclusion here\]
+TYPE CONCLUSION HERE
 
 What if p was .06? What would you conclude?
 
-\[type conclusion here\]
+TYPE CONCLUSION HERE

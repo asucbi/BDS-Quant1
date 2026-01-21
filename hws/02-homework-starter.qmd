@@ -1,12 +1,12 @@
 ---
-title: "Module 2: Homework Starter File KEY"
+title: "Module 2: Homework Starter File"
 format: html
 editor: visual
 ---
 
 ## Homework Note
 
-You must answer all questions and follow all steps in the homework document. Any time you see \[insert answer here\] in the starter file you need to replace that with the information that is being requested. To be eligible for full credit, please replace all \[insert answer here\] placeholders, answer all questions, and address all instructions in this document.
+You must answer all questions and follow all steps in the homework document. Any time you see INSERT ANSWER HERE in the starter file you need to replace that with the information that is being requested. To be eligible for full credit, please replace all INSERT ANSWER HERE placeholders, answer all questions, and address all instructions in this document.
 
 ## Load Packages
 
@@ -28,7 +28,7 @@ Note: you may have to install these packages first. If you do install them, I re
 
 ## Exercise 1:
 
-For this first exercise, please generate 10000 random samples of sizes 10, 50, and 150 from the life_expectancy distribution. For each sample, calculate the mean. Then, plot those 10000 means to examine the resulting sampling distributions. 
+For this first exercise, please generate 10000 random samples of sizes 10, 50, and 150 from the life_expectancy distribution. For each sample, calculate the mean. Then, plot those 10000 means to examine the resulting sampling distributions.
 
 Remember that we are now using the "life_expectancy" variable!
 
@@ -45,7 +45,7 @@ Compare the three plots, what does this show?
 
 Describe the shape of the distribution. If it is skewed, please specify the direction (positive/right skewed or negative/left skewed).
 
-\[insert answer here\]
+INSERT ANSWER HERE
 
 Next, let's take 10000 samples of size 10 and calculate the mean for each sample. We will use the `rep_sample_n()` function from the *infer* package.
 
@@ -76,7 +76,7 @@ Next, combine your three data frames together and generate a plot to compare the
 
 Compare the three plots, what does this show?
 
-\[insert answer here\]
+INSERT ANSWER HERE
 
 ## Exercise 2:
 
@@ -88,15 +88,15 @@ If people can subconsciously detect subtle emotional cues in facial expressions,
 
 **Step 1:** State the null and alternative hypotheses. Use *non-directional* hypotheses.
 
-H~0~: \[insert answer here\]
+H~0~: INSERT ANSWER HERE
 
-H~1~: \[insert answer here\]
+H~1~: INSERT ANSWER HERE
 
 **Step 2:** Choose your alpha level; provide a justification.
 
-$\alpha$: \[insert answer here\]
+$\alpha$: INSERT ANSWER HERE
 
-Justification: \[insert answer here\]
+Justification: INSERT ANSWER HERE
 
 **Step 3:** Collect your data.
 
@@ -104,11 +104,11 @@ We're going to pretend we already did this!
 
 Restating from above: Our sample mean is 54 and sample standard deviation is 15 The population mean, under the null hypothesis, is 50.
 
-$\bar{x}$ = \[insert answer here\]
+$\bar{x}$ = INSERT ANSWER HERE
 
-*s* = \[insert answer here\]
+*s* = INSERT ANSWER HERE
 
-$\mu$ = \[insert answer here\]
+$\mu$ = INSERT ANSWER HERE
 
 **Step 4:** Define the mean and SEM for the sampling distribution. Estimate the population mean and sd from your data, calculate the SEM. Report the SEM.
 
@@ -127,7 +127,7 @@ $\mu$ = \[insert answer here\]
 
 ```
 
-*SEM* = \[insert answer here\]
+*SEM* = INSERT ANSWER HERE
 
 **Step 5:** Determine the probability of your data or more extreme under the null distribution. Calculate the t-statistic and then generate a p-value using the `pt()` function.
 
@@ -154,7 +154,7 @@ My alpha level is .05 and my observed p-value is `r round(p_value, 3)`, so I ret
 
 ```
 
-Summary: \[insert answer here\]
+Summary: INSERT ANSWER HERE
 
 ## Exercise 3:
 
@@ -168,11 +168,11 @@ We're going to pretend we already did this!
 
 Our sample mean is 56 and sample standard deviation is 15 The population mean, under the null hypothesis, is 50.
 
-$\bar{x}$ = \[insert answer here\]
+$\bar{x}$ = INSERT ANSWER HERE
 
-*s* = \[insert answer here\]
+*s* = INSERT ANSWER HERE
 
-$\mu$ = \[insert answer here\]
+$\mu$ = INSERT ANSWER HERE
 
 **Step 4:** Define the SEM for the sampling distribution. Report the SEM.
 
@@ -184,7 +184,7 @@ $\mu$ = \[insert answer here\]
 
 ```
 
-*SEM* = \[insert answer here\]
+*SEM* = INSERT ANSWER HERE
 
 **Step 5:** Determine the probability of your data or more extreme under the null distribution. Calculate the t-statistic and then generate a p-value using the `pt()` function.
 
@@ -210,6 +210,6 @@ My alpha level is .05 and my observed p-value is `r round(p_value, 3)`, so I ret
 
 ```
 
-Summary: \[insert answer here\]
+Summary: INSERT ANSWER HERE
 
 ## Render and submit your document. Follow the steps outlined in the Homework Instructions.

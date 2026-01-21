@@ -58,6 +58,8 @@ Next, let's take 10000 samples of size 5 and calculate the mean for each sample.
 
 ```{r sample-5}
 
+?rep_sample_n
+
 sample_5 <- rep_sample_n(gapminder_2015, size = 5, reps = 10000) %>% #here we are getting 100 samples of size 5
   group_by(replicate) %>% #here we are grouping by sample (the function created this `replicate` variable)
   summarise(mean_infant_mortality = mean(infant_mortality)) %>% #now, get the mean for each sample
@@ -177,14 +179,24 @@ My alpha level is .05 and my observed p-value is `r round(p_value, 3)`, so I rej
 
 ```{r confidence-interval}
 
+# if we didn't know the "critical value" (i.e., 1.96, the value that marks the cutoffs for 95% of the data), here's what we could do:
+critical_value <- qnorm(0.975) 
+
+# we use 0.975 instead of 0.95 because we have a two-tailed distribution and want 2.5% of data in each tail (and 95% in the middle between the tails)
+
 # remember that you've already created objects for xbar (sample_mean) and the SEM, round to 2 decimal places
 
 lower_bound <- round(sample_mean - (1.96*SEM), 2)
 upper_bound <- round(sample_mean + (1.96*SEM), 2)
 
+# OR
+
+lower_bound <- round(sample_mean - (critical_value*SEM), 2)
+upper_bound <- round(sample_mean + (critical_value*SEM), 2)
+
 ```
 
-We examined the effect of an 8-week mindfulness meditation program on stress levels.The average score of participants after the program (*M* = `r sample_mean`, 95%CI \[`r lower_bound`, `r upper_bound`\], *SD* = `r estimated_sigma`) was significantly lower than the population average ($\mu$ = `r population_mean`), *t*(`r df_value`) = `r round(t_statistic, 2)`, *p* = `r round(p_value, 3)`. This finding suggests that the mindfulness meditation program has a significant impact on reducing stress levels in participants.
+We examined the effect of an 8-week mindfulness meditation program on stress levels.The average score of participants after the program (*M* = `r sample_mean`, 95%CI [`r lower_bound`, `r upper_bound`], *SD* = `r estimated_sigma`) was significantly lower than the population average ($\mu$ = `r population_mean`), *t*(`r df_value`) = `r round(t_statistic, 2)`, *p* = `r round(p_value, 3)`. This finding suggests that the mindfulness meditation program has a significant impact on reducing stress levels in participants.
 
 See image below for an illustration of how to insert r code into summary:
 

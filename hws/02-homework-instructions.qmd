@@ -69,7 +69,7 @@ You must answer all questions and follow all steps in the homework document. Any
 
 ## Exercise 1:
 
-For this first exercise, please generate 10000 random samples of sizes 10, 50, and 150 from the life_expectancy distribution. For each sample, calculate the mean. Then, plot those 10000 means to examine the resulting sampling distributions. 
+For this first exercise, please generate 10000 random samples of sizes 10, 50, and 150 from the life_expectancy distribution. For each sample, calculate the mean. Then, plot those 10000 means to examine the resulting sampling distributions.
 
 **Remember that we are now using the "life_expectancy" variable!**
 
@@ -123,7 +123,7 @@ $\mu$ =
 
 95% CI = $\bar{x}$ ±(1.96 x SEM)
 
-**Review the Lab Instructions for a reminder about the information that needs to be included in your summary!**
+**Review the Lab Instructions for a reminder about the information that needs to be included in your summary! To receive full credit, ALL of those things must be included in your summary.**
 
 ## Exercise 3:
 
