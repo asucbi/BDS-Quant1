@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -63,10 +63,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="03-lab-worksheet_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="03-lab-worksheet_files/libs/quarto-html/anchor.min.js"></script>
 <link href="03-lab-worksheet_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="03-lab-worksheet_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="03-lab-worksheet_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="03-lab-worksheet_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="03-lab-worksheet_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="03-lab-worksheet_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="03-lab-worksheet_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -198,7 +198,7 @@ window.Quarto = {
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
-<p>A significant positive correlation was found between conscientiousness and self-reported health status, <em>r</em>(58) = 0.48, 95% CI[0.25, 0.65], <em>p</em> &lt; .001.</p>
+<p>A significant positive correlation was found between conscientiousness and self-reported health status, <em>r</em>(58) = 0.48, 95% CI[0.25, 0.65], <em>p</em> &lt; .001. As conscientiousness increases, self-reported health status also increases.</p>
 </section>
 </section>
 <section id="part-2-regression" class="level1">
@@ -376,7 +376,7 @@ F-statistic: 17.04 on 1 and 58 DF,  p-value: 0.0001186</code></pre>
 </section>
 <section id="getting-standardized-coefficients" class="level4">
 <h4 class="anchored" data-anchor-id="getting-standardized-coefficients">Getting standardized coefficients</h4>
-<p>These are called the <em>unstandardized</em> coefficients. We can also get the standardized coefficients. Standardized regression coefficients, often notated as <span class="math inline">\(\beta\)</span>, are just the regression coefficients after the variables have been <em>standardized</em> or <em>Z-scored</em>. To obtain them, we need to z-score our data with <code>scale()</code> before we run the <code>lm()</code> function. One really cool thing is that we can do it in the <code>lm()</code> call:</p>
+<p>These are called the <em>unstandardized</em> coefficients. We can also get the standardized coefficients. Standardized regression coefficients, often notated as <span class="math inline">\(\beta\)</span>, are just the regression coefficients after the variables have been <em>standardized</em> or <em>Z-scored</em>. To obtain them, we need to z-score our data with <code>scale()</code> before we run the <code>lm()</code> function. One really cool thing is that we can do it in the <code>lm()</code> call.</p>
 <blockquote class="blockquote">
 <p><strong>Question:</strong> What does the standardized slope for conscientiousness mean?</p>
 </blockquote>
@@ -410,7 +410,7 @@ F-statistic: 17.04 on 1 and 58 DF,  p-value: 0.0001186</code></pre>
 <p>Thankfully, there is. The <code>{broom}</code> package is a package for <em>tidying</em> the results of models. It’s pretty easy to use—you just pass the model object to a function from <code>{broom}</code> called <code>tidy()</code>. There are some more advanced things you can do, but just <code>tidy(model)</code> works for most purposes. And one really nice thing about <code>{broom}</code> is that it works with a lot of different types of models, so this will continue to work as we move to other techniques (e.g., multi-level modelling with <code>{lme4}</code>).</p>
 <section id="tidy" class="level3">
 <h3 class="anchored" data-anchor-id="tidy"><code>tidy()</code></h3>
-<p>Let’s see what happens when we tidy our model:</p>
+<p>Let’s see what happens when we tidy our model.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -421,7 +421,7 @@ F-statistic: 17.04 on 1 and 58 DF,  p-value: 0.0001186</code></pre>
 2 consc          0.490     0.119      4.13 0.000119 </code></pre>
 </div>
 </div>
-<p>You can see it produces a dataframe containing the model coefficients and their significance tests. If you also want to get the confidence intervals around those coefficients, you simply need to add the argument <code>conf.int = TRUE</code>:</p>
+<p>You can see it produces a dataframe containing the model coefficients and their significance tests. If you also want to get the confidence intervals around those coefficients, you simply need to add the argument <code>conf.int = TRUE</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -472,7 +472,7 @@ F-statistic: 17.04 on 1 and 58 DF,  p-value: 0.0001186</code></pre>
 </table>
 </div>
 </div>
-<p>We could clean things up a bit more by changing the names and reformatting that pesky p-value column:</p>
+<p>We could clean things up a bit more by changing the names and reformatting that pesky p-value column.</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -603,8 +603,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -715,7 +713,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

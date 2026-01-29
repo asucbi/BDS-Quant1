@@ -78,6 +78,11 @@ cor(health$consc, health$sr_health)
 
 > **Question:** Is the correlation positive or negative? ...strong or weak?
 
+Once you have a correlation, you may want to assess whether it's statistically meaningful.
+
+What is the null hypotehsis for a correlation?
+What is the alternative hypothesis?
+
 ## Correlation test
 
 You can run a correlation test using the `corr.test()` function from the `{psych}` package.
@@ -114,9 +119,9 @@ r_consc_health$n #sample size
 
 ## Summary
 
-#pause for students to fill in A \[WHAT GOES HERE\]
+#pause for students to fill in the blanks
 
-A significant positive correlation was found between conscientiousness and self-reported health status, *r*(`r r_consc_health$n-2`) = `r round(r_consc_health$ci$r, 2)`, 95% CI\[`r round(r_consc_health$ci$lower,2)`, `r round(r_consc_health$ci$upper,2)`\], *p* `r papaja::printp(r_consc_health$p.adj)`.
+A significant positive correlation was found between conscientiousness and self-reported health status, *r*(`r r_consc_health$n-2`) = `r round(r_consc_health$ci$r, 2)`, 95% CI\[`r round(r_consc_health$ci$lower,2)`, `r round(r_consc_health$ci$upper,2)`\], *p* `r papaja::printp(r_consc_health$p.adj)`. As conscientiousness status increases self-reported health status also increases.
 
 # Part 2: Regression
 
@@ -194,7 +199,7 @@ We can extract elements from this list by using `LIST$ELEMENT` or `LIST[["ELEMEN
 
 ### Extracting predicted Y values
 
-The fitted values of Y are stored in `model` in an element called `fitted.values`. Using the instructions about how to extract elements from lists right above, extract the fitted values from the model and store these in an object called `fitted_y`. Print `fitted_y`.
+The fitted values of Y are stored in `model` in an element called `fitted.values`. Using the instructions about how to extract elements from lists above, extract the fitted values from the model and store these in an object called `fitted_y`. Print `fitted_y`.
 
 ```{r exract-pred-y}
 
@@ -334,13 +339,6 @@ Calculate the following:
 
 ```{r calc-R2}
 
-
-#pause for students to fill in ?? using equations above
-
-
-
-
-
 ss_model <- sum((fitted_y - mean(health$sr_health))^2)
 ss_model
 
@@ -425,6 +423,7 @@ We can also grab these estimates from the model output using `model$coefficients
 
 
 model$coefficients
+coef(model)
 
 ```
 

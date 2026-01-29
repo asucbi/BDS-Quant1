@@ -64,8 +64,7 @@ Answer the following questions:
 
 -   What is the intercept? What does it mean for the relation between age and pitch?
 -   What is the slope? What does it mean for the relation between age and pitch?
--   What is the coefficient 
-of determination (R-squared)? What does it mean for the relation between age and pitch?
+-   What is the coefficient of determination (R-squared)? What does it mean for the relation between age and pitch?
 
 Create a table of your regression results.
 

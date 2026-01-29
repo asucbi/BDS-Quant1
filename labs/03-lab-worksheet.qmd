@@ -73,8 +73,6 @@ ggplot(data = health, aes(x=consc, y=sr_health)) +
 
 > **Question:** What do you notice about the strength and direction of the data?
 
-
-
 ## Calculate correlation coefficient (*r*)
 
 Now, let's calculate the correlation coefficient for `health$consc` and `health$sr_health` using the `cor()` function (this is in the `{stats}` package, which is a core package in to R - no need to install/load!).
@@ -86,8 +84,6 @@ cor(health$consc, health$sr_health)
 ```
 
 > **Question:** Is the correlation positive or negative? ...strong or weak?
-
-
 
 # Hypothesis testing with correlations {#stats}
 
@@ -113,8 +109,6 @@ r_consc_health <- health %>%
 
 > **Question:** What can we conclude about the relationship between conscientiousness and health from this data?
 
-
-
 It is often very useful to save the output of a statistical test to an object that you can then pull useful information out of it.
 
 ```{r, echo=FALSE, eval=FALSE}
@@ -128,7 +122,7 @@ r_consc_health$n #sample size
 
 ## Summary
 
-A significant positive correlation was found between conscientiousness and self-reported health status, *r*(`r r_consc_health$n-2`) = `r round(r_consc_health$ci$r, 2)`, 95% CI\[`r round(r_consc_health$ci$lower,2)`, `r round(r_consc_health$ci$upper,2)`\], *p* `r papaja::printp(r_consc_health$p.adj)`.
+A significant positive correlation was found between conscientiousness and self-reported health status, *r*(`r r_consc_health$n-2`) = `r round(r_consc_health$ci$r, 2)`, 95% CI\[`r round(r_consc_health$ci$lower,2)`, `r round(r_consc_health$ci$upper,2)`\], *p* `r papaja::printp(r_consc_health$p.adj)`. As conscientiousness increases, self-reported health status also increases.
 
 # Part 2: Regression
 
@@ -158,8 +152,6 @@ We determine the values of these estimates by finding the best-fitting linear mo
 $$\hat{Y_i} = b_0 + b_1X_i$$
 
 > **Question:** Using the Ordinary Least Squares estimation method, what criteria do we use to determine what is the best-fitting linear model?
-
-
 
 ### Estimating a regression model in R
 
@@ -342,8 +334,6 @@ model_summary$sigma == residual_standard_error
 
 > **Question:** What does this residual standard error (AKA standard error of the estimate) mean?
 
-
-
 ### The coefficient of determination ($R^2$)
 
 #### Calculating $R^2$ 'by hand'
@@ -397,8 +387,6 @@ round(r_squared, 10) == round(model_summary$r.squared, 10)
 
 > **Question:** What does this r-squared value mean (in plain English)?
 
-
-
 ### Regression coefficients
 
 We also get estimates for the individual regression coefficients, $b_0$ and $b_1$ in the case of univariate regression.
@@ -448,9 +436,7 @@ model$coefficients
 
 > **Question:** What does the intercept mean?
 
-
 > **Question:** What about the slope for conscientiousness?
-
 
 We can get the confidence intervals around those coefficients by using the `confint` function from the `{stats}` package.
 
@@ -475,10 +461,7 @@ coefficients(std_model) %>%
 
 > **Question:** What does the standardized slope for conscientiousness mean?
 
-
-
 > **Question:** Why is the intercept zero?
-
 
 #### Getting the p-values
 
@@ -514,11 +497,7 @@ r_consc_health
 
 > **Question:** Is the test of the intercept significant? What does this mean?
 
-
-
 > **Question:** Is the test of the slope significant? What does this mean?
-
-
 
 # A tidier way to extract information
 
@@ -606,4 +585,4 @@ ci_upper <- round(model_ci[2,2], 2)
 
 ```
 
-We conducted a univariate linear regression to examine the relation between conscientiousness and self-reported health. Overall, our model that included conscientiousness explained `r rsquared_prop`% of the variance in self-reported health. We found a positive relation such that individuals who had higher conscientiousness scores also reported better health, $\beta$ = `r beta_value`, 95% CI[`r ci_lower`, `r ci_upper`], _t_ = `r t_value`, *p* `r papaja::printp(p_value)`.
+We conducted a univariate linear regression to examine the relation between conscientiousness and self-reported health. Overall, our model that included conscientiousness explained `r rsquared_prop`% of the variance in self-reported health. We found a positive relation such that individuals who had higher conscientiousness scores also reported better health, $\beta$ = `r beta_value`, 95% CI\[`r ci_lower`, `r ci_upper`\], *t* = `r t_value`, *p* `r papaja::printp(p_value)`.

@@ -50,7 +50,7 @@ kable(t(XXX), digits = 2, col.names = c("Statistic", "Value"), caption = "Infant
 
 Describe the shape of the distribution. If it is skewed, please specify the direction (positive/right skewed or negative/left skewed).
 
-Next, let's take 1000 samples of size 5 and calcualte the mean for each sample. We will use the `rep_sample_n()` function from the *infer* package.
+Next, let's take 1000 samples of size 5 and calculate the mean for each sample. We will use the `rep_sample_n()` function from the *infer* package.
 
 ```{r sample-5}
 

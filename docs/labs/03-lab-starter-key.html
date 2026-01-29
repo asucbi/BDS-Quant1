@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -63,10 +63,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="03-lab-starter-key_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="03-lab-starter-key_files/libs/quarto-html/anchor.min.js"></script>
 <link href="03-lab-starter-key_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="03-lab-starter-key_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="03-lab-starter-key_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="03-lab-starter-key_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="03-lab-starter-key_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="03-lab-starter-key_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="03-lab-starter-key_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -206,6 +206,8 @@ dbl (3): pid, consc, sr_health
 <blockquote class="blockquote">
 <p><strong>Question:</strong> Is the correlation positive or negative? …strong or weak?</p>
 </blockquote>
+<p>Once you have a correlation, you may want to assess whether it’s statistically meaningful.</p>
+<p>What is the null hypotehsis for a correlation? What is the alternative hypothesis?</p>
 </section>
 <section id="correlation-test" class="level2">
 <h2 class="anchored" data-anchor-id="correlation-test">Correlation test</h2>
@@ -228,7 +230,7 @@ dbl (3): pid, consc, sr_health
   .. ..$ : chr [1:2] "consc" "sr_health"
   .. ..$ : chr [1:2] "consc" "sr_health"
  $ n     : num 60
- $ t     : num [1:2, 1:2] Inf 4.13 4.13 Inf
+ $ t     : num [1:2, 1:2] Inf 4.13 4.13 5.11e+08
   ..- attr(*, "dimnames")=List of 2
   .. ..$ : chr [1:2] "consc" "sr_health"
   .. ..$ : chr [1:2] "consc" "sr_health"
@@ -237,7 +239,7 @@ dbl (3): pid, consc, sr_health
   .. ..$ : chr [1:2] "consc" "sr_health"
   .. ..$ : chr [1:2] "consc" "sr_health"
  $ p.adj : num 0.000119
- $ se    : num [1:2, 1:2] 0 0.115 0.115 0
+ $ se    : num [1:2, 1:2] 0.00 1.15e-01 1.15e-01 1.96e-09
   ..- attr(*, "dimnames")=List of 2
   .. ..$ : chr [1:2] "consc" "sr_health"
   .. ..$ : chr [1:2] "consc" "sr_health"
@@ -293,8 +295,8 @@ consc-sr_hl 0.2532571 0.4765366 0.6516132 0.0001186082</code></pre>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
-<p>#pause for students to fill in A [WHAT GOES HERE]</p>
-<p>A significant positive correlation was found between conscientiousness and self-reported health status, <em>r</em>(58) = 0.48, 95% CI[0.25, 0.65], <em>p</em> &lt; .001.</p>
+<p>#pause for students to fill in the blanks</p>
+<p>A significant positive correlation was found between conscientiousness and self-reported health status, <em>r</em>(58) = 0.48, 95% CI[0.25, 0.65], <em>p</em> &lt; .001. As conscientiousness status increases self-reported health status also increases.</p>
 </section>
 </section>
 <section id="part-2-regression" class="level1">
@@ -448,7 +450,7 @@ F-statistic: 17.04 on 1 and 58 DF,  p-value: 0.0001186</code></pre>
 </section>
 <section id="extracting-predicted-y-values" class="level3">
 <h3 class="anchored" data-anchor-id="extracting-predicted-y-values">Extracting predicted Y values</h3>
-<p>The fitted values of Y are stored in <code>model</code> in an element called <code>fitted.values</code>. Using the instructions about how to extract elements from lists right above, extract the fitted values from the model and store these in an object called <code>fitted_y</code>. Print <code>fitted_y</code>.</p>
+<p>The fitted values of Y are stored in <code>model</code> in an element called <code>fitted.values</code>. Using the instructions about how to extract elements from lists above, extract the fitted values from the model and store these in an object called <code>fitted_y</code>. Print <code>fitted_y</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pause for students to fill in ??</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -667,14 +669,8 @@ TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE </code></pre>
 <li><p><span class="math inline">\(R^2\)</span></p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pause for students to fill in ?? using equations above</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>ss_model <span class="ot">&lt;-</span> <span class="fu">sum</span>((fitted_y <span class="sc">-</span> <span class="fu">mean</span>(health<span class="sc">$</span>sr_health))<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>ss_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>ss_model <span class="ot">&lt;-</span> <span class="fu">sum</span>((fitted_y <span class="sc">-</span> <span class="fu">mean</span>(health<span class="sc">$</span>sr_health))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>ss_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 13.35878</code></pre>
 </div>
@@ -703,7 +699,7 @@ TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE </code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>r_squared <span class="sc">==</span> model_summary<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(r_squared, <span class="dv">10</span>) <span class="sc">==</span> <span class="fu">round</span>(model_summary<span class="sc">$</span>r.squared, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -754,6 +750,11 @@ TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE </code></pre>
 <pre><code>(Intercept)       consc 
   1.6569733   0.4904059 </code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)       consc 
+  1.6569733   0.4904059 </code></pre>
+</div>
 </div>
 <blockquote class="blockquote">
 <p><strong>Question:</strong> What does the intercept mean?</p>
@@ -763,24 +764,24 @@ TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE </code></pre>
 </blockquote>
 <p>We can get the confidence intervals around those coefficients by using the <code>confint</code> function from the <code>{stats}</code> package. Save the confidence interval in an object called <code>model_ci</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pause for students to attempt</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>model_ci <span class="ot">&lt;-</span> <span class="fu">confint</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pause for students to attempt</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>model_ci <span class="ot">&lt;-</span> <span class="fu">confint</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="getting-standardized-coefficients" class="level4">
 <h4 class="anchored" data-anchor-id="getting-standardized-coefficients">Getting standardized coefficients</h4>
 <p>These are called the <em>unstandardized</em> coefficients. We can also get the standardized coefficients. Standardized regression coefficients, often notated as <span class="math inline">\(\beta\)</span>, are just the regression coefficients after the variables have been <em>standardized</em> or <em>Z-scored</em>. To obtain them, we need to z-score our data with <code>scale()</code> before we run the <code>lm()</code> function. One really cool thing is that we can do it in the <code>lm()</code> call:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>std_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">scale</span>(sr_health) <span class="sc">~</span> <span class="fu">scale</span>(consc), <span class="at">data =</span> health)</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(std_model) <span class="sc">%&gt;%</span> </span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>std_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">scale</span>(sr_health) <span class="sc">~</span> <span class="fu">scale</span>(consc), <span class="at">data =</span> health)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(std_model) <span class="sc">%&gt;%</span> </span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> (Intercept) scale(consc) 
        0.000        0.477 </code></pre>
@@ -798,7 +799,7 @@ TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE </code></pre>
 <p>We can also test the significance of each of the regression coefficient estimates.</p>
 <p>We can get these from the summary of our model object by extracting the coefficients from the summary.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Estimate Std. Error  t value     Pr(&gt;|t|)
 (Intercept) 1.6569733  0.3570543 4.640676 0.0000202958
@@ -807,7 +808,7 @@ consc       0.4904059  0.1187984 4.128050 0.0001186082</code></pre>
 </div>
 <p>As an aside, let’s take a look at the correlation value that we calculated earlier. What do you notice?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>r_consc_health</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>r_consc_health</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:corr.test(x = .)
 Correlation matrix 
@@ -841,7 +842,7 @@ sr_health     0         0
 <h3 class="anchored" data-anchor-id="tidy"><code>tidy()</code></h3>
 <p>Let’s see what happens when we tidy our model:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
   term        estimate std.error statistic   p.value
@@ -852,7 +853,7 @@ sr_health     0         0
 </div>
 <p>You can see it produces a dataframe containing the model coefficients and their significance tests. If you also want to get the confidence intervals around those coefficients, you simply need to add the argument <code>conf.int = TRUE</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 7
   term        estimate std.error statistic   p.value conf.low conf.high
@@ -945,12 +946,12 @@ sr_health     0         0
 <h2 class="anchored" data-anchor-id="make-sure-to-always-include-a-written-summary">Make sure to always include a written summary!</h2>
 <p>You might want to save the relevant pieces as objects first.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>rsquared_prop <span class="ot">&lt;-</span> <span class="fu">round</span>(model_summary<span class="sc">$</span>r.squared, <span class="dv">2</span>)<span class="sc">*</span><span class="dv">100</span></span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>beta_value <span class="ot">&lt;-</span> <span class="fu">round</span>(model_summary<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">1</span>], <span class="dv">2</span>)</span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>t_value <span class="ot">&lt;-</span> <span class="fu">round</span>(model_summary<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">3</span>], <span class="dv">2</span>)</span>
-<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="fu">round</span>(model_summary<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">4</span>], <span class="dv">3</span>)</span>
-<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>ci_lower <span class="ot">&lt;-</span> <span class="fu">round</span>(model_ci[<span class="dv">2</span>,<span class="dv">1</span>], <span class="dv">2</span>)</span>
-<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>ci_upper <span class="ot">&lt;-</span> <span class="fu">round</span>(model_ci[<span class="dv">2</span>,<span class="dv">2</span>], <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>rsquared_prop <span class="ot">&lt;-</span> <span class="fu">round</span>(model_summary<span class="sc">$</span>r.squared, <span class="dv">2</span>)<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>beta_value <span class="ot">&lt;-</span> <span class="fu">round</span>(model_summary<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">1</span>], <span class="dv">2</span>)</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>t_value <span class="ot">&lt;-</span> <span class="fu">round</span>(model_summary<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">3</span>], <span class="dv">2</span>)</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="fu">round</span>(model_summary<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">4</span>], <span class="dv">3</span>)</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>ci_lower <span class="ot">&lt;-</span> <span class="fu">round</span>(model_ci[<span class="dv">2</span>,<span class="dv">1</span>], <span class="dv">2</span>)</span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>ci_upper <span class="ot">&lt;-</span> <span class="fu">round</span>(model_ci[<span class="dv">2</span>,<span class="dv">2</span>], <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here’s what it looks like when I insert the objects created above:</p>
 <p><img src="images/reg-summary.png" class="img-fluid"></p>
@@ -1043,8 +1044,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1155,7 +1154,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
