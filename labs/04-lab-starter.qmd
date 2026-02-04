@@ -16,7 +16,7 @@ library(tidyverse)
 library(papaja) #for formatting p values
 library(broom) #for formatting tables
 library(knitr) #for formatting tables
-library(ppcor) #for calculating partial and semi-partial correlations
+library(ppcor) #for calculating partial correlations
 library(easystats) #for assessing multicollinaerity
 
 ```
@@ -53,7 +53,6 @@ ggplot(data = mr_data, aes(x=XXX, y=XXX)) +
 
 > **Question:** What do you notice about the strength and direction of the data?
 
-
 # Multiple Regression
 
 Let's use both `age` and `height` to predict `weight`.
@@ -70,7 +69,6 @@ Remember, use: `model_1 <- lm(Y ~ X1 + X2, data = data)`
 ```
 
 > **Question** Write out the resulting model. How do we interpret each of these regression coefficients?
-
 
 # Partial Regression Coefficients
 
@@ -111,27 +109,7 @@ summary(model_3)
 
 > **Question** How does the regression coefficient corresponding to the part of `age` that is unrelated to `height` in the univariate model (i.e., `model_3`) predicting `weight` compare to the regression coefficient corresponding to `age` in the multiple regression model (i.e., `model_1`)?
 
-
-> **Question** Which type of correlation is the partial regression coefficient conceptually most similar to?
-
-
-## Semi-partial Correlation
-
-Here, we will calculate the **semi-partial** correlation for age using the `spcor.test` function.
-
-```{r sp-cor, message= FALSE, echo=FALSE}
-semi_partial_cor <- spcor.test(
-  x = mr_data$XXX, # Y (var of interest 1)
-  y = mr_data$XXX,    # X1 (var of interest 2 - the one you want residualized)
-  z = mr_data$XXX  # X2 (control variable)
-)
-
-semi_partial_cor
-semi_partial_cor$estimate^2 # R-Squared 
-
-```
-
-## Partial Correlation
+# Partial Correlations with the {ppcor} package.
 
 Here, we will calculate the **partial** correlation for age using the `spcor.test` function.
 
@@ -210,9 +188,7 @@ per
 
 > **Question** What does this proportional reduction in error mean?
 
-
 > **Question** What is the more familiar term for this value?
-
 
 Look again at our summary output if we run our multiple regression model (i.e., `model_2`) and see how our results map on.
 
@@ -279,7 +255,6 @@ model_comparison$`Pr(>F)`[2]
 
 > **Question** Do you think there is likely to be multicollinaerity in this dataset? Why?
 
-
 First, let's create a correlation matrix to examine potential correlations between our variables. Make sure to select only the variables that you want to examine.
 
 ```{r correlation-matrix, message = FALSE, echo=FALSE}
@@ -317,11 +292,11 @@ model_3_vif <- 1/model_3_tol
 
 ```
 
-# Write an APA-Style Summary 
+# Write an APA-Style Summary
 
 This summary is based on what is now called `model_2`. Don't forget to include a confidence interval around each of your estimates!
 
-It's helpful to create objects with each of the relevant values first. 
+It's helpful to create objects with each of the relevant values first.
 
 ```{r get-values, message= FALSE, echo=FALSE}
 #confidence interval

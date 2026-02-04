@@ -51,6 +51,8 @@ ggplot(data = age_pitch, aes(x=age, y=pitch)) +
   geom_point() +
   labs(x = "Age", y = "Pitch")
 
+cor.test(age_pitch$age, age_pitch$pitch)
+
 
 ```
 
@@ -79,6 +81,8 @@ ggplot(data = age_pitch, aes(x=age, y=pitch)) +
 
 model_1 <- lm(pitch ~ age, data = age_pitch)
 summary(model_1)
+
+model_ci <- confint(model_1)
 
 ```
 

@@ -6,7 +6,7 @@ editor: visual
 
 # Purpose
 
-In today's lab, we will review Multiple Regression, work with Partial and Semi-Partial Correlations, and practice significance testing for Multiple Regression.
+In today's lab, we will review Multiple Regression, work with Partial Correlations, and practice significance testing for Multiple Regression.
 
 For today's lab, you will need to load the following libraries.
 
@@ -16,7 +16,7 @@ library(tidyverse)
 library(papaja) #for formatting p values
 library(broom) #for formatting tables
 library(knitr) #for formatting tables
-library(ppcor) #for calculating partial and semi-partial correlations
+library(ppcor) #for calculating partial correlations
 library(easystats) #for assessing multicollinaerity
 
 ```
@@ -103,7 +103,7 @@ The *partial regression coefficients* that we obtain in the "Estimate" column fr
 
 Let's walk through the logic of a partial regression coefficient by re-creating the partial regression coefficient corresponding to `age` ($b_1$ = 1.28) from our multiple regression model above.
 
-INST NOTE: DRAW PARTIAL AND SEMI-PARTIAL CORRELATIONS ON THE BOARD
+INST NOTE: DRAW PARTIAL CORRELATIONS ON THE BOARD
 
 # Re-creating the partial regression coefficient for `age`
 
@@ -143,31 +143,9 @@ summary(model_3)
 
 INST ANS: It's the same thing!
 
-> **Question** Which type of correlation is the partial regression coefficient conceptually most similar to?
-
-INST ANS: Semi-partial correlations (because we're looking at prop of variance explained by age out of entire variance in weight and not variance that is just left over after accounting for the other variables)
-
-# Semi-Partial and Partial Correlations
+# Partial Correlations with the `{ppcor}` package.
 
 You can also use functions in the `{ppcor}` package to calculate semi-partial and partial correlations more quickly.
-
-## Semi-partial Correlation
-
-Here, we will calculate the **semi-partial** correlation for age using the `spcor.test` function.
-
-```{r, message= FALSE, echo=FALSE, eval=FALSE}
-semi_partial_cor <- spcor.test(
-  x = mr_data$weight, # Y (var of interest 1)
-  y = mr_data$age,    # X1 (var of interest 2 - the one you want residualized)
-  z = mr_data$height  # X2 (control variable)
-)
-
-semi_partial_cor
-semi_partial_cor$estimate^2 # R-Squared 
-
-```
-
-## Partial Correlation
 
 Here, we will calculate the **partial** correlation for age using the `spcor.test` function.
 
@@ -402,11 +380,11 @@ model_3_vif <- 1/model_3_tol
 
 ```
 
-# Write an APA-Style Summary 
+# Write an APA-Style Summary
 
 This summary is based on what is now called `model_2`. Don't forget to include a confidence interval around each of your estimates!
 
-It's helpful to create objects with each of the relevant values first. 
+It's helpful to create objects with each of the relevant values first.
 
 ```{r get-values, message= FALSE, echo=FALSE}
 #confidence interval

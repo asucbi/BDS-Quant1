@@ -16,7 +16,7 @@ library(tidyverse)
 library(papaja) #for formatting p values
 library(broom) #for formatting tables
 library(knitr) #for formatting tables
-library(ppcor) #for calculating partial and semi-partial correlations
+library(ppcor) #for calculating partial correlations
 library(easystats) #for assessing multicollinaerity
 
 ```
@@ -66,7 +66,6 @@ ggplot(data = mr_data, aes(x=height, y=weight)) +
 
 > **Question:** What do you notice about the strength and direction of the data?
 
-
 # Multiple Regression
 
 Let's use both `age` and `height` to predict `weight`.
@@ -86,7 +85,6 @@ $$W_i = -141.22 + 1.28A_i + 3.60H_i + \epsilon_i$$
 
 > **Question** How do we interpret each of these regression coefficients?
 
-
 # Partial Regression Coefficients
 
 The regression coefficients corresponding to the predictors in a multiple regression model are called *partial regression coefficients*. Let's break down what this term means.
@@ -98,7 +96,6 @@ A new concept that gets introduced when we have multiple predictors in the regre
 The *partial regression coefficients* that we obtain in the "Estimate" column from the summary output of our multiple regression model account for this redundancy. A partial regression coefficient is the relationship between a predictor variable (X1) and outcome variable (Y) when the relationship between X1 and the other predictor variable(s) in the model has been removed.
 
 Let's walk through the logic of a partial regression coefficient by re-creating the partial regression coefficient corresponding to `age` ($b_1$ = 1.28) from our multiple regression model above.
-
 
 # Re-creating the partial regression coefficient for `age`
 
@@ -136,31 +133,9 @@ summary(model_3)
 
 > **Question** How does the regression coefficient corresponding to the part of `age` that is unrelated to `height` in the univariate model (i.e., `model_3`) predicting `weight` compare to the regression coefficient corresponding to `age` in the multiple regression model (i.e., `model_1`)?
 
-
-> **Question** Which type of correlation is the partial regression coefficient conceptually most similar to?
-
-
-# Semi-Partial and Partial Correlations
+# Partial Correlations with the `{ppcor}` package.
 
 You can also use functions in the `{ppcor}` package to calculate semi-partial and partial correlations more quickly.
-
-## Semi-partial Correlation
-
-Here, we will calculate the **semi-partial** correlation for age using the `spcor.test` function.
-
-```{r, message= FALSE, echo=FALSE, eval=FALSE}
-semi_partial_cor <- spcor.test(
-  x = mr_data$weight, # Y (var of interest 1)
-  y = mr_data$age,    # X1 (var of interest 2 - the one you want residualized)
-  z = mr_data$height  # X2 (control variable)
-)
-
-semi_partial_cor
-semi_partial_cor$estimate^2 # R-Squared 
-
-```
-
-## Partial Correlation
 
 Here, we will calculate the **partial** correlation for age using the `spcor.test` function.
 
@@ -265,9 +240,7 @@ per
 
 > **Question** What does this proportional reduction in error mean?
 
-
 > **Question** What is the more familiar term for this value?
-
 
 Look again at our summary output if we run our multiple regression model (i.e., `model_2`) and see how our results map on.
 
@@ -352,7 +325,6 @@ model_comparison$`Pr(>F)`[2]
 
 > **Question** Do you think there is likely to be multicollinaerity in this dataset? Why?
 
-
 ## Let's identify potential problems with multicollinaerity.
 
 First, let's create a correlation matrix to examine potential correlations between our variables. Make sure to select only the variables that you want to examine.
@@ -392,11 +364,11 @@ model_3_vif <- 1/model_3_tol
 
 ```
 
-# Write an APA-Style Summary 
+# Write an APA-Style Summary
 
 This summary is based on what is now called `model_2`. Don't forget to include a confidence interval around each of your estimates!
 
-It's helpful to create objects with each of the relevant values first. 
+It's helpful to create objects with each of the relevant values first.
 
 ```{r get-values, message= FALSE, echo=FALSE}
 #confidence interval

@@ -6,7 +6,7 @@ editor: visual
 
 # Purpose
 
-In today's lab, we will review Multiple Regression, work with Partial and Semi-Partial Correlations, and practice significance testing for Multiple Regression.
+In today's lab, we will review Multiple Regression, work with Partial Correlations, and practice significance testing for Multiple Regression.
 
 For today's lab, you will need to load the following libraries.
 
@@ -16,7 +16,7 @@ library(tidyverse)
 library(papaja) #for formatting p values
 library(broom) #for formatting tables
 library(knitr) #for formatting tables
-library(ppcor) #for calculating partial and semi-partial correlations
+library(ppcor) #for calculating partial correlations
 library(easystats) #for assessing multicollinaerity
 
 ```
@@ -161,34 +161,7 @@ summary(model_3)
 
 > **Question** How does the regression coefficient corresponding to the part of `age` that is unrelated to `height` in the univariate model (i.e., `model_3`) predicting `weight` compare to the regression coefficient corresponding to `age` in the multiple regression model (i.e., `model_1`)?
 
-> **Question** Which type of correlation is the partial regression coefficient conceptually most similar to?
-
-## Semi-partial Correlation
-
-Here, we will calculate the **semi-partial** correlation for age using the `spcor.test` function.
-
-```{r sp-cor, message= FALSE}
-
-#students: fill in XXX with correct code
-
-
-
-
-
-
-
-semi_partial_cor <- spcor.test(
-  x = mr_data$weight, # Y (var of interest 1)
-  y = mr_data$age,    # X1 (var of interest 2 - the one you want residualized)
-  z = mr_data$height  # X2 (control variable)
-)
-
-semi_partial_cor
-semi_partial_cor$estimate^2 # R-Squared 
-
-```
-
-## Partial Correlation
+# Partial Correlations with the {ppcor} package.
 
 Here, we will calculate the **partial** correlation for age using the `spcor.test` function.
 
