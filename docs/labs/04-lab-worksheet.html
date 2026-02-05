@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -63,10 +63,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="04-lab-worksheet_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="04-lab-worksheet_files/libs/quarto-html/anchor.min.js"></script>
 <link href="04-lab-worksheet_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="04-lab-worksheet_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="04-lab-worksheet_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="04-lab-worksheet_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="04-lab-worksheet_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="04-lab-worksheet_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="04-lab-worksheet_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -130,12 +130,15 @@ window.Quarto = {
 <p>In today’s lab, we will review Multiple Regression, work with Partial and Semi-Partial Correlations, and practice significance testing for Multiple Regression.</p>
 <p>For today’s lab, you will need to load the following libraries.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(papaja) <span class="co">#for formatting p values</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom) <span class="co">#for formatting tables</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co">#for formatting tables</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ppcor) <span class="co">#for calculating partial and semi-partial correlations</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(easystats) <span class="co">#for assessing multicollinaerity</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.5.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(papaja) <span class="co">#for formatting p values</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom) <span class="co">#for formatting tables</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co">#for formatting tables</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ppcor) <span class="co">#for calculating partial correlations</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(easystats) <span class="co">#for assessing multicollinaerity</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="read-in-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="read-in-the-data">Read in the Data</h2>
@@ -199,21 +202,11 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p><strong>Question</strong> How does the regression coefficient corresponding to the part of <code>age</code> that is unrelated to <code>height</code> in the univariate model (i.e., <code>model_3</code>) predicting <code>weight</code> compare to the regression coefficient corresponding to <code>age</code> in the multiple regression model (i.e., <code>model_1</code>)?</p>
 </blockquote>
-<blockquote class="blockquote">
-<p><strong>Question</strong> Which type of correlation is the partial regression coefficient conceptually most similar to?</p>
-</blockquote>
 </section>
-<section id="semi-partial-and-partial-correlations" class="level1">
-<h1>Semi-Partial and Partial Correlations</h1>
+<section id="partial-correlations-with-the-ppcor-package." class="level1">
+<h1>Partial Correlations with the <code>{ppcor}</code> package.</h1>
 <p>You can also use functions in the <code>{ppcor}</code> package to calculate semi-partial and partial correlations more quickly.</p>
-<section id="semi-partial-correlation" class="level2">
-<h2 class="anchored" data-anchor-id="semi-partial-correlation">Semi-partial Correlation</h2>
-<p>Here, we will calculate the <strong>semi-partial</strong> correlation for age using the <code>spcor.test</code> function.</p>
-</section>
-<section id="partial-correlation" class="level2">
-<h2 class="anchored" data-anchor-id="partial-correlation">Partial Correlation</h2>
 <p>Here, we will calculate the <strong>partial</strong> correlation for age using the <code>spcor.test</code> function.</p>
-</section>
 </section>
 <section id="significance-testing-the-model-comparison-approach" class="level1">
 <h1>Significance Testing: The Model Comparison Approach</h1>
@@ -381,8 +374,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -493,7 +484,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
