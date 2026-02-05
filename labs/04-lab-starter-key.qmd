@@ -69,6 +69,15 @@ ggplot(data = mr_data, aes(x=height, y=weight)) +
 
 > **Question:** What do you notice about the strength and direction of the data?
 
+
+
+
+
+
+
+ANS: Both age and height seem to be positively correlated with weight.
+
+
 # Multiple Regression
 
 Let's use both `age` and `height` to predict `weight`.
@@ -95,6 +104,16 @@ summary(model_1)
 ```
 
 > **Question** Write out the resulting model. How do we interpret each of these regression coefficients?
+
+
+
+
+
+
+
+
+ANS: When age and height are 0 the predicted weight is -141.22. For each one-unit increase in age we expect weight to increase by 1.28, holding height constant. For each one-unit increase in height we expect weight to increase by 3.60, holding age constant.
+
 
 # Partial Regression Coefficients
 
@@ -160,6 +179,14 @@ summary(model_3)
 ```
 
 > **Question** How does the regression coefficient corresponding to the part of `age` that is unrelated to `height` in the univariate model (i.e., `model_3`) predicting `weight` compare to the regression coefficient corresponding to `age` in the multiple regression model (i.e., `model_1`)?
+
+
+
+
+
+
+
+ANS: It's the same thing!
 
 # Partial Correlations with the {ppcor} package.
 
@@ -274,7 +301,26 @@ per
 
 > **Question** What does this proportional reduction in error mean?
 
+
+
+
+
+
+
+ANS: Age and height explained 77.29% of the variability in weight scores.
+
+
 > **Question** What is the more familiar term for this value?
+
+
+
+
+
+
+
+ANS: R-squared; coefficient of determination.
+
+
 
 Look again at our summary output if we run our multiple regression model (i.e., `model_2`) and see how our results map on.
 
@@ -350,6 +396,14 @@ model_comparison$`Pr(>F)`[2]
 
 > **Question** Do you think there is likely to be multicollinaerity in this dataset? Why?
 
+
+
+
+
+
+
+ANS: Yes, height and age seem likely to be correlated.
+
 First, let's create a correlation matrix to examine potential correlations between our variables. Make sure to select only the variables that you want to examine.
 
 ```{r correlation-matrix, message = FALSE}
@@ -385,6 +439,16 @@ check_collinearity(model_2)
 ```
 
 > **Question** Does it look like we have multicollinaerity in our data based on these diagnostics?
+
+
+
+
+
+
+
+ANS: No?
+
+
 
 Wait, what?? Let's calculate Tolerance and VIF "by hand."
 

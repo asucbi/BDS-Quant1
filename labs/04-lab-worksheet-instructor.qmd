@@ -339,7 +339,7 @@ model_comparison$`Pr(>F)`[2]
 
 > **Question** Do you think there is likely to be multicollinaerity in this dataset? Why?
 
-INST ANS: YES!
+INST ANS: Yes, height and age seem likely to be correlated.
 
 ## Let's identify potential problems with multicollinaerity.
 
@@ -362,6 +362,8 @@ check_collinearity(model_2)
 ```
 
 > **Question** Does it look like we have multicollinaerity in our data based on these diagnostics?
+
+INST ANS: No?
 
 Wait, what?? Let's calculate Tolerance and VIF "by hand."
 
