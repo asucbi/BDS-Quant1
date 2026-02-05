@@ -15,7 +15,7 @@ library(tidyverse)
 library(papaja) #for formatting p values
 library(broom) #for formatting tables
 library(knitr) #for formatting tables
-library(ppcor) #for calculating partial and semi-partial correlations
+library(ppcor) #for calculating partial correlations
 library(easystats) #for assessing multicollinaerity
 ```
 
@@ -35,11 +35,11 @@ The data is called `data_kay2021.csv`. Read in the data using the `read_csv()` f
 
 Say a researcher is interested in whether there is a relationship between the tendency to believe in conspiracy theories (Y = `conspiracy`) and paranoia (X1 = `paranoia`) when controlling for person’s general tendency to have delusions (X2 = `delusions`).
 
-1.  Calculate **and report** the semi-partial and partial correlations for this scenario. For this exercise, your report can be as simple as: "The semi-partial correlation is \_\_\_ and the partial correlation is \_\_\_."
+1.  Calculate **and report** the partial correlations for this scenario. For this exercise, your report can be as simple as: "The partial correlation is XXX."
 
-2.  Explain the difference in what the semi-partial versus the partial correlation means.
+2.  Explain the what partial correlation means.
 
-```{r correlations}
+```{r partial-correlation}
 
 
 
@@ -69,7 +69,7 @@ We want to predict the tendency to believe in conspiracy theories (Y = `conspira
 
 Treat the model you ran in Exercise 2 as Model 1. Make a new model, Model 2 (name it `model_2`), that includes all the predictors in Model 1 plus the desire for uniqueness (`uniqueness`) and the desire for control (`control`).
 
-Perform a model comparison to test whether the variation in the tendency to believe in conspiracy theories is accounted for by a desire for uniqueness and control (together) *above and beyond* the variation already accounted for by paranoia and delusional ideation.
+Perform a model comparison to test whether the variation in the tendency to believe in conspiracy theories is accounted for by a desire for uniqueness and control (TOGETHER, AS A SET) *above and beyond* the variation already accounted for by paranoia and delusional ideation.
 
 1.  Run a regression predicting the tendency to believe in conspiracy theories (Y = `conspiracy`) from paranoia (X1 = `paranoia`), delusional ideation (X2 = `delusions`), desire for uniqueness (`uniqueness`) and the desire for control (`control`). Call it `model_2`.
 
