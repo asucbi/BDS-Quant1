@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -29,10 +29,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="04-homework-instructions_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="04-homework-instructions_files/libs/quarto-html/anchor.min.js"></script>
 <link href="04-homework-instructions_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="04-homework-instructions_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="04-homework-instructions_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="04-homework-instructions_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="04-homework-instructions_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="04-homework-instructions_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="04-homework-instructions_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -93,14 +93,14 @@ window.Quarto = {
 
 <section id="purpose" class="level2">
 <h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
-<p>In this week’s homework, you will be asked to demonstrate your understanding of semi-partial and partial correlations and regression analysis.</p>
+<p>In this week’s homework, you will be asked to demonstrate your understanding of partial correlations and regression analysis.</p>
 </section>
 <section id="access-the-starter-files-for-module-4" class="level2">
 <h2 class="anchored" data-anchor-id="access-the-starter-files-for-module-4">Access the Starter Files for Module 4</h2>
 <ul>
 <li><p>Go to <a href="posit.cloud">posit.cloud</a> and then <strong>navigate to the course workspace</strong> via the left sidebar.</p>
 <ul>
-<li>Look for the course workspace called “Statistical Methods Spring 2025”</li>
+<li>Look for the course workspace called “Statistical Methods Spring 2026”</li>
 </ul></li>
 <li><p>Open the project titled <strong>Module 3</strong> This module contains the starter files that you will use for this lab and for your homework.</p></li>
 </ul>
@@ -130,6 +130,11 @@ window.Quarto = {
 <li><strong>knitr</strong>: a package that supports the integration of code into text documents, we will be using it today to create a table</li>
 </ul>
 <p>Please load these packages using the <code>library()</code> function. If the packages don’t load, you may need to <code>install.packages()</code> first.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.5.2</code></pre>
+</div>
+</div>
 </section>
 <section id="read-in-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="read-in-the-data">Read in the Data</h2>
@@ -154,8 +159,8 @@ Note
 <h2 class="anchored" data-anchor-id="exercise-1">Exercise 1:</h2>
 <p>Say a researcher is interested in whether there is a relationship between the tendency to believe in conspiracy theories (Y = <code>conspiracy</code>) and paranoia (X1 = <code>paranoia</code>) when controlling for person’s general tendency to have delusions (X2 = <code>delusions</code>).</p>
 <ol type="1">
-<li><p>Calculate <strong>and report</strong> the semi-partial and partial correlations for this scenario. For this exercise, your report can be as simple as: “The semi-partial correlation is ___ and the partial correlation is ___.”</p></li>
-<li><p>Explain the difference in what the semi-partial versus the partial correlation means.</p></li>
+<li><p>Calculate <strong>and report</strong> the partial correlations for this scenario. For this exercise, your report can be as simple as: “The partial correlation is XXX.”</p></li>
+<li><p>Explain the what partial correlation means.</p></li>
 </ol>
 </section>
 <section id="exercise-2" class="level2">
@@ -171,7 +176,7 @@ Note
 <section id="exercise-3" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-3">Exercise 3:</h2>
 <p>Treat the model you ran in Exercise 2 as Model 1. Make a new model, Model 2, that includes all the predictors in Model 1 plus the desire for uniqueness (<code>uniqueness</code>) and the desire for control (<code>control</code>).</p>
-<p>Perform a model comparison to test whether the variation in the tendency to believe in conspiracy theories is accounted for by a desire for uniqueness and control (together) <em>above and beyond</em> the variation already accounted for by paranoia and delusional ideation.</p>
+<p>Perform a model comparison to test whether the variation in the tendency to believe in conspiracy theories is accounted for by a desire for uniqueness and control (TOGETHER, AS A SET) <em>above and beyond</em> the variation already accounted for by paranoia and delusional ideation.</p>
 <p>Treat the model you ran in Exercise 2 as Model 1. Make a new model, Model 2 (name it <code>model_2</code>), that includes all the predictors in Model 1 plus the desire for uniqueness (<code>uniqueness</code>) and the desire for control (<code>control</code>).</p>
 <p>Perform a model comparison to test whether the variation in the tendency to believe in conspiracy theories is accounted for by a desire for uniqueness and control (together) <em>above and beyond</em> the variation already accounted for by paranoia and delusional ideation.</p>
 <ol type="1">
@@ -291,8 +296,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -403,7 +406,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
