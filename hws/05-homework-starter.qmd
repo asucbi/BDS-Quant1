@@ -15,7 +15,7 @@ library(knitr) #for formatting tables
 
 ## Read in the Data
 
-The data is called `depression_drug.csv`. Read in the data using the `read_csv()` function. Name the data "depression_drug". 
+The data is called `depression_drug.csv`. Read in the data using the `read_csv()` function. Name the data "depression_drug".
 
 The data has 2 columns:
 
@@ -28,14 +28,14 @@ The data has 2 columns:
 
 
 ```
-## Research Problem: 
+
+## Research Problem:
 
 You are interested in the effectiveness of a new drug in treating the symptoms of depression. You randomly assign patients with depression into one of 3 treatment groups with different levels of the drug (low, medium, and high), and also one control group that only received a placebo. You then measure their symptoms after 4 weeks of drug treatment. You are interested in whether the drug is effective, and what level of the drug is most effective.
 
 ## Exercise 1:
 
-Recreate the (exact same) table from the homework instructions. 
-
+Recreate the (exact same) table from the homework instructions.
 
 ```{r recreate-table, echo=FALSE}
 
@@ -46,9 +46,9 @@ Recreate the (exact same) table from the homework instructions.
 
 ## Exercise 2:
 
-Recreate the (exact same) boxplot from the homework instructions. 
+Recreate the (exact same) boxplot from the homework instructions.
 
-Answer this question: What pattern do you notice in the data? 
+Answer this question: What pattern do you notice in the data?
 
 ```{r recreate-boxplot, echo=FALSE}
 
@@ -59,9 +59,9 @@ Answer this question: What pattern do you notice in the data?
 
 ## Exercise 3:
 
-Run an omnibus ANOVA test to determine whether there is a relationship between `drug` and `depression`. 
+Run an omnibus ANOVA test to determine whether there is a relationship between `drug` and `depression`.
 
-Answer this question: What does this tell you? 
+Answer this question: What does this tell you?
 
 ```{r omnibus-anova}
 
@@ -72,7 +72,7 @@ Answer this question: What does this tell you?
 
 ## Exercise 4:
 
-Conduct *post-hoc* pairwise comparisons for `depression` scores across all levels of `drug`. Use a correction method to account for multiple comparisons.  
+Conduct *post-hoc* pairwise comparisons for `depression` scores across all levels of `drug`. Use a correction method to account for multiple comparisons.
 
 ```{r pariwise-comparisons}
 
@@ -83,7 +83,7 @@ Conduct *post-hoc* pairwise comparisons for `depression` scores across all level
 
 ## Exercise 5:
 
-Run the regression again. This time, using your preferred method of dummy coding, test whether there is a significant difference between depression scores for each drug group (`low`, `medium`, `high`) and the `none` group. In this exercise you are being asked to compare low vs. none, medium vs. none, and high vs. none. 
+Run the regression again. This time, using your preferred method of dummy coding, test whether there is a significant difference between depression scores for each drug group (`low`, `medium`, `high`) and the `none` group. In this exercise you are being asked to compare low vs. none, medium vs. none, and high vs. none.
 
 Write out the interpretation of each model coeffieient (do this *separately* from the summary).
 
@@ -95,6 +95,7 @@ Write an APA-style summary.
 
 
 ```
+
 ## Exercise 6:
 
 Now, rather than comparing each drug dosage to no drug separately, let's say we want to know whether the average of the three drug groups is different from the "none" group. What custom ("DIY") contrast codes would you use to test this comparison? Make sure your contrasts follow the rules for planned contrasts (you can reference the lecture slides or lab handout for this info!).
@@ -107,6 +108,7 @@ You do not need to run/interpret this model (just writing out the codes is enoug
 
 
 ```
+
 ## Exercise 7:
 
 Answer this question: What is the *most important* thing to remember about contrast codes?

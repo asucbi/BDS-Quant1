@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Module 5: Lab Instructions (Instructor File)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="05-lab-starter-key_files/libs/clipboard/clipboard.min.js"></script>
+<script src="05-lab-starter-key_files/libs/quarto-html/quarto.js"></script>
+<script src="05-lab-starter-key_files/libs/quarto-html/popper.min.js"></script>
+<script src="05-lab-starter-key_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="05-lab-starter-key_files/libs/quarto-html/anchor.min.js"></script>
+<link href="05-lab-starter-key_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="05-lab-starter-key_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="05-lab-starter-key_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="05-lab-starter-key_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="05-lab-starter-key_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Module 5: Lab Instructions (Instructor File)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="purpose" class="level1">
+<h1>Purpose</h1>
+<p>In today’s lab, we will focus on linear regression with a categorical predictor. We will pay special attention to how categorical variables are coded and what that means for our interpretations.</p>
+<p>For today’s lab, you will need to load the following libraries.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.5.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(papaja) <span class="co">#for formatting p values</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans) <span class="co">#for post-hoc t-tests</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co">#for formatting tables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="research-scenario" class="level1">
+<h1>Research scenario</h1>
+<p>We’ll be looking at a dataset comparing different kinds of treatment for depression. In this study, depressed patients (n = 5 per group) were randomly assigned to one of three groups:</p>
+<ol type="1">
+<li>CBT group</li>
+<li>Psychotherapy group</li>
+<li>Control group (received no therapy)</li>
+</ol>
+<p>After 10 weeks, participants’ depression scores were measured (on a scale of 1 = no depression to 12 = severely depressed). Our dataset will have just 2 variables: <code>group</code> (CBT, Psychotherapy, or Control) and <code>depress</code> (depression scores).</p>
+<p><strong>NOTE:</strong> <code>1</code> = CBT; <code>2</code> = Psychotherapy; <code>3</code> = Control</p>
+<section id="read-in-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="read-in-the-data">Read in the data</h2>
+<p>First, let’s read in the data and then use <code>View()</code> to check it out.</p>
+<p>Today’s dataset is called <code>depression_therapy.csv</code>. Let’s read it in and name it <code>cat_data</code> (i.e., categorical regression data).</p>
+<p>The data has 2 columns:</p>
+<ul>
+<li>group: a numeric indicator of whether they were in the CBT, Psychotherapy, or Control group</li>
+<li>depress: participants’ score on the depression measure</li>
+</ul>
+</section>
+<section id="structure-of-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="structure-of-the-data">Structure of the data</h2>
+<p>The first thing we should check is how the data are structured. We should have a factor called <code>group</code> and a numeric variable for depression scores called <code>depress</code>. Let’s use the function <code>str()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(cat_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>spc_tbl_ [15 × 2] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ group  : num [1:15] 1 1 1 1 1 2 2 2 2 2 ...
+ $ depress: num [1:15] 9 6 7 6 8 6 3 4 3 1 ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   group = col_double(),
+  ..   depress = col_double()
+  .. )
+ - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
+</div>
+</div>
+</section>
+<section id="recode-group-as-a-factor" class="level2">
+<h2 class="anchored" data-anchor-id="recode-group-as-a-factor">Recode <code>group</code> as a factor</h2>
+<p>R thinks that <code>group</code> is an integer, so we need to make it into a factor in order to run our analysis. We can use <code>mutate()</code> and base R’s <code>factor()</code>, which can be used to turn variables into factors.</p>
+<p>NOTE: You want to provide labels in the same order as the levels of the factor, so in this case we want them in the order <code>CBT</code>, <code>Psychotherapy</code>, and <code>Control</code> (see above).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cat_data &lt;- cat_data %&gt;% </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(group = factor(group,</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                         labels = c("XXX", "XXX", "XXX"))) # order matters here! </span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>cat_data <span class="ot">=</span> cat_data <span class="sc">%&gt;%</span> </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">factor</span>(group,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"CBT"</span>, <span class="st">"Psychotherapy"</span>, <span class="st">"Control"</span>))) <span class="co"># order matters here! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Look at the structure of the data again. Now it’s clear that <code>group</code> is a factor variable with the correct levels.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(cat_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [15 × 2] (S3: tbl_df/tbl/data.frame)
+ $ group  : Factor w/ 3 levels "CBT","Psychotherapy",..: 1 1 1 1 1 2 2 2 2 2 ...
+ $ depress: num [1:15] 9 6 7 6 8 6 3 4 3 1 ...</code></pre>
+</div>
+</div>
+</section>
+<section id="descriptives" class="level2">
+<h2 class="anchored" data-anchor-id="descriptives">Descriptives</h2>
+<p>Next, we’ll get descriptives for each group using two tidyverse functions, <code>group_by()</code> and <code>summarize()</code>. First, you want to group by <code>group</code>, and then you want to summarize with three arguments, mean, sd, and n.&nbsp;We’ll use knitr to make this into a table.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cat_data %&gt;% </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   group_by(group) %&gt;% </span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   summarize(mean = XXX,</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#             sd = XXX,</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#             n = XXX) %&gt;% </span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   knitr::kable(digits = 2)</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>cat_data <span class="sc">%&gt;%</span> </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(depress, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(depress, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">group</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CBT</td>
+<td style="text-align: right;">7.2</td>
+<td style="text-align: right;">1.30</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Psychotherapy</td>
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">1.82</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Control</td>
+<td style="text-align: right;">9.8</td>
+<td style="text-align: right;">1.79</td>
+<td style="text-align: right;">5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="visualizing-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-the-data">Visualizing the data</h2>
+<p>There are many ways that you can visualize the data. In ggplot, I recommend adding a <code>geom_boxplot()</code> or <code>geom_violin()</code> layer. You can also use <code>geom_bar()</code> but there are some disadvantages to barplots, and there have even been attempts to <a href="https://thenode.biologists.com/barbarplots/">Bar Bar Plots!</a> from scientific journals.</p>
+<p><a href="https://www.r-graph-gallery.com/boxplot.html">This</a> is a good resource for boxplots with ggplot, <a href="https://www.r-graph-gallery.com/violin.html">this</a> is a good resource for violin plots with ggplot, and <a href="https://www.r-graph-gallery.com/barplot.html">this</a> is a good resource for bar plots with ggplot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#boxplot:</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>cat_data <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(group, depress), <span class="at">y =</span> depress)) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average depression score"</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Group"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Depression scores per group"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Ignoring unknown labels:
+• fill : "Group"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-lab-starter-key_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#violin plot:</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>cat_data <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(group, depress), <span class="at">y =</span> depress)) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">fill =</span> group)) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average depression score"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Group"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Depression scores per group"</span>)<span class="sc">+</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-lab-starter-key_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#barplot:</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>cat_data <span class="sc">%&gt;%</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_depress =</span> <span class="fu">mean</span>(depress),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(depress)) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(group, avg_depress), </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> avg_depress)) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"cornflowerblue"</span>) <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> cat_data, </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> depress),</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">position =</span> <span class="st">'jitter'</span>)<span class="sc">+</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Average depression score"</span>,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Average depression score per group"</span>) <span class="sc">+</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>avg_depress <span class="sc">-</span> sd, <span class="at">ymax=</span>avg_depress <span class="sc">+</span> sd),</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> .<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-lab-starter-key_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>INST NOTE: Why might we prefer the boxplot or violin plot to the barplot? Watch the Bar Bar Plots video!</p>
+<hr>
+</section>
+<section id="lets-start-by-just-looking-at-variables-with-two-levels." class="level2">
+<h2 class="anchored" data-anchor-id="lets-start-by-just-looking-at-variables-with-two-levels.">Let’s start by just looking at variables with two levels.</h2>
+<p>Create a new dataset called <code>cat_reduced</code> that includes only the treatment and control groups. Use <code>View()</code> to double check that the data look correct.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cat_reduced &lt;- cat_data %&gt;% </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   filter(group != "XXX") %&gt;% </span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   droplevels()</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># View(cat_reduced)</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>cat_reduced <span class="ot">&lt;-</span> cat_data <span class="sc">%&gt;%</span> </span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">!=</span> <span class="st">"Control"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">droplevels</span>()</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(cat_reduced)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+</section>
+<section id="regression-with-categorical-predictors" class="level1">
+<h1>Regression with categorical predictors</h1>
+<section id="dummy-coding" class="level2">
+<h2 class="anchored" data-anchor-id="dummy-coding">Dummy coding</h2>
+<p>Dummy coding is R’s default method. This actually happens under the hood in R when our independent variable is a factor. Let’s run a regression predicting <code>depress</code> from <code>group</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model_default &lt;- lm(XXX ~ XXX, data = cat_reduced)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(model_default)</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>model_default <span class="ot">&lt;-</span> <span class="fu">lm</span>(depress <span class="sc">~</span> group, <span class="at">data =</span> cat_reduced) </span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_default)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = depress ~ group, data = cat_reduced)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+ -2.40  -1.00  -0.30   0.75   2.60 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)          7.2000     0.7071   10.18 7.42e-06 ***
+groupPsychotherapy  -3.8000     1.0000   -3.80  0.00524 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.581 on 8 degrees of freedom
+Multiple R-squared:  0.6435,    Adjusted R-squared:  0.5989 
+F-statistic: 14.44 on 1 and 8 DF,  p-value: 0.005237</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> What does the F test tell us?</p>
+</blockquote>
+<p>INST ANS: Whether any mean is different from any other mean. So we already know there’s a difference between the two groups.</p>
+<p>Here is our regression equation:</p>
+<p><span class="math display">\[Depression_i = \beta_0 + \beta_1psychotherapy_i +
+\beta_2control_i + e_i\]</span></p>
+<p>R is creating a dummy variable for us under the hood: <code>groupPsychotherapy</code>. This is what R is doing:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cat_reduced <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">groupPsychotherapy =</span> <span class="fu">case_when</span>(group <span class="sc">==</span> <span class="st">"Psychotherapy"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+   group         depress groupPsychotherapy
+   &lt;fct&gt;           &lt;dbl&gt;              &lt;dbl&gt;
+ 1 CBT                 9                  0
+ 2 CBT                 6                  0
+ 3 CBT                 7                  0
+ 4 CBT                 6                  0
+ 5 CBT                 8                  0
+ 6 Psychotherapy       6                  1
+ 7 Psychotherapy       3                  1
+ 8 Psychotherapy       4                  1
+ 9 Psychotherapy       3                  1
+10 Psychotherapy       1                  1</code></pre>
+</div>
+</div>
+<p>By default, R treats whatever the first level of the factor variable is as the reference group. In this case, CBT was the first level of <code>group</code> (because it was initially coded as <code>1</code> in our raw data), so the model treated CBT as our reference group.</p>
+<p>Here is our regression equation, derived from the output:</p>
+<p><span class="math display">\[Depression_i = 7.20 -3.80psychotherapy\]</span></p>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> Using this equation, determine the mean depression score of each group.</p>
+</blockquote>
+<p>INST ANS: 7.2: CBT 7.2 - 3.8 = 3.4: psychotherapy</p>
+<p>Now, let’s revisit the output.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>model_default <span class="ot">&lt;-</span> <span class="fu">lm</span>(depress <span class="sc">~</span> group, <span class="at">data =</span> cat_reduced) </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_default)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = depress ~ group, data = cat_reduced)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+ -2.40  -1.00  -0.30   0.75   2.60 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)          7.2000     0.7071   10.18 7.42e-06 ***
+groupPsychotherapy  -3.8000     1.0000   -3.80  0.00524 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.581 on 8 degrees of freedom
+Multiple R-squared:  0.6435,    Adjusted R-squared:  0.5989 
+F-statistic: 14.44 on 1 and 8 DF,  p-value: 0.005237</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> Interpret the intercept. What does a significant p-value signify?</p>
+</blockquote>
+<p>INST ANS: mean of CBT is significantly different from 0.</p>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> Interpret the slopes. What do the significant p-values signify?</p>
+</blockquote>
+<p>INST ANS: The mean of psychotherapy is significantly different from the mean of CBT.</p>
+<p>Now, let’s change the reference level so that Psychotherapy is assigned a 0 and CBT is assigned a 1.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cat_reduced &lt;- cat_reduced %&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(groupCBT = case_when(group == "CBT" ~ XXX,</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                                         TRUE ~ XXX))</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>cat_reduced <span class="ot">&lt;-</span> cat_reduced <span class="sc">%&gt;%</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">groupCBT =</span> <span class="fu">case_when</span>(group <span class="sc">==</span> <span class="st">"CBT"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>                                        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>))</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>cat_reduced</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+   group         depress groupCBT
+   &lt;fct&gt;           &lt;dbl&gt;    &lt;dbl&gt;
+ 1 CBT                 9        1
+ 2 CBT                 6        1
+ 3 CBT                 7        1
+ 4 CBT                 6        1
+ 5 CBT                 8        1
+ 6 Psychotherapy       6        0
+ 7 Psychotherapy       3        0
+ 8 Psychotherapy       4        0
+ 9 Psychotherapy       3        0
+10 Psychotherapy       1        0</code></pre>
+</div>
+</div>
+<p>Rerun the model. Compare it to the default model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>model_newref <span class="ot">&lt;-</span> <span class="fu">lm</span>(depress <span class="sc">~</span> groupCBT, <span class="at">data =</span> cat_reduced) </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_newref)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = depress ~ groupCBT, data = cat_reduced)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+ -2.40  -1.00  -0.30   0.75   2.60 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)   3.4000     0.7071   4.808  0.00134 **
+groupCBT      3.8000     1.0000   3.800  0.00524 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.581 on 8 degrees of freedom
+Multiple R-squared:  0.6435,    Adjusted R-squared:  0.5989 
+F-statistic: 14.44 on 1 and 8 DF,  p-value: 0.005237</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> Interpret the intercept. What does a significant p-value signify?</p>
+</blockquote>
+<p>INST ANS: mean of Psychotherapy is significantly different from 0.</p>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> Interpret the slopes. What do the significant p-values signify?</p>
+</blockquote>
+<p>INST ANS: The mean of CBT is significantly different from the mean of Psychotherapy. Same meaning, now just different direction.</p>
+</section>
+<section id="deviation-coding" class="level2">
+<h2 class="anchored" data-anchor-id="deviation-coding">Deviation coding</h2>
+<p>Now, let’s say we’re not interested in the difference between CBT and Psychotherapy. Instead, we want to know whether either differs from the grand mean of depression. To do this, we would use Deviation Coding. There are a few ways we can create our codes, but this is my preferred method:</p>
+<section id="create-dummy-variables-with-mutate-and-case_when" class="level3">
+<h3 class="anchored" data-anchor-id="create-dummy-variables-with-mutate-and-case_when">Create dummy variables with <code>mutate()</code> and <code>case_when()</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create new dummy variables containing .5 and -.5</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cat_reduced &lt;- cat_reduced %&gt;%</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(dev_code = case_when(group == "CBT" ~ XXX,</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#                                    TRUE ~ XXX))</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>cat_reduced <span class="ot">&lt;-</span> cat_reduced <span class="sc">%&gt;%</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dev_code =</span> <span class="fu">case_when</span>(group <span class="sc">==</span> <span class="st">"CBT"</span> <span class="sc">~</span> .<span class="dv">5</span>,</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>                                   <span class="cn">TRUE</span> <span class="sc">~</span> <span class="sc">-</span>.<span class="dv">5</span>))</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="co">#check out your data</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>cat_reduced</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 4
+   group         depress groupCBT dev_code
+   &lt;fct&gt;           &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+ 1 CBT                 9        1      0.5
+ 2 CBT                 6        1      0.5
+ 3 CBT                 7        1      0.5
+ 4 CBT                 6        1      0.5
+ 5 CBT                 8        1      0.5
+ 6 Psychotherapy       6        0     -0.5
+ 7 Psychotherapy       3        0     -0.5
+ 8 Psychotherapy       4        0     -0.5
+ 9 Psychotherapy       3        0     -0.5
+10 Psychotherapy       1        0     -0.5</code></pre>
+</div>
+</div>
+<p>Now, we can run the linear model using this new dummy variable as the IV.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>model_dummy1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(depress <span class="sc">~</span> dev_code, <span class="at">data =</span> cat_reduced) </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_dummy1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = depress ~ dev_code, data = cat_reduced)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+ -2.40  -1.00  -0.30   0.75   2.60 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      5.3        0.5    10.6 5.48e-06 ***
+dev_code         3.8        1.0     3.8  0.00524 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.581 on 8 degrees of freedom
+Multiple R-squared:  0.6435,    Adjusted R-squared:  0.5989 
+F-statistic: 14.44 on 1 and 8 DF,  p-value: 0.005237</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> What does the intercept mean? What does the slope mean?</p>
+</blockquote>
+<p>INST ANS: intercept: the grand mean of depression. slope: the difference between the groups. Note that it didn’t change the <em>test</em> from our earlier model, it changed the estimate and the intercept.</p>
+<hr>
+</section>
+</section>
+<section id="now-lets-take-a-look-at-variables-with-more-than-2-levels." class="level2">
+<h2 class="anchored" data-anchor-id="now-lets-take-a-look-at-variables-with-more-than-2-levels.">Now, let’s take a look at variables with more than 2 levels.</h2>
+<p>For this, we’ll go back to using <code>cat_data</code> as our data file.</p>
+</section>
+</section>
+<section id="traditional-anova" class="level1">
+<h1>Traditional ANOVA</h1>
+<p>We will first review how to generate a “traditional ANOVA” table.</p>
+<p>To get an ANOVA table, you can use the same <code>lm()</code> as regression, and use <code>anova()</code> to get the ANOVA summary table. Importantly, you want to make sure that the categorical IV is a factor (which we did above).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>model_anova <span class="ot">&lt;-</span> <span class="fu">lm</span>(depress <span class="sc">~</span> group, <span class="at">data =</span> cat_data)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: depress
+          Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+group      2  103.6  51.800  18.951 0.0001934 ***
+Residuals 12   32.8   2.733                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>To calculate post-hod pairwise comparisons between group levels, we can use <code>emmeans::emmeans()</code>. This function takes an <code>lm()</code> output, an equation that indicates we want to perform pairwise t-tests (<code>pairwise</code>) on the left, and the IV (<code>group</code>) on the right, as well as an <code>adjust</code> (e.g.&nbsp;“bonferroni” or “holm”).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model_anova, pairwise <span class="sc">~</span> group, <span class="at">adjust =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$emmeans
+ group         emmean    SE df lower.CL upper.CL
+ CBT              7.2 0.739 12     5.59     8.81
+ Psychotherapy    3.4 0.739 12     1.79     5.01
+ Control          9.8 0.739 12     8.19    11.41
+
+Confidence level used: 0.95 
+
+$contrasts
+ contrast                estimate   SE df t.ratio p.value
+ CBT - Psychotherapy          3.8 1.05 12   3.634  0.0034
+ CBT - Control               -2.6 1.05 12  -2.487  0.0286
+ Psychotherapy - Control     -6.4 1.05 12  -6.121  0.0001</code></pre>
+</div>
+</div>
+<p>Since we are running a lot of tests (and number of tests grow as we add more levels), we need to correct for multiple comparisons so that we don’t have an inflated type I error rate.</p>
+<ul>
+<li>Bonferroni correction: multiplies the p-values by the number of comparisons. We’ll talk about this more in class on Tuesday!</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model_anova, pairwise <span class="sc">~</span> group, <span class="at">adjust =</span> <span class="st">"bonferroni"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$emmeans
+ group         emmean    SE df lower.CL upper.CL
+ CBT              7.2 0.739 12     5.59     8.81
+ Psychotherapy    3.4 0.739 12     1.79     5.01
+ Control          9.8 0.739 12     8.19    11.41
+
+Confidence level used: 0.95 
+
+$contrasts
+ contrast                estimate   SE df t.ratio p.value
+ CBT - Psychotherapy          3.8 1.05 12   3.634  0.0103
+ CBT - Control               -2.6 1.05 12  -2.487  0.0858
+ Psychotherapy - Control     -6.4 1.05 12  -6.121  0.0002
+
+P value adjustment: bonferroni method for 3 tests </code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> Compare the p-values from these two emmeans summaries. What do you notice?</p>
+</blockquote>
+<p>INST ANS: p-values are lower (some no longer significant) with Bonferroni correction!</p>
+<p>INST NOTE: multiply p-value by # comparisons (3) to illustrate</p>
+<hr>
+</section>
+<section id="regression-with-categorical-predictors-1" class="level1">
+<h1>Regression with categorical predictors</h1>
+<p>Running the ANOVA within a linear regression framework will give us the same information we already got from our regression model, and something more!</p>
+<section id="dummy-coding-1" class="level2">
+<h2 class="anchored" data-anchor-id="dummy-coding-1">Dummy coding</h2>
+<p>In regression, categorical predictors with more than two levels are broken up into more than one predictor. This actually happens under the hood in R when our independent variable is a factor. Let’s put <code>group</code> as the predictor in our model as before:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>model_default <span class="ot">&lt;-</span> <span class="fu">lm</span>(depress <span class="sc">~</span> group, <span class="at">data =</span> cat_data) </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_default)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = depress ~ group, data = cat_data)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+  -2.4   -1.2   -0.2    1.0    2.6 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)          7.2000     0.7394   9.738 4.77e-07 ***
+groupPsychotherapy  -3.8000     1.0456  -3.634  0.00342 ** 
+groupControl         2.6000     1.0456   2.487  0.02861 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.653 on 12 degrees of freedom
+Multiple R-squared:  0.7595,    Adjusted R-squared:  0.7195 
+F-statistic: 18.95 on 2 and 12 DF,  p-value: 0.0001934</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> What does the F test tell us?</p>
+</blockquote>
+<p>INST ANS: Whether any mean is different from any other mean.</p>
+<p>Here is our regression equation:</p>
+<p><span class="math display">\[Depression_i = \beta_0 + \beta_1psychotherapy_i + \beta_2control_i + e_i\]</span></p>
+<p>R is creating two dummy variables for us under the hood: <code>groupPsychotherapy</code> and <code>groupControl</code>. This is what R is doing:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>cat_data <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">groupPsychotherapy =</span> <span class="fu">case_when</span>(group <span class="sc">==</span> <span class="st">"Psychotherapy"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>),</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">groupControl =</span> <span class="fu">case_when</span>(group <span class="sc">==</span> <span class="st">"Control"</span> <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 15 × 4
+   group         depress groupPsychotherapy groupControl
+   &lt;fct&gt;           &lt;dbl&gt;              &lt;dbl&gt;        &lt;dbl&gt;
+ 1 CBT                 9                  0            0
+ 2 CBT                 6                  0            0
+ 3 CBT                 7                  0            0
+ 4 CBT                 6                  0            0
+ 5 CBT                 8                  0            0
+ 6 Psychotherapy       6                  1            0
+ 7 Psychotherapy       3                  1            0
+ 8 Psychotherapy       4                  1            0
+ 9 Psychotherapy       3                  1            0
+10 Psychotherapy       1                  1            0
+11 Control            12                  0            1
+12 Control            11                  0            1
+13 Control             8                  0            1
+14 Control            10                  0            1
+15 Control             8                  0            1</code></pre>
+</div>
+</div>
+<p>By default, R treats whatever the first level of the factor variable is as the reference group. In this case, CBT was the first level of <code>group</code> (because it was initially coded as <code>1</code> in our raw data), so the model treated CBT as our reference group.</p>
+<p>Here is our regression equation, derived from the output:</p>
+<p><span class="math display">\[Depression_i = 7.20 -3.80psychotherapy + 2.60control\]</span></p>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> Using this equation, determine the mean depression score of each group.</p>
+</blockquote>
+<p>INST ANS: 7.2: CBT 7.2 - 3.8 = 3.4: psychotherapy 7.2 + 2.6 = 9.8: control</p>
+<p>Now, let’s revisit the output.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>model_default <span class="ot">&lt;-</span> <span class="fu">lm</span>(depress <span class="sc">~</span> group, <span class="at">data =</span> cat_data) </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_default)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = depress ~ group, data = cat_data)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+  -2.4   -1.2   -0.2    1.0    2.6 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)          7.2000     0.7394   9.738 4.77e-07 ***
+groupPsychotherapy  -3.8000     1.0456  -3.634  0.00342 ** 
+groupControl         2.6000     1.0456   2.487  0.02861 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.653 on 12 degrees of freedom
+Multiple R-squared:  0.7595,    Adjusted R-squared:  0.7195 
+F-statistic: 18.95 on 2 and 12 DF,  p-value: 0.0001934</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> Interpret the intercept. What does a significant p-value signify?</p>
+</blockquote>
+<p>INST ANS: mean of CBT is significantly different from 0 (because it’s the control group).</p>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> Interpret the slopes. What do the significant p-values signify?</p>
+</blockquote>
+<p>INST ANS: The differences between psychotherapy and control are significantly different from the mean of CBT.</p>
+<p>Let’s imagine that we have the following (more intuitive) research questions:</p>
+<ol type="1">
+<li>Is CBT effective (relative to no therapy)?</li>
+<li>Is psychotherapy effective (relative to no therapy)?</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> What do want our reference group to be to answer these research questions?</p>
+</blockquote>
+<p>INST ANS: the control group</p>
+<p>Now let’s make the appropriate dummy codes. Recall that we need <em>k</em>-1 dummy codes (where <em>k</em> is the number of groups). We have 3 groups, so we need 2 dummy codes.</p>
+<p>Remember, our decision of how to set the dummy codes (which group to set as the <strong>reference group</strong>) should be guided by our research questions.</p>
+<section id="create-dummy-variables-with-mutate-and-case_when-1" class="level3">
+<h3 class="anchored" data-anchor-id="create-dummy-variables-with-mutate-and-case_when-1">Create dummy variables with <code>mutate()</code> and <code>case_when()</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create new dummy variables containing 1's and 0's</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cat_data &lt;- cat_data %&gt;%</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(CBT.v.Control = case_when(XXX),</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co">#          Psychotherapy.v.Control = case_when(XXX)</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>cat_data <span class="ot">&lt;-</span> cat_data <span class="sc">%&gt;%</span></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">CBT.v.Control =</span> <span class="fu">case_when</span>(group <span class="sc">==</span> <span class="st">"CBT"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>                                   <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>),</span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">Psychotherapy.v.Control =</span> <span class="fu">case_when</span>(group <span class="sc">==</span> <span class="st">"Psychotherapy"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>                                             <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>))</span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a><span class="co">#check out your data</span></span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a>cat_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 15 × 4
+   group         depress CBT.v.Control Psychotherapy.v.Control
+   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;                   &lt;dbl&gt;
+ 1 CBT                 9             1                       0
+ 2 CBT                 6             1                       0
+ 3 CBT                 7             1                       0
+ 4 CBT                 6             1                       0
+ 5 CBT                 8             1                       0
+ 6 Psychotherapy       6             0                       1
+ 7 Psychotherapy       3             0                       1
+ 8 Psychotherapy       4             0                       1
+ 9 Psychotherapy       3             0                       1
+10 Psychotherapy       1             0                       1
+11 Control            12             0                       0
+12 Control            11             0                       0
+13 Control             8             0                       0
+14 Control            10             0                       0
+15 Control             8             0                       0</code></pre>
+</div>
+</div>
+<p>Now, we can run the linear model using these new dummy variables as the IV’s.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model_dummy1 &lt;- lm(depress ~ XXX + XXX, data = cat_data) </span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(model_dummy1)</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>model_dummy1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(depress <span class="sc">~</span> CBT.v.Control <span class="sc">+</span> Psychotherapy.v.Control, <span class="at">data =</span> cat_data) </span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_dummy1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = depress ~ CBT.v.Control + Psychotherapy.v.Control, 
+    data = cat_data)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+  -2.4   -1.2   -0.2    1.0    2.6 
+
+Coefficients:
+                        Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)               9.8000     0.7394  13.255 1.59e-08 ***
+CBT.v.Control            -2.6000     1.0456  -2.487   0.0286 *  
+Psychotherapy.v.Control  -6.4000     1.0456  -6.121 5.17e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.653 on 12 degrees of freedom
+Multiple R-squared:  0.7595,    Adjusted R-squared:  0.7195 
+F-statistic: 18.95 on 2 and 12 DF,  p-value: 0.0001934</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> What does the intercept mean? What do the slopes mean?</p>
+</blockquote>
+<p>INST ANS: mean of the control group; slopes are the differences from the control group.</p>
+<p>Another reasonable question might be whether the treatments, on average, are better than the control.</p>
+<p>Rules for DIY / Planned Contrasts:</p>
+<p>Rule 1: Groups coded with positive weights will be compared to groups with negative weights Rule 2: The sum of weights you use should be zero Rule 3: If a group is not involved in a comparison, assign it a weight of 0 Rule 4: Initial weight assigned to groups should be equal to # groups in opposite chunk of variation Rule 5: To get final weights, divide initial weight by number of groups with non-zero weights</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Step</th>
+<th style="text-align: left;">CBT and Psychotherapy</th>
+<th style="text-align: left;">Control</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Positive vs.&nbsp;Negative</td>
+<td style="text-align: left;">Positive</td>
+<td style="text-align: left;">Negative</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Initial Weights</td>
+<td style="text-align: left;">1, 1</td>
+<td style="text-align: left;">-2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Final Weights</td>
+<td style="text-align: left;">1/3, 1/3</td>
+<td style="text-align: left;">-2/3</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="heres-an-alternative-way-to-create-contrasts-using-a-matrix." class="level3">
+<h3 class="anchored" data-anchor-id="heres-an-alternative-way-to-create-contrasts-using-a-matrix.">Here’s an alternative way to create contrasts, using a matrix.</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#first, check out the order of levels of your variable</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(cat_data<span class="sc">$</span>group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "CBT"           "Psychotherapy" "Control"      </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#now, list your final weights, in the same order of your levels</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>Treat.v.Control <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">2</span><span class="sc">/</span><span class="dv">3</span>)  </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co">#turn this into a matrix</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(Treat.v.Control)</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="co">#assign these contrasts to your variable</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(cat_data<span class="sc">$</span>group) <span class="ot">&lt;-</span> mat</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="co">#check out the `attributes()` of your variable</span></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(cat_data<span class="sc">$</span>group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$levels
+[1] "CBT"           "Psychotherapy" "Control"      
+
+$class
+[1] "factor"
+
+$contrasts
+              Treat.v.Control              
+CBT                 0.3333333 -7.071068e-01
+Psychotherapy       0.3333333  7.071068e-01
+Control            -0.6666667  3.572448e-17</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#run your model</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>model_tvc <span class="ot">&lt;-</span> <span class="fu">lm</span>(depress <span class="sc">~</span> group, <span class="at">data =</span> cat_data)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_tvc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = depress ~ group, data = cat_data)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+  -2.4   -1.2   -0.2    1.0    2.6 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)            6.8000     0.4269  15.930 1.95e-09 ***
+groupTreat.v.Control  -4.5000     0.9055  -4.969 0.000326 ***
+group                 -2.6870     0.7394  -3.634 0.003424 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.653 on 12 degrees of freedom
+Multiple R-squared:  0.7595,    Adjusted R-squared:  0.7195 
+F-statistic: 18.95 on 2 and 12 DF,  p-value: 0.0001934</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Question:</strong> What does the intercept mean? What do the slopes mean?</p>
+</blockquote>
+<p>INST ANS: Intercept is the grand mean. Slope for Treat.v.Control is difference between the mean for Control and the mean across the two treatment groups.</p>
+<p>We can have k-1 contrasts. So, we might want to add another contrast testing the two treatment groups. We can do the same thing to add another contrast.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">#first, check out the order of levels of your variable</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(cat_data<span class="sc">$</span>group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "CBT"           "Psychotherapy" "Control"      </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">#now, list your final weights, in the same order of your levels. control drops out, so we assign it a zero.</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>CBT.v.Psychotherapy <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>, <span class="dv">0</span>)  </span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co">#turn this into a matrix along with our previous contrasts</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(Treat.v.Control, CBT.v.Psychotherapy)</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="co">#assign these contrasts to your variable</span></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(cat_data<span class="sc">$</span>group) <span class="ot">&lt;-</span> mat</span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a><span class="co">#check out the `attributes()` of your variable</span></span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(cat_data<span class="sc">$</span>group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$levels
+[1] "CBT"           "Psychotherapy" "Control"      
+
+$class
+[1] "factor"
+
+$contrasts
+              Treat.v.Control CBT.v.Psychotherapy
+CBT                 0.3333333                 0.5
+Psychotherapy       0.3333333                -0.5
+Control            -0.6666667                 0.0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">#run your model</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>model_tvc <span class="ot">&lt;-</span> <span class="fu">lm</span>(depress <span class="sc">~</span> group, <span class="at">data =</span> cat_data)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_tvc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = depress ~ group, data = cat_data)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+  -2.4   -1.2   -0.2    1.0    2.6 
+
+Coefficients:
+                         Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                6.8000     0.4269  15.930 1.95e-09 ***
+groupTreat.v.Control      -4.5000     0.9055  -4.969 0.000326 ***
+groupCBT.v.Psychotherapy   3.8000     1.0456   3.634 0.003424 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.653 on 12 degrees of freedom
+Multiple R-squared:  0.7595,    Adjusted R-squared:  0.7195 
+F-statistic: 18.95 on 2 and 12 DF,  p-value: 0.0001934</code></pre>
+</div>
+</div>
+<p>Now, write up an APA Style Summary!</p>
+<p>We ran a linear regression to examine the effect of different kinds of treatment on depression. We used custom contrast coding to examine the difference between the average of the treatment groups and the control group (CBT: 1/3, Psychotherapy: 1/3, Control: -2/3) and between the two types of treatment (CBT: 1/2, Psychotherapy: -1/2, Control: 0). Our omnibus test revealed a significant effect of treatment group on depression scores, F(2, 12) = 18.95, <em>p</em> &lt; .001), and the model explained a substantial proportion of variance in weight, with an R<sup>2</sup> = 0.76 and an adjusted R<sup>2</sup> = 0.72. Participants in a treatment group (<em>M</em> = 5.3, <em>SD</em> = 2.5) had significantly lower depression scores than participants in the control group (<em>M</em> = 9.8, <em>SD</em> = 1.79), <span class="math inline">\(\beta\)</span> = -4.5, 95% CI[-6.47, -2.53], <em>p</em> &lt; .001. Within treatment groups, participants who received CBT (<em>M</em> = 7.2, <em>SD</em> = 1.3) had significantly higher depression scores than participants who received Psychotherapy (<em>M</em> = 3.4, <em>SD</em> = 1.82), <span class="math inline">\(\beta\)</span> = 3.8, 95% CI[1.52, 6.08], <em>p</em> =.003. In summary, we found that treatment had an effect on participants’ depression scores and Psychotherapy may be a better treatment option than CBT.</p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

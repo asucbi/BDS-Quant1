@@ -1,5 +1,5 @@
 ---
-title: "Module 5: Lab Starter File"
+title: "Module 5: Lab Instructions (Instructor File)"
 format: html
 editor: visual
 ---
@@ -68,10 +68,9 @@ NOTE: You want to provide labels in the same order as the levels of the factor, 
 
 ```{r}
 
-cat_data <- cat_data %>%
+cat_data = cat_data %>% 
   mutate(group = factor(group,
-                        labels = c("XXX", "XXX", "XXX"))) # order matters here!
-
+                        labels = c("CBT", "Psychotherapy", "Control"))) # order matters here! 
 
 ```
 
@@ -88,11 +87,11 @@ str(cat_data)
 Next, we'll get descriptives for each group using two tidyverse functions, `group_by()` and `summarize()`. First, you want to group by `group`, and then you want to summarize with three arguments, mean, sd, and n. We'll use knitr to make this into a table.
 
 ```{r}
-cat_data %>%
-  group_by(group) %>%
-  summarize(mean = XXX,
-            sd = XXX,
-            n = XXX) %>%
+cat_data %>% 
+  group_by(group) %>% 
+  summarize(mean = mean(depress, na.rm = TRUE),
+            sd = sd(depress, na.rm = TRUE),
+            n = n()) %>% 
   knitr::kable(digits = 2)
 
 ```
@@ -149,6 +148,8 @@ cat_data %>%
 
 ```
 
+INST NOTE: Why might we prefer the boxplot or violin plot to the barplot? Watch the Bar Bar Plots video!
+
 ------------------------------------------------------------------------
 
 ## Let's start by just looking at variables with two levels.
@@ -156,12 +157,12 @@ cat_data %>%
 Create a new dataset called `cat_reduced` that includes only the treatment and control groups. Use `View()` to double check that the data look correct.
 
 ```{r}
-cat_reduced <- cat_data %>%
-  filter(group != "XXX") %>%
+
+cat_reduced <- cat_data %>% 
+  filter(group != "Control") %>% 
   droplevels()
 
 View(cat_reduced)
-
 
 ```
 
@@ -174,13 +175,15 @@ View(cat_reduced)
 Dummy coding is R's default method. This actually happens under the hood in R when our independent variable is a factor. Let's run a regression predicting `depress` from `group`.
 
 ```{r}
-model_default <- lm(XXX ~ XXX, data = cat_reduced)
+
+model_default <- lm(depress ~ group, data = cat_reduced) 
 summary(model_default)
 
 ```
 
 > **Question:** What does the F test tell us?
 
+INST ANS: Whether any mean is different from any other mean. So we already know there's a difference between the two groups.
 
 Here is our regression equation:
 
@@ -205,6 +208,8 @@ $$Depression_i = 7.20 -3.80psychotherapy$$
 
 > **Question:** Using this equation, determine the mean depression score of each group.
 
+INST ANS: 7.2: CBT 7.2 - 3.8 = 3.4: psychotherapy
+
 Now, let's revisit the output.
 
 ```{r}
@@ -216,16 +221,19 @@ summary(model_default)
 
 > **Question:** Interpret the intercept. What does a significant p-value signify?
 
+INST ANS: mean of CBT is significantly different from 0.
 
 > **Question:** Interpret the slopes. What do the significant p-values signify?
 
+INST ANS: The mean of psychotherapy is significantly different from the mean of CBT.
 
 Now, let's change the reference level so that Psychotherapy is assigned a 0 and CBT is assigned a 1.
 
 ```{r}
+
 cat_reduced <- cat_reduced %>%
-  mutate(groupCBT = case_when(group == "CBT" ~ XXX,
-                                        TRUE ~ XXX))
+  mutate(groupCBT = case_when(group == "CBT" ~ 1,
+                                        TRUE ~ 0))
 
 cat_reduced
 
@@ -242,9 +250,11 @@ summary(model_newref)
 
 > **Question:** Interpret the intercept. What does a significant p-value signify?
 
+INST ANS: mean of Psychotherapy is significantly different from 0.
 
 > **Question:** Interpret the slopes. What do the significant p-values signify?
 
+INST ANS: The mean of CBT is significantly different from the mean of Psychotherapy. Same meaning, now just different direction.
 
 ## Deviation coding
 
@@ -254,11 +264,10 @@ Now, let's say we're not interested in the difference between CBT and Psychother
 
 ```{r}
 
-# create new dummy variables containing .5 and -.5
-
+# create new dummy variables containing 1's and 0's
 cat_reduced <- cat_reduced %>%
-  mutate(dev_code = case_when(group == "CBT" ~ XXX,
-                                   TRUE ~ XXX))
+  mutate(dev_code = case_when(group == "CBT" ~ .5,
+                                   TRUE ~ -.5))
 
 #check out your data
 cat_reduced
@@ -275,6 +284,8 @@ summary(model_dummy1)
 ```
 
 > **Question:** What does the intercept mean? What does the slope mean?
+
+INST ANS: intercept: the grand mean of depression. slope: the difference between the groups. Note that it didn't change the *test* from our earlier model, it changed the estimate and the intercept.
 
 ------------------------------------------------------------------------
 
@@ -311,10 +322,13 @@ Since we are running a lot of tests (and number of tests grow as we add more lev
 
 emmeans(model_anova, pairwise ~ group, adjust = "bonferroni")
 
-
 ```
 
 > **Question:** Compare the p-values from these two emmeans summaries. What do you notice?
+
+INST ANS: p-values are lower (some no longer significant) with Bonferroni correction!
+
+INST NOTE: multiply p-value by \# comparisons (3) to illustrate
 
 ------------------------------------------------------------------------
 
@@ -335,9 +349,12 @@ summary(model_default)
 
 > **Question:** What does the F test tell us?
 
+INST ANS: Whether any mean is different from any other mean.
+
 Here is our regression equation:
 
-$$Depression_i = \beta_0 + \beta_1psychotherapy_i + \beta_2control_i + e_i$$
+$$Depression_i = \beta_0 + \beta_1psychotherapy_i + 
+\beta_2control_i + e_i$$
 
 R is creating two dummy variables for us under the hood: `groupPsychotherapy` and `groupControl`. This is what R is doing:
 
@@ -359,6 +376,8 @@ $$Depression_i = 7.20 -3.80psychotherapy + 2.60control$$
 
 > **Question:** Using this equation, determine the mean depression score of each group.
 
+INST ANS: 7.2: CBT 7.2 - 3.8 = 3.4: psychotherapy 7.2 + 2.6 = 9.8: control
+
 Now, let's revisit the output.
 
 ```{r}
@@ -370,9 +389,11 @@ summary(model_default)
 
 > **Question:** Interpret the intercept. What does a significant p-value signify?
 
+INST ANS: mean of CBT is significantly different from 0 (because it's the control group).
 
 > **Question:** Interpret the slopes. What do the significant p-values signify?
 
+INST ANS: The differences between psychotherapy and control are significantly different from the mean of CBT.
 
 Let's imagine that we have the following (more intuitive) research questions:
 
@@ -381,6 +402,7 @@ Let's imagine that we have the following (more intuitive) research questions:
 
 > **Question:** What do want our reference group to be to answer these research questions?
 
+INST ANS: the control group
 
 Now let's make the appropriate dummy codes. Recall that we need *k*-1 dummy codes (where *k* is the number of groups). We have 3 groups, so we need 2 dummy codes.
 
@@ -390,10 +412,11 @@ Remember, our decision of how to set the dummy codes (which group to set as the 
 
 ```{r}
 # create new dummy variables containing 1's and 0's
-
 cat_data <- cat_data %>%
-  mutate(CBT.v.Control = case_when(XXX),
-         Psychotherapy.v.Control = case_when(XXX))
+  mutate(CBT.v.Control = case_when(group == "CBT" ~ 1,
+                                   TRUE ~ 0),
+         Psychotherapy.v.Control = case_when(group == "Psychotherapy" ~ 1,
+                                             TRUE ~ 0))
 
 #check out your data
 cat_data
@@ -403,15 +426,17 @@ cat_data
 Now, we can run the linear model using these new dummy variables as the IV's.
 
 ```{r}
-model_dummy1 <- lm(depress ~ XXX + XXX, data = cat_data)
+
+model_dummy1 <- lm(depress ~ CBT.v.Control + Psychotherapy.v.Control, data = cat_data) 
 summary(model_dummy1)
 
 ```
 
 > **Question:** What does the intercept mean? What do the slopes mean?
 
+INST ANS: mean of the control group; slopes are the differences from the control group.
 
-Another reasonable question might be whether the treatments, on average, are better than the control.
+Another reasonable question might be whether the treatments, on avearge) are better than the control.
 
 Rules for DIY / Planned Contrasts:
 
@@ -450,6 +475,7 @@ summary(model_tvc)
 
 > **Question:** What does the intercept mean? What do the slopes mean?
 
+INST ANS: Intercept is the grand mean. Slope for Treat.v.Control is difference between the mean for Control and the mean across the two treatment groups.
 
 We can have k-1 contrasts. So, we might want to add another contrast testing the two treatment groups. We can do the same thing to add another contrast.
 
@@ -458,7 +484,7 @@ We can have k-1 contrasts. So, we might want to add another contrast testing the
 #first, check out the order of levels of your variable
 levels(cat_data$group)
 
-#now, list your final weights, in the same order of your levels. control drops out, so we assign it a zero.
+#now, list your final weights, in the same order of your levels. control drops out, so we assing it a zero.
 CBT.v.Psychotherapy = c(1/2, -1/2, 0)  
 
 #turn this into a matrix along with our previous contrasts
