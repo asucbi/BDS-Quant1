@@ -274,7 +274,7 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p><strong>Question</strong> Do you think there is likely to be multicollinaerity in this dataset? Why?</p>
 </blockquote>
-<p>INST ANS: YES!</p>
+<p>INST ANS: Yes, height and age seem likely to be correlated.</p>
 <section id="lets-identify-potential-problems-with-multicollinaerity." class="level2">
 <h2 class="anchored" data-anchor-id="lets-identify-potential-problems-with-multicollinaerity.">Let’s identify potential problems with multicollinaerity.</h2>
 <p>First, let’s create a correlation matrix to examine potential correlations between our variables. Make sure to select only the variables that you want to examine.</p>
@@ -282,6 +282,7 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p><strong>Question</strong> Does it look like we have multicollinaerity in our data based on these diagnostics?</p>
 </blockquote>
+<p>INST ANS: No?</p>
 <p>Wait, what?? Let’s calculate Tolerance and VIF “by hand.”</p>
 <p>First, we’ll get R<sub>j</sub><sup>2</sup> by predicting age from height. Call this <code>model_3</code>.</p>
 <p>Next, we’ll extract the R<sub>j</sub><sup>2</sup> value from the summary.</p>

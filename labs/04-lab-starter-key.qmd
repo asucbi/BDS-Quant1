@@ -31,7 +31,9 @@ Today's dataset is called `data_htwtage.csv`. Let's read it in and name it `mr_d
 
 #students: fill in XXX with correct code
 
-
+# mr_data <- read_csv(XXX)
+# 
+# View(XXX)
 
 
 
@@ -50,7 +52,13 @@ Let's create two scatter plots of the relation between our IVs and DV using `ggp
 
 #students: fill in XXX with correct code
 
-
+# ggplot(data = mr_data, aes(x=XXX, y=XXX)) +
+#   geom_point() +
+#   labs(x = "Age", y = "Weight") #label your axes!
+# 
+# ggplot(data = mr_data, aes(x=XXX, y=XXX)) +
+#   geom_point() +
+#   labs(x = "Height", y = "Weight") #label your axes!
 
 
 
@@ -68,6 +76,14 @@ ggplot(data = mr_data, aes(x=height, y=weight)) +
 ```
 
 > **Question:** What do you notice about the strength and direction of the data?
+
+
+
+
+
+
+
+
 
 ANS: Both age and height seem to be positively correlated with weight.
 
@@ -98,6 +114,15 @@ summary(model_1)
 
 > **Question** Write out the resulting model. How do we interpret each of these regression coefficients?
 
+
+
+
+
+
+
+
+
+
 ANS: When age and height are 0 the predicted weight is -141.22. For each one-unit increase in age we expect weight to increase by 1.28, holding height constant. For each one-unit increase in height we expect weight to increase by 3.60, holding age constant.
 
 # Partial Regression Coefficients
@@ -110,6 +135,7 @@ ANS: When age and height are 0 the predicted weight is -141.22. For each one-uni
 
 #students: type out this model
 
+model_2 <- lm(age ~ height, data = mr_data)
 
 
 
@@ -127,6 +153,7 @@ model_2 <- lm(age ~ height, data = mr_data)
 
 #students: fill in XXX with correct code
 
+# mr_data$age_resid <- resid(XXX)
 
 
 
@@ -144,6 +171,7 @@ mr_data$age_resid <- resid(model_2)
 
 #students: fill in XXX with correct code
 
+# model_3 <- lm(weight ~ XXX, data = mr_data)
 
 
 
@@ -165,17 +193,31 @@ summary(model_3)
 
 > **Question** How does the regression coefficient corresponding to the part of `age` that is unrelated to `height` in the univariate model (i.e., `model_3`) predicting `weight` compare to the regression coefficient corresponding to `age` in the multiple regression model (i.e., `model_1`)?
 
+
+
+
+
+
+
+
 ANS: It's the same thing!
 
 # Partial Correlations with the {ppcor} package.
 
-Here, we will calculate the **partial** correlation for age using the `spcor.test` function.
+Here, we will calculate the **partial** correlation for age using the `pcor.test` function.
 
 ```{r p-cor, message= FALSE}
 
 #students: fill in XXX with correct code
 
-
+# partial_cor <- pcor.test(
+#   x = mr_data$XXX, # Y (var of interest 1)
+#   y = mr_data$XXX,    # X1 (var of interest 2)
+#   z = mr_data$XXX  # X2 (control variable)
+# )
+# 
+# partial_cor
+# partial_cor$estimate^2 # R-Squared
 
 
 
@@ -200,6 +242,7 @@ Let's run Model 1 (the intercept-only model) and see how much error is left unac
 
 #students: fill in XXX with correct code
 
+# model_1 <- lm(weight ~ XXX, data = mr_data)
 
 
 
@@ -237,7 +280,8 @@ model_2_sse <- model_2_anova$`Sum Sq`[3]
 
 #students: fill in XXX with correct code
 
-
+# ssr <- XXX - XXX
+# ssr
 
 
 
@@ -257,7 +301,8 @@ We can give both models as arguments to the `anova()` function to make the model
 
 #students: fill in XXX with correct code
 
-
+# model_comparison <- anova(XXX, XXX)
+# model_comparison
 
 
 
@@ -280,9 +325,25 @@ per
 
 > **Question** What does this proportional reduction in error mean?
 
+
+
+
+
+
+
+
+
 ANS: Age and height explained 77.29% of the variability in weight scores.
 
 > **Question** What is the more familiar term for this value?
+
+
+
+
+
+
+
+
 
 ANS: R-squared; coefficient of determination.
 
@@ -302,7 +363,8 @@ Construct Model 1 and Model 2. Store in variables labelled `model_1` and `model_
 
 #students: fill in XXX with correct code
 
-
+# model_1 <- lm(weight ~ XXX, data = mr_data)
+# model_2 <- lm(weight ~ XXX + XXX, data = mr_data)
 
 
 
@@ -360,6 +422,13 @@ model_comparison$`Pr(>F)`[2]
 
 > **Question** Do you think there is likely to be multicollinaerity in this dataset? Why?
 
+
+
+
+
+
+
+
 ANS: Yes, height and age seem likely to be correlated.
 
 First, let's create a correlation matrix to examine potential correlations between our variables. Make sure to select only the variables that you want to examine.
@@ -368,7 +437,8 @@ First, let's create a correlation matrix to examine potential correlations betwe
 
 #students: fill in XXX with correct code
 
-
+# cor_df <- mr_data[,XXX:XXX] #select only the numeric variables
+# cor(XXX) #create a correlation matrix
 
 
 
@@ -384,7 +454,7 @@ Next, let's use the `easystats` package to check the Tolerance and VIF (Variance
 
 #students: fill in XXX with correct code
 
-
+# check_collinearity(XXX)
 
 
 
@@ -397,6 +467,13 @@ check_collinearity(model_2)
 ```
 
 > **Question** Does it look like we have multicollinaerity in our data based on these diagnostics?
+
+
+
+
+
+
+
 
 ANS: No?
 
@@ -454,4 +531,6 @@ height_p_value <- mod_summary$coefficients[3,4]
 
 ## Now, let's write the summary:
 
-A multiple linear regression was conducted to examine the the effect of age and height on weight. The overall model significantly predicted weight, F(`r df1`, `r df2`) = `r f_value`, *p* = `r papaja::printp(omnibus_p_value)`. The model explained a substantial proportion of variance in weight, with an R<sup>2</sup> = `r omnibus_r_squared` and an adjusted R<sup>2</sup> = `r omnibus_adj_r_squared`. Age was not a significant predictor of weight ($\beta_1$ = `r age_beta`, 95% CI\[`r age_ci_lower`, `r age_ci_upper`\], *p* `r papaja::printp(age_p_value)`). However, height was a significant predictor of weight ($\beta_2$ = `r height_beta`, 95% CI\[`r height_ci_lower`, `r height_ci_upper`\], *p* \< `r papaja::printp(height_p_value)`), indicating that for every one-unit increase in height, weight is predicted to increase by `r height_beta` units, holding age constant. Overall, our model predicting weight from age and height found that height was a significant predictor while age was not.
+A multiple linear regression was conducted to examine the the effect of age and height on weight. The overall model significantly predicted weight, F(`r df1`, `r df2`) = `r f_value`, *p* = `r papaja::printp(omnibus_p_value)`. The model explained a substantial proportion of variance in weight, with an R<sup>2</sup> = `r omnibus_r_squared` and an adjusted R<sup>2</sup> = `r omnibus_adj_r_squared`. Age was not a significant predictor of weight ($\beta_1$ = `r age_beta`, 95% CI\[`r age_ci_lower`, `r age_ci_upper`\], *p* = `r papaja::printp(age_p_value)`). However, height was a significant predictor of weight ($\beta_2$ = `r height_beta`, 95% CI\[`r height_ci_lower`, `r height_ci_upper`\], *p* \< `r papaja::printp(height_p_value)`), indicating that for every one-unit increase in height, weight is predicted to increase by `r height_beta` units, holding age constant. Overall, our model predicting weight from age and height found that height was a significant predictor while age was not.
+
+*Note: Every time I try to put a bracket, R adds an extra backslash, so it looks like this: \[ or this \]. Remove the backslash before knitting or rendering the file. 

@@ -45,7 +45,7 @@ View(cat_data)
 
 ```
 
-The data has 4 columns:
+The data has 2 columns:
 
 -   group: a numeric indicator of whether they were in the CBT, Psychotherapy, or Control group
 -   depress: participants' score on the depression measure

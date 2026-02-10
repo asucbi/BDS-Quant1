@@ -86,7 +86,7 @@ Perform a model comparison to test whether the variation in the tendency to beli
 
 1.  Run a regression predicting the tendency to believe in conspiracy theories (Y = `conspiracy`) from paranoia (X1 = `paranoia`), delusional ideation (X2 = `delusions`), desire for uniqueness (`uniqueness`) and the desire for control (`control`). Call it `model_2`.
 
-2.  Write out your interpretations of the overall model (both R<sup>2</sup> and the F-statistic) and each of the regression coefficients ($\beta_0$, $\beta_1$, and $\beta_2$).
+2.  Write out your interpretations of the overall model (both R<sup>2</sup> and the F-statistic) and each of the regression coefficients (e.g., $\beta_0$, $\beta_1$, $\beta_2$, etc...).
 
 3.  Run regression diagnostics (i.e., `check_collinaerity()`) on Model 2 to look for potential multicollinaerity. Comment on what you find, but not need to try to correct anything.
 

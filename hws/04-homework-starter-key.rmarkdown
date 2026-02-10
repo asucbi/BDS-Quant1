@@ -1,14 +1,18 @@
 ---
-title: "Module 4: Homework Starter File"
+title: "Module 4: Homework Starter File KEY"
 format: html
 editor: visual
 ---
+
+
 
 ## Homework Note
 
 You must answer ALL questions and follow ALL steps in the homework instructions!
 
 ## Load Packages
+
+
 
 ```{r load-packages, echo=FALSE, message=FALSE}
 library(tidyverse)
@@ -19,17 +23,23 @@ library(ppcor) #for calculating partial correlations
 library(easystats) #for assessing multicollinaerity
 ```
 
+
+
 ## Read in the Data
 
 The dataset we will use comes from data from [Kay (2021)](https://www.sciencedirect.com/science/article/pii/S0092656621000659). This paper examines why people believe in conspiracy theories.
 
 The data is called `data_kay2021.csv`. Read in the data using the `read_csv()` function. Name the data "kay2021"
 
+
+
 ```{r read in data, echo = FALSE, message=FALSE}
 
-
+kay2021 <- read_csv("data/data_kay2021.csv")
 
 ```
+
+
 
 ## Exercise 1:
 
@@ -39,12 +49,25 @@ Say a researcher is interested in whether there is a relationship between the te
 
 2.  Explain the what partial correlation means.
 
+
+
 ```{r partial-correlation}
 
+partial_corr <- pcor.test(
+  x = kay2021$conspiracy, # Y  (var of interest 1)
+  y = kay2021$paranoia,   # X1 (var of interest 2)
+  z = kay2021$delusions   # X2 (control variable)
+)
+
+partial_corr
+
+partial_corr$estimate^2
 
 
 
 ```
+
+
 
 ## Exercise 2:
 
@@ -58,22 +81,30 @@ We want to predict the tendency to believe in conspiracy theories (Y = `conspira
 
 4.  Provide an APA-style summary of your results (make sure it contains **all** necessary pieces, check lab for an example).
 
+
+
 ```{r regression-1}
 
+model_1 <- lm(conspiracy ~ paranoia + delusions, data = kay2021)
+summary(model_1)
 
+check_collinearity(model_1)
+plot(check_collinearity(model_1))
 
 
 ```
 
+
+
 ## Exercise 3:
 
-Treat the model you ran in Exercise 2 as Model 1. Make a new model, Model 2 (name it `model_2`), that includes all the predictors in Model 1 plus the desire for uniqueness (`uniqueness`) and the desire for control (`control`).
+Treat the model you ran in Exercise 2 as Model 1. Make a new model, Model 2 (name is `model_2`), that includes all the predictors in Model 1 plus the desire for uniqueness (`uniqueness`) and the desire for control (`control`).
 
 Perform a model comparison to test whether the variation in the tendency to believe in conspiracy theories is accounted for by a desire for uniqueness and control (TOGETHER, AS A SET) *above and beyond* the variation already accounted for by paranoia and delusional ideation.
 
 1.  Run a regression predicting the tendency to believe in conspiracy theories (Y = `conspiracy`) from paranoia (X1 = `paranoia`), delusional ideation (X2 = `delusions`), desire for uniqueness (`uniqueness`) and the desire for control (`control`). Call it `model_2`.
 
-2.  Write out your interpretations of the overall model (both R\<sup\>2\</sup\> and the F-statistic) and each of the regression coefficients (e.g., \$\\beta_0\$, \$\\beta_1\$, \$\\beta_2\$, etc...).
+2.  Write out your interpretations of the overall model (both R<sup>2</sup> and the F-statistic) and each of the regression coefficients (e.g., $\beta_0$, $\beta_1$, $\beta_2$, etc...).
 
 3.  Run regression diagnostics (i.e., `check_collinaerity()`) on Model 2 to look for potential multicollinaerity. Comment on what you find, but not need to try to correct anything.
 
@@ -83,13 +114,51 @@ Perform a model comparison to test whether the variation in the tendency to beli
 
 6.  Provide an APA-style summary of your results (make sure it contains **all** necessary pieces, check lab for an example).
 
+
+
 ```{r regression-2}
 
+model_2 <- lm(conspiracy ~ paranoia + delusions + uniqueness + control, data = kay2021)
+summary(model_2)
 
+check_collinearity(model_2)
+plot(check_collinearity(model_2))
+
+anova(model_1, model_2)
+
+model_1_anova <- anova(model_1)
+model_2_anova <- anova(model_2)
+
+model_1_sse <- model_1_anova$`Sum Sq`[3]
+model_2_sse <- model_2_anova$`Sum Sq`[5]
+
+ssr <- model_1_sse - model_2_sse
+ssr
 
 
 ```
 
+
+
 ## Render and submit your document.
 
-## **Make sure that you I can see all of your answers in the rendered document!**
+**Make sure that you I can see all of your answers in the rendered document!**
+
+To receive credit for this homework, submit a rendered PDF version of your file to "Module 4: Homework Submission" on Canvas.
+
+-   At the top of the .qmd file, change "format: html" to "format: pdf"
+-   Click "Render" at the top of the document
+-   Your document will open in a browser tab
+    -   If your document opens in the "Viewer" pane, click the "sidebar" button (circled in image below).
+    -   If you get a popup warning, click "Try Again" (may be specific to Mac)
+
+![](images/sidebar.png)
+
+-   Click the "Save" icon on the top right (circled in the image below)
+
+![](images/save_pdf.png)
+
+-   Save wherever you keep your class documents and upload your file to Canvas
+
+------------------------------------------------------------------------
+
