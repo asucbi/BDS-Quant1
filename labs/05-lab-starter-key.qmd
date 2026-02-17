@@ -226,16 +226,14 @@ Dummy coding is R's default method. This actually happens under the hood in R wh
 model_default <- lm(depress ~ group, data = cat_reduced) 
 summary(model_default)
 
+contrasts(cat_reduced$group)
+
 ```
 
 > **Question:** What does the F test tell us?
 
 INST ANS: Whether any mean is different from any other mean. So we already know there's a difference between the two groups.
 
-Here is our regression equation:
-
-$$Depression_i = \beta_0 + \beta_1psychotherapy_i + 
-\beta_2control_i + e_i$$
 
 R is creating a dummy variable for us under the hood: `groupPsychotherapy`. This is what R is doing:
 
@@ -249,11 +247,8 @@ cat_reduced %>%
 
 By default, R treats whatever the first level of the factor variable is as the reference group. In this case, CBT was the first level of `group` (because it was initially coded as `1` in our raw data), so the model treated CBT as our reference group.
 
-Here is our regression equation, derived from the output:
 
-$$Depression_i = 7.20 -3.80psychotherapy$$
-
-> **Question:** Using this equation, determine the mean depression score of each group.
+> **Question:** Using the resulting equation, determine the mean depression score of each group.
 
 INST ANS: 7.2: CBT 7.2 - 3.8 = 3.4: psychotherapy
 
@@ -420,9 +415,6 @@ summary(model_default)
 
 INST ANS: Whether any mean is different from any other mean.
 
-Here is our regression equation:
-
-$$Depression_i = \beta_0 + \beta_1psychotherapy_i + \beta_2control_i + e_i$$
 
 R is creating two dummy variables for us under the hood: `groupPsychotherapy` and `groupControl`. This is what R is doing:
 
@@ -438,11 +430,8 @@ cat_data %>%
 
 By default, R treats whatever the first level of the factor variable is as the reference group. In this case, CBT was the first level of `group` (because it was initially coded as `1` in our raw data), so the model treated CBT as our reference group.
 
-Here is our regression equation, derived from the output:
 
-$$Depression_i = 7.20 -3.80psychotherapy + 2.60control$$
-
-> **Question:** Using this equation, determine the mean depression score of each group.
+> **Question:** Using the resulting equation, determine the mean depression score of each group.
 
 INST ANS: 7.2: CBT 7.2 - 3.8 = 3.4: psychotherapy 7.2 + 2.6 = 9.8: control
 

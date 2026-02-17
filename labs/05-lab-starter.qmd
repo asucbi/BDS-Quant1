@@ -182,11 +182,6 @@ summary(model_default)
 > **Question:** What does the F test tell us?
 
 
-Here is our regression equation:
-
-$$Depression_i = \beta_0 + \beta_1psychotherapy_i + 
-\beta_2control_i + e_i$$
-
 R is creating a dummy variable for us under the hood: `groupPsychotherapy`. This is what R is doing:
 
 ```{r}
@@ -199,11 +194,8 @@ cat_reduced %>%
 
 By default, R treats whatever the first level of the factor variable is as the reference group. In this case, CBT was the first level of `group` (because it was initially coded as `1` in our raw data), so the model treated CBT as our reference group.
 
-Here is our regression equation, derived from the output:
 
-$$Depression_i = 7.20 -3.80psychotherapy$$
-
-> **Question:** Using this equation, determine the mean depression score of each group.
+> **Question:** Using the resulting equation, determine the mean depression score of each group.
 
 Now, let's revisit the output.
 
@@ -216,9 +208,7 @@ summary(model_default)
 
 > **Question:** Interpret the intercept. What does a significant p-value signify?
 
-
 > **Question:** Interpret the slopes. What do the significant p-values signify?
-
 
 Now, let's change the reference level so that Psychotherapy is assigned a 0 and CBT is assigned a 1.
 
@@ -242,9 +232,7 @@ summary(model_newref)
 
 > **Question:** Interpret the intercept. What does a significant p-value signify?
 
-
 > **Question:** Interpret the slopes. What do the significant p-values signify?
-
 
 ## Deviation coding
 
@@ -335,9 +323,6 @@ summary(model_default)
 
 > **Question:** What does the F test tell us?
 
-Here is our regression equation:
-
-$$Depression_i = \beta_0 + \beta_1psychotherapy_i + \beta_2control_i + e_i$$
 
 R is creating two dummy variables for us under the hood: `groupPsychotherapy` and `groupControl`. This is what R is doing:
 
@@ -353,11 +338,8 @@ cat_data %>%
 
 By default, R treats whatever the first level of the factor variable is as the reference group. In this case, CBT was the first level of `group` (because it was initially coded as `1` in our raw data), so the model treated CBT as our reference group.
 
-Here is our regression equation, derived from the output:
 
-$$Depression_i = 7.20 -3.80psychotherapy + 2.60control$$
-
-> **Question:** Using this equation, determine the mean depression score of each group.
+> **Question:** Using the resulting equation, determine the mean depression score of each group.
 
 Now, let's revisit the output.
 
@@ -370,9 +352,7 @@ summary(model_default)
 
 > **Question:** Interpret the intercept. What does a significant p-value signify?
 
-
 > **Question:** Interpret the slopes. What do the significant p-values signify?
-
 
 Let's imagine that we have the following (more intuitive) research questions:
 
@@ -380,7 +360,6 @@ Let's imagine that we have the following (more intuitive) research questions:
 2.  Is psychotherapy effective (relative to no therapy)?
 
 > **Question:** What do want our reference group to be to answer these research questions?
-
 
 Now let's make the appropriate dummy codes. Recall that we need *k*-1 dummy codes (where *k* is the number of groups). We have 3 groups, so we need 2 dummy codes.
 
@@ -409,7 +388,6 @@ summary(model_dummy1)
 ```
 
 > **Question:** What does the intercept mean? What do the slopes mean?
-
 
 Another reasonable question might be whether the treatments, on average, are better than the control.
 
@@ -449,7 +427,6 @@ summary(model_tvc)
 ```
 
 > **Question:** What does the intercept mean? What do the slopes mean?
-
 
 We can have k-1 contrasts. So, we might want to add another contrast testing the two treatment groups. We can do the same thing to add another contrast.
 
