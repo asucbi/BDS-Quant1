@@ -180,7 +180,7 @@ INST NOTE: Why might we prefer the boxplot or violin plot to the barplot? Watch 
 
 ## Let's start by just looking at variables with two levels.
 
-Create a new dataset called `cat_reduced` that includes only the treatment and control groups. Use `View()` to double check that the data look correct.
+Create a new dataset called `cat_reduced` that includes only the treatment groups. Use `View()` to double check that the data look correct.
 
 ```{r}
 # cat_reduced <- cat_data %>% 
@@ -232,7 +232,15 @@ contrasts(cat_reduced$group)
 
 > **Question:** What does the F test tell us?
 
-INST ANS: Whether any mean is different from any other mean. So we already know there's a difference between the two groups.
+
+
+
+
+
+
+
+
+ANSWER: Whether any mean is different from any other mean. So we already know there's a difference between the two groups.
 
 
 R is creating a dummy variable for us under the hood: `groupPsychotherapy`. This is what R is doing:
@@ -250,7 +258,15 @@ By default, R treats whatever the first level of the factor variable is as the r
 
 > **Question:** Using the resulting equation, determine the mean depression score of each group.
 
-INST ANS: 7.2: CBT 7.2 - 3.8 = 3.4: psychotherapy
+
+
+
+
+
+
+
+
+ANSWER: 7.2: CBT 7.2 - 3.8 = 3.4: psychotherapy
 
 Now, let's revisit the output.
 
@@ -263,11 +279,27 @@ summary(model_default)
 
 > **Question:** Interpret the intercept. What does a significant p-value signify?
 
-INST ANS: mean of CBT is significantly different from 0.
+
+
+
+
+
+
+
+
+ANSWER: mean of CBT is significantly different from 0.
 
 > **Question:** Interpret the slopes. What do the significant p-values signify?
 
-INST ANS: The mean of psychotherapy is significantly different from the mean of CBT.
+
+
+
+
+
+
+
+
+ANSWER: The mean of psychotherapy is significantly different from the mean of CBT.
 
 Now, let's change the reference level so that Psychotherapy is assigned a 0 and CBT is assigned a 1.
 
@@ -303,11 +335,27 @@ summary(model_newref)
 
 > **Question:** Interpret the intercept. What does a significant p-value signify?
 
-INST ANS: mean of Psychotherapy is significantly different from 0.
+
+
+
+
+
+
+
+
+ANSWER: mean of Psychotherapy is significantly different from 0.
 
 > **Question:** Interpret the slopes. What do the significant p-values signify?
 
-INST ANS: The mean of CBT is significantly different from the mean of Psychotherapy. Same meaning, now just different direction.
+
+
+
+
+
+
+
+
+ANSWER: The mean of CBT is significantly different from the mean of Psychotherapy. Same meaning, now just different direction.
 
 ## Deviation coding
 
@@ -349,7 +397,15 @@ summary(model_dummy1)
 
 > **Question:** What does the intercept mean? What does the slope mean?
 
-INST ANS: intercept: the grand mean of depression. slope: the difference between the groups. Note that it didn't change the *test* from our earlier model, it changed the estimate and the intercept.
+
+
+
+
+
+
+
+
+ANSWER: intercept: the grand mean of depression. slope: the difference between the groups. Note that it didn't change the *test* from our earlier model, it changed the estimate and the intercept.
 
 ------------------------------------------------------------------------
 
@@ -390,7 +446,15 @@ emmeans(model_anova, pairwise ~ group, adjust = "bonferroni")
 
 > **Question:** Compare the p-values from these two emmeans summaries. What do you notice?
 
-INST ANS: p-values are lower (some no longer significant) with Bonferroni correction!
+
+
+
+
+
+
+
+
+ANSWER: p-values are lower (some no longer significant) with Bonferroni correction!
 
 INST NOTE: multiply p-value by \# comparisons (3) to illustrate
 
@@ -413,7 +477,15 @@ summary(model_default)
 
 > **Question:** What does the F test tell us?
 
-INST ANS: Whether any mean is different from any other mean.
+
+
+
+
+
+
+
+
+ANSWER: Whether any mean is different from any other mean.
 
 
 R is creating two dummy variables for us under the hood: `groupPsychotherapy` and `groupControl`. This is what R is doing:
@@ -433,7 +505,15 @@ By default, R treats whatever the first level of the factor variable is as the r
 
 > **Question:** Using the resulting equation, determine the mean depression score of each group.
 
-INST ANS: 7.2: CBT 7.2 - 3.8 = 3.4: psychotherapy 7.2 + 2.6 = 9.8: control
+
+
+
+
+
+
+
+
+ANSWER: 7.2: CBT 7.2 - 3.8 = 3.4: psychotherapy 7.2 + 2.6 = 9.8: control
 
 Now, let's revisit the output.
 
@@ -446,11 +526,27 @@ summary(model_default)
 
 > **Question:** Interpret the intercept. What does a significant p-value signify?
 
-INST ANS: mean of CBT is significantly different from 0 (because it's the control group).
+
+
+
+
+
+
+
+
+ANSWER: mean of CBT is significantly different from 0 (because it's the control group).
 
 > **Question:** Interpret the slopes. What do the significant p-values signify?
 
-INST ANS: The differences between psychotherapy and control are significantly different from the mean of CBT.
+
+
+
+
+
+
+
+
+ANSWER: The differences between psychotherapy and control are significantly different from the mean of CBT.
 
 Let's imagine that we have the following (more intuitive) research questions:
 
@@ -459,7 +555,15 @@ Let's imagine that we have the following (more intuitive) research questions:
 
 > **Question:** What do want our reference group to be to answer these research questions?
 
-INST ANS: the control group
+
+
+
+
+
+
+
+
+ANSWER: the control group
 
 Now let's make the appropriate dummy codes. Recall that we need *k*-1 dummy codes (where *k* is the number of groups). We have 3 groups, so we need 2 dummy codes.
 
@@ -514,7 +618,15 @@ summary(model_dummy1)
 
 > **Question:** What does the intercept mean? What do the slopes mean?
 
-INST ANS: mean of the control group; slopes are the differences from the control group.
+
+
+
+
+
+
+
+
+ANSWER: mean of the control group; slopes are the differences from the control group.
 
 Another reasonable question might be whether the treatments, on average, are better than the control.
 
@@ -555,7 +667,15 @@ summary(model_tvc)
 
 > **Question:** What does the intercept mean? What do the slopes mean?
 
-INST ANS: Intercept is the grand mean. Slope for Treat.v.Control is difference between the mean for Control and the mean across the two treatment groups.
+
+
+
+
+
+
+
+
+ANSWER: Intercept is the grand mean. Slope for Treat.v.Control is difference between the mean for Control and the mean across the two treatment groups.
 
 We can have k-1 contrasts. So, we might want to add another contrast testing the two treatment groups. We can do the same thing to add another contrast.
 

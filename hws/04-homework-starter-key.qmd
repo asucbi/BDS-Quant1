@@ -52,7 +52,7 @@ partial_corr
 partial_corr$estimate^2
 
 
-
+0.14
 ```
 
 ## Exercise 2:
@@ -74,7 +74,6 @@ summary(model_1)
 
 check_collinearity(model_1)
 plot(check_collinearity(model_1))
-
 
 ```
 
