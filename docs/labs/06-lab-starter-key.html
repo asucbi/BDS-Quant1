@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -63,10 +63,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="06-lab-starter-key_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="06-lab-starter-key_files/libs/quarto-html/anchor.min.js"></script>
 <link href="06-lab-starter-key_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="06-lab-starter-key_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="06-lab-starter-key_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="06-lab-starter-key_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="06-lab-starter-key_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="06-lab-starter-key_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="06-lab-starter-key_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -128,16 +128,28 @@ window.Quarto = {
 <section id="purpose" class="level1">
 <h1>Purpose</h1>
 <p>In today’s lab, we will practice calculating effect sizes and estimating power using different methods.</p>
-<p>For today’s lab, you will need to load the following libraries (lot of them today!).</p>
+<p>For today’s lab, you will need to load the following libraries (lots of them today!).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(papaja) <span class="co">#for formatting p values</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans) <span class="co">#for post-hoc t-tests</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co">#for formatting tables</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrain) <span class="co">#for creating raincloud plots</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MOTE) <span class="co">#for getting ci around effect sizes</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WebPower) <span class="co">#for calculating power</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Superpower) <span class="co">#for simulating power</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.5.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(papaja) <span class="co">#for formatting p values</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans) <span class="co">#for post-hoc t-tests</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co">#for formatting tables</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrain) <span class="co">#for creating raincloud plots</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggrain' was built under R version 4.5.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MOTE) <span class="co">#for getting ci around effect sizes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'MOTE' was built under R version 4.5.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WebPower) <span class="co">#for calculating power</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'lavaan' was built under R version 4.5.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Superpower) <span class="co">#for simulating power</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="research-scenario" class="level1">
@@ -202,10 +214,10 @@ F-statistic: 3.264 on 2 and 120 DF,  p-value: 0.04164</code></pre>
 <p>Use <code>emmeans</code> to get all pairwise comparisons. Apply a bonferroni adjustment.</p>
 <p>Interpret your comparisons. How do these comparisons differ (or not) from your model summary above?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pairs <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, pairwise <span class="sc">~</span> Condition, <span class="at">adjust =</span> <span class="st">"bonferroni"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Look what happens if we don't adjust for multiple comparisons (compare this to your summary)</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model, pairwise <span class="sc">~</span> Condition, <span class="at">adjust =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pairs <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, pairwise <span class="sc">~</span> Condition, <span class="at">adjust =</span> <span class="st">"bonferroni"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Look what happens if we don't adjust for multiple comparisons (compare this to your summary)</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model, pairwise <span class="sc">~</span> Condition, <span class="at">adjust =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$emmeans
  Condition    emmean     SE  df lower.CL upper.CL
@@ -228,10 +240,10 @@ $contrasts
 <p>Pooled SD (unequal ns): <span class="math inline">\(S_p = \sqrt{\frac{(n_1 - 1)S_1^2 + (n_2 - 1)S_2^2}{n_1 + n_2 - 2}}\)</span></p>
 <p>First get means, standard deviations and ns.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first, get means, sds, and ns</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>cue_data <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Condition)<span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(Total_Final), <span class="at">sd=</span><span class="fu">sd</span>(Total_Final), <span class="at">n=</span><span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first, get means, sds, and ns</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>cue_data <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Condition)<span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(Total_Final), <span class="at">sd=</span><span class="fu">sd</span>(Total_Final), <span class="at">n=</span><span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   Condition     mean    sd     n
@@ -246,68 +258,82 @@ $contrasts
 <p>Calculate Cohen’s d for each paired comparison.</p>
 <p>Take a look at your effect sizes. Are they small, medium, or large?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># students: fill in these equations</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>cue_overt <span class="ot">&lt;-</span> (.<span class="dv">500</span><span class="fl">-.524</span>)<span class="sc">/</span> <span class="fu">sqrt</span>( ((<span class="dv">43</span> <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="fl">0.168</span> <span class="sc">^</span> <span class="dv">2</span> <span class="sc">+</span> (<span class="dv">40</span> <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> .<span class="dv">135</span> <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">/</span> (<span class="dv">43</span> <span class="sc">+</span> <span class="dv">40</span> <span class="sc">-</span> <span class="dv">2</span>))</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>cue_restudy <span class="ot">&lt;-</span> (.<span class="dv">500</span><span class="fl">-.437</span>)<span class="sc">/</span> <span class="fu">sqrt</span>( ((<span class="dv">43</span> <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="fl">0.168</span> <span class="sc">^</span> <span class="dv">2</span> <span class="sc">+</span> (<span class="dv">40</span> <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> .<span class="dv">169</span> <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">/</span> (<span class="dv">43</span> <span class="sc">+</span> <span class="dv">40</span> <span class="sc">-</span> <span class="dv">2</span>))</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>overt_restudy <span class="ot">&lt;-</span> (.<span class="dv">525</span><span class="fl">-.437</span>)<span class="sc">/</span> <span class="fu">sqrt</span>((<span class="fl">0.135</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> .<span class="dv">169</span><span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>cue_overt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># students: fill in these equations</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cue_overt &lt;- XXX</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># cue_restudy &lt;- XXX</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># overt_restudy &lt;- XXX</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># cue_overt</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co"># cue_restudy</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co"># overt_restudy</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>cue_overt <span class="ot">&lt;-</span> (.<span class="dv">500</span><span class="fl">-.524</span>)<span class="sc">/</span> <span class="fu">sqrt</span>( ((<span class="dv">43</span> <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="fl">0.168</span> <span class="sc">^</span> <span class="dv">2</span> <span class="sc">+</span> (<span class="dv">40</span> <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> .<span class="dv">135</span> <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">/</span> (<span class="dv">43</span> <span class="sc">+</span> <span class="dv">40</span> <span class="sc">-</span> <span class="dv">2</span>))</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>cue_restudy <span class="ot">&lt;-</span> (.<span class="dv">500</span><span class="fl">-.437</span>)<span class="sc">/</span> <span class="fu">sqrt</span>( ((<span class="dv">43</span> <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="fl">0.168</span> <span class="sc">^</span> <span class="dv">2</span> <span class="sc">+</span> (<span class="dv">40</span> <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> .<span class="dv">169</span> <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">/</span> (<span class="dv">43</span> <span class="sc">+</span> <span class="dv">40</span> <span class="sc">-</span> <span class="dv">2</span>))</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>overt_restudy <span class="ot">&lt;-</span> (.<span class="dv">525</span><span class="fl">-.437</span>)<span class="sc">/</span> <span class="fu">sqrt</span>((<span class="fl">0.135</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> .<span class="dv">169</span><span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>cue_overt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -0.1568605</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>cue_restudy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cue_restudy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3739267</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>overt_restudy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>overt_restudy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5753601</code></pre>
 </div>
 </div>
 <p>There is an easier way!</p>
 <p>We can also use the <code>MOTE</code> package to get an estimate of our effect size and a confidence interval around our effect size.</p>
-<p>Let’s first check out the <code>d.ind.t</code> function. What information do you need to provide?</p>
+<p>Let’s first check out the <code>d_ind_t</code> function. What information do you need to provide?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>?d.ind.t</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># students: fill in arguments</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>cue_overt_d <span class="ot">&lt;-</span> <span class="fu">d.ind.t</span>(.<span class="dv">500</span>, .<span class="dv">524</span>, .<span class="dv">168</span>, .<span class="dv">135</span>, <span class="dv">43</span>, <span class="dv">40</span>)</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>cue_restudy_d <span class="ot">&lt;-</span> <span class="fu">d.ind.t</span>(.<span class="dv">500</span>, .<span class="dv">437</span>, .<span class="dv">168</span>, .<span class="dv">169</span>, <span class="dv">43</span>, <span class="dv">40</span>)</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>                    </span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>overt_restudy_d <span class="ot">&lt;-</span> <span class="fu">d.ind.t</span>(.<span class="dv">524</span>, .<span class="dv">437</span>, .<span class="dv">135</span>, .<span class="dv">169</span>, <span class="dv">40</span>, <span class="dv">40</span>)</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>cue_overt_d<span class="sc">$</span>estimate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>?d_ind_t</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># students: fill in arguments</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># cue_overt_d &lt;- d_ind_t(XXX)</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># cue_restudy_d &lt;- d_ind_t(XXX)</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">#                     </span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co"># overt_restudy_d &lt;- d_ind_t(XXX)</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>cue_overt_d <span class="ot">&lt;-</span> <span class="fu">d_ind_t</span>(.<span class="dv">500</span>, .<span class="dv">524</span>, .<span class="dv">168</span>, .<span class="dv">135</span>, <span class="dv">43</span>, <span class="dv">40</span>)</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>cue_restudy_d <span class="ot">&lt;-</span> <span class="fu">d_ind_t</span>(.<span class="dv">500</span>, .<span class="dv">437</span>, .<span class="dv">168</span>, .<span class="dv">169</span>, <span class="dv">43</span>, <span class="dv">40</span>)</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>overt_restudy_d <span class="ot">&lt;-</span> <span class="fu">d_ind_t</span>(.<span class="dv">524</span>, .<span class="dv">437</span>, .<span class="dv">135</span>, .<span class="dv">169</span>, <span class="dv">40</span>, <span class="dv">40</span>)</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>cue_overt_d<span class="sc">$</span>estimate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "$d_s$ = -0.16, 95\\% CI [-0.59, 0.27]"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>cue_restudy_d<span class="sc">$</span>estimate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>cue_restudy_d<span class="sc">$</span>estimate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "$d_s$ = 0.37, 95\\% CI [-0.06, 0.81]"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>overt_restudy_d<span class="sc">$</span>estimate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>overt_restudy_d<span class="sc">$</span>estimate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "$d_s$ = 0.57, 95\\% CI [0.12, 1.01]"</code></pre>
 </div>
@@ -315,48 +341,48 @@ $contrasts
 <p>Compare these to the Cohen’s d values that you calculated “by hand.” How do they compare?</p>
 <p>Now, write an APA style summary of your results. This should include information about your overall model (e.g., <em>F</em> and <em>R</em><sup>2</sup>) as well as each of the pairwise comparisons and all relevant information (<em>t</em>, <em>p</em>, effect size, 95% CIs). Make sure you have corrected for pairwise comparisons and state which correction you used.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, let's get all of the objects we will need. You can also do some of this within your summary, but I like to lay it all out here.</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>mod_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(model)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>aov_model <span class="ot">&lt;-</span> <span class="fu">anova</span>(model)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">#descriptives</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>descriptives <span class="ot">&lt;-</span> cue_data <span class="sc">%&gt;%</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Condition)<span class="sc">%&gt;%</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(Total_Final), <span class="at">sd=</span><span class="fu">sd</span>(Total_Final), <span class="at">n=</span><span class="fu">n</span>())</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>cue_mean <span class="ot">&lt;-</span> <span class="fu">round</span>(descriptives<span class="sc">$</span>mean[<span class="dv">1</span>], <span class="dv">2</span>)</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>cue_sd <span class="ot">&lt;-</span> <span class="fu">round</span>(descriptives<span class="sc">$</span>sd[<span class="dv">1</span>], <span class="dv">2</span>)</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>overt_mean <span class="ot">&lt;-</span> <span class="fu">round</span>(descriptives<span class="sc">$</span>mean[<span class="dv">2</span>], <span class="dv">2</span>)</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>overt_sd <span class="ot">&lt;-</span> <span class="fu">round</span>(descriptives<span class="sc">$</span>sd[<span class="dv">2</span>], <span class="dv">2</span>)</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>restudy_mean <span class="ot">&lt;-</span> <span class="fu">round</span>(descriptives<span class="sc">$</span>mean[<span class="dv">3</span>], <span class="dv">2</span>)</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>restudy_sd <span class="ot">&lt;-</span> <span class="fu">round</span>(descriptives<span class="sc">$</span>sd[<span class="dv">3</span>], <span class="dv">2</span>)</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co">#omnibus effects</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>aov_df_1 <span class="ot">&lt;-</span> aov_model<span class="sc">$</span>Df[<span class="dv">1</span>]</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>aov_df_2 <span class="ot">&lt;-</span> aov_model<span class="sc">$</span>Df[<span class="dv">2</span>]</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>aov_f_val <span class="ot">&lt;-</span> <span class="fu">round</span>(aov_model<span class="sc">$</span>F[<span class="dv">1</span>], <span class="dv">2</span>)</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>aov_p_val <span class="ot">&lt;-</span> aov_model<span class="sc">$</span><span class="st">`</span><span class="at">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">1</span>]</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>r_squared <span class="ot">&lt;-</span> <span class="fu">round</span>(mod_summary<span class="sc">$</span>r.squared, <span class="dv">2</span>)</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>adj_r_squared <span class="ot">&lt;-</span> <span class="fu">round</span>(mod_summary<span class="sc">$</span>adj.r.squared, <span class="dv">2</span>)</span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="co">#get df for contrasts</span></span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>contrast_df <span class="ot">&lt;-</span> <span class="fu">summary</span>(pairs)<span class="sc">$</span>contrasts<span class="sc">$</span>df[<span class="dv">1</span>]</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a><span class="co">#Cue v. Overt (note: use t and p values from emmeans because it has the correction!)</span></span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>cvo_tval <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(pairs)<span class="sc">$</span>contrasts<span class="sc">$</span>t[<span class="dv">1</span>], <span class="dv">2</span>)</span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>cvo_pval <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(pairs)<span class="sc">$</span>contrasts<span class="sc">$</span>p.value[<span class="dv">1</span>], <span class="dv">2</span>)</span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>cvo_d <span class="ot">&lt;-</span> cue_overt_d<span class="sc">$</span>estimate</span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a><span class="co">#Cue v. Restudy (note: use t and p values from emmeans because it has the correction!)</span></span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>cvr_tval <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(pairs)<span class="sc">$</span>contrasts<span class="sc">$</span>t[<span class="dv">2</span>], <span class="dv">2</span>)</span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>cvr_pval <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(pairs)<span class="sc">$</span>contrasts<span class="sc">$</span>p.value[<span class="dv">2</span>], <span class="dv">2</span>)</span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>cvr_d <span class="ot">&lt;-</span> cue_restudy_d<span class="sc">$</span>estimate</span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a><span class="co">#Overt v. Restudy (note: use t and p values from emmeans because it has the correction!)</span></span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>ovr_tval <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(pairs)<span class="sc">$</span>contrasts<span class="sc">$</span>t[<span class="dv">3</span>], <span class="dv">2</span>)</span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>ovr_pval <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(pairs)<span class="sc">$</span>contrasts<span class="sc">$</span>p.value[<span class="dv">3</span>], <span class="dv">2</span>)</span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>ovr_d <span class="ot">&lt;-</span> overt_restudy_d<span class="sc">$</span>estimate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, let's get all of the objects we will need. You can also do some of this within your summary, but I like to lay it all out here.</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>mod_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(model)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>aov_model <span class="ot">&lt;-</span> <span class="fu">anova</span>(model)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#descriptives</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>descriptives <span class="ot">&lt;-</span> cue_data <span class="sc">%&gt;%</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Condition)<span class="sc">%&gt;%</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(Total_Final), <span class="at">sd=</span><span class="fu">sd</span>(Total_Final), <span class="at">n=</span><span class="fu">n</span>())</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>cue_mean <span class="ot">&lt;-</span> <span class="fu">round</span>(descriptives<span class="sc">$</span>mean[<span class="dv">1</span>], <span class="dv">2</span>)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>cue_sd <span class="ot">&lt;-</span> <span class="fu">round</span>(descriptives<span class="sc">$</span>sd[<span class="dv">1</span>], <span class="dv">2</span>)</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>overt_mean <span class="ot">&lt;-</span> <span class="fu">round</span>(descriptives<span class="sc">$</span>mean[<span class="dv">2</span>], <span class="dv">2</span>)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>overt_sd <span class="ot">&lt;-</span> <span class="fu">round</span>(descriptives<span class="sc">$</span>sd[<span class="dv">2</span>], <span class="dv">2</span>)</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>restudy_mean <span class="ot">&lt;-</span> <span class="fu">round</span>(descriptives<span class="sc">$</span>mean[<span class="dv">3</span>], <span class="dv">2</span>)</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>restudy_sd <span class="ot">&lt;-</span> <span class="fu">round</span>(descriptives<span class="sc">$</span>sd[<span class="dv">3</span>], <span class="dv">2</span>)</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="co">#omnibus effects</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>aov_df_1 <span class="ot">&lt;-</span> aov_model<span class="sc">$</span>Df[<span class="dv">1</span>]</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>aov_df_2 <span class="ot">&lt;-</span> aov_model<span class="sc">$</span>Df[<span class="dv">2</span>]</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>aov_f_val <span class="ot">&lt;-</span> <span class="fu">round</span>(aov_model<span class="sc">$</span>F[<span class="dv">1</span>], <span class="dv">2</span>)</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>aov_p_val <span class="ot">&lt;-</span> aov_model<span class="sc">$</span><span class="st">`</span><span class="at">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">1</span>]</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>r_squared <span class="ot">&lt;-</span> <span class="fu">round</span>(mod_summary<span class="sc">$</span>r.squared, <span class="dv">2</span>)</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>adj_r_squared <span class="ot">&lt;-</span> <span class="fu">round</span>(mod_summary<span class="sc">$</span>adj.r.squared, <span class="dv">2</span>)</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a><span class="co">#get df for contrasts</span></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>contrast_df <span class="ot">&lt;-</span> <span class="fu">summary</span>(pairs)<span class="sc">$</span>contrasts<span class="sc">$</span>df[<span class="dv">1</span>]</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a><span class="co">#Cue v. Overt (note: use t and p values from emmeans because it has the correction!)</span></span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>cvo_tval <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(pairs)<span class="sc">$</span>contrasts<span class="sc">$</span>t[<span class="dv">1</span>], <span class="dv">2</span>)</span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>cvo_pval <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(pairs)<span class="sc">$</span>contrasts<span class="sc">$</span>p.value[<span class="dv">1</span>], <span class="dv">2</span>)</span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>cvo_d <span class="ot">&lt;-</span> cue_overt_d<span class="sc">$</span>estimate</span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a><span class="co">#Cue v. Restudy (note: use t and p values from emmeans because it has the correction!)</span></span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>cvr_tval <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(pairs)<span class="sc">$</span>contrasts<span class="sc">$</span>t[<span class="dv">2</span>], <span class="dv">2</span>)</span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>cvr_pval <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(pairs)<span class="sc">$</span>contrasts<span class="sc">$</span>p.value[<span class="dv">2</span>], <span class="dv">2</span>)</span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>cvr_d <span class="ot">&lt;-</span> cue_restudy_d<span class="sc">$</span>estimate</span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a><span class="co">#Overt v. Restudy (note: use t and p values from emmeans because it has the correction!)</span></span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>ovr_tval <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(pairs)<span class="sc">$</span>contrasts<span class="sc">$</span>t[<span class="dv">3</span>], <span class="dv">2</span>)</span>
+<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>ovr_pval <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(pairs)<span class="sc">$</span>contrasts<span class="sc">$</span>p.value[<span class="dv">3</span>], <span class="dv">2</span>)</span>
+<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a>ovr_d <span class="ot">&lt;-</span> overt_restudy_d<span class="sc">$</span>estimate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="review-the-summary-notice-all-of-the-different-pieces-that-are-present" class="level2">
@@ -373,25 +399,26 @@ $contrasts
 <p><span class="math inline">\(f^2 = R^2 / (1 - R^2)\)</span></p>
 <p>How many participants do we need for our study?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>r_squared <span class="ot">&lt;-</span> <span class="fu">summary</span>(model)<span class="sc">$</span>r.squared</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>f_squared <span class="ot">&lt;-</span> r_squared<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>r_squared)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># first, let's look at the help info for `wp.regression`</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>?wp.regression</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># students: fill in the arguments below</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>WebPower<span class="sc">::</span><span class="fu">wp.regression</span>(<span class="at">n=</span><span class="cn">NULL</span>, <span class="at">p1=</span><span class="dv">2</span>, <span class="at">f2=</span>f_squared, <span class="at">alpha=</span><span class="fl">0.05</span>, <span class="at">power=</span>.<span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>r_squared <span class="ot">&lt;-</span> <span class="fu">summary</span>(model)<span class="sc">$</span>r.squared</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>f_squared <span class="ot">&lt;-</span> r_squared<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>r_squared)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># first, let's look at the help info for `wp.regression`</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>?wp.regression</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co"># students: fill in the arguments below</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co"># WebPower::wp.regression(n=XXX, p1=XXX, f2=XXX, alpha=XXX, power=XXX)</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>WebPower<span class="sc">::</span><span class="fu">wp.regression</span>(<span class="at">n=</span><span class="cn">NULL</span>, <span class="at">p1=</span><span class="dv">2</span>, <span class="at">f2=</span>f_squared, <span class="at">alpha=</span><span class="fl">0.05</span>, <span class="at">power=</span>.<span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Power for multiple regression
 
@@ -400,7 +427,7 @@ $contrasts
 
 URL: http://psychstat.org/regression</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note: you can plug in `NULL` for different arguments if you have different questions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note: you can plug in `NULL` for different arguments if you have different questions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="simulation-power-analysis-with-superpower" class="level2">
@@ -408,22 +435,22 @@ URL: http://psychstat.org/regression</code></pre>
 <p>Book going over <a href="https://aaroncaldwell.us/SuperpowerBook/">Superpower</a></p>
 <p>Reviewer 2 asked you to calculate the power of Tekin et al (2021) Experiment 1 after you ran it. Set up a study design using the <code>ANOVA_design</code> function from <code>Superpower</code>. Use the same means, SD, and n (use 40 per group as <code>SuperPower</code>cannot do unequal sample sizes for one-way designs) from their Experiment 1 study (excluding the one condition). Run a power analysis on this data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#first, let's look at what we need for this function</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>?ANOVA_design</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#create objects for each parameter</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="st">"3b"</span> <span class="co"># 3 levels of `condition` varying between subjects</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">40</span> <span class="co"># unequal ns dont work yet for this</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">50</span>,.<span class="dv">52</span>, .<span class="dv">43</span>)<span class="co"># each group mean</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.17</span>, .<span class="dv">14</span>, <span class="fl">0.17</span>) <span class="co"># each group sd</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>label_list <span class="ot">=</span> <span class="fu">list</span>(<span class="st">"Condition"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Cue-JOL"</span>, <span class="st">"OR"</span>,<span class="st">"RS"</span>)) <span class="co"># labels for each group</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co">#now, use ANOVA_design to specify the parameters of the data</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> design,</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> n,</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> mu, </span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> sd, </span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>                              <span class="at">label_list =</span> label_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#first, let's look at what we need for this function</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>?ANOVA_design</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#create objects for each parameter</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="st">"3b"</span> <span class="co"># 3 levels of `condition` varying between subjects</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">40</span> <span class="co"># unequal ns dont work yet for this</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">50</span>,.<span class="dv">52</span>, .<span class="dv">43</span>)<span class="co"># each group mean</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.17</span>, .<span class="dv">14</span>, <span class="fl">0.17</span>) <span class="co"># each group sd</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>label_list <span class="ot">=</span> <span class="fu">list</span>(<span class="st">"Condition"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Cue-JOL"</span>, <span class="st">"OR"</span>,<span class="st">"RS"</span>)) <span class="co"># labels for each group</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="co">#now, use ANOVA_design to specify the parameters of the data</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> design,</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> n,</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> mu, </span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> sd, </span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>                              <span class="at">label_list =</span> label_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -431,139 +458,151 @@ URL: http://psychstat.org/regression</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check out the simulated data!</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>design_result<span class="sc">$</span>dataframe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check out the simulated data!</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>design_result<span class="sc">$</span>dataframe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    subject              cond          y         Condition
-1         1 Condition_Cue-JOL 0.49407260 Condition_Cue-JOL
-2         2 Condition_Cue-JOL 0.50811788 Condition_Cue-JOL
-3         3 Condition_Cue-JOL 0.51973679 Condition_Cue-JOL
-4         4 Condition_Cue-JOL 0.45117452 Condition_Cue-JOL
-5         5 Condition_Cue-JOL 0.28643677 Condition_Cue-JOL
-6         6 Condition_Cue-JOL 0.53408167 Condition_Cue-JOL
-7         7 Condition_Cue-JOL 0.47585114 Condition_Cue-JOL
-8         8 Condition_Cue-JOL 0.28964459 Condition_Cue-JOL
-9         9 Condition_Cue-JOL 0.23914975 Condition_Cue-JOL
-10       10 Condition_Cue-JOL 0.49350886 Condition_Cue-JOL
-11       11 Condition_Cue-JOL 0.47676828 Condition_Cue-JOL
-12       12 Condition_Cue-JOL 0.51801394 Condition_Cue-JOL
-13       13 Condition_Cue-JOL 0.63682844 Condition_Cue-JOL
-14       14 Condition_Cue-JOL 0.54430303 Condition_Cue-JOL
-15       15 Condition_Cue-JOL 0.72745303 Condition_Cue-JOL
-16       16 Condition_Cue-JOL 0.38243443 Condition_Cue-JOL
-17       17 Condition_Cue-JOL 0.44011155 Condition_Cue-JOL
-18       18 Condition_Cue-JOL 0.46143981 Condition_Cue-JOL
-19       19 Condition_Cue-JOL 0.50974742 Condition_Cue-JOL
-20       20 Condition_Cue-JOL 0.58604875 Condition_Cue-JOL
-21       21 Condition_Cue-JOL 0.60548425 Condition_Cue-JOL
-22       22 Condition_Cue-JOL 0.51924796 Condition_Cue-JOL
-23       23 Condition_Cue-JOL 0.30167765 Condition_Cue-JOL
-24       24 Condition_Cue-JOL 0.47262009 Condition_Cue-JOL
-25       25 Condition_Cue-JOL 0.34863883 Condition_Cue-JOL
-26       26 Condition_Cue-JOL 0.54030130 Condition_Cue-JOL
-27       27 Condition_Cue-JOL 0.58517914 Condition_Cue-JOL
-28       28 Condition_Cue-JOL 0.48256859 Condition_Cue-JOL
-29       29 Condition_Cue-JOL 0.35446941 Condition_Cue-JOL
-30       30 Condition_Cue-JOL 0.45932533 Condition_Cue-JOL
-31       31 Condition_Cue-JOL 0.60002447 Condition_Cue-JOL
-32       32 Condition_Cue-JOL 0.36017631 Condition_Cue-JOL
-33       33 Condition_Cue-JOL 0.25220419 Condition_Cue-JOL
-34       34 Condition_Cue-JOL 0.66543499 Condition_Cue-JOL
-35       35 Condition_Cue-JOL 0.71089753 Condition_Cue-JOL
-36       36 Condition_Cue-JOL 0.79628523 Condition_Cue-JOL
-37       37 Condition_Cue-JOL 0.47779021 Condition_Cue-JOL
-38       38 Condition_Cue-JOL 0.39665131 Condition_Cue-JOL
-39       39 Condition_Cue-JOL 0.46060671 Condition_Cue-JOL
-40       40 Condition_Cue-JOL 0.78658977 Condition_Cue-JOL
-41       41      Condition_OR 0.47452783      Condition_OR
-42       42      Condition_OR 0.82447746      Condition_OR
-43       43      Condition_OR 0.77607670      Condition_OR
-44       44      Condition_OR 0.62469519      Condition_OR
-45       45      Condition_OR 0.57335838      Condition_OR
-46       46      Condition_OR 0.47483557      Condition_OR
-47       47      Condition_OR 0.54126949      Condition_OR
-48       48      Condition_OR 0.63184800      Condition_OR
-49       49      Condition_OR 0.41203642      Condition_OR
-50       50      Condition_OR 0.49927151      Condition_OR
-51       51      Condition_OR 0.60078390      Condition_OR
-52       52      Condition_OR 0.46301717      Condition_OR
-53       53      Condition_OR 0.60339709      Condition_OR
-54       54      Condition_OR 0.67318452      Condition_OR
-55       55      Condition_OR 0.38052785      Condition_OR
-56       56      Condition_OR 0.64753989      Condition_OR
-57       57      Condition_OR 0.35110910      Condition_OR
-58       58      Condition_OR 0.72027515      Condition_OR
-59       59      Condition_OR 0.62552307      Condition_OR
-60       60      Condition_OR 0.78148961      Condition_OR
-61       61      Condition_OR 0.45163953      Condition_OR
-62       62      Condition_OR 0.44281996      Condition_OR
-63       63      Condition_OR 0.63085869      Condition_OR
-64       64      Condition_OR 0.83232614      Condition_OR
-65       65      Condition_OR 0.65409503      Condition_OR
-66       66      Condition_OR 0.50862572      Condition_OR
-67       67      Condition_OR 0.63337706      Condition_OR
-68       68      Condition_OR 0.14822769      Condition_OR
-69       69      Condition_OR 0.65701190      Condition_OR
-70       70      Condition_OR 0.67261743      Condition_OR
-71       71      Condition_OR 0.36907443      Condition_OR
-72       72      Condition_OR 0.56448333      Condition_OR
-73       73      Condition_OR 0.47426876      Condition_OR
-74       74      Condition_OR 0.38605727      Condition_OR
-75       75      Condition_OR 0.48561873      Condition_OR
-76       76      Condition_OR 0.41625801      Condition_OR
-77       77      Condition_OR 0.54678693      Condition_OR
-78       78      Condition_OR 0.58080245      Condition_OR
-79       79      Condition_OR 0.33573975      Condition_OR
-80       80      Condition_OR 0.49040962      Condition_OR
-81       81      Condition_RS 0.34460675      Condition_RS
-82       82      Condition_RS 0.31347973      Condition_RS
-83       83      Condition_RS 0.31057797      Condition_RS
-84       84      Condition_RS 0.37910389      Condition_RS
-85       85      Condition_RS 0.37750517      Condition_RS
-86       86      Condition_RS 0.43518058      Condition_RS
-87       87      Condition_RS 0.58253434      Condition_RS
-88       88      Condition_RS 0.49610189      Condition_RS
-89       89      Condition_RS 0.51628783      Condition_RS
-90       90      Condition_RS 0.36304455      Condition_RS
-91       91      Condition_RS 0.47242232      Condition_RS
-92       92      Condition_RS 0.15599443      Condition_RS
-93       93      Condition_RS 0.31712591      Condition_RS
-94       94      Condition_RS 0.29576779      Condition_RS
-95       95      Condition_RS 0.62629802      Condition_RS
-96       96      Condition_RS 0.35067340      Condition_RS
-97       97      Condition_RS 0.50679978      Condition_RS
-98       98      Condition_RS 0.67657230      Condition_RS
-99       99      Condition_RS 0.24656588      Condition_RS
-100     100      Condition_RS 0.68110986      Condition_RS
-101     101      Condition_RS 0.27150626      Condition_RS
-102     102      Condition_RS 0.24972626      Condition_RS
-103     103      Condition_RS 0.17682544      Condition_RS
-104     104      Condition_RS 0.16108296      Condition_RS
-105     105      Condition_RS 0.58982022      Condition_RS
-106     106      Condition_RS 0.03524795      Condition_RS
-107     107      Condition_RS 0.48763627      Condition_RS
-108     108      Condition_RS 0.35835092      Condition_RS
-109     109      Condition_RS 0.34368196      Condition_RS
-110     110      Condition_RS 0.46432815      Condition_RS
-111     111      Condition_RS 0.43879130      Condition_RS
-112     112      Condition_RS 0.74492594      Condition_RS
-113     113      Condition_RS 0.18559750      Condition_RS
-114     114      Condition_RS 0.54325732      Condition_RS
-115     115      Condition_RS 0.42897336      Condition_RS
-116     116      Condition_RS 0.29930978      Condition_RS
-117     117      Condition_RS 0.59895677      Condition_RS
-118     118      Condition_RS 0.34773252      Condition_RS
-119     119      Condition_RS 0.50213252      Condition_RS
-120     120      Condition_RS 0.52333172      Condition_RS</code></pre>
+<pre><code>    subject              cond         y         Condition
+1         1 Condition_Cue-JOL 0.3542570 Condition_Cue-JOL
+2         2 Condition_Cue-JOL 0.4803629 Condition_Cue-JOL
+3         3 Condition_Cue-JOL 0.4891950 Condition_Cue-JOL
+4         4 Condition_Cue-JOL 0.6058057 Condition_Cue-JOL
+5         5 Condition_Cue-JOL 0.8080047 Condition_Cue-JOL
+6         6 Condition_Cue-JOL 0.3804160 Condition_Cue-JOL
+7         7 Condition_Cue-JOL 0.5167522 Condition_Cue-JOL
+8         8 Condition_Cue-JOL 0.5509345 Condition_Cue-JOL
+9         9 Condition_Cue-JOL 0.5453419 Condition_Cue-JOL
+10       10 Condition_Cue-JOL 0.2756445 Condition_Cue-JOL
+11       11 Condition_Cue-JOL 0.5634525 Condition_Cue-JOL
+12       12 Condition_Cue-JOL 0.5929607 Condition_Cue-JOL
+13       13 Condition_Cue-JOL 0.6174062 Condition_Cue-JOL
+14       14 Condition_Cue-JOL 0.2480823 Condition_Cue-JOL
+15       15 Condition_Cue-JOL 0.6722823 Condition_Cue-JOL
+16       16 Condition_Cue-JOL 0.1887888 Condition_Cue-JOL
+17       17 Condition_Cue-JOL 0.5822291 Condition_Cue-JOL
+18       18 Condition_Cue-JOL 0.4520862 Condition_Cue-JOL
+19       19 Condition_Cue-JOL 0.4908267 Condition_Cue-JOL
+20       20 Condition_Cue-JOL 0.4248576 Condition_Cue-JOL
+21       21 Condition_Cue-JOL 0.2726682 Condition_Cue-JOL
+22       22 Condition_Cue-JOL 0.5388818 Condition_Cue-JOL
+23       23 Condition_Cue-JOL 0.8924912 Condition_Cue-JOL
+24       24 Condition_Cue-JOL 0.8246723 Condition_Cue-JOL
+25       25 Condition_Cue-JOL 0.6553557 Condition_Cue-JOL
+26       26 Condition_Cue-JOL 0.8381102 Condition_Cue-JOL
+27       27 Condition_Cue-JOL 0.7167661 Condition_Cue-JOL
+28       28 Condition_Cue-JOL 0.6232906 Condition_Cue-JOL
+29       29 Condition_Cue-JOL 0.4977251 Condition_Cue-JOL
+30       30 Condition_Cue-JOL 0.2474197 Condition_Cue-JOL
+31       31 Condition_Cue-JOL 0.1822884 Condition_Cue-JOL
+32       32 Condition_Cue-JOL 0.4204332 Condition_Cue-JOL
+33       33 Condition_Cue-JOL 0.4692444 Condition_Cue-JOL
+34       34 Condition_Cue-JOL 0.4737390 Condition_Cue-JOL
+35       35 Condition_Cue-JOL 0.4960408 Condition_Cue-JOL
+36       36 Condition_Cue-JOL 0.4244302 Condition_Cue-JOL
+37       37 Condition_Cue-JOL 0.3203832 Condition_Cue-JOL
+38       38 Condition_Cue-JOL 0.4728378 Condition_Cue-JOL
+39       39 Condition_Cue-JOL 0.7651657 Condition_Cue-JOL
+40       40 Condition_Cue-JOL 0.6759614 Condition_Cue-JOL
+41       41      Condition_OR 0.4782370      Condition_OR
+42       42      Condition_OR 0.6518495      Condition_OR
+43       43      Condition_OR 0.6502970      Condition_OR
+44       44      Condition_OR 0.3787371      Condition_OR
+45       45      Condition_OR 0.3548986      Condition_OR
+46       46      Condition_OR 0.6410165      Condition_OR
+47       47      Condition_OR 0.3066952      Condition_OR
+48       48      Condition_OR 0.6302817      Condition_OR
+49       49      Condition_OR 0.6970201      Condition_OR
+50       50      Condition_OR 0.5725186      Condition_OR
+51       51      Condition_OR 0.3518899      Condition_OR
+52       52      Condition_OR 0.3742385      Condition_OR
+53       53      Condition_OR 0.3024096      Condition_OR
+54       54      Condition_OR 0.5399102      Condition_OR
+55       55      Condition_OR 0.7283420      Condition_OR
+56       56      Condition_OR 0.4019108      Condition_OR
+57       57      Condition_OR 0.6232190      Condition_OR
+58       58      Condition_OR 0.4355348      Condition_OR
+59       59      Condition_OR 0.6600431      Condition_OR
+60       60      Condition_OR 0.5349356      Condition_OR
+61       61      Condition_OR 0.5903805      Condition_OR
+62       62      Condition_OR 0.5477936      Condition_OR
+63       63      Condition_OR 0.4695986      Condition_OR
+64       64      Condition_OR 0.6659217      Condition_OR
+65       65      Condition_OR 0.4433335      Condition_OR
+66       66      Condition_OR 0.4540458      Condition_OR
+67       67      Condition_OR 0.4763750      Condition_OR
+68       68      Condition_OR 0.3884675      Condition_OR
+69       69      Condition_OR 0.2829394      Condition_OR
+70       70      Condition_OR 0.3509631      Condition_OR
+71       71      Condition_OR 0.5953306      Condition_OR
+72       72      Condition_OR 0.4944639      Condition_OR
+73       73      Condition_OR 0.6223844      Condition_OR
+74       74      Condition_OR 0.3721842      Condition_OR
+75       75      Condition_OR 0.7547166      Condition_OR
+76       76      Condition_OR 0.2520657      Condition_OR
+77       77      Condition_OR 0.5104043      Condition_OR
+78       78      Condition_OR 0.3413636      Condition_OR
+79       79      Condition_OR 0.5287933      Condition_OR
+80       80      Condition_OR 0.3606134      Condition_OR
+81       81      Condition_RS 0.1491161      Condition_RS
+82       82      Condition_RS 0.3178059      Condition_RS
+83       83      Condition_RS 0.6606403      Condition_RS
+84       84      Condition_RS 0.2997087      Condition_RS
+85       85      Condition_RS 0.6169246      Condition_RS
+86       86      Condition_RS 0.3094727      Condition_RS
+87       87      Condition_RS 0.6168891      Condition_RS
+88       88      Condition_RS 0.4090820      Condition_RS
+89       89      Condition_RS 0.4739799      Condition_RS
+90       90      Condition_RS 0.1028572      Condition_RS
+91       91      Condition_RS 0.2849337      Condition_RS
+92       92      Condition_RS 0.5238507      Condition_RS
+93       93      Condition_RS 0.5728032      Condition_RS
+94       94      Condition_RS 0.3635312      Condition_RS
+95       95      Condition_RS 0.6871322      Condition_RS
+96       96      Condition_RS 0.4678795      Condition_RS
+97       97      Condition_RS 0.3166822      Condition_RS
+98       98      Condition_RS 0.4655715      Condition_RS
+99       99      Condition_RS 0.2853900      Condition_RS
+100     100      Condition_RS 0.6612729      Condition_RS
+101     101      Condition_RS 0.2845478      Condition_RS
+102     102      Condition_RS 0.5455456      Condition_RS
+103     103      Condition_RS 0.5941469      Condition_RS
+104     104      Condition_RS 0.5658996      Condition_RS
+105     105      Condition_RS 0.6824482      Condition_RS
+106     106      Condition_RS 0.4722788      Condition_RS
+107     107      Condition_RS 0.4586390      Condition_RS
+108     108      Condition_RS 0.4216161      Condition_RS
+109     109      Condition_RS 0.4349327      Condition_RS
+110     110      Condition_RS 0.7846590      Condition_RS
+111     111      Condition_RS 0.2139460      Condition_RS
+112     112      Condition_RS 0.4583652      Condition_RS
+113     113      Condition_RS 0.3260152      Condition_RS
+114     114      Condition_RS 0.4163383      Condition_RS
+115     115      Condition_RS 0.2100834      Condition_RS
+116     116      Condition_RS 0.3518767      Condition_RS
+117     117      Condition_RS 0.3617553      Condition_RS
+118     118      Condition_RS 0.1963582      Condition_RS
+119     119      Condition_RS 0.6817226      Condition_RS
+120     120      Condition_RS 0.3362388      Condition_RS</code></pre>
 </div>
 </div>
 <p>Now, let’s check out how much power we have. Here, we will run our analysis many times (nsims below) and seeing how many of those times we get a significant result.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>nsims<span class="ot">=</span><span class="dv">500</span> <span class="co">#number of times we do this should be larger than this, but it takes a while to run so we'll stick with 500 for this example!</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>power_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result, </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">nsims =</span> nsims, </span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">seed =</span> <span class="dv">1234</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>nsims<span class="ot">=</span><span class="dv">500</span> <span class="co">#number of times we do this should be larger than this, but it takes a while to run so we'll stick with 500 for this example!</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>power_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result, </span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">nsims =</span> nsims, </span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">seed =</span> <span class="dv">1234</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Power and Effect sizes for ANOVA tests
+                power effect_size
+anova_Condition  66.8     0.06962
+
+Power and Effect sizes for pairwise comparisons (t-tests)
+                                 power effect_size
+p_Condition_Cue-JOL_Condition_OR  10.0      0.1379
+p_Condition_Cue-JOL_Condition_RS  43.2     -0.4102
+p_Condition_OR_Condition_RS       72.2     -0.5867</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>power_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Power and Effect sizes for ANOVA tests
                 power effect_size
@@ -577,27 +616,30 @@ p_Condition_OR_Condition_RS       72.2     -0.5867</code></pre>
 </div>
 </div>
 <p>What is our power to detect the overall effect of <code>Condition</code>? What about the pairwise comparisons between the groups?</p>
+<p>ANSWER: To detect the effect of Condition we have only 66.8% power (Yikes). To detect the cue-JOL vs.&nbsp;overt difference we have 10.0% power. To detect the Cue-JOL vs.&nbsp;Restudy difference we have 43.2% power. Finally, to detect the overt and restudy difference we have power of 72.2%.</p>
 <p>What kind of power analysis would this be?</p>
+<p>ANSWER: We’re doing it after we ran the study – Post-hoc</p>
 <p>What do you think of the power for this study design?</p>
+<p>ANSWER: Not very well powered study.</p>
 </section>
 </section>
 <section id="now-we-want-to-run-a-replication-study.-lets-plan-a-study-where-we-want-to-collect-100-ps-per-group." class="level1">
 <h1>Now, we want to run a replication study. Let’s plan a study where we want to collect 100 Ps per group.</h1>
 <p>Change <code>ANOVA_design</code> to reflect <em>just this difference</em>. Set N = 100.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create objects for each parameter</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="st">"3b"</span> <span class="co"># 3 levels of `condition` varying between subjects</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># unequal ns dont work yet for this</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">50</span>,.<span class="dv">52</span>, .<span class="dv">43</span>)<span class="co"># each group mean</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.17</span>, .<span class="dv">14</span>, <span class="fl">0.17</span>) <span class="co"># each group sd</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>label_list <span class="ot">=</span> <span class="fu">list</span>(<span class="st">"condition"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Cue-JOL"</span>, <span class="st">"OR"</span>,<span class="st">"RS"</span>)) <span class="co"># labels for each group</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co">#now, use ANOVA_design to specify the parameters of the data</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> design,</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> n,</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> mu, </span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> sd, </span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>                              <span class="at">label_list =</span> label_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create objects for each parameter</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="st">"3b"</span> <span class="co"># 3 levels of `condition` varying between subjects</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># unequal ns dont work yet for this</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">50</span>,.<span class="dv">52</span>, .<span class="dv">43</span>)<span class="co"># each group mean</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.17</span>, .<span class="dv">14</span>, <span class="fl">0.17</span>) <span class="co"># each group sd</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>label_list <span class="ot">=</span> <span class="fu">list</span>(<span class="st">"condition"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Cue-JOL"</span>, <span class="st">"OR"</span>,<span class="st">"RS"</span>)) <span class="co"># labels for each group</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="co">#now, use ANOVA_design to specify the parameters of the data</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> design,</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> n,</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> mu, </span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> sd, </span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>                              <span class="at">label_list =</span> label_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -605,11 +647,11 @@ p_Condition_OR_Condition_RS       72.2     -0.5867</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>nsims<span class="ot">=</span><span class="dv">500</span><span class="co"># number of times we do this should be larger than this!</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>power_result_vig_2 <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result, </span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">nsims =</span> nsims, </span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">seed =</span> <span class="dv">1234</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>nsims<span class="ot">=</span><span class="dv">500</span><span class="co"># number of times we do this should be larger than this!</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>power_result_vig_2 <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result, </span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">nsims =</span> nsims, </span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">seed =</span> <span class="dv">1234</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Power and Effect sizes for ANOVA tests
                 power effect_size
@@ -622,26 +664,29 @@ p_condition_Cue-JOL_condition_RS  83.6     -0.4179
 p_condition_OR_condition_RS       97.8     -0.5890</code></pre>
 </div>
 </div>
-<p>What would are power be using the current study parameters to detect overall effect? How about each pairwise comparison?</p>
+<p>What would our power be using the current study parameters to detect overall effect? How about each pairwise comparison?</p>
+<p>ANSWER: To detect the effect of Condition we have 97% power – much better! To detect the cue-JOL vs.&nbsp;overt difference we have 14.8% power. To detect the Cue-JOL vs.&nbsp;Restudy difference we have 83.6% power. Finally, to detect the overt and restudy difference we have power of 97.8%.</p>
 <p>What kind of power analysis would this be?</p>
+<p>ANSWER: We’re doing it before we run the replication, so its a priori – good!</p>
 <p>What do you think of the power for this study design?</p>
+<p>ANSWER: Much better, except for the effect of JOL vs OR is still very low. Why? Look back at Cohen’s d values - effect for JOL vs OR is only -0.16 while others are .41 and .58 (much larger)</p>
 </section>
 <section id="lets-say-i-want-to-power-the-study-to-be-able-to-detect-a-.05-point-difference-on-the-final-test-between-the-cue-only-jols-and-overt-retrieval-groups-e.g.-the-difference-between-their-means." class="level1">
 <h1>Let’s say I want to power the study to be able to detect a .05 point difference on the final test between the Cue-Only JOLs and Overt Retrieval groups (e.g., the difference between their means).</h1>
 <p>Change <code>ANOVA_design</code> to reflect <em>just this difference</em>. Set N = 40.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="st">"2b"</span> <span class="co">#now there are only 2 levels of the variable!</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">40</span> <span class="co">#unequal ns dont work yet for this</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">50</span>,.<span class="dv">55</span>) <span class="co">#each group mean</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.17</span>, .<span class="dv">14</span>) <span class="co">#each group sd</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>label_list <span class="ot">=</span> <span class="fu">list</span>(<span class="st">"condition"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Cue-JOL"</span>, <span class="st">"OR"</span>)) <span class="co"># labels for each group</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> design,</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> n,</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> mu, </span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> sd, </span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>                              <span class="at">label_list =</span> label_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="st">"2b"</span> <span class="co">#now there are only 2 levels of the variable!</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">40</span> <span class="co">#unequal ns dont work yet for this</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">50</span>,.<span class="dv">55</span>) <span class="co">#each group mean</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.17</span>, .<span class="dv">14</span>) <span class="co">#each group sd</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>label_list <span class="ot">=</span> <span class="fu">list</span>(<span class="st">"condition"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Cue-JOL"</span>, <span class="st">"OR"</span>)) <span class="co"># labels for each group</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> design,</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> n,</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> mu, </span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> sd, </span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>                              <span class="at">label_list =</span> label_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -649,11 +694,11 @@ p_condition_OR_condition_RS       97.8     -0.5890</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>nsims<span class="ot">=</span><span class="dv">500</span> <span class="co">#number of times we do this should be larger than this!</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>power_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result, </span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">nsims =</span> nsims, </span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">seed =</span> <span class="dv">1234</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>nsims<span class="ot">=</span><span class="dv">500</span> <span class="co">#number of times we do this should be larger than this!</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>power_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result, </span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">nsims =</span> nsims, </span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">seed =</span> <span class="dv">1234</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Power and Effect sizes for ANOVA tests
                 power effect_size
@@ -665,11 +710,12 @@ p_condition_Cue-JOL_condition_OR  30.2      0.3305</code></pre>
 </div>
 </div>
 <p>What is our power to detect a .05 point difference with 40 per group?</p>
+<p>ANSWER: We have 30% power (not great!)</p>
 </section>
 <section id="plot-a-power-curve-just-for-this-difference.-what-sample-size-is-needed-to-achieve-90-power" class="level1">
 <h1>Plot a power curve just for this difference. What sample size is needed to achieve 90% power?</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_power</span>(design_result, <span class="at">min_n =</span> <span class="dv">10</span>, <span class="at">max_n =</span> <span class="dv">400</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_power</span>(design_result, <span class="at">min_n =</span> <span class="dv">10</span>, <span class="at">max_n =</span> <span class="dv">400</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -684,6 +730,7 @@ p_condition_Cue-JOL_condition_OR  30.2      0.3305</code></pre>
 </div>
 </div>
 <p>How many participants would you need to achieve 90% power?</p>
+<p>ANSWER: You need 205 participants to have 90% power to detect a .05 difference between the two conditions.</p>
 </section>
 
 </main>
@@ -770,8 +817,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -882,7 +927,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

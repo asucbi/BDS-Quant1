@@ -8,7 +8,7 @@ editor: visual
 
 In today's lab, we will practice calculating effect sizes and estimating power using different methods.
 
-For today's lab, you will need to load the following libraries (lot of them today!).
+For today's lab, you will need to load the following libraries (lots of them today!).
 
 ```{r libraries, message=FALSE}
 
@@ -57,6 +57,9 @@ First, we will filter the data to remove `Cue-target J` from the `Condition` col
 
 #students: fill in filter 
 
+# cue_data <- cue_data %>%
+#   filter(XXX)
+
 
 
 
@@ -82,6 +85,8 @@ str(cue_data)
 # we might want to make `Condition` a factor -- do that!
 # students: fill in code to make it a factor 
 
+# cue_data <- cue_data %>% 
+#   mutate(Condition = XXX)
 
 
 
@@ -123,7 +128,8 @@ What is your interpretation of each of the predictors? What does the F value tel
 
 # students: create the model
 
-
+# model <- lm(XXX) 
+# summary(model)
 
 
 
@@ -188,7 +194,17 @@ Take a look at your effect sizes. Are they small, medium, or large?
 
 # students: fill in these equations
 
-
+# cue_overt <- XXX
+# 
+# cue_restudy <- XXX
+# 
+# overt_restudy <- XXX
+# 
+# cue_overt
+# 
+# cue_restudy
+# 
+# overt_restudy
 
 
 
@@ -215,14 +231,19 @@ There is an easier way!
 
 We can also use the `MOTE` package to get an estimate of our effect size and a confidence interval around our effect size.
 
-Let's first check out the `d.ind.t` function. What information do you need to provide?
+Let's first check out the `d_ind_t` function. What information do you need to provide?
 
 ```{r effect-ci}
 
-?d.ind.t
+?d_ind_t
 
 # students: fill in arguments
 
+# cue_overt_d <- d_ind_t(XXX)
+# 
+# cue_restudy_d <- d_ind_t(XXX)
+#                     
+# overt_restudy_d <- d_ind_t(XXX)
 
 
 
@@ -231,12 +252,11 @@ Let's first check out the `d.ind.t` function. What information do you need to pr
 
 
 
+cue_overt_d <- d_ind_t(.500, .524, .168, .135, 43, 40)
 
-cue_overt_d <- d.ind.t(.500, .524, .168, .135, 43, 40)
-
-cue_restudy_d <- d.ind.t(.500, .437, .168, .169, 43, 40)
+cue_restudy_d <- d_ind_t(.500, .437, .168, .169, 43, 40)
                     
-overt_restudy_d <- d.ind.t(.524, .437, .135, .169, 40, 40)
+overt_restudy_d <- d_ind_t(.524, .437, .135, .169, 40, 40)
 
 cue_overt_d$estimate
 
@@ -324,6 +344,7 @@ f_squared <- r_squared/(1-r_squared)
 
 # students: fill in the arguments below
 
+# WebPower::wp.regression(n=XXX, p1=XXX, f2=XXX, alpha=XXX, power=XXX)
 
 
 
@@ -379,44 +400,19 @@ power_result <- ANOVA_power(design_result,
                                   nsims = nsims, 
                                   seed = 1234)
 
+power_result
+
 ```
 
 What is our power to detect the overall effect of `Condition`? What about the pairwise comparisons between the groups?
-
-
-
-
-
-
-
-
-
 
 ANSWER: To detect the effect of Condition we have only 66.8% power (Yikes). To detect the cue-JOL vs. overt difference we have 10.0% power. To detect the Cue-JOL vs. Restudy difference we have 43.2% power. Finally, to detect the overt and restudy difference we have power of 72.2%.
 
 What kind of power analysis would this be?
 
-
-
-
-
-
-
-
-
-
 ANSWER: We're doing it after we ran the study -- Post-hoc
 
 What do you think of the power for this study design?
-
-
-
-
-
-
-
-
-
 
 ANSWER: Not very well powered study.
 
@@ -448,42 +444,15 @@ power_result_vig_2 <- ANOVA_power(design_result,
 
 ```
 
-What would are power be using the current study parameters to detect overall effect? How about each pairwise comparison?
+What would our power be using the current study parameters to detect overall effect? How about each pairwise comparison?
 
-
-
-
-
-
-
-
-
-
-ANSWER: To detect the effect of Condition we have only 97% power -- much better! To detect the cue-JOL vs. overt difference we have 14.8% power. To detect the Cue-JOL vs. Restudy difference we have 83.6% power. Finally, to detect the overt and restudy difference we have power of 97.8%.
+ANSWER: To detect the effect of Condition we have 97% power -- much better! To detect the cue-JOL vs. overt difference we have 14.8% power. To detect the Cue-JOL vs. Restudy difference we have 83.6% power. Finally, to detect the overt and restudy difference we have power of 97.8%.
 
 What kind of power analysis would this be?
-
-
-
-
-
-
-
-
-
 
 ANSWER: We're doing it before we run the replication, so its a priori -- good!
 
 What do you think of the power for this study design?
-
-
-
-
-
-
-
-
-
 
 ANSWER: Much better, except for the effect of JOL vs OR is still very low. Why? Look back at Cohen's d values - effect for JOL vs OR is only -0.16 while others are .41 and .58 (much larger)
 
@@ -516,15 +485,6 @@ power_result <- ANOVA_power(design_result,
 
 What is our power to detect a .05 point difference with 40 per group?
 
-
-
-
-
-
-
-
-
-
 ANSWER: We have 30% power (not great!)
 
 # Plot a power curve just for this difference. What sample size is needed to achieve 90% power?
@@ -536,14 +496,5 @@ plot_power(design_result, min_n = 10, max_n = 400)
 ```
 
 How many participants would you need to achieve 90% power?
-
-
-
-
-
-
-
-
-
 
 ANSWER: You need 205 participants to have 90% power to detect a .05 difference between the two conditions.

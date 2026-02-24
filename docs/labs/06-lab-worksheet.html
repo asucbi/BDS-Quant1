@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -63,10 +63,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="06-lab-worksheet_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="06-lab-worksheet_files/libs/quarto-html/anchor.min.js"></script>
 <link href="06-lab-worksheet_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="06-lab-worksheet_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="06-lab-worksheet_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="06-lab-worksheet_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="06-lab-worksheet_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="06-lab-worksheet_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="06-lab-worksheet_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -130,14 +130,26 @@ window.Quarto = {
 <p>In today’s lab, we will practice calculating effect sizes and estimating power using different methods.</p>
 <p>For today’s lab, you will need to load the following libraries (lots of them today!).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(papaja) <span class="co">#for formatting p values</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans) <span class="co">#for post-hoc t-tests</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co">#for formatting tables</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrain) <span class="co">#for creating raincloud plots</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MOTE) <span class="co">#for getting ci around effect sizes</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WebPower) <span class="co">#for calculating power</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Superpower) <span class="co">#for simulating power</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.5.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(papaja) <span class="co">#for formatting p values</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans) <span class="co">#for post-hoc t-tests</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co">#for formatting tables</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrain) <span class="co">#for creating raincloud plots</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggrain' was built under R version 4.5.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MOTE) <span class="co">#for getting ci around effect sizes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'MOTE' was built under R version 4.5.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WebPower) <span class="co">#for calculating power</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'lavaan' was built under R version 4.5.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Superpower) <span class="co">#for simulating power</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="research-scenario" class="level1">
@@ -189,7 +201,7 @@ window.Quarto = {
 <p>Take a look at your effect sizes. Are they small, medium, or large?</p>
 <p>There is an easier way!</p>
 <p>We can also use the <code>MOTE</code> package to get an estimate of our effect size and a confidence interval around our effect size.</p>
-<p>Let’s first check out the <code>d.ind.t</code> function. What information do you need to provide?</p>
+<p>Let’s first check out the <code>d_ind_t</code> function. What information do you need to provide?</p>
 <p>Compare these to the Cohen’s d values that you calculated “by hand.” How do they compare?</p>
 <p>Now, write an APA style summary of your results. This should include information about your overall model (e.g., <em>F</em> and <em>R</em><sup>2</sup>) as well as each of the pairwise comparisons and all relevant information (<em>t</em>, <em>p</em>, effect size, 95% CIs). Make sure you have corrected for pairwise comparisons and state which correction you used.</p>
 <p>We ran a linear regression to examine the effect of delayed judgments of learning (JOLs), retrieval practice, and overt retries on memory. An omibus test revealed a significant effect of condition on memory, F(2, 120) = 3.26, <em>p</em> .042). The model explained a small proportion of variance in memory, with an R<sup>2</sup> = 0.05 and an adjusted R<sup>2</sup> = 0.04. To find the source of this effect, we computed pairwise comparisons for each of our conditions. Participants’ memory in the delayed judgment condition (<em>M</em> = 0.5, SD 0.17) did not differ significantly from participants’ memory in the overt retrieval condition (<em>M</em> = 0.52, SD 0.14), <span class="math inline">\(t(120) = -0.7, p &gt; .999\)</span>, <span class="math inline">\(d_s\)</span> = -0.16, 95% CI [-0.59, 0.27], nor did it differ from participants’ memory in the restudy condition (<em>M</em> = 0.44, SD 0.17), <span class="math inline">\(t(120) = 1.81, p = .220\)</span>, <span class="math inline">\(d_s\)</span> = 0.37, 95% CI [-0.06, 0.81]. However, participants in the overt retrieval condition had significantly greater memory scores than participants in the restudy condition (<em>M</em> = 0.44, SD 0.17), <span class="math inline">\(t(120) = 2.47, p = .040\)</span>, <span class="math inline">\(d_s\)</span> = 0.57, 95% CI [0.12, 1.01]. In summary, we found that overt retrieval resulted in better memory than restudying, but neither of these methods differed from delayed judgment.</p>
@@ -216,7 +228,7 @@ window.Quarto = {
 <section id="now-we-want-to-run-a-replication-study.-lets-plan-a-study-where-we-want-to-collect-100-ps-per-group." class="level2">
 <h2 class="anchored" data-anchor-id="now-we-want-to-run-a-replication-study.-lets-plan-a-study-where-we-want-to-collect-100-ps-per-group.">Now, we want to run a replication study. Let’s plan a study where we want to collect 100 Ps per group.</h2>
 <p>Change <code>ANOVA_design</code> to reflect <em>just this difference</em>. Set N = 100.</p>
-<p>What would are power be using the current study parameters to detect overall effect? How about each pairwise comparison?</p>
+<p>What would our power be using the current study parameters to detect overall effect? How about each pairwise comparison?</p>
 <p>What kind of power analysis would this be?</p>
 <p>What do you think of the power for this study design?</p>
 </section>
@@ -315,8 +327,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -427,7 +437,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

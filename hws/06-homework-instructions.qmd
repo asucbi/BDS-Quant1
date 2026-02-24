@@ -12,7 +12,7 @@ In this week's homework, you will be asked to demonstrate your understanding of 
 
 -   Go to [posit.cloud](posit.cloud) and then **navigate to the course workspace** via the left sidebar.
 
-    -   Look for the course workspace called "Statistical Methods Spring 2025"
+    -   Look for the course workspace called "Spring 2026: Statistical Methods"
 
 -   Open the project titled **Module 6** This module contains the starter files that you will use for this lab and for your homework.
 
@@ -115,6 +115,7 @@ Answer the following questions:
 model <- lm(teacher_salary ~ region, data = salary)
 summary(model)
 
+contrasts(salary$region)
 
 ```
 
@@ -152,12 +153,12 @@ salary %>%
             sd = sd(teacher_salary),
             n = n())
 
-nvm <- d.ind.t(m1=33.7, m2=28.9, sd1=4.69, sd2=4.32, n1=9, n2=12)
-nvw <- d.ind.t(m1=33.7, m2=28.6, sd1=4.69, sd2=3.87, n1=9, n2=11)
-nvs <- d.ind.t(m1=33.7, m2=27.2, sd1=4.69, sd2=3.89, n1=9, n2=16)
-mvw <- d.ind.t(m1=28.9, m2=28.6, sd1=4.32, sd2=3.87, n1=12, n2=11)
-mvs <- d.ind.t(m1=28.9, m2=27.2, sd1=4.32, sd2=3.89, n1=12, n2=16)
-wvs <- d.ind.t(m1=28.6, m2=27.2, sd1=3.87, sd2=3.89, n1=11, n2=16)
+nvm <- d_ind_t(m1=33.7, m2=28.9, sd1=4.69, sd2=4.32, n1=9, n2=12)
+nvw <- d_ind_t(m1=33.7, m2=28.6, sd1=4.69, sd2=3.87, n1=9, n2=11)
+nvs <- d_ind_t(m1=33.7, m2=27.2, sd1=4.69, sd2=3.89, n1=9, n2=16)
+mvw <- d_ind_t(m1=28.9, m2=28.6, sd1=4.32, sd2=3.87, n1=12, n2=11)
+mvs <- d_ind_t(m1=28.9, m2=27.2, sd1=4.32, sd2=3.89, n1=12, n2=16)
+wvs <- d_ind_t(m1=28.6, m2=27.2, sd1=3.87, sd2=3.89, n1=11, n2=16)
 
 ```
 

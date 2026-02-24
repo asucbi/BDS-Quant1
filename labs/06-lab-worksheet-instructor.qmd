@@ -159,16 +159,16 @@ There is an easier way!
 
 We can also use the `MOTE` package to get an estimate of our effect size and a confidence interval around our effect size.
 
-Let's first check out the `d.ind.t` function. What information do you need to provide?
+Let's first check out the `d_ind_t` function. What information do you need to provide?
 
 ```{r effect-ci}
 
 
-cue_overt_d <- d.ind.t(.500, .524, .168, .135, 43, 40)
+cue_overt_d <- d_ind_t(.500, .524, .168, .135, 43, 40)
 
-cue_restudy_d <- d.ind.t(.500, .437, .168, .169, 43, 40)
+cue_restudy_d <- d_ind_t(.500, .437, .168, .169, 43, 40)
                     
-overt_restudy_d <- d.ind.t(.524, .437, .135, .169, 40, 40)
+overt_restudy_d <- d_ind_t(.524, .437, .135, .169, 40, 40)
 
 
 ```
@@ -329,7 +329,7 @@ power_result_vig_2 <- ANOVA_power(design_result,
 
 ```
 
-What would are power be using the current study parameters to detect overall effect? How about each pairwise comparison?
+What would our power be using the current study parameters to detect overall effect? How about each pairwise comparison?
 
 INST ANS: To detect the effect of Condition we have only 97% power -- much better! To detect the cue-JOL vs. overt difference we have 14.8% power. To detect the Cue-JOL vs. Restudy difference we have 83.6% power. Finally, to detect the overt and restudy difference we have power of 97.8%.
 
