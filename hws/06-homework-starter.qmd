@@ -25,7 +25,7 @@ The data has 3 columns:
 -   region: region of the US that the state falls into
 -   teacher_salary: average teacher's salary (in thousand per year)
 
-```{r read in data, echo = FALSE, message=FALSE}
+```{r read in data}
 
 
 
@@ -42,7 +42,7 @@ Create (exactly) the raincloud plot from the homework instructions.
 
 Answer the question: What does the raincloud plot tell you about how teacher salary does or does not differ by region?
 
-```{r raincloud-plot, echo=FALSE}
+```{r raincloud-plot}
 
 
 
@@ -95,7 +95,7 @@ Answer the following questions:
 
 2.  Is each effect small, medium, or large?
 
-```{r effsize-ci, echo=FALSE}
+```{r effsize-ci}
 
 
 
@@ -106,14 +106,14 @@ Answer the following questions:
 
 Now, write an APA style summary of your results. This should include information about your overall model (e.g., *F* and *R*<sup>2</sup>) as well as each of the pairwise comparisons and all relevant information (e.g., *t*, *p*, effect size, 95% CIs).
 
-```{r apa-summary, echo=FALSE}
+```{r apa-summary}
 
 
 
 
 ```
 
-## Exercise 7:
+## Exercise 6:
 
 Now, let's say we want to run a replication study and we want to know many participants we need to achieve 90% power.
 
@@ -131,7 +131,7 @@ Answer the following questions:
 
 4.  In your replication study, will you recruit 12 participants or do something differently? If so, what? (No need to run any additional analysis for this question if you're thinking of that - just tell me what you would do!)
 
-```{r power-analysis, echo=FALSE}
+```{r power-analysis}
 
 
 

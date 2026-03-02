@@ -121,7 +121,7 @@ model_2 <- lm(depression ~ low.v.none + med.v.none + high.v.none, data = depress
 summary(model_2)
 
 
-
+inte
 ```
 
 ## Exercise 6:

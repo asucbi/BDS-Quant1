@@ -1,5 +1,5 @@
 ---
-title: "BDS Quant 1 Final Project"
+title: "BDS 505 (Statistical Methods) Final Project"
 editor: 
   markdown: 
     wrap: sentence
@@ -16,20 +16,20 @@ In the final project for this course, you will choose a dataset to analyze and p
 3. Brief (5-minute) Research Presentation
 
 :::callout-important
-See "Course Schedule" in Canvas for all due dates. Grading rubrics for each component are also available in the relevant Modules on Canvas.
+See "Course Schedule" in Canvas for all due dates. Grading rubrics for each component will also be made available in the relevant Modules on Canvas.
 :::
 
-Like BDS 1 last semester, the goal of this project is for you to demonstrate proficiency in the techniques we have covered in this class (Quant 1) and apply them to a novel dataset in a meaningful way. While final projects for the two classes are intentionally similar, there are some important differences that reflect your increasing data analytic skills. Please make sure to pay careful attention to the instructions.
+Like BDS 1 last semester, the goal of this project is for you to demonstrate proficiency in the techniques we have covered in this class (Statistical Methods) and apply them to a novel dataset in a meaningful way. While final projects for the two classes are intentionally similar, there are some important differences that reflect your increasing data analytic skills. Please make sure to pay careful attention to the instructions.
 
 ## Step 1: Find a Dataset
 
-The dataset should be publicly available and related in some way to Behavioral Science. Ideally, this would be your own (not yet analyzed) data or data that is similar to what you plan to work with in your research or capstone project. However, it should not be a dataset that you have already collected or already worked with in your own independent research. It also should not be a dataset that we are using in class (e.g., labs, homework, etc). If you would like to continue building on the dataset that you used in BDS 1, you MUST: (a) ensure that the analyses and visualizations are meaningfully different than your BDS 1 submission and (b) check in with me _before starting_ your data analysis plan. It is a good idea to reach out to me about your dataset before you begin your data analysis plan in general.
+The dataset should be publicly available (or easily shared with me) and related in some way to Behavioral Science. Ideally, this would be your own (not yet analyzed) data or data that is similar to what you plan to work with in your research or capstone project. However, it should not be a dataset that you are already very familiar with and/or have already worked with in your own independent research. It also should not be a dataset that we are using in class (e.g., labs, homework, etc). If you would like to continue building on the dataset that you used in BDS 1, you MUST: (a) ensure that the analyses and visualizations are meaningfully different than your BDS 1 submission and (b) check in with me _before starting_ your data analysis plan. It is a good idea to reach out to me about your dataset before you begin your data analysis plan in general.
 
 Your dataset should be large enough that multiple relationships can be explored. One rule of thumb is that the dataset should include at least 50 observations and 10 to 20 variables. However, this is very flexible and I am open to discussing.
 
 ## Step 2: Identify 2-3 specific *novel* research questions that this data can help you answer.
 
-Each of your 2-3 questions must be motivated by theory (i.e., you should be able to tell me _why_ this is an interesting question based on prior research). You should be able to answer each of your questions with a statistical test that was covered in this class. 
+Each of your 2-3 questions must be motivated by theory (i.e., you should be able to tell me _why_ this is an interesting question based on prior research). You should be able to answer each of your questions with a statistical test *that was covered in this class*. 
 
 **IMPORTANT: At least one of your research questions must be about an _interaction_ between two variables.** 
 
@@ -81,12 +81,12 @@ Your report should include:
         -   A description of the model that you tested
         -   Any assumptions that you tested, what you found, how you addressed them
         -   Results of the statistical analysis, written out in APA Style
-            -   This should include coefficients, _p_-values, effect sizes, etc.
+            -   This should include coefficients, _p_-values, effect sizes, confidence intervals, etc.
         -   Interpretations of each coefficient in the model, written based on your actual results
        -   At least one visualization per analysis that showcases your results
 -   A 1 paragraph discussion summarizing what you are taking away from your results 
     -   Here you might also briefly discuss ideas about why your predicted and actual results differ (if they do)
--   An APA-Style reference section that cites your dataset (at minimum) and any other references that you used (e.g., to motivate your research question)
+-   An APA-Style reference section that cites your dataset and any other references that you used (e.g., to motivate your research question). You should have *at least* three references (your data set and two others to motivate the research).
 
 Analysis Reports will additionally be graded for "Creativity, Clarity, and Critical Thought." This is assessed based on the following considerations: Is the project carefully thought out? Are limitations carefully considered? Does it appear that time and effort went into the planning and implementation of the project? Is the report well-organized and readable?
 
@@ -95,7 +95,7 @@ There are no official requirements about report length as long as each of the ab
 :::
 
 :::callout-important
-Before you finalize your presentation and submit it as a PDF, make sure your chunks are turned off with `echo = FALSE`. 
+Before you finalize your presentation and submit it as a PDF, make sure your chunks are turned *off* with `echo = FALSE`. 
 :::
 
 ## Step 6: Generate a Brief Research Presentation
@@ -111,7 +111,7 @@ Finally, you will create a 5-minute presentation in which you summarize your Res
     -   Walk through at least one visualization that illustrates your results.
 -   Conclude by briefly summarizing your results and what we can take away from these analyses.
 
-Research Presentations will also additionally be graded for "Creativity, Clarity, and Critical Thought." This is assessed based on the following considerations: Is the presentation carefully thought out? Does it appear that time and effort went into the planning and implementation of the presentation? Is the presentation well-organized? Are the data and visualizations presented in a way that is easy to follow?
+Research Presentations will also additionally be graded for "Creativity, Clarity, and Critical Thought." This is assessed based on the following considerations: Is the presentation carefully thought out? Does it appear that time and effort went into the planning and implementation of the presentation? Is the presentation well-organized? Are the data and visualizations presented in a way that is easy to follow? Is the presentation approximately 5 minutes in length (points will be deducted for presentations that are substantially too short or too long)?
 
 After each presentation, we will take time for 1-2 questions from your classmates.
 
@@ -121,10 +121,9 @@ To receive credit for your presentation, you must upload your slides to Canvas a
 
 ## Step 7: Participate in Research Presentations
 
-Research presentations will take place the final week of class (April 29th and May 1st).
+Research presentations will take place the final week of class (April 28th and 30th).
 
 Showing up and attending to your classmates presentations is part of the Research Presentation assignment. Thus, your Research Presentation grade will include a Participation component that requires your attendance at the presentations and participating in the Q&A portion of another student's presentation at least once (i.e., asking a question).
-
 
 
 

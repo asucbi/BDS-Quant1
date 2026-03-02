@@ -102,6 +102,7 @@ cue_data <- cue_data %>%
 # check out the structure again
 
 str(cue_data)
+levels(cue_data$Condition)
 
 ```
 
@@ -140,10 +141,18 @@ What is your interpretation of each of the predictors? What does the F value tel
 
 model <- lm(Total_Final ~ Condition, data=cue_data) 
 summary(model)
+# interpret overall and individual effects
+
+
+
+
+
+
+
 
 # F-value says there is a difference somewhere, but we don't see one in our summary!
 # we might want to look at the contrasts
-contrasts(cue_data$Condition)
+#contrasts(cue_data$Condition)
 
 ```
 
@@ -182,7 +191,7 @@ cue_data %>%
 
 ```
 
-Which equation for Pooled SD should we use?
+Which equation for SD should we use?
 
 Note: our Pooled SD will differ based on the comparison we're testing.
 
@@ -217,13 +226,15 @@ cue_overt <- (.500-.524)/ sqrt( ((43 - 1) * 0.168 ^ 2 + (40 - 1) * .135 ^ 2) / (
 
 cue_restudy <- (.500-.437)/ sqrt( ((43 - 1) * 0.168 ^ 2 + (40 - 1) * .169 ^ 2) / (43 + 40 - 2))
 
-overt_restudy <- (.525-.437)/ sqrt((0.135^2 + .169^2)/2)
+overt_restudy <- (.524-.437)/ sqrt((0.135^2 + .169^2)/2)
 
 cue_overt
 
 cue_restudy
 
 overt_restudy
+
+# Heuristics for Cohen's d: 0.20 = S, 0.50 = M, 0.80 = L
 
 ```
 
@@ -252,7 +263,7 @@ Let's first check out the `d_ind_t` function. What information do you need to pr
 
 
 
-cue_overt_d <- d_ind_t(.500, .524, .168, .135, 43, 40)
+cue_overt_d <- d_ind_t(m1 = .500, m2 = .524, .168, .135, 43, 40)
 
 cue_restudy_d <- d_ind_t(.500, .437, .168, .169, 43, 40)
                     
@@ -354,7 +365,7 @@ f_squared <- r_squared/(1-r_squared)
 
 
 
-WebPower::wp.regression(n=NULL, p1=2, f2=f_squared, alpha=0.05, power=.9)
+WebPower::wp.regression(n=200, p1=2, f2=NULL, alpha=0.05, power=.9)
 
 # note: you can plug in `NULL` for different arguments if you have different questions
 
@@ -400,19 +411,45 @@ power_result <- ANOVA_power(design_result,
                                   nsims = nsims, 
                                   seed = 1234)
 
-power_result
 
 ```
 
 What is our power to detect the overall effect of `Condition`? What about the pairwise comparisons between the groups?
 
+
+
+
+
+
+
+
+
 ANSWER: To detect the effect of Condition we have only 66.8% power (Yikes). To detect the cue-JOL vs. overt difference we have 10.0% power. To detect the Cue-JOL vs. Restudy difference we have 43.2% power. Finally, to detect the overt and restudy difference we have power of 72.2%.
+
 
 What kind of power analysis would this be?
 
+
+
+
+
+
+
+
+
 ANSWER: We're doing it after we ran the study -- Post-hoc
 
+
+
 What do you think of the power for this study design?
+
+
+
+
+
+
+
+
 
 ANSWER: Not very well powered study.
 
@@ -446,15 +483,43 @@ power_result_vig_2 <- ANOVA_power(design_result,
 
 What would our power be using the current study parameters to detect overall effect? How about each pairwise comparison?
 
+
+
+
+
+
+
+
+
 ANSWER: To detect the effect of Condition we have 97% power -- much better! To detect the cue-JOL vs. overt difference we have 14.8% power. To detect the Cue-JOL vs. Restudy difference we have 83.6% power. Finally, to detect the overt and restudy difference we have power of 97.8%.
+
+
 
 What kind of power analysis would this be?
 
+
+
+
+
+
+
+
+
 ANSWER: We're doing it before we run the replication, so its a priori -- good!
+
 
 What do you think of the power for this study design?
 
+
+
+
+
+
+
+
+
 ANSWER: Much better, except for the effect of JOL vs OR is still very low. Why? Look back at Cohen's d values - effect for JOL vs OR is only -0.16 while others are .41 and .58 (much larger)
+
 
 # Let's say I want to power the study to be able to detect a .05 point difference on the final test between the Cue-Only JOLs and Overt Retrieval groups (e.g., the difference between their means).
 
@@ -485,7 +550,16 @@ power_result <- ANOVA_power(design_result,
 
 What is our power to detect a .05 point difference with 40 per group?
 
+
+
+
+
+
+
+
+
 ANSWER: We have 30% power (not great!)
+
 
 # Plot a power curve just for this difference. What sample size is needed to achieve 90% power?
 
@@ -496,5 +570,13 @@ plot_power(design_result, min_n = 10, max_n = 400)
 ```
 
 How many participants would you need to achieve 90% power?
+
+
+
+
+
+
+
+
 
 ANSWER: You need 205 participants to have 90% power to detect a .05 difference between the two conditions.
