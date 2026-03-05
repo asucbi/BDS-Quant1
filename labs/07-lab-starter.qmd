@@ -44,13 +44,13 @@ The data has 4 columns:
 -   income: average income (in the late 80s / early 90s)
 -   winter: average temperature during winter months
 
-# We should always examine our data first! 
+# We should always examine our data first!
 
 Let's start by using the `describe()` function in the `{psych}` package to examine our data.
 
 ```{r describe, echo=FALSE, message=FALSE, eval=FALSE}
 
-
+describe(XXX)
 ```
 
 > **Question: What do you noticed about the means and standard deviations of our variables? ...range? ...scale?**
@@ -72,7 +72,7 @@ Now, let's center the income variable and re-run the regression.
 
 ```{r centered, echo=FALSE, message=FALSE}
 
-#first, create the income variable
+#first, create the centered income variable
 pop <- pop %>% 
   mutate(income_c = XXX))
 
@@ -100,11 +100,10 @@ model_2 <- lm(population ~ income_c, data = pop)
 summary(model_2)
 
 ```
+
 > **Question: How would you interpret the intercept? Is this meaningful?**
 
-
 > **Question: How would you interpret the slope?**
-
 
 Now, let's try a multiple regression. Predict population from income centered and winter temperature. Get a summary of your model.
 
@@ -117,15 +116,11 @@ summary(model_3)
 
 > **Question: How would you interpret the intercept? Is this meaningful?**
 
-
 > **Question: How would you interpret the slope for income_c?**
-
 
 > **Question: How would you interpret the slope for winter?**
 
-
 > **Question: How would you summarize your findings?**
-
 
 Now, let's get confidence intervals and effect sizes for each of our predictors.
 
@@ -144,6 +139,7 @@ eta_squared(model_3, XXX)
 Now, let's say we want to know whether income or winter temperature is the stronger predictor of population. In the previous model, we found the the expected increase in population for a one-unit increase in income (holding winter temp constant) is 0.38 and the expected increase for a one-unit increase in winter temp (holding income constant) is 206.65. However, because these measures are on different scales, we can't say that the effect of temperature is bigger just because the value is larger. To make this comparison possible, we can *scale* our variables.
 
 First, let's z-score each of our variables.
+
 ```{r z-scores, echo=FALSE, message=FALSE}
 
 pop <- pop %>% 
@@ -154,6 +150,7 @@ pop <- pop %>%
 describe(pop)
 
 ```
+
 Next, run a regression predicting population from the z-scored variables you just created. Check out a summary.
 
 ```{r stand-reg, echo=FALSE, message=FALSE}
@@ -162,19 +159,16 @@ model_4 <- lm(population ~ XXX + XXX, data = pop)
 summary(model_4)
 
 ```
-> **Question: How would you interpret the intercept?**
 
+> **Question: How would you interpret the intercept?**
 
 > **Question: How would you interpret the effect of income?**
 
-
 > **Question: How would you interpret the effect of winter?**
-
 
 > **Question: Which is the stronger predictor?**
 
-
-Compare the summary for your current model (model_4) to the summary for the previous model (model_3). 
+Compare the summary for your current model (model_4) to the summary for the previous model (model_3).
 
 ```{r compare-summaries, echo=FALSE, message=FALSE, eval=FALSE}
 
@@ -182,12 +176,12 @@ summary(model_4)
 summary(model_3)
 
 ```
-> **Question: What changes? What stays the same?**
 
+> **Question: What changes? What stays the same?**
 
 # Log Transformation
 
-Now, let's focus on the effect of winter temperature on population size. 
+Now, let's focus on the effect of winter temperature on population size.
 
 First, let's look at the distribution of our variables.
 
@@ -206,8 +200,8 @@ pop %>%
   labs(title = "Histogram of Winter Temperature")
 
 ```
-> **Question: Which variable might we want to log transform? Why?**
 
+> **Question: Which variable might we want to log transform? Why?**
 
 Log transform the population variable, then examine the distribution again.
 
@@ -223,8 +217,8 @@ pop %>%
   labs(title = "Histogram of (Log) Population Size")
 
 ```
-> **Question: How does the data distribution look now?**
 
+> **Question: How does the data distribution look now?**
 
 Now, run a regression predicting population from winter temperature. Examine the summary.
 
@@ -234,30 +228,31 @@ model_5 <- lm(population_log ~ winter, data = pop)
 summary(model_5)
 
 ```
+
 > **Question: What do you need to do before you can interpret the effect of winter temp on population?**
 
-
-Recall that: 
+Recall that:
 
 $log_b(n) = x \leftrightarrow b^x = n$
 
-To interpret the intercept, use the `exp()` function to put the outcome variable back into original units. 
+To interpret the intercept, use the `exp()` function to put the outcome variable back into original units.
 
 ```{r interpret-intercept, echo=FALSE, message=FALSE, eval=FALSE}
 
 exp(XXX)
 
 ```
-> **Question: How would you interpret the intercept?**
 
+> **Question: How would you interpret the intercept?**
 
 Now, use the following steps to interpret the slope:
 
-  1.  expotentiate the coefficient
-  2.  subtract one from this number
-  3.  multiply by zero to get a percentage
+1.  expotentiate the coefficient
+2.  subtract one from this number
+3.  multiply by zero to get a percentage
 
 For every one-unit increase in our predictor, our dependent variable increases/decreases by this percent.
+
 ```{r interpret-slope, echo=FALSE, message=FALSE, eval=FALSE}
 
 #expotentiate the coefficient
@@ -267,20 +262,18 @@ winter_exp <- exp(XXX)
 (XXX-1)*100
 
 ```
-> **Question: How would you interpret the slope?**
 
+> **Question: How would you interpret the slope?**
 
 # Polynomials
 
 # Research scenario
 
-Using cross-sectional data, we will examine the development (change and/or stability) of conscientiousness in adulthood (age 21 to 60).  Based on previous research, we hypothesize that people will increase in conscientiousness with age; however, the rate of increase will be greatest during early adulthood (20s and 30s) and slow thereafter. 
+Using cross-sectional data, we will examine the development (change and/or stability) of conscientiousness in adulthood (age 21 to 60). Based on previous research, we hypothesize that people will increase in conscientiousness with age; however, the rate of increase will be greatest during early adulthood (20s and 30s) and slow thereafter.
 
 > **Question: Which part of the above paragraph refers to a *linear* trend of age?**
 
-
 > **Question: Which part of the above paragraph refers to a *quadratic* trend of age?**
-
 
 ## Read in the data
 
@@ -299,7 +292,7 @@ The data has 2 columns:
 -   age: participant age
 -   conscientiousness: score on conscientiousness measure
 
-# We should always examine our data first! 
+# We should always examine our data first!
 
 Let's start by plotting the relation between conscientiousness and age.
 
@@ -310,8 +303,8 @@ polynomial %>%
   geom_point()
 
 ```
-> **Question: What do you notice about the relation between age and conscientiousness?**
 
+> **Question: What do you notice about the relation between age and conscientiousness?**
 
 Fist, we will examine a linear trend of age. Run a model predicting conscientiousness from age. Check out the summary.
 
@@ -321,13 +314,12 @@ model_linear <- lm(conscientiousness ~ XXX, data = polynomial)
 summary(model_linear)
 
 ```
-> **Question: How would you interpret the intercept?**
 
+> **Question: How would you interpret the intercept?**
 
 > **Question: How would you interpret the slope?**
 
-
-Even if we found a significant linear trend, we had a hypothesis about a quadratic, so let's test that! 
+Even if we found a significant linear trend, we had a hypothesis about a quadratic, so let's test that!
 
 First, create the quadratic term. Then, run a model predicting conscientiousness from linear and quadratic effects of age. Check out the summary.
 
@@ -340,10 +332,10 @@ model_quad <- lm(conscientiousness ~ XXX + XXX, data = polynomial)
 summary(model_quad)
 
 ```
+
 > **Question: What can you say about the relation between conscientiousness and age?**
 
-
-Let's test a cubic trend as well. Add a cubic term to your data (age^3) and run a third model. Check out the summary.
+Let's test a cubic trend as well. Add a cubic term to your data (age\^3) and run a third model. Check out the summary.
 
 ```{r con-age-cubic, echo=FALSE, message=FALSE, eval=FALSE}
 
@@ -354,10 +346,10 @@ model_cubic <- lm(conscientiousness ~ age + age_2 + age_3, data = polynomial)
 summary(model_cubic)
 
 ```
+
 > **Question: Which model would you choose?**
 
-
-Let's compare our models using the `anova()` function and also examine the change in _R^2_ across our models.
+Let's compare our models using the `anova()` function and also examine the change in *R\^2* across our models.
 
 ```{r compare-models, echo=FALSE, message=FALSE, eval=FALSE}
 
@@ -368,8 +360,8 @@ summary(model_quad)$r.squared - summary(model_linear)$r.squared
 summary(model_cubic)$r.squared - summary(model_quad)$r.squared
 
 ```
-> **Question: Which model is the best fit for the data?**
 
+> **Question: Which model is the best fit for the data?**
 
 BUT: Let's see if we have multicollinaerity issues with our chosen model. Use `check_collinaerity()` from the `{performance}` package to test the quadratic model.
 
@@ -378,8 +370,8 @@ BUT: Let's see if we have multicollinaerity issues with our chosen model. Use `c
 check_collinearity(model_quad)
 
 ```
-> **Question: Do we have a problem with multicollinaerity?**
 
+> **Question: Do we have a problem with multicollinaerity?**
 
 Center your predictor, create the quadratic term, and run the model again. Check for multicollinaerity.
 
@@ -395,20 +387,19 @@ summary(model_quad_c)
 check_collinearity(model_quad_c)
 
 ```
+
 > **Question: NOW, do we have a problem with multicollinaerity?**
 
-
 > **Question: What is your final interpretation of the relation between age and conscientiousness?**
-
 
 > **Question: What information would you include in a summary?**
 
 -   clearly define the variables
 -   describe the model
 -   mention both linear and quadratic terms
--   report *overall* model fit ( _R_<sup>2</sup>, _F_, _df_, _p_-value)
--   report linear effect ( _b_, _SE_, _t_ statistic with associated _df_, 95%CI, _p_-value)
+-   report *overall* model fit ( *R*<sup>2</sup>, *F*, *df*, *p*-value)
+-   report linear effect ( *b*, *SE*, *t* statistic with associated *df*, 95%CI, *p*-value)
 -   interpret linear effect (e.g., as x increases/decreases, y increases/decreases)
--   report quadratic effect ( _b_, _SE_, _t_ statistic with associated _df_, 95%CI, _p_-value)
+-   report quadratic effect ( *b*, *SE*, *t* statistic with associated *df*, 95%CI, *p*-value)
 -   interpret quadratic effect (e.g., the negative quadratic term suggests an inverted u-shape, where X increases with Y up to a point and then it decreases)
 -   in one sentence, summarize what you found in non-statistical language
