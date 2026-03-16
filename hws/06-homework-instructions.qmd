@@ -115,7 +115,11 @@ Answer the following questions:
 model <- lm(teacher_salary ~ region, data = salary)
 summary(model)
 
-contrasts(salary$region)
+testcontrasts(salary$region)
+
+salary %>% 
+  group_by(region) %>% 
+  summarise(avg_salary = mean(teacher_salary, na.rm = TRUE))
 
 ```
 

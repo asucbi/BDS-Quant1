@@ -111,8 +111,8 @@ Notice that the only difference between these two equations are their intercepts
 cheat %>% 
 ggplot(aes(x = honesty, y = claimed_solved)) +
   geom_point() +
-  geom_abline(slope = -.45, intercept = 6.04, color = "red", size = 1) +
-  geom_abline(slope = -.45, intercept = 7.16, color = "blue", size = 1) +
+  geom_abline(slope = -.45, intercept = 6.04, color = "red", linewidth = 1) +
+  geom_abline(slope = -.45, intercept = 7.16, color = "blue", linewidth = 1) +
   geom_label(x = 1.5, y = 5.2, label = "shredder") +
   geom_label(x = 1.5, y =6.5, label = "non-shredder") +
   theme_minimal()
@@ -273,7 +273,7 @@ Now, let's add the interaction term to test whether the effect of `confidence` o
 
 ```{r}
 
-model2_int <- lm(claimed_solved ~ honesty*confidence, data = cheat)
+model2_int <- lm(claimed_solved ~ honesty * confidence, data = cheat)
 summary(model2_int)
 
 ```
@@ -288,7 +288,7 @@ check_collinearity(model2_int)
 
 ```
 
-> Question: Is there multicollinaerity? What could you do to fix it?
+> Question: Is there multicollinearity? What could you do to fix it?
 
 ## Centering
 
