@@ -67,6 +67,11 @@ cheat %>%
             sd_honesty = sd(honesty, na.rm = TRUE),
             mean_claimed = mean(claimed_solved, na.rm = TRUE),
             sd_claimed = sd(claimed_solved, na.rm = TRUE))
+
+# let's make condition a factor
+
+cheat <- cheat %>% 
+  mutate(condition = as.factor(condition))
 ```
 
 # Simple regression

@@ -45,6 +45,15 @@ cheat <- read_csv("data/cheating_data.csv")
 
 ```{r}
 
+# do some exploration here
+
+
+
+# let's make condition a factor
+
+cheat <- cheat %>% 
+  mutate(condition = as.factor(condition))
+
 
 ```
 

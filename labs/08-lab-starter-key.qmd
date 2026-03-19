@@ -81,6 +81,12 @@ cheat %>%
             sd_honesty = sd(honesty, na.rm = TRUE),
             mean_claimed = mean(claimed_solved, na.rm = TRUE),
             sd_claimed = sd(claimed_solved, na.rm = TRUE))
+
+# let's make condition a factor
+
+cheat <- cheat %>% 
+  mutate(condition = as.factor(condition))
+
 ```
 
 # Simple regression
@@ -169,7 +175,7 @@ summary(model_simple)
 
 
 
-ANSWER: $$\hat{claimed_i} = 6.76 -0.50honesty $$
+ANSWER: $$\hat{claimed_i} = 6.76 - 0.50honesty $$
 
 > Question: What do each of the parameter estimates mean?
 
@@ -231,7 +237,7 @@ summary(model_main_effects)
 
 
 
-ANSWER: $$\hat{claimed_i} = 6.04 -0.45honesty + 1.12condition$$
+ANSWER: $$\hat{claimed_i} = 6.04 - 0.45honesty + 1.12condition$$
 
 > Question: What do each of the parameter estimates mean?
 
