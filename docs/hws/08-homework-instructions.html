@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -29,10 +29,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="08-homework-instructions_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="08-homework-instructions_files/libs/quarto-html/anchor.min.js"></script>
 <link href="08-homework-instructions_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="08-homework-instructions_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="08-homework-instructions_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="08-homework-instructions_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="08-homework-instructions_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="08-homework-instructions_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="08-homework-instructions_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -71,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><p>Go to <a href="posit.cloud">posit.cloud</a> and then <strong>navigate to the course workspace</strong> via the left sidebar.</p>
 <ul>
-<li>Look for the course workspace called “Statistical Methods Spring 2025”</li>
+<li>Look for the course workspace called “Spring 2026: Statistical Methods”</li>
 </ul></li>
 <li><p>Open the project titled <strong>Module 8</strong> This module contains the starter files that you will use for the lab and for your homework.</p></li>
 </ul>
@@ -101,6 +101,11 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>performance</strong>: a package for checking model assumptions (e.g., multicollinaerity)</li>
 </ul>
 <p>Please load these packages using the <code>library()</code> function. If the packages don’t load, you may need to <code>install.packages()</code> first.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.5.2</code></pre>
+</div>
+</div>
 </section>
 <section id="data-summary" class="level2">
 <h2 class="anchored" data-anchor-id="data-summary">Data Summary</h2>
@@ -120,10 +125,10 @@ ul.task-list li input[type="checkbox"] {
 <section id="exercise-1" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1">Exercise 1:</h2>
 <ol type="1">
-<li>Run a model testing whether test anxiety moderates the relationship between time spent studying and test performance. Take steps to reduce multicollinearity before running the model.</li>
+<li>Run a model testing whether <em>test anxiety</em> moderates the relationship between time spent studying and test performance. Take steps to reduce multicollinearity <em>before</em> running the model (think: what can I do <em>before running the model</em> to reduce multicollinearity).</li>
 </ol>
 <ol start="2" type="1">
-<li><p>Interpret each of the model coefficients.</p></li>
+<li><p>Write out the full model with parameter estimates filled in. Interpret each of the model coefficients (parameters).</p></li>
 <li><p>Visualize the interaction using <code>ggplot</code>. Make sure to clearly label your axes.</p></li>
 </ol>
 <ol start="4" type="1">
@@ -133,17 +138,17 @@ ul.task-list li input[type="checkbox"] {
 <li>Test whether the simple slopes for low anxiety and high anxiety are significantly different from each other. Answer the question: Do the slopes differ significantly from each other?</li>
 </ol>
 <ol start="6" type="1">
-<li><p>Write an APA style summary of your results. We have had a lot of practice extracting values from objects, and I know this can be tedious (though its a good skill to have!). If you would like to type out the numbers rather than extracting them from objects, that is fine. However, be careful to double-check your values! If you want to practice extracting values from objects, I encourage you to keep doing it!</p></li>
-<li><p>Answer the questions: (a) What contrast codes were applied to the <code>anxiety</code> factor in the model you ran? (b) How would your interpretation of each of the coefficients change if you instead assigned these contrasts: -0.5 = low, 0.5 = high?</p></li>
+<li><p>Write an APA style summary of your results. Use the example from class to guide your summary.</p></li>
+<li><p>Answer the questions: (a) What contrast codes were applied to the <code>anxiety</code> factor in the model you ran? (b) How would your interpretation of each of the coefficients change if you instead assigned these contrasts: -0.5 = low, 0.5 = high? No need to re-run the model, I just want your explanation.</p></li>
 </ol>
 </section>
 <section id="exercise-2" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-2">Exercise 2:</h2>
 <ol type="1">
-<li>Now, run a model testing whether students’ previous test score moderates the relationship between time spent studying and test performance. Take steps to reduce multicollinearity before running the model.</li>
+<li>Now, run a model testing whether students’ <em>previous test score</em> moderates the relationship between time spent studying and test performance. Take the same steps to reduce multicollinearity before running the model.</li>
 </ol>
 <ol start="2" type="1">
-<li><p>Interpret each of the model coefficients.</p></li>
+<li><p>Write out the full model with parameter estimates filled in. Interpret each of the model coefficients (parameters).</p></li>
 <li><p>Write out the three equations for examining the effect of <code>prev_score</code> on <code>perf</code> at low, medium, and high levels of <code>study_time</code>.</p></li>
 </ol>
 <ol start="5" type="1">
@@ -153,7 +158,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Test whether the slope of <code>prev_score</code> on <code>perf</code> differs from zero across low, medium, and high levels of <code>study_time</code>?</li>
 </ol>
 <ol start="7" type="1">
-<li>Write an APA style summary of your results. We have had a lot of practice extracting values from objects, and I know this can be tedious (though its a good skill to have!). If you would like to type out the numbers rather than extracting them from objects, that is fine. However, be careful to double-check your values! If you want to practice extracting values from objects, I encourage you to keep doing it!</li>
+<li>Write an APA style summary of your results. Use the example from class to guide your summary.</li>
 </ol>
 </section>
 <section id="render-and-submit-your-document." class="level2">
@@ -264,8 +269,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -376,7 +379,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

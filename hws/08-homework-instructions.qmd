@@ -12,7 +12,7 @@ In this week's homework, you will be asked to demonstrate your understanding of 
 
 -   Go to [posit.cloud](posit.cloud) and then **navigate to the course workspace** via the left sidebar.
 
-    -   Look for the course workspace called "Statistical Methods Spring 2025"
+    -   Look for the course workspace called "Spring 2026: Statistical Methods"
 
 -   Open the project titled **Module 8** This module contains the starter files that you will use for the lab and for your homework.
 
@@ -48,7 +48,7 @@ library(tidyverse)
 library(papaja) #for formatting p values
 library(psych) #for generating easy descriptives
 library(emmeans) #for examining simple slopes
-library(performance) #for checking multicollinaerity
+library(performance) #for checking multicollinearity
 library(knitr) #for formatting tables
 
 ```
@@ -76,7 +76,7 @@ The data has 4 columns:
 
 ## Exercise 1:
 
-1.  Run a model testing whether test anxiety moderates the relationship between time spent studying and test performance. Take steps to reduce multicollinearity before running the model.
+1.  Run a model testing whether *test anxiety* moderates the relationship between time spent studying and test performance. Take steps to reduce multicollinearity *before* running the model (think: what can I do *before running the model* to reduce multicollinearity).
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 test_perf <- test_perf %>% 
@@ -89,7 +89,7 @@ summary(model)
 
 ```
 
-2.  Interpret each of the model coefficients.
+2.  Write out the full model with parameter estimates filled in. Interpret each of the model coefficients (parameters).
 
 3.  Visualize the interaction using `ggplot`. Make sure to clearly label your axes.
 
@@ -112,13 +112,13 @@ emtrends(model, ~anxiety, var = "study_time_c") %>%
 emtrends(model, pairwise~anxiety, var = "study_time_c")
 ```
 
-6.  Write an APA style summary of your results. We have had a lot of practice extracting values from objects, and I know this can be tedious (though its a good skill to have!). If you would like to type out the numbers rather than extracting them from objects, that is fine. However, be careful to double-check your values! If you want to practice extracting values from objects, I encourage you to keep doing it!
+6.  Write an APA style summary of your results. Use the example from class to guide your summary.
 
-7.  Answer the questions: (a) What contrast codes were applied to the `anxiety` factor in the model you ran? (b) How would your interpretation of each of the coefficients change if you instead assigned these contrasts: -0.5 = low, 0.5 = high?
+7.  Answer the questions: (a) What contrast codes were applied to the `anxiety` factor in the model you ran? (b) How would your interpretation of each of the coefficients change if you instead assigned these contrasts: -0.5 = low, 0.5 = high? No need to re-run the model, I just want your explanation.
 
 ## Exercise 2:
 
-1.  Now, run a model testing whether students' previous test score moderates the relationship between time spent studying and test performance. Take steps to reduce multicollinearity before running the model.
+1.  Now, run a model testing whether students' *previous test score* moderates the relationship between time spent studying and test performance. Take the same steps to reduce multicollinearity before running the model.
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 test_perf <- test_perf %>% 
@@ -129,7 +129,7 @@ summary(model)
 
 ```
 
-2.  Interpret each of the model coefficients.
+2.  Write out the full model with parameter estimates filled in. Interpret each of the model coefficients (parameters).
 
 3.  Write out the three equations for examining the effect of `prev_score` on `perf` at low, medium, and high levels of `study_time`.
 
@@ -165,7 +165,7 @@ emtrends(model,~study_time_c, var="prev_score_c", at=mylist) %>%
 
 ```
 
-7.  Write an APA style summary of your results. We have had a lot of practice extracting values from objects, and I know this can be tedious (though its a good skill to have!). If you would like to type out the numbers rather than extracting them from objects, that is fine. However, be careful to double-check your values! If you want to practice extracting values from objects, I encourage you to keep doing it!
+7.  Write an APA style summary of your results. Use the example from class to guide your summary.
 
 ## Render and submit your document.
 
