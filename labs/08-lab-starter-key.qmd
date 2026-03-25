@@ -407,7 +407,7 @@ summary(model_int)
 
 
 
-ANSWER: $$\hat{claimed_i} = 4.75 -0.85honesty_C + 1.12condition + 0.78honest_C*condition$$
+ANSWER: $$\hat{claimed_i} = 4.75 - 0.85honesty_C + 1.12condition + 0.78honest_C*condition$$
 
 > Question: What do each of the parameter estimates mean?
 
@@ -428,9 +428,9 @@ b1: -0.85, for every 1-unit increase in honesty_c, the model predicts a *decreas
 
 b2: 1.12, the difference in `claimed_solved` between the non-shredder and shredder conditions while controlling for `honesty_c` (when honesty_c = 0, which is the mean of honesty)
 
-Claimed = 4.75 -0.85Honesty_c + 1.12Condition + 0.78(Honesty_c X Condition)
+Claimed = 4.75 - 0.85Honesty_c + 1.12Condition + 0.78(Honesty_c X Condition)
 
-Mean_Non-shredder: 4.75 - 0.85(0) + 1.12(0) + 0.78(0x0) = 4.75 Mean_Shredder: 4.75 -0.85(0) + 1.12(1) + 0.78(0x1) = 5.87
+Mean_Non-shredder: 4.75 - 0.85(0) + 1.12(0) + 0.78(0x0) = 4.75 Mean_Shredder: 4.75 - 0.85(0) + 1.12(1) + 0.78(0x1) = 5.87
 
 These are called *adjusted means*. Another way of obtaining these adjusted means is by using the `emmeans` function.
 
@@ -451,7 +451,7 @@ To get the *simple slopes* we can use the `emtrends` function from the `emmeans`
 
 There are different questions we can ask by calculating simple slopes and performing hypothesis tests with them.
 
-Q1: Is honesty a significant predictor of number of problems people claim to have solved at each level of condition (non-shredder & shredder conditions)?
+Q1: Is honesty a significant predictor of number of problems people claim to have solved at each level of condition (non-shredder & shredder conditions)? (e.g., is the slope significantly different from zero)
 
 ```{r}
 emtrends(model_int, ~condition, var = "honesty_c") %>% 
@@ -578,7 +578,16 @@ ggplot(aes(x = confidence, y = claimed_solved)) +
 
 > Question: What is the relation between `claimed_solved` and each of these variables?
 
-ANSWER: honesty looks negative, confidence is slightly positive but not significant
+
+
+
+
+
+
+
+
+
+ANSWER: honesty looks negative, confidence is slightly positive but not likely to be significant
 
 # Continuous x Continuous Interaction
 
@@ -592,6 +601,14 @@ summary(model2_int)
 ```
 
 > Question: Is the interaction significant?
+
+
+
+
+
+
+
+
 
 ANSWER: YES!
 
@@ -629,7 +646,7 @@ We already created the centered honesty predictor. Let's do the same for `confid
 #students: fill in code
 
 # cheat <- cheat %>%
-#    mutate(confidence_c = XXX) # subtract the mean
+#    mutate(confidence_c = confidence - mean(confidence, na.rm = TRUE)) # subtract the mean
 
 
 
@@ -654,7 +671,7 @@ Run a multiple regression model predicting `claimed_solved` from `honest_c`, `co
 
 #students: fill in the code and run this model
 
-# model2_int_c <- lm(XXX ~ XXX, data = cheat)
+# model2_int_c <- lm(claimed_solved ~ honesty_c * confidence_c, data = cheat)
 # summary(model2_int_c)
 
 

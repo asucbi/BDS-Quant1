@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Module 9: Lab Instructions</title>
+<title>Module 9: Lab Instructions (Instructor)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,16 +57,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="09-lab-worksheet_files/libs/clipboard/clipboard.min.js"></script>
-<script src="09-lab-worksheet_files/libs/quarto-html/quarto.js"></script>
-<script src="09-lab-worksheet_files/libs/quarto-html/popper.min.js"></script>
-<script src="09-lab-worksheet_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="09-lab-worksheet_files/libs/quarto-html/anchor.min.js"></script>
-<link href="09-lab-worksheet_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="09-lab-worksheet_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="09-lab-worksheet_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="09-lab-worksheet_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="09-lab-worksheet_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="09-lab-worksheet-instructor_files/libs/clipboard/clipboard.min.js"></script>
+<script src="09-lab-worksheet-instructor_files/libs/quarto-html/quarto.js"></script>
+<script src="09-lab-worksheet-instructor_files/libs/quarto-html/popper.min.js"></script>
+<script src="09-lab-worksheet-instructor_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="09-lab-worksheet-instructor_files/libs/quarto-html/anchor.min.js"></script>
+<link href="09-lab-worksheet-instructor_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="09-lab-worksheet-instructor_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="09-lab-worksheet-instructor_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="09-lab-worksheet-instructor_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="09-lab-worksheet-instructor_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -108,7 +108,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Module 9: Lab Instructions</h1>
+<h1 class="title">Module 9: Lab Instructions (Instructor)</h1>
 </div>
 
 
@@ -163,6 +163,7 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>Question: What do you notice about the structure of the data? What changes might you want to make?</p>
 </blockquote>
+<p>ANSWER: drug and dose are not factors and we might want to make them factors</p>
 </section>
 </section>
 <section id="turn-drug-and-dose-into-factors." class="level1">
@@ -180,6 +181,7 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>Question: From the means, what can you say about the relation between drug and dose in predicting pain?</p>
 </blockquote>
+<p>ANSWER: it looks like maybe there is no effect of drug at Low doses but pain may be higher for Drug_A than Drug_B at Medium doses.</p>
 <section id="linear-modeling-approach-treatmentdummy-coding" class="level2">
 <h2 class="anchored" data-anchor-id="linear-modeling-approach-treatmentdummy-coding">Linear modeling approach: treatment/dummy-coding</h2>
 <p>Let’s see if this is true, run a regression analysis predicting <code>pain_level</code> from <code>drug</code>, <code>dose</code>, and their interaction.</p>
@@ -188,9 +190,16 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>Question: Write the full model with parameter estimates filled in.</p>
 </blockquote>
+<p><span class="math display">\[\hat{pain_i} = 8.50 - .28(drug) - .79(dose) - .54(drugxdose) \]</span></p>
 <blockquote class="blockquote">
 <p>Question: What do each of the parameter estimates mean?</p>
 </blockquote>
+<p>ANSWER:</p>
+<p>Plus in different values for combinations into the model.</p>
+<p>Intercept: predicted outcome when drug = 0 (Drug_A) and dose = 0 (Low)</p>
+<p>Drug: the mean difference in the intercept for a one-unit change in drug when dose = 0; change from the intercept for a low dose for Drug_B</p>
+<p>Dose: the mean difference in the intercept for a one-unit change in dose when drug = 0; change from the intercept for Drug_A for a medium dose</p>
+<p>Interaction: Does the difference between Drug_A and Drug_B differ across Low and Medium doses?</p>
 </section>
 <section id="linear-modeling-approach-deviation-coding" class="level2">
 <h2 class="anchored" data-anchor-id="linear-modeling-approach-deviation-coding">Linear modeling approach: deviation-coding</h2>
@@ -198,9 +207,16 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>Question: Write the full model with parameter estimates filled in.</p>
 </blockquote>
+<p><span class="math display">\[\hat{pain_i} = 7.83 - .55(drug) + 1.05(dose) - .54(drugxdose) \]</span></p>
 <blockquote class="blockquote">
 <p>Question: What do each of the parameter estimates mean?</p>
 </blockquote>
+<p>ANSWER:</p>
+<p>Intercept: the grand mean (overall mean of all the cells)</p>
+<p>Drug: the main effect of drug</p>
+<p>Dose: the main effect of dose</p>
+<p>Interaction: interaction betwen drug and dose</p>
+<p>No significant effects.</p>
 </section>
 <section id="anova-approach" class="level2">
 <h2 class="anchored" data-anchor-id="anova-approach">ANOVA approach</h2>
@@ -208,6 +224,7 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>Question: How do the results from the ANOVA compare to the Regression?</p>
 </blockquote>
+<p>ANSWER: They are essentially the same (t^2 = F)</p>
 </section>
 <section id="x3-factorial-anova" class="level2">
 <h2 class="anchored" data-anchor-id="x3-factorial-anova">2x3 Factorial ANOVA</h2>
@@ -215,12 +232,15 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>Question: What are the three effects that we are testing? What is the null and alternative hypothesis for each test?</p>
 </blockquote>
+<p>ANSWER:</p>
+<p>Drug: H0: pain level is equal across all drugs; H1: at least one drug differs Dose: H0: pain level is equal across dosages; H1: at least one dosage differs DrugxDose: H0: the effect of dose does not depend on drug (and vice versa); H1: the effect of dose depends on drug (or vice versa)</p>
 <p>Next, run a linear model predicting pain_level from <code>drug</code>, <code>dose</code>, and their interaction. Make sure you’re using the <code>pain</code> dataset.</p>
 <p>The output becomes a little more challenging to interpret and doesn’t give us information about overall effects (e.g., Is there a main effect of drug? …an interaction between drug and dose?)</p>
 <p>One way we can make it more interpretable is using an ANOVA approach. Let’s use the <code>aov_ez</code> function in the <code>{afex}</code> package again to run the ANOVA.</p>
 <blockquote class="blockquote">
 <p>Question: How would you interpret the effects (remember these are omnibus tests)?</p>
 </blockquote>
+<p>ANSWER: No effect of drug. Difference somewhere in dose. Interaction between drug and dose.</p>
 </section>
 </section>
 <section id="lets-compare-this-to-the-same-anova-using-the-aov-function-in-base-r." class="level1">
@@ -228,6 +248,7 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>Question: Compare the output of the two ANOVA models. Do they differ? If so, why?</p>
 </blockquote>
+<p>ANSWER: Yes! In particular, <code>drug</code> goes from non-significant (with Type III SS) to significant (with Type I SS). This is because Type I asks how much of the <em>total variance</em> <code>drug</code> explains and Type III asks how much of the variance left over after <code>dose</code> and <code>drug x dose</code> is explained by <code>drug</code>.</p>
 <section id="explore-the-significant-interaction" class="level2">
 <h2 class="anchored" data-anchor-id="explore-the-significant-interaction">Explore the significant interaction</h2>
 <p>We found both a significant effect of <code>dose</code> and a significant interaction. Because the interaction is significant, we will focus on that (remember that we should use caution in interpreting main effects in the presence of an interaction).</p>
@@ -235,6 +256,7 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>Question: What does this plot suggest?</p>
 </blockquote>
+<p>ANSWER: For Drug A, high dose levels are really effective at reducing pain while Low and Medium levels don’t differ as much. For Drug B there doesn’t seem to be a huge difference in pain across the three dosage levels.</p>
 <p>Now, we will use emmeans to explore the effect of <code>dose</code> at each level of <code>drug</code>.</p>
 <p>Don’t forget effect sizes!</p>
 <p>In our model, the main effect of <code>dose</code> was significant. While we are being careful in interpretation due to the significant interaction, maybe we are still curious which levels of dose differ significantly from one another.</p>
@@ -242,9 +264,11 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>Question: Overall, what do these results reveal about the interaction bewteen drug and dosage?</p>
 </blockquote>
+<p>ANSWER: For Drug A, high dose levels are really effective at reducing pain while Low and Medium levels don’t differ as much. For Drug B there doesn’t seem to be a huge difference in pain across the three dosage levels.</p>
 <blockquote class="blockquote">
 <p>Question: What information would you include in a summary?</p>
 </blockquote>
+<p>ANSWER: What you did, significant effects (include means, sds, F, df, p-values, effect size, confidence intervals, etc), report non-significant effects but no need to go into detail, general interpretation of what you found. Include a figure depicting the interaction effect.</p>
 </section>
 <section id="anova-power" class="level2">
 <h2 class="anchored" data-anchor-id="anova-power">ANOVA power</h2>
@@ -252,10 +276,12 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>Question: How much power do we have to detect each of our effects? Is this enough?</p>
 </blockquote>
+<p>ANSWER: Drug: 35%, Dose: 100%, Interaction: 89%</p>
 <p>Now, let’s look at how much power we would have with different sample sizes (this will take a while to run!)</p>
 <blockquote class="blockquote">
 <p>Question: How many TOTAL participants would we need to achieve 90% power for all of our research questions?</p>
 </blockquote>
+<p>ANSWER: We get 37, but remember that it’s 37 per cell of the design. We have 6 cells (each combo of drug and dose), so the total sample size would be 37x6 = 222!</p>
 </section>
 </section>
 

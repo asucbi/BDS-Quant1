@@ -81,7 +81,7 @@ The data has 8 columns:
 
 ## Exercise 1:
 
-1.  Run a model predicting iconicity from SER (sensory experience ratings). Write out your interpretations of the intercept and the slope.
+1.  Run a model predicting iconicity from SER (sensory experience ratings). Write out your interpretations of the intercept and the slope. 
 2.  Answer the question: Why might we want to center the SER variable?
 3.  Center the SER variable, rerun the model. Write out your interpretations of the intercept and the slope. (no APA style summary required for this exercise)
 
@@ -119,6 +119,8 @@ icon <- icon %>%
 
 model4 <- lm(iconicity ~ SER_z + sys_z, data = icon)
 summary(model4)
+
+kable(summary(model4)$coefficients)
 
 ```
 
