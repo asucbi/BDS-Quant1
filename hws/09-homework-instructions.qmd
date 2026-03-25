@@ -12,7 +12,7 @@ In this week's homework, you will be asked to demonstrate your understanding of 
 
 -   Go to [posit.cloud](posit.cloud) and then **navigate to the course workspace** via the left sidebar.
 
-    -   Look for the course workspace called "Statistical Methods Spring 2025"
+    -   Look for the course workspace called "Spring 2026: Statistical Methods"
 
 -   Open the project titled **Module 9** This module contains the starter files that you will use for the lab and for your homework.
 
@@ -56,6 +56,8 @@ library(effectsize)
 library(broom)
 library(kableExtra)
 library(Superpower)
+
+set.seed(505)
 
 ```
 
@@ -103,7 +105,7 @@ str(reject) # Notice the re-ordering of levels
 
 ```
 
-2.  Use `lm()` to performs a factorial ANOVA analysis as *regression.* Use functions from the `{broom}` package (as we did in lab) to create a clean table of the coefficients. Make sure to include CIs.
+2.  Use `lm()` to perform a factorial ANOVA analysis as *regression.* Use functions from the `{broom}` package (as we did in lab) to create a clean table of the coefficients. Make sure to include CIs.
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 
@@ -118,7 +120,7 @@ model %>%
 
 3.  Interpret each of the regression coefficients (intercept, effect of rejection sensitivity, effect of partner, interaction).
 
-4.  Use the `eta_squared` function from the `{effectsize}` package to generate effect sizes for each of the effects in the model. For each effect (rejection sensitivity, partner, interaction) report whether the effect size is small, medium, or large.
+4.  Use the `eta_squared` function from the `{effectsize}` package to generate effect sizes for each of the effects in the model. For each effect (rejection sensitivity, partner, interaction) report the effects size and whether the effect size is small, medium, or large.
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 
@@ -137,6 +139,9 @@ eta_squared(model)
 We did not review this in lab, but the `apa.2way.table()` function from the apaTables package is a very convenient way to get our cell means and marginal means. This function works for any type of 2-way ANOVA, regardless of the number of levels of your factors, e.g. it would work for a 3 x 3 ANOVA. All you need to do is indicate what the IV's (aka factors) and DV are and specify `show.marginal.means = TRUE`. Check out the `help` info for the `apa.2way.table()` function and use it to create a table of means. Make sure that the table is visible in the output you turn in.
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
+
+install.packages("apaTables")
+library(apaTables)
 
 table_of_means <- apa.2way.table(iv1 = rs, 
                iv2 = partner, 
@@ -181,24 +186,17 @@ aov_ez(id="subid", between=c("rs", "partner"), dv="liking", data=reject,  anova_
 
 model %>%
   emmeans::emmeans(pairwise~rs|partner) %>%
-  joint_tests(by="rs") %>%
-  kable() %>% 
-  kable_styling()
-
-
-model %>%
-  emmeans::emmeans(pairwise~rs|partner) %>%
   joint_tests(by="partner") %>%
   kable() %>% 
   kable_styling()
 
 ```
 
-7.  Use the `F_to_eta2` function to generate a partial eta-squared effect size for the effect of `rs` at each level of `partner`. For each effect (e.g., partner at low rejection sensitivity, partner at high rejection sensitivity) report whether the effect size is small, medium, or large.
+7.  Use the `F_to_eta2` function to generate a partial eta-squared effect size for the effect of `rs` at each level of `partner`. For each effect (e.g., rejection sensitivity for happy partner, rejection sensitivity for neutral partner) report whether the effect size is small, medium, or large.
 
 ```{r message = FALSE, echo = FALSE, eval = FALSE}
 
-F_to_eta2(f = c(3.134, 334.686), 
+F_to_eta2(f = c(217.668, 3.134), 
           df=c(1,1), 
              df_error=76)%>% # for full model
   kable() %>% 
@@ -222,8 +220,6 @@ ggplot(reject, aes(x = rs, y = liking, fill = rs)) +
 
 10. Write an APA-style summary of these results.
 
-11. In this model (using the `aov_ez` function), what type of sums of squares did we use? If we ran the same model using a different type of sums of squares (e.g., using the `aov()` function in base R), would you expect the results *for THIS model* to change? Why or why not?
-
 ## Exercise 3: Power for Factorial ANOVA
 
 1.  Let's say we want to replicate this study. How would our power be if we had approximately the same sample size? Run the simulation 1000 times. Answer the following questions:
@@ -245,7 +241,7 @@ reject %>%
             sd = sd(liking, na.rm = TRUE),
             n = n())
 
-string <- "2b*2b"
+design <- "2b*2b"
 n <- 20
 # about 20 per condition
 mu <- c(5.55, 6, 1.8, 6.45)
@@ -256,7 +252,7 @@ labelnames <- c("rs", "Low", "High", "partner", "Neutral", "Happy")
 # the label names should be in the order of the means specified above.
 
 #create design object
-design_result <- ANOVA_design(design = string,
+design_result <- ANOVA_design(design = design,
                    n = n,
                    mu = mu,
                    sd = sd,
@@ -273,7 +269,7 @@ simulation_result
 
 ```
 
-2.  Use the `power_plot` function to example power with a sample size ranging from 5 to 50. This may take a little while to run!
+2.  Use the `power_plot` function to plot power with a sample size ranging from 5 to 50. This may take a little while to run!
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
@@ -281,7 +277,7 @@ plot_power(design_result, min_n = 5, max_n = 50)
 
 ```
 
-3.  How many *total participants* would we need to achieve over 90% power for the main effects and interaction?
+3.  How many *total participants* (not per condition!) would we need to achieve over 90% power for the main effects and interaction?
 
 ## Render and submit your document.
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -29,10 +29,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="09-homework-instructions_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="09-homework-instructions_files/libs/quarto-html/anchor.min.js"></script>
 <link href="09-homework-instructions_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="09-homework-instructions_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="09-homework-instructions_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="09-homework-instructions_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="09-homework-instructions_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="09-homework-instructions_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="09-homework-instructions_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -71,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><p>Go to <a href="posit.cloud">posit.cloud</a> and then <strong>navigate to the course workspace</strong> via the left sidebar.</p>
 <ul>
-<li>Look for the course workspace called “Statistical Methods Spring 2025”</li>
+<li>Look for the course workspace called “Spring 2026: Statistical Methods”</li>
 </ul></li>
 <li><p>Open the project titled <strong>Module 9</strong> This module contains the starter files that you will use for the lab and for your homework.</p></li>
 </ul>
@@ -105,6 +105,14 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Superpower</strong>: a package for running power analysis simulations</li>
 </ul>
 <p>Please load these packages using the <code>library()</code> function. If the packages don’t load, you may need to <code>install.packages()</code> first.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.5.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggrain' was built under R version 4.5.2</code></pre>
+</div>
+</div>
 </section>
 <section id="purpose-1" class="level1">
 <h1>Purpose</h1>
@@ -131,11 +139,11 @@ ul.task-list li input[type="checkbox"] {
 <p>First, check out the structure of the data. If any variables need to be turned into factors, do that now.</p>
 <p>Recall that, by default, R orders factor levels alphabetically. In our case, this means that <code>High</code> will be the reference group of rejection sensitivity and <code>Happy</code> will be the reference group of interaction partner’s emotional expression. However, it might be more intuitive to have <code>Low</code> and <code>Neutral</code> be the reference groups, respectively. Change the levels of <code>rs</code> and <code>partner</code> to make <code>Low</code> and <code>Neutral</code> the reference groups.</p>
 <ol start="2" type="1">
-<li>Use <code>lm()</code> to performs a factorial ANOVA analysis as <em>regression.</em> Use functions from the <code>{broom}</code> package (as we did in lab) to create a clean table of the coefficients. Make sure to include CIs.</li>
+<li>Use <code>lm()</code> to perform a factorial ANOVA analysis as <em>regression.</em> Use functions from the <code>{broom}</code> package (as we did in lab) to create a clean table of the coefficients. Make sure to include CIs.</li>
 </ol>
 <ol start="3" type="1">
 <li><p>Interpret each of the regression coefficients (intercept, effect of rejection sensitivity, effect of partner, interaction).</p></li>
-<li><p>Use the <code>eta_squared</code> function from the <code>{effectsize}</code> package to generate effect sizes for each of the effects in the model. For each effect (rejection sensitivity, partner, interaction) report whether the effect size is small, medium, or large.</p></li>
+<li><p>Use the <code>eta_squared</code> function from the <code>{effectsize}</code> package to generate effect sizes for each of the effects in the model. For each effect (rejection sensitivity, partner, interaction) report the effects size and whether the effect size is small, medium, or large.</p></li>
 </ol>
 <ol start="5" type="1">
 <li>Write an APA-style summary of these results.</li>
@@ -166,15 +174,14 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Use <code>emmeans</code> to explore the effect of <code>rs</code> at each level of <code>partner</code>.</p></li>
 </ol>
 <ol start="7" type="1">
-<li>Use the <code>F_to_eta2</code> function to generate a partial eta-squared effect size for the effect of <code>rs</code> at each level of <code>partner</code>. For each effect (e.g., partner at low rejection sensitivity, partner at high rejection sensitivity) report whether the effect size is small, medium, or large.</li>
+<li>Use the <code>F_to_eta2</code> function to generate a partial eta-squared effect size for the effect of <code>rs</code> at each level of <code>partner</code>. For each effect (e.g., rejection sensitivity for happy partner, rejection sensitivity for neutral partner) report whether the effect size is small, medium, or large.</li>
 </ol>
 <ol start="8" type="1">
 <li><p>How does this model (the one created using <code>aov_ez</code>) differ from the previous model (the one created using <code>lm()</code>)? What differs? What is the same? Comment on what the models are testing as well as the results.</p></li>
 <li><p>Create a raincloud plot to visualize the interaction effect.</p></li>
 </ol>
 <ol start="10" type="1">
-<li><p>Write an APA-style summary of these results.</p></li>
-<li><p>In this model (using the <code>aov_ez</code> function), what type of sums of squares did we use? If we ran the same model using a different type of sums of squares (e.g., using the <code>aov()</code> function in base R), would you expect the results <em>for THIS model</em> to change? Why or why not?</p></li>
+<li>Write an APA-style summary of these results.</li>
 </ol>
 </section>
 <section id="exercise-3-power-for-factorial-anova" class="level2">
@@ -189,10 +196,10 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Is this sample size adequate? Why or why not?</p></li>
 </ol>
 <ol start="2" type="1">
-<li>Use the <code>power_plot</code> function to example power with a sample size ranging from 5 to 50. This may take a little while to run!</li>
+<li>Use the <code>power_plot</code> function to plot power with a sample size ranging from 5 to 50. This may take a little while to run!</li>
 </ol>
 <ol start="3" type="1">
-<li>How many <em>total participants</em> would we need to achieve over 90% power for the main effects and interaction?</li>
+<li>How many <em>total participants</em> (not per condition!) would we need to achieve over 90% power for the main effects and interaction?</li>
 </ol>
 </section>
 <section id="render-and-submit-your-document." class="level2">
@@ -304,8 +311,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -416,7 +421,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
