@@ -21,11 +21,27 @@ library(broom) #for cleaning up models
 library(kableExtra) #for viewing tables produced by `kable` in html
 library(Superpower) #for power analysis
 
+set.seed(505)
+
 ```
 
 # Research scenario
 
 Today's dataset examines the effectiveness of two drugs (Drug_A and Drug_B) at three different doses (Low, Medium, and High) in decreasing patients' pain level.
+
+> Question: What kind of ANOVA is this (_____-way)? How would you further describe the design?
+
+
+
+
+
+
+
+
+
+
+
+ANSWER: it is a two-way ANOVA because there are two factors (drug and dose) and a 2 x 3 design because 2 levels of drug and 3 levels of dose.
 
 ## Read in the data
 
@@ -279,7 +295,7 @@ Drug: the main effect of drug
 
 Dose: the main effect of dose
 
-Interaction: interaction betwen drug and dose
+Interaction: interaction between drug and dose
 
 No significant effects.
 
@@ -383,14 +399,13 @@ One way we can make it more interpretable is using an ANOVA approach. Let's use 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
 aov_ez(id="subid", between=c("drug", "dose"), dv="pain_level", data=pain,  anova_table = list(es = "pes")) %>% 
-  nice()%>% 
+  nice() %>% 
   kable() %>% 
   kable_styling()
 
 ```
 
 > Question: How would you interpret the effects (remember these are omnibus tests)?
-
 
 
 
@@ -478,7 +493,7 @@ Now, we will use emmeans to explore the effect of `dose` at each level of `drug`
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
 lm(pain_level ~ drug * dose, data = pain) %>%
-  emmeans::emmeans(pairwise~drug|dose) %>%
+  emmeans::emmeans(pairwise~dose|drug) %>%
   joint_tests(by="drug") %>% 
   kable() %>% 
   kable_styling()
@@ -566,8 +581,7 @@ pain %>%
             n = n())
 
 design <- "2b*3b"
-n <- 10
-# about 10 per condition
+n <- 10 # about 10 per condition
 mu <- c(8.50, 7.71, 2.50, 8.22, 6.90, 6.14)
 # Enter means in the order that matches the labels below.
 sd <-c(1.31, 1.80, 1.27, 1.09, 2.08, 3.24)
@@ -606,7 +620,7 @@ simulation_result
 
 
 
-ANSWER: Drug: 35%, Dose: 100%, Interaction: 89%
+ANSWER: Drug: 39%, Dose: 100%, Interaction: 89%
 
 Now, let's look at how much power we would have with different sample sizes (this will take a while to run!)
 

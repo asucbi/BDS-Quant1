@@ -87,6 +87,7 @@ test_perf <- test_perf %>%
 model <- lm(data= test_perf, perf ~ anxiety*study_time_c)
 summary(model)
 
+
 ```
 
 2.  Write out the full model with parameter estimates filled in. Interpret each of the model coefficients (parameters).

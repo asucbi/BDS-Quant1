@@ -6,11 +6,11 @@ editor: visual
 
 ## Purpose
 
-This week's lab / homework is a little different, and the goal is to practice implementing the statistical analyses you have learned so far with "real" data. 
+This week's lab / homework is a little different, and the goal is to practice implementing the statistical analyses you have learned so far with "real" data.
 
 ## Load Packages
 
-I have loaded some packages that you might want to use into the Posit workspace. However, there may be other packages that you choose to load as well. 
+I have loaded some packages that you might want to use into the Posit workspace. However, there may be other packages that you choose to load as well.
 
 Please load these packages using the `library()` function. If the packages don't load, you may need to `install.packages()` first.
 
@@ -33,25 +33,17 @@ library(janitor)
 
 # Instructions
 
-For each exercise (except the last one) you will be given a research question. It is your job to identify the correct statistical test to use and the relevant variables in the dataset. You will first clean the data as necessary to answer the research question (this might involve things like reverse coding variables, creating a composite score, identifying and dealing with unusual cases, removing outliers, etc). Then, you will run your analyses, making sure to identify any issues with model assumptions, correcting them if you can (using methods we covered in this course), generating all descriptives (e.g., means, standard deviations) and model statistics (e.g., estimates, confidence intervals, p-values, effect sizes, etc), writing an APA-style summary reporting your results, and generating a figure to illustrate your results.  
+For each exercise (except the last one) you will be given a research question. It is your job to identify the correct statistical test to use and the relevant variables in the dataset. You will first clean the data as necessary to answer the research question (this might involve things like reverse coding variables, creating a composite score, identifying and dealing with unusual cases, removing outliers, etc). Then, you will run your analyses, making sure to identify any issues with model assumptions, correcting them if you can (using methods we covered in this course), generating all descriptives (e.g., means, standard deviations) and model statistics (e.g., estimates, confidence intervals, p-values, effect sizes, etc), writing an APA-style summary reporting your results, and generating the appropriate figure to illustrate each significant effect.
 
-For each exercise, make sure to answer the following questions:
-
-(1) Which variables from the dataset are you going to use to answer the research question?
-
-(2) Which statistical test(s) are you going to use to answer the research question?
-
-(3) What are the null and alternative hypotheses for your test?
-
-You *must explicitly answer* these questions (e.g., write out the answer to each before your analysis). After answering these questions, run your analyses, generate a figure, and write up your APA-style summary.
+Your APA-style summary must include all relevant pieces of information (as reviewed in class). It must also explicitly state which variables from the dataset were used to answer the research question and which statistical test(s) you ran.
 
 ## Read in the Data
 
 I have compiled the survey data, but I have not yet done any data cleaning. The data file is called `stats_survey.csv`. Read in the data, name it `survey`. Check it out using `View()`.
 
-Note that there is a codebook in the data folder that provides additional details about the data. Make sure to check that out! 
+Note that there is a codebook in the data folder that provides additional details about the data. Make sure to check that out!
 
-We will spend a little time looking at the data. What do you notice about the different variables? What do you think might be useful to keep in mind as we run our analyses?
+First, spend a little time looking at the data. What do you notice about the different variables? What do you think might be useful to keep in mind as we run our analyses?
 
 ```{r read-data, echo=FALSE, message=FALSE}
 
@@ -77,7 +69,7 @@ In an earlier homework assignment, we examined the relation between age and life
 
 ## Exercise 3
 
-A researcher observes that people who are very outgoing and talkative generally seem to be happier and she wants to explore this relation. First, she wants to know about the strength and direction of the relation between extraversion and happiness. Then, she wants to predict happiness from extraversion. Note that, in our dataset, there are multiple variables that must be averaged to create an overall "extraversion" score. Some of these questions may need to be reverse coded before averaging (see codebook). 
+A researcher observes that people who are very outgoing and talkative generally seem to be happier, and she wants to explore this relation. First, she wants to know about the strength and direction of the relation between extraversion and happiness. Then, she wants to predict happiness from extraversion. Note that, in our dataset, there are multiple variables that must be averaged to create an overall "extraversion" score. Some of these questions may need to be reverse coded before averaging (see codebook).
 
 Here's a hint for this one:
 
@@ -99,7 +91,7 @@ Now, let's test this research question: Does sleep quality interact with gender 
 
 ## Exercise 5
 
-Identify a NEW question that you can ask using these data, conduct that analysis, create a figure, and write an APA-style summary interpreting the results. Make sure to tell me what your research question is. Your results do not have to be significant. I am going to have an independent judge blindly rate how innovative each research question is (in the spirit of ASU), and the person who comes up with the most innovative question will receive a prize!
+Identify a NEW question that you can ask using these data, conduct that analysis, create a figure, and write an APA-style summary interpreting the results. Make sure to tell me what your research question is. Your results do not have to be significant.
 
 *Guidelines:* The analysis you do must not be an analysis or part of an analysis that we did in Exercises 1 through 4; the analysis must use statistical tests that we have covered in class up to this point; you are welcome to recode variables in ways that might be informative.
 

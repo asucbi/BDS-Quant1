@@ -255,7 +255,7 @@ Now, we will use emmeans to explore the effect of `dose` at each level of `drug`
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
 lm(pain_level ~ drug * dose, data = pain) %>%
-  emmeans::emmeans(pairwise~drug|dose) %>%
+  emmeans::emmeans(pairwise~dose|drug) %>%
   joint_tests(by="drug") %>% 
   kable() %>% 
   kable_styling()
