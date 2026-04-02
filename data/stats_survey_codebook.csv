@@ -10,12 +10,12 @@ What language or languages can you speak with at least beginner level proficienc
 "In a typical week, how many days do you engage in moderate (like brisk walking) or vigorous (like running or intense exercise) physical activity for at least 30 minutes?",hrs_exercise,options,0 to 7,
 "Overall, how satisfied are you with your life currently?",life_sat,options,0 to 10,
 How much do you agree with the statement: I prefer to keep to myself.,ex_keep_to_self,options,1 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
-How much do you agree with the statement: I am the life of the party.,ex_life_of_party,options,2 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
-How much do you agree with the statement: I feel comfortable around people.,ex_comfort_around_people,options,3 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
-How much do you agree with the statement: I am quiet around strangers.,ex_quiet_around_strangers,options,4 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
-How much do you agree with the statement: I start conversations.,ex_start_convos,options,5 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
-How much do you agree with the statement: I talk to a lot of different people at parties.,ex_diff_people,options,6 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
-How much do you agree with the statement: I don't mind being the center of attention.,ex_center_of_attn,options,7 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
+How much do you agree with the statement: I am the life of the party.,ex_life_of_party,options,1 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
+How much do you agree with the statement: I feel comfortable around people.,ex_comfort_around_people,options,1 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
+How much do you agree with the statement: I am quiet around strangers.,ex_quiet_around_strangers,options,1 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
+How much do you agree with the statement: I start conversations.,ex_start_convos,options,1 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
+How much do you agree with the statement: I talk to a lot of different people at parties.,ex_diff_people,options,1 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
+How much do you agree with the statement: I don't mind being the center of attention.,ex_center_of_attn,options,1 (Do Not Agree At All) to 5 (Completely Agree),contributes to extraversion composite score
 What is your favorite animal?,fave_animal,free_response,N/A,
 "If you could have any superpower, what would it be?",superpower,free_response,N/A,
 Do you prefer cats or dogs?,cats_or_dogs,options,"Cats, Dogs, I prefer not to answer.",

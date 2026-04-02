@@ -35,6 +35,8 @@ Each of your 2-3 questions must be motivated by theory (i.e., you should be able
 
 ## Step 3: Construct your Data Analysis Plan
 
+**IMPORTANT: Your data analysis plan is a _preregistration_. This means that the data analysis plan should be completed _and approved by Jessica_ before you start working with the data at all. You can look at the data (and should include a `glimpse()` or similar in the submission) to see things like which variables the dataset contains, the scale of the variables, or the type of variables, but if any analyses are done prior to data analysis plan approval you will need to find a new dataset and create a new data analysis plan.**
+
 Your data analysis plan should include:
 
 -   **Introduction to Data:** 
