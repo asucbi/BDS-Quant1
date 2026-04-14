@@ -33,7 +33,7 @@ library(janitor)
 
 # Instructions
 
-For each exercise (except the last one) you will be given a research question. It is your job to identify the correct statistical test to use and the relevant variables in the dataset. You will first clean the data as necessary to answer the research question (this might involve things like reverse coding variables, creating a composite score, identifying and dealing with unusual cases, removing outliers, etc). Then, you will run your analyses, making sure to identify any issues with model assumptions, correcting them if you can (using methods we covered in this course), generating all descriptives (e.g., means, standard deviations) and model statistics (e.g., estimates, confidence intervals, p-values, effect sizes, etc), writing an APA-style summary reporting your results, and generating the appropriate figure to illustrate each significant effect.
+For each exercise (except the last one) you will be given a research question. It is your job to identify the correct statistical test to use and the relevant variables in the dataset. You will first clean the data as necessary to answer the research question (this might involve things like reverse coding variables, creating a composite score, identifying and dealing with unusual cases, removing outliers, etc). Then, you will run your analyses, making sure to identify any issues with model assumptions, correcting them if you can (using methods we covered in this course), generating all descriptives (e.g., means, standard deviations) and model statistics (e.g., estimates, confidence intervals, p-values, effect sizes, etc), writing an APA-style summary reporting your results, and generating an appropriate figure to illustrate each significant effect.
 
 Your APA-style summary must include all relevant pieces of information (as reviewed in class). It must also explicitly state which variables from the dataset were used to answer the research question and which statistical test(s) you ran.
 
@@ -69,7 +69,7 @@ In an earlier homework assignment, we examined the relation between age and life
 
 ## Exercise 3
 
-A researcher observes that people who are very outgoing and talkative generally seem to be happier, and she wants to explore this relation. First, she wants to know about the strength and direction of the relation between extraversion and happiness. Then, she wants to predict happiness from extraversion. Note that, in our dataset, there are multiple variables that must be averaged to create an overall "extraversion" score. Some of these questions may need to be reverse coded before averaging (see codebook).
+A researcher observes that people who are very outgoing and talkative generally seem to be happier, and she wants to explore this relation. First, she wants to know about the strength and direction of the relation between extraversion and happiness. Then, she wants to predict happiness from extraversion. Note that, in our dataset, there are multiple variables that must be averaged to create an overall "extraversion" score. Some of these questions may need to be reverse coded before averaging (see codebook). 
 
 Here's a hint for this one:
 

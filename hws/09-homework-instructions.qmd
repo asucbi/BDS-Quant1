@@ -130,6 +130,12 @@ eta_squared(model)
 
 5.  Write an APA-style summary of these results.
 
+```{r message = FALSE, echo = FALSE, eval = FALSE}
+emmeans::emmeans(model, pairwise ~rs, adjust="bonferroni")$contrasts 
+emmeans::emmeans(model, pairwise ~partner, adjust="bonferroni")$contrasts 
+emmeans::emmeans(model, pairwise~rs|partner)
+
+```
 ## Exercise 2: Factorial ANOVA as ANOVA
 
 1.  What are the three hypothesis tests involved in a Factorial ANOVA? For each of the three hypothesis tests, write out the null and alternative hypothesis.

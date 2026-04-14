@@ -1,0 +1,191 @@
+---
+title: "Module 12: Homework Instructions"
+format: html
+editor: visual
+---
+
+## Purpose
+
+In this week's homework, you will apply concepts from Lab 12 (slopes and intercepts as outcomes) to a new dataset and research context.
+
+This key uses the synthetic dataset **sleep_work.csv**, in which employees are nested within companies and the relationship between sleep and performance varies across companies.
+
+## Load Packages
+
+```{r load-packages, message=FALSE, echo=FALSE}
+library(tidyverse)
+```
+
+# Research scenario
+
+This dataset examines the relationship between **hours of sleep and cognitive performance** among employees working at different companies.
+
+-   Employees are nested within companies
+-   You will examine how **sleep duration** predicts **cognitive performance scores**
+-   You will also examine whether this relationship differs across companies
+
+## Read in the Data
+
+The dataset is called `sleep_work.csv`.
+
+Variables:
+
+-   `company_id`: company identifier
+-   `performance`: cognitive performance score
+-   `sleep_hours`: hours of sleep per night
+-   `company_size`: number of employees at the company (group-level variable)
+
+Read in the dataset, call it `sleep`. Make sure that `company_id` is a factor.
+
+```{r read-data, echo=FALSE, message=FALSE}
+sleep <- read_csv("data/sleep_work.csv")
+
+sleep <- sleep %>%
+  mutate(company_id = as.factor(company_id))
+
+```
+
+## Q1: What is the clustering structure in this dataset? Why might this matter?
+
+Employees are nested within companies. This matters because employees within the same company are likely more similar to each other than employees from different companies, so the observations are not independent.
+
+## Q2: Run a disaggregated model predicting `performance` from `sleep_hours`.
+
+```{r disagg, eval=FALSE, echo=FALSE}
+
+disag <- lm(performance ~ sleep_hours, data = sleep)
+summary(disag)
+
+```
+
+## Q3: Interpret the slope from this model. Is it significant?
+
+The slope is **1.27**, so for each additional hour of sleep, performance increases by about **1.27 points**, on average. No, it is not significant (p = .31)
+
+## Q4: What assumption about clustering / independence does this model make?
+
+This model assumes that all observations are independent and that company-level clustering does not matter.
+
+## Q5: Create an aggregated dataset at the company level (e.g., average `peformance` and average `sleep_hours` for each company).
+
+```{r aggregate, eval=FALSE, echo=FALSE}
+sleep_agg <- sleep %>%
+  group_by(company_id) %>%
+  summarise(perf_mean = mean(performance, na.rm=TRUE),
+            sleep_mean = mean(sleep_hours, na.rm=TRUE))
+```
+
+## Q6: Run the aggregated model.
+
+```{r agg-model, eval=FALSE, echo=FALSE}
+agg <- lm(perf_mean ~ sleep_mean, data = sleep_agg)
+summary(agg)
+```
+
+## Q7: Interpret the slope from this model. Is it significant?
+
+The slope is **-1.46**, so for each additional hour of sleep, performance decreases by about **1.46 points**, on average. It is not significant (p = .98)
+
+## Q8: What is the key difference between the aggregated and disaggregated models in how they treat within-company vs. between-company variability?
+
+Aggregation removes within-company variability, while disaggregation ignores between-company variability.
+
+## Q9: Calculate the ICC using a one-way ANOVA approach (as we did in lab).
+
+```{r icc, eval=FALSE, echo=FALSE}
+icc_mod <- lm(performance ~ company_id, data = sleep)
+icc_aov <- anova(icc_mod)
+
+ss_b <- icc_aov[1,2]
+ss_t <- icc_aov[1,2] + icc_aov[2,2]
+ICC <- ss_b / ss_t
+ICC
+```
+
+## Q10: Interpret the ICC.
+
+The ICC is **0.968**. That means about **96.79%** of the variance in performance is attributable to differences between companies. Company membership explains a very large amount of the variability in performance.
+
+## Q11: Visualize whether slopes and intercepts differ across companies.
+
+```{r viz, eval=FALSE, echo=FALSE}
+sleep %>%
+  ggplot(aes(x = sleep_hours, y = performance, color = company_id)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+## Q12: Based on the plot, do slopes, intercepts, or both vary?
+
+Both appear to vary. The lines start at different heights and have different steepness across companies.
+
+## Q13: Fit a model including `company_id` as a predictor.
+
+```{r model1, eval=FALSE, echo=FALSE}
+model1 <- lm(performance ~ sleep_hours + company_id, data = sleep)
+summary(model1)
+anova(model1)
+```
+
+## Q14: What does this model tell you about the effect of company?
+
+`company_id` is significant in this model, which means companies differ in their baseline performance levels (their intercepts), even after accounting for sleep hours. The main effect of `sleep_hours` is also positive and significant.
+
+## Q15: Fit a model with an interaction.
+
+```{r model2, eval=FALSE, echo=FALSE}
+model2 <- lm(performance ~ sleep_hours * company_id, data = sleep)
+summary(model2)
+anova(model2)
+```
+
+## Q16: What does this model tell you about slope differences?
+
+The interaction model indicates that slopes differ across companies, and the interaction is significant overall. Adding the interaction improves fit substantially over the model with only main effects, so the relationship between sleep and performance is not the same for all companies.
+
+## Q17: Extract slopes and intercepts for each company. Make sure this dataset still includes the `company_size` variable.
+
+```{r slopes, eval=FALSE, echo=FALSE}
+slopesints <- sleep %>%
+  group_by(company_id, company_size) %>%
+  summarise(
+    intercept = coef(lm(performance ~ sleep_hours))[1],
+    slope = coef(lm(performance ~ sleep_hours))[2]
+  )
+
+```
+
+## Q18: Predict the intercepts from `company_size`.
+
+```{r intercept-model, eval=FALSE, echo=FALSE}
+
+int_mod <- lm(intercept ~ company_size, data = slopesints)
+summary(int_mod)
+
+```
+
+## Q19: What do the results of this model tell you?
+
+`company_size` significantly predicts intercepts in this dataset meaning that company size explains baseline performance differences here.
+
+## Q20: Now predict slopes from `company_size`.
+
+```{r slope-model, eval=FALSE, echo=FALSE}
+
+slope_mod <- lm(slope ~ company_size, data = slopesints)
+summary(slope_mod)
+
+```
+
+## Q22: What do the results of this model tell you?
+
+`company_size` significantly predict slopes in this dataset. That means company size explains the differences in the sleep–performance relationship across companies.
+
+------------------------------------------------------------------------
+
+## Submit your document
+
+-   Render your document
+-   Submit the rendered file to Canvas
+
+------------------------------------------------------------------------

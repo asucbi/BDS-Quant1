@@ -29,17 +29,7 @@ set.seed(505)
 
 Today's dataset examines the effectiveness of two drugs (Drug_A and Drug_B) at three different doses (Low, Medium, and High) in decreasing patients' pain level.
 
-> Question: What kind of ANOVA is this (_____-way)? How would you further describe the design?
-
-
-
-
-
-
-
-
-
-
+> Question: What kind of ANOVA is this (\_\_\_\_\_-way)? How would you further describe the design?
 
 ANSWER: it is a two-way ANOVA because there are two factors (drug and dose) and a 2 x 3 design because 2 levels of drug and 3 levels of dose.
 
@@ -68,16 +58,6 @@ head(pain)
 ```
 
 > Question: What do you notice about the structure of the data? What changes might you want to make?
-
-
-
-
-
-
-
-
-
-
 
 ANSWER: drug and dose are not factors and we might want to make them factors
 
@@ -143,16 +123,6 @@ pain_red %>%
 
 > Question: From the means, what can you say about the relation between drug and dose in predicting pain?
 
-
-
-
-
-
-
-
-
-
-
 ANSWER: it looks like maybe there is no effect of drug at Low doses but pain may be higher for Drug_A than Drug_B at Medium doses.
 
 ## Linear modeling approach: treatment/dummy-coding
@@ -189,29 +159,9 @@ lm(pain_level ~ drug * dose, data = pain_red) %>%
 
 > Question: Write the full model with parameter estimates filled in.
 
-
-
-
-
-
-
-
-
-
-
 $$\hat{pain_i} = 8.50 - .28(drug) - .79(dose) - .54(drugxdose) $$
 
 > Question: What do each of the parameter estimates mean?
-
-
-
-
-
-
-
-
-
-
 
 ANSWER:
 
@@ -263,29 +213,9 @@ lm(pain_level ~ drug * dose, data = pain_red) %>%
 
 > Question: Write the full model with parameter estimates filled in.
 
-
-
-
-
-
-
-
-
-
-
 $$\hat{pain_i} = 7.83 - .55(drug) + 1.05(dose) - .54(drugxdose) $$
 
 > Question: What do each of the parameter estimates mean?
-
-
-
-
-
-
-
-
-
-
 
 ANSWER:
 
@@ -329,16 +259,6 @@ aov_ez(id="subid", between=c("drug", "dose"), dv="pain_level", data=pain_red,  a
 
 > Question: How do the results from the ANOVA compare to the Regression?
 
-
-
-
-
-
-
-
-
-
-
 ANSWER: They are essentially the same (t\^2 = F)
 
 ## 2x3 Factorial ANOVA
@@ -369,16 +289,6 @@ pain <- pain %>%
 
 > Question: What are the three effects that we are testing? What is the null and alternative hypothesis for each test?
 
-
-
-
-
-
-
-
-
-
-
 ANSWER:
 
 Drug: H0: pain level is equal across all drugs; H1: at least one drug differs Dose: H0: pain level is equal across dosages; H1: at least one dosage differs DrugxDose: H0: the effect of dose does not depend on drug (and vice versa); H1: the effect of dose depends on drug (or vice versa)
@@ -407,16 +317,6 @@ aov_ez(id="subid", between=c("drug", "dose"), dv="pain_level", data=pain,  anova
 
 > Question: How would you interpret the effects (remember these are omnibus tests)?
 
-
-
-
-
-
-
-
-
-
-
 ANSWER: No effect of drug. Difference somewhere in dose. Interaction between drug and dose.
 
 # Let's compare this to the same ANOVA using the `aov()` function in base R.
@@ -430,16 +330,6 @@ summary(model_aov)
 ```
 
 > Question: Compare the output of the two ANOVA models. Do they differ? If so, why?
-
-
-
-
-
-
-
-
-
-
 
 ANSWER: Yes! In particular, `drug` goes from non-significant (with Type III SS) to significant (with Type I SS). This is because Type I asks how much of the *total variance* `drug` explains and Type III asks how much of the variance left over after `dose` and `drug x dose` is explained by `drug`.
 
@@ -475,16 +365,6 @@ ggplot(pain, aes(x = dose, y = pain_level, fill = dose)) +
 ```
 
 > Question: What does this plot suggest?
-
-
-
-
-
-
-
-
-
-
 
 ANSWER: For Drug A, high dose levels are really effective at reducing pain while Low and Medium levels don't differ as much. For Drug B there doesn't seem to be a huge difference in pain across the three dosage levels.
 
@@ -541,29 +421,9 @@ emmeans::emmeans(model3, pairwise ~dose, adjust="bonferroni")$contrasts %>%
 
 > Question: Overall, what do these results reveal about the interaction bewteen drug and dosage?
 
-
-
-
-
-
-
-
-
-
-
 ANSWER: For Drug A, high dose levels are really effective at reducing pain while Low and Medium levels don't differ as much. For Drug B there doesn't seem to be a huge difference in pain across the three dosage levels.
 
 > Question: What information would you include in a summary?
-
-
-
-
-
-
-
-
-
-
 
 ANSWER: What you did, significant effects (include means, sds, F, df, p-values, effect size, confidence intervals, etc), report non-significant effects but no need to go into detail, general interpretation of what you found. Include a figure depicting the interaction effect.
 
@@ -610,16 +470,6 @@ simulation_result
 
 > Question: How much power do we have to detect each of our effects? Is this enough?
 
-
-
-
-
-
-
-
-
-
-
 ANSWER: Drug: 39%, Dose: 100%, Interaction: 89%
 
 Now, let's look at how much power we would have with different sample sizes (this will take a while to run!)
@@ -631,15 +481,5 @@ plot_power(design_result, min_n = 10, max_n = 100)
 ```
 
 > Question: How many TOTAL participants would we need to achieve 90% power for all of our research questions?
-
-
-
-
-
-
-
-
-
-
 
 ANSWER: We get 37, but remember that it's 37 per cell of the design. We have 6 cells (each combo of drug and dose), so the total sample size would be 37x6 = 222!
