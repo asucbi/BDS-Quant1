@@ -80,6 +80,7 @@ Disaggregation: Ignores group-level data (discards between-group variability)
 
 # students: run the disaggregated model
 
+# disag <- lm(XXX ~ XXX, data=nels)
 
 
 
@@ -110,7 +111,10 @@ ANSWER: It ignores the group level variable. If there is an effect of group, we 
 #First, get the average math score and time on math for each school
 # students: use `group_by` and `summarise()` to generate a new dataset with these values
 
-
+# nelsagg <- nels %>% 
+#   group_by(XXX) %>% 
+#   summarise(mathagg = mean(XXX, na.rm = TRUE),
+#             timeagg = mean(XXX, na.rm = TRUE))
 
 
 
@@ -185,6 +189,7 @@ ss_t <-(icc_aov[1,2] + icc_aov[2,2])
 # calculate the ICC
 # students: calculate the ICC
 
+# ICC <- XXX/XXX
 
 
 
@@ -218,17 +223,6 @@ Because we have a high ICC for the group effect, it’s useful to visualize our 
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
-# students: generate a visualization
-
-
-
-
-
-
-
-
-
-
 nels %>% 
   ggplot(aes(x = timeonmath, y = mathscore)) +
   geom_point() +
@@ -256,6 +250,7 @@ First, let's run an ANOVA-style regression to see whether `Schoolid` improves ou
 
 # students: run this model (hint: we're just adding ONE additional predictor!)
 
+# model1 <- lm(XXX, data = nels)
 
 
 
@@ -275,7 +270,7 @@ anova(model1)
 
 ANSWER: There is a significant effect of Schoolid. However, it only tells us about the intercepts and not the slopes.
 
-> Question: What do I need to do to get information about the effect of `Schoolid` on the slopes (i.e., the relation between `timeonmath` and `mathscore`?
+> Question: What do I need to do to get information about the effect of `Schoolid` on the slopes (i.e., the relation between `timeonmath` and `mathscore`)?
 
 ANSWER: Test the interaction!
 
@@ -321,6 +316,7 @@ Now, let's try to predict the *intercepts* from whether a school is public or pr
 
 # students: run a model predicting the `intercept` from `schooltype`
 
+# int <- lm(XXX, data=slopesints)
 
 
 
@@ -355,7 +351,7 @@ Now, let's try to predict the *slopes* from whether a school is public or privat
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
-slope<-lm(slope~schooltype,data=slopesints)
+slope <- lm(slope~schooltype,data=slopesints)
 summary(slope)
 
 ```
@@ -374,9 +370,26 @@ For public schools, each 1 unit increase in time spent on homework corresponds t
 
 The relationship (slope) does not significantly differ for the two school types (e.g., there’s not a significant difference between an increase in 1.1 points and an increase of 2.06 points).
 
+> Question: Look back at the plot. Why do you think the effect school type on the slope wasn't significant? The lines look like there are different slopes.
+
+ANSWER: The lines to differ, but it may be the case that another predictor, aside from school type, predicts the different slopes.
+
+> Also, look what happens if I fill the lines by school type. What do you notice? 
+
+```{r plot-by-schooltype}
+
+nels %>% 
+  ggplot(aes(x = timeonmath, y = mathscore, color = schooltype, group = Schoolid)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) 
+
+```
+
 ------------------------------------------------------------------------
 
 You might be asking: Why do we need multilevel models? Can we just do this slopes and intercepts as outcomes analysis?
+
+> TL;DR: Multilevel models are needed because treating slopes and intercepts as outcomes in a single-level regression ignores the hierarchical structure of the data, leading to biased estimates and incorrect standard errors; MLM addresses this by modeling nested data with random effects that capture within- and between-group variability and account for non-independence.
 
 While the idea of intercepts and slopes being outcomes is central to understanding what MLM does, simply treating them as outcomes in a standard single-level regression wouldn't capture the crucial aspects and benefits of running a full multilevel model. Here's why:
 

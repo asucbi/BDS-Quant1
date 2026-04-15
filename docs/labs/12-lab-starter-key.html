@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Module 12: Lab Instructions</title>
+<title>Module 12: Lab Starter (KEY)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,46 +57,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="12-lab-worksheet_files/libs/clipboard/clipboard.min.js"></script>
-<script src="12-lab-worksheet_files/libs/quarto-html/quarto.js"></script>
-<script src="12-lab-worksheet_files/libs/quarto-html/popper.min.js"></script>
-<script src="12-lab-worksheet_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="12-lab-worksheet_files/libs/quarto-html/anchor.min.js"></script>
-<link href="12-lab-worksheet_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="12-lab-worksheet_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="12-lab-worksheet_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="12-lab-worksheet_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="12-lab-worksheet_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="12-lab-starter-key_files/libs/clipboard/clipboard.min.js"></script>
+<script src="12-lab-starter-key_files/libs/quarto-html/quarto.js"></script>
+<script src="12-lab-starter-key_files/libs/quarto-html/popper.min.js"></script>
+<script src="12-lab-starter-key_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="12-lab-starter-key_files/libs/quarto-html/anchor.min.js"></script>
+<link href="12-lab-starter-key_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="12-lab-starter-key_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="12-lab-starter-key_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="12-lab-starter-key_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="12-lab-starter-key_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -108,7 +79,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Module 12: Lab Instructions</h1>
+<h1 class="title">Module 12: Lab Starter (KEY)</h1>
 </div>
 
 
@@ -134,7 +105,7 @@ window.Quarto = {
 <li>Contrast multilevel and single-level models.</li>
 <li>Facilitate interpretation of the parameters of multilevel models.</li>
 </ol>
-<p>For today’s lab, we just need tidyverse!</p>
+<p>For today’s lab, you will only need tidyverse!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -160,8 +131,13 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>Question: What kind of clustering might we have in these data?</p>
 </blockquote>
-<p>For our analyses, we want Schoolid to be a factor. Let’s make that change to the data.</p>
-<p>We will start by discussing some key concepts related to multilevel models.</p>
+<p>ANSWER: students clustered within schools</p>
+</section>
+<section id="for-our-analyses-we-want-schoolid-to-be-a-factor.-lets-make-that-change-to-the-data." class="level2">
+<h2 class="anchored" data-anchor-id="for-our-analyses-we-want-schoolid-to-be-a-factor.-lets-make-that-change-to-the-data.">For our analyses, we want Schoolid to be a factor. Let’s make that change to the data.</h2>
+</section>
+<section id="we-will-start-by-discussing-some-key-concepts-related-to-multilevel-models." class="level2">
+<h2 class="anchored" data-anchor-id="we-will-start-by-discussing-some-key-concepts-related-to-multilevel-models.">We will start by discussing some key concepts related to multilevel models.</h2>
 </section>
 <section id="disaggregation-versus-aggregation" class="level2">
 <h2 class="anchored" data-anchor-id="disaggregation-versus-aggregation">Disaggregation versus Aggregation</h2>
@@ -172,40 +148,43 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>Question: What do the results suggest?</p>
 </blockquote>
+<p>ANSWER: Students who spend more time on math have higher math scores.</p>
 <blockquote class="blockquote">
 <p>Question: What is the problem with conducting the analysis in this manner?</p>
 </blockquote>
+<p>ANSWER: It ignores the group level variable. If there is an effect of group, we have possibly overestimated our df (amount of unique information that we have) and consequently inflated our t-value and made a Type I error.</p>
 <p><em>Aggregation:</em> Estimate an aggregated model predicting mean math achievement from mean hours spent on homework each week. Since aggregation ignores individual-level data, we need to compute the mean math score and the mean time spent on math homework for each of the 10 schools.</p>
 <blockquote class="blockquote">
 <p>Question: What do the results suggest?</p>
 </blockquote>
+<p>ANSWER: Students who spend more time on math (on average) have higher math scores (on average), but no longer significant.</p>
 <blockquote class="blockquote">
 <p>Question: What is the problem with conducting the analysis in this manner?</p>
 </blockquote>
+<p>ANSWER: The meaning of our results has changed. We’re ignoring anything about the individuals, assuming everyone in each school spends the same time on math and has the same math score. Instead of predicting an individual’s math score from how much time that individual spends on math we’ve changed the meaning of our variables and are predicting things about the group.</p>
 </section>
 <section id="assessing-the-effect-of-the-grouping-variable." class="level2">
 <h2 class="anchored" data-anchor-id="assessing-the-effect-of-the-grouping-variable.">Assessing the effect of the grouping variable.</h2>
 <p>We might want to know how much of an effect our grouping variable (<code>Schoolid</code>) has on our outcome (<code>mathscore</code>). To assess this, we can use the ICC or intraclass correlation coefficient. The ICC is an index of within-group similarity.</p>
 <p>Recall that:</p>
-<p><span class="math display">\[
-\text{Total Variance} = \text{Between Group Variance} + \text{Within Group Variance}
-\]</span> The ICC is calculated as:</p>
-<p><span class="math display">\[
-\text{ICC} = \frac{\text{Between Group Variance}}{\text{Total Variance}}
-\]</span></p>
+<p>Total Variance = Between Group Variance + Within Group Variance</p>
+<p>The ICC is calculated as:</p>
+<p>ICC = Between Group Variance / Total Variance</p>
 <p>or</p>
-<p><span class="math display">\[
-\text{ICC} = \frac{\text{Between Group Variance}}{ \text{Between Group Variance} + \text{Within Group Variance}}
-\]</span> In summary, we can use the ICC to answer the question: How much of the total variance in our dependent variable can be accounted for by the groping effect?</p>
+<p>ICC = Between Group Variance / (Between Group Variance + Within Group Variance)</p>
+<p>In summary, we can use the ICC to answer the question: How much of the total variance in our dependent variable can be accounted for by the grouping effect?</p>
 <blockquote class="blockquote">
 <p>Question: How can we get the between-schools variability, within-schools variability, and the total variability in math achievement?</p>
 </blockquote>
+<p>ANSWER: Run a one-way ANOVA predicting mathscore from Schoolid – how much variance in math score is accounted for by the grouping factor – in this case school.</p>
 <blockquote class="blockquote">
 <p>Question: What is the sums of squares for the effect of school? How can we calculate the total sums of squares?</p>
 </blockquote>
+<p>ANSWER: Sum Sq for Schoolid row is the effect of school. We add this to the Residual Sum Sq to get the total SS.</p>
 <blockquote class="blockquote">
-<p>Question: What is the sums of squares for the effect of school? How can we calculate the total sums of squares?</p>
+<p>Question: What does this mean?</p>
 </blockquote>
+<p>ANSWER: 43.69% of the variance in math scores is explained by school. Just by knowing which school someone is in, you can have a pretty good idea of what their math score will be (suggesting that scores within an individual school are similar). Even at an ICC of 10% your results start to get influenced by grouping.</p>
 <p>In the <em>disaggregated model</em> we ran above (predicting <code>mathscore</code> from <code>timeonmath</code>), we are assuming that school (the grouping variable) explains 0% of the variance in math scores. This assumes that we have 260 unique values (the number of entries in our data).</p>
 <p>In the <em>aggregated model</em>, we ran above (using <code>mathscore</code> from <code>timeonmath</code> averaged for each school), we are assuming that school (the grouping variable) explains 100% of the variance in math scores (i.e., that everyone in the school has the same math score). This assumes that we have 10 unique values (the number of schools in our data).</p>
 <p>However, the amount of unique data we have falls actually somewhere in the middle.</p>
@@ -216,6 +195,7 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>Question: From these plots, what can you say about the slopes and intercepts?</p>
 </blockquote>
+<p>ANSWER: The plots suggest that the regression lines predicting math achievement from hours spent on homework are pretty different from school to school in both intercept and slope.</p>
 <p>If there is real variability due to the grouping effect, we usually want to try to figure out what characteristics of the group (i.e., a school) predict its regression line (i.e., its slope and intercept) so we can say something more substantial than just “the way time spent on homework predicts math scores is different school to school”.</p>
 </section>
 <section id="slopes-and-intercepts-as-outcomes" class="level2">
@@ -224,37 +204,71 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>Question: What does this model tell us about the impact of <code>Schoolid</code> on <code>mathscore</code>? What does it suggest about the intercepts? …the slopes?</p>
 </blockquote>
+<p>ANSWER: There is a significant effect of Schoolid. However, it only tells us about the intercepts and not the slopes.</p>
 <blockquote class="blockquote">
-<p>Question: What do I need to do to get information about the effect of <code>Schoolid</code> on the slopes (i.e., the relation between <code>timeonmath</code> and <code>mathscore</code>?</p>
+<p>Question: What do I need to do to get information about the effect of <code>Schoolid</code> on the slopes (i.e., the relation between <code>timeonmath</code> and <code>mathscore</code>)?</p>
 </blockquote>
+<p>ANSWER: Test the interaction!</p>
 <blockquote class="blockquote">
 <p>Question: Does <code>Schoolid</code> impact the intercepts, the slope, or both?</p>
 </blockquote>
+<p>ANSWER: Both!</p>
 <p>Now we know that there is significant between-school variance in both the intercepts and the slopes and can try to predict this variance using school-level predictors. In this dataset, we have a variable that indicates whether the school is public or private (<code>schooltype</code>).</p>
 <p>First, we need to find the unique intercept and slope for each of the 10 schools.</p>
 <p>Now, let’s try to predict the <em>intercepts</em> from whether a school is public or private.</p>
 <blockquote class="blockquote">
 <p>Question: What is the regression equation predicting intercept from school type?</p>
 </blockquote>
+<p>ANSWER: Intercept = 43.14 + 16.06(schooltype)</p>
 <blockquote class="blockquote">
 <p>Question: What is the expected math achievement for a private school? How about for a public school?</p>
 </blockquote>
+<p>ANSWER: private school = 1, public school = 0 private school = 43.15 + 16.06 = 59.21, public school = 43.15</p>
 <blockquote class="blockquote">
 <p>Question: What is the implied “time spent on homework” in this model?</p>
 </blockquote>
+<p>ANSWER: We are predicting the intercept, so predicting value for achievement when hw is 0.</p>
 <blockquote class="blockquote">
 <p>Question: The effect of school type (the slope in this model) has a p value of .07. What does this mean?</p>
 </blockquote>
+<p>ANSWER: For each 1-unit increase in schooltype, the predicted achievement score when time spent on math homework is 0 (e.g., the intercept for math score) increases by 16 points, and this decrease is “marginally” significant.</p>
 <p>Now, let’s try to predict the <em>slopes</em> from whether a school is public or private.</p>
 <blockquote class="blockquote">
 <p>Question: What is the regression equation predicting slope from school type?</p>
 </blockquote>
+<p>ANSWER: Slope = 2.06-0.963(schooltype)</p>
 <blockquote class="blockquote">
 <p>Question: What is the relationship (slope) between time spent on homework and math achievement for a private school? How about for a public school?</p>
 </blockquote>
+<p>ANSWER: For public schools, each 1 unit increase in time spent on homework corresponds to a 2.06 increase in math achievement.</p>
+<p>For public schools, each 1 unit increase in time spent on homework corresponds to a 2.06 - 0.96 = 1.10 increase in math achievement.</p>
 <blockquote class="blockquote">
 <p>Question: Is the relationship (slope) significantly different for the two types of schools?</p>
 </blockquote>
+<p>The relationship (slope) does not significantly differ for the two school types (e.g., there’s not a significant difference between an increase in 1.1 points and an increase of 2.06 points).</p>
+<blockquote class="blockquote">
+<p>Question: Look back at the plot. Why do you think the effect school type on the slope wasn’t significant? The lines look like there are different slopes.</p>
+</blockquote>
+<p>ANSWER: The lines to differ, but it may be the case that another predictor, aside from school type, predicts the different slopes.</p>
+<blockquote class="blockquote">
+<p>Also, look what happens if I fill the lines by school type. What do you notice?</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>nels <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> timeonmath, <span class="at">y =</span> mathscore, <span class="at">color =</span> schooltype, <span class="at">group =</span> Schoolid)) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-lab-starter-key_files/figure-html/plot-by-schooltype-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <hr>
 <p>You might be asking: Why do we need multilevel models? Can we just do this slopes and intercepts as outcomes analysis?</p>
 <blockquote class="blockquote">

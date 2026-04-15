@@ -274,6 +274,8 @@ summary(slope)
 
 You might be asking: Why do we need multilevel models? Can we just do this slopes and intercepts as outcomes analysis?
 
+> TL;DR: Multilevel models are needed because treating slopes and intercepts as outcomes in a single-level regression ignores the hierarchical structure of the data, leading to biased estimates and incorrect standard errors; MLM addresses this by modeling nested data with random effects that capture within- and between-group variability and account for non-independence.
+
 While the idea of intercepts and slopes being outcomes is central to understanding what MLM does, simply treating them as outcomes in a standard single-level regression wouldn't capture the crucial aspects and benefits of running a full multilevel model. Here's why:
 
 1.  Ignoring the Hierarchical Structure and Dependencies:

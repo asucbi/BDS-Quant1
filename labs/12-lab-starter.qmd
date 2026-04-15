@@ -1,5 +1,5 @@
 ---
-title: "Module 12: Lab Instructions (Instructor)"
+title: "Module 12: Lab Instructions"
 format: html
 editor: visual
 ---
@@ -171,7 +171,16 @@ Because we have a high ICC for the group effect, it’s useful to visualize our 
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
+nels %>% 
+  ggplot(aes(x = timeonmath, y = mathscore)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(~Schoolid)
 
+nels %>% 
+  ggplot(aes(x = timeonmath, y = mathscore, color = Schoolid)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) 
 
 ```
 
@@ -195,7 +204,7 @@ anova(model1)
 
 > Question: What does this model tell us about the impact of `Schoolid` on `mathscore`? What does it suggest about the intercepts? ...the slopes?
 
-> Question: What do I need to do to get information about the effect of `Schoolid` on the slopes (i.e., the relation between `timeonmath` and `mathscore`?
+> Question: What do I need to do to get information about the effect of `Schoolid` on the slopes (i.e., the relation between `timeonmath` and `mathscore`)?
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
@@ -252,7 +261,7 @@ Now, let's try to predict the *slopes* from whether a school is public or privat
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
-slope<-lm(slope~schooltype,data=slopesints)
+slope <- lm(slope~schooltype,data=slopesints)
 summary(slope)
 
 ```
@@ -263,9 +272,13 @@ summary(slope)
 
 > Question: Is the relationship (slope) significantly different for the two types of schools?
 
+> Question: Look back at the plot. Why do you think the effect school type on the slope wasn't significant? The lines look like there are different slopes.
+
 ------------------------------------------------------------------------
 
 You might be asking: Why do we need multilevel models? Can we just do this slopes and intercepts as outcomes analysis?
+
+> TL;DR: Multilevel models are needed because treating slopes and intercepts as outcomes in a single-level regression ignores the hierarchical structure of the data, leading to biased estimates and incorrect standard errors; MLM addresses this by modeling nested data with random effects that capture within- and between-group variability and account for non-independence.
 
 While the idea of intercepts and slopes being outcomes is central to understanding what MLM does, simply treating them as outcomes in a standard single-level regression wouldn't capture the crucial aspects and benefits of running a full multilevel model. Here's why:
 
