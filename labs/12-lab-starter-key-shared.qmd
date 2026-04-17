@@ -29,7 +29,7 @@ Today's dataset examines the effect of time spent on math homework on math achie
 
 Today's dataset is called `NELS88.csv`. Let's read it in and name it `nels`.
 
-```{r read-and-view, message= FALSE, echo=FALSE}
+```{r read-and-view, message= FALSE}
 
 nels <- read_csv("data/NELS88.csv")
 
@@ -41,7 +41,7 @@ nels <- read_csv("data/NELS88.csv")
 -   Use `str()` to look at the structure of the data
 -   Use `head()` to look at the first few rows of the data
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r message= FALSE}
 
 View(nels)
 str(nels)
@@ -63,7 +63,7 @@ As we discussed in lecture on Tuesday, the world we live in is highly interdepen
 
 ## For our analyses, we want Schoolid to be a factor. Let's make that change to the data.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r message= FALSE}
 
 nels <- nels %>% 
   mutate(Schoolid = as.factor(Schoolid))
@@ -82,7 +82,7 @@ Disaggregation: Ignores group-level data (discards between-group variability)
 
 *Disaggregation:* Estimate a disaggregated model predicting math achievement from time spent on math homework each week. Since disaggregation ignores group-level data, we will not use the `schoolid` variable in our regression model.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r message= FALSE}
 
 # students: run the disaggregated model
 
@@ -130,7 +130,7 @@ anova(disag)
 
 *Aggregation:* Estimate an aggregated model predicting mean math achievement from mean hours spent on homework each week. Since aggregation ignores individual-level data, we need to compute the mean math score and the mean time spent on math homework for each of the 10 schools.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r message= FALSE}
 
 #First, get the average math score and time on math for each school
 # students: use `group_by` and `summarise()` to generate a new dataset with these values
@@ -216,7 +216,7 @@ In summary, we can use the ICC to answer the question: How much of the total var
 
 
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r message= FALSE}
 
 # run a one-way ANOVA predicting mathscore from Schoolid
 icc_mod <- lm(mathscore ~ Schoolid, data=nels)
@@ -241,7 +241,7 @@ icc_aov
 
 
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r message= FALSE}
 
 # extract the ss_between and ss_total
 ss_b <- icc_aov[1,2]
@@ -291,7 +291,7 @@ However, the amount of unique data we have falls actually somewhere in the middl
 
 Because we have a high ICC for the group effect, it’s useful to visualize our data to see if they vary in slopes, intercepts, or both. This will help us understand the source of the group effect.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r message= FALSE}
 
 nels %>% 
   ggplot(aes(x = timeonmath, y = mathscore)) +
@@ -325,7 +325,7 @@ If there is real variability due to the grouping effect, we usually want to try 
 
 First, let's run an ANOVA-style regression to see whether `Schoolid` improves our model fit over a model with just `timeonmath`.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r message= FALSE}
 
 # students: run this model (hint: we're just adding ONE additional predictor!)
 
@@ -369,7 +369,7 @@ anova(model1)
 
 
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r message= FALSE}
 
 model2 <- lm(mathscore ~ timeonmath * Schoolid, data = nels)
 summary(model2)
@@ -394,7 +394,7 @@ Now we know that there is significant between-school variance in both the interc
 
 First, we need to find the unique intercept and slope for each of the 10 schools.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r message= FALSE}
 
 # This script tells R to run our regression (model) for each school. It will then save the coefficents (i.e., the slopes and the intercepts) from each regression. The saved intercepts and slopes will be in the object "slopesints".
 
@@ -416,7 +416,7 @@ contrasts(slopesints$schooltype)
 
 Now, let's try to predict the *intercepts* from whether a school is public or private.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r message= FALSE}
 
 # students: run a model predicting the `intercept` from `schooltype`
 
@@ -480,7 +480,7 @@ summary(int)
 
 Now, let's try to predict the *slopes* from whether a school is public or private.
 
-```{r message= FALSE, echo=FALSE, eval=FALSE}
+```{r message= FALSE}
 
 slope <- lm(slope~schooltype,data=slopesints)
 summary(slope)
