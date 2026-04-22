@@ -52,12 +52,9 @@ head(nels)
 
 > Question: What is the fixed effect?
 
-
 > Question: What is the random factor?
 
-
 > Question: What changes might you want to make to the data structure?
-
 
 ## Let's make that change to the data.
 
@@ -101,7 +98,6 @@ max_students <- summary_stats$max_students_in_classroom
 
 > Question: Do we want to group mean center or grand mean center?
 
-
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
 #lots of ways to do this, first get means for each school
@@ -121,35 +117,31 @@ nels <- nels %>%
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
-#students: fill in the code below to create these visualizations
-
-
-ggplot(nels, aes(x = XXX, y = XXX, group = XXX)) +
-  geom_point(aes(color = as.factor(XXX))) +
-  geom_smooth(method = "lm", se = FALSE, aes(group = XXX, color = as.factor(XXX))) +
+ggplot(nels, aes(x = timeonmath, y = mathscore, group = Schoolid)) +
+  geom_point(aes(color = as.factor(Schoolid))) +
+  geom_smooth(method = "lm", se = FALSE, aes(group = Schoolid, color = as.factor(Schoolid))) +
   theme_minimal() +
   theme(legend.position = "none") +
   labs(title = "Effect of Time on Math on Math Score by School", x = "Time on Math", y = "Math Score")
 
-ggplot(nels, aes(x = XXX, y = XXX, fill = XXX)) +
-  geom_rain(rain.side="l") + 
-  labs(x="School Type", y="Math Score", title="Effect of School Type on Math Score") + 
+ggplot(nels, aes(x = schooltype, y = mathscore, fill = schooltype)) +
+  geom_rain(rain.side = "r") + 
+  geom_line(aes(group = studentid), alpha = 0.3, color = "gray") + 
+  labs(x = "School Type", y = "Math Score",
+       title = "Effect of School Type on Math Score") + 
   theme(legend.position = "none") 
 
 ```
 
 > Question: What do these plots suggest?
 
-
 ## First, we may want to know how much of the variance in `mathscore` is explained by `Schoolid`. We did this last week, but let's get the ICC using the null model.
 
 > Question: What goes into the null model?
 
-
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
 #students: fit the null model and calculate the ICC "by hand"
-
 
 #fit the null model
 null <- lmer(XXX, data = nels)
@@ -165,7 +157,6 @@ icc(null)
 
 > Question: How do you interpret the ICC? Should we be concerned about clustering in our data?
 
-
 ## We will now build up from the last model. Fit a model that includes `timeonmath` and `schooltype` (no interaction). Include a random intercept for `Schoolid`.
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
@@ -176,7 +167,6 @@ summary(model_1)
 ```
 
 > Question: How would you interpret the fixed effects in this model? ...the random effects?
-
 
 ## Let's continue building our model. Fit a model that includes an interaction between `timeonmath` and `schooltype`.
 
@@ -191,13 +181,11 @@ summary(model_2)
 
 > Question: What method of maximum likelihood estimation should we use here (FIML or REML)? Why?
 
-
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
 #students: run th likelihood ratio test, use the correct maximum likelihood estimation
 
-
-test_likelihoodratio(XXX)
+lrt1 <- test_likelihoodratio(XXX, XXX, REML=FALSE)
 
 ```
 
@@ -216,13 +204,11 @@ model_performance(model_1)$BIC - model_performance(model_2)$BIC
 
 > Question: What can we say from the AIC/BIC analysis?
 
-
 ## Using the best fitting model from above, fit a model that adds random slopes for `timeonmath_c`
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
 #students: add a random slope for timeonmath_c
-
 
 model_3 <- lmer(mathscore ~ timeonmath_c * schooltype + (XXX), data = nels)
 summary(model_3)
@@ -233,29 +219,25 @@ summary(model_3)
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
-#students: add a random slope for schooltype
-
-model_4 <- lmer(mathscore ~ timeonmath_c * schooltype + (XXX), data = nels)
+model_4 <- lmer(mathscore ~ timeonmath_c * schooltype + (timeonmath_c + schooltype|Schoolid), data = nels)
 summary(model_4)
 
 ```
 
 > Question: What happened when you added the random slope for `schooltype`? Why do you think this happened? What should you do?
 
-
 ## We might want to know whether its useful to include a random slope for `timeonmath_c`. To assess this, let's compare the model with only a random intercept (model_2) to a model with a random intercept and random slope for `timeonmath_c` (model_3).
 
 > Question: What method of maximum likelihood estimation should we use here (FIML or REML)? Why?
 
-
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
-test_likelihoodratio(model_2, model_3)
+lrt2 <- test_likelihoodratio(model_2, model_3, REML=TRUE)
+lrt2
 
 ```
 
 > Question: Which is the best fitting model?
-
 
 ## Using the best model, interpret the fixed and random effects.
 
@@ -263,6 +245,7 @@ test_likelihoodratio(model_2, model_3)
 
 summary(model_3)
 
+# can pull out fixed and random effects with the `model_parameters()` function!
 model_parameters(model_3, effects="fixed")
 model_parameters(model_3, effects="random") #note that the pulls out the SD, not the variance
 
@@ -283,16 +266,14 @@ model_parameters(model_5, effects="random")
 
 ```{r message= FALSE, echo=FALSE, eval=FALSE}
 
-#students: get these values
-
 #pseudo R^2 (conditional = full model, marginal = fixed effects only)
-r2(XXX)
+r2(model_3)
 
 #semi-R^2
-partR2(XXX, data = nels, partvars = c("timeonmath_c"), R2_type = "marginal", nboot = 10, CI = 0.95) 
+partR2(model_3, data = nels, partvars = c("timeonmath_c"), R2_type = "marginal", nboot = 10, CI = 0.95) #VERY small effect!
 
 #cohen's d = effect / sqrt(var(int) + var(slope) + var(resid))
-XXX/ sqrt(XXX+XXX+XXX)
+-15.605 / sqrt(9.683+25.577+25.577)
 
 ```
 
@@ -315,8 +296,30 @@ check_model(model_3)
 
 > Question: How does this look?
 
-
 > Question: Why would we *NOT* want to use these data in a real assessment of the effect of school type on the relation between time spent on math homework and math scores?
 
+## The last step is to write up the results of our model.
 
+The present study examined the effect of school type on the relation between time spent on math homework and math scores, using a nested data structure with two levels: students (Level 1) nested within classrooms (Level 2). The analysis included `r summary_stats$total_students` distributed across `r summary_stats$n_clusters` classrooms. Classrooms varied in size, with an average of approximately `r summary_stats$average_students_per_classroom` students per classroom ($SD$ = `r round(summary_stats$SD_students_per_classroom, 2)`, $range$ = \[`r summary_stats$min_students_in_classroom`, `r summary_stats$max_students_in_classroom`\]).
 
+The effect of school type on the relation between time spent on math homework and math scores was modeled using a multilevel linear model where `mathscore` is the students' score on a mathematics assessment, `schooltype` indicates whether the school was public or private, `timonmath` is the number of hours the student spends on math per week, and (`timeonmath|schoolid`) represents random intercepts and slopes for `timeonmath` across schools. We group mean centered `timeonmath` (around the mean for each school) for our analyses.
+
+A maximal model, including main effects and interactions for school type and time spent on math as well as a random intercept for school and a random slopes for school type and time spent on math failed to converge. Before settling on a final model, we conducted a likelihood ratio test (using the `{easystats}` package, version 0.7.3) to compare three possible models; (1) a model that included only main effects for school type and time spent on math as well as a random intercept for school ($df$ = `r lrt1$df[1]` (2) a model that included main effects and interactions for school type and time spent on math as well as a random intercept for school ($df$ = `r lrt1$df[2]`), and (3) a model that additionally included a random slope for time spent on math ($df$ = `r lrt2$df[2]`). We found that the model that included the interaction term significantly (model 2) improved model fit over a model without the interaction (model 1), $\chi^2$ = `r round(lrt1$Chi2[2], 2)`, $p$ `r papaja::printp(lrt1$p[2], add_equals = TRUE)`. However, the most complex model (model 3) additionally significantly improved model fit over model 2, $\chi^2$ = `r round(lrt2$Chi2[2], 2)`, $p$ `r papaja::printp(lrt2$p[2], add_equals = TRUE)`.
+
+We checked our model assumptions (linearity, normality of residuals, homoscedasticity, collinearity) visually, using diagnostic plots from the performance package (version 0.13.0). Based on this visual assessment, we found that all our model assumptions were satisfied. The Intraclass Correlation Coefficient (ICC) for the outcome variable was calculated as `r round(ICC$ICC_conditional, 2)`, suggesting that `r round(ICC$ICC_conditional, 2)*100`% of the variance in math scores could be attributed to differences between classrooms. The models were estimated using Restricted Maximum Likelihood (REML) to account for the nested data structure. The lme4 package (version 1.1.35) was used for fitting the model.
+
+```{r message= FALSE, echo=FALSE}
+
+#get means
+nels_desc <- nels %>% 
+  group_by(schooltype) %>% 
+  summarise(mean = mean(mathscore, na.rm = TRUE),
+            sd = sd(mathscore, na.rm = TRUE))
+
+```
+
+Our fixed effects analysis revealed a significant intercept, $\beta$ = `r round(summary(model_3)$coefficients["(Intercept)", "Estimate"], 2)`, $SE$ = `r round(summary(model_3)$coefficients["(Intercept)", "Std. Error"], 2)`), $p$ `r papaja::printp(summary(model_3)$coefficients["(Intercept)", "Pr(>|t|)"], add_equals = TRUE)`, indicating a high baseline level of math scores. The main effect of time on math was not significant, $\beta$ = `r round(summary(model_3)$coefficients["timeonmath_c", "Estimate"], 2)`, $SE$ = `r round(summary(model_3)$coefficients["timeonmath_c", "Std. Error"], 2)`), $p$ `r papaja::printp(summary(model_3)$coefficients["timeonmath_c", "Pr(>|t|)"], add_equals = TRUE)` nor was the interaction between time spent on my and school type $\beta$ = `r round(summary(model_3)$coefficients["timeonmath_c:schooltypepublic", "Estimate"], 2)`, $SE$ = `r round(summary(model_3)$coefficients["timeonmath_c:schooltypepublic", "Std. Error"], 2)`), $p$ `r papaja::printp(summary(model_3)$coefficients["timeonmath_c:schooltypepublic", "Pr(>|t|)"], add_equals = TRUE)`. The main effect of school type was significant, $\beta$ = `r round(summary(model_3)$coefficients["timeonmath_c", "Estimate"], 2)`, $SE$ = `r round(summary(model_3)$coefficients["timeonmath_c", "Std. Error"], 2)`), $p$ `r papaja::printp(summary(model_3)$coefficients["timeonmath_c", "Pr(>|t|)"], add_equals = TRUE)` such that private schools ($mean$ = `r round(nels_desc$mean[1], 2)`, $sd$ = `r round(nels_desc$sd[1], 2)`) had higher math scores than public schools ($mean$ = `r round(nels_desc$mean[2], 2)`, $sd$ = `r round(nels_desc$sd[2], 2)`). However, only one of the schools in our sample was private.
+
+Regarding random effects, we observed a variance of `r round(summary(model_3)$varcor$Schoolid[1],2)` ($SD$ = `r round(sqrt(summary(model_3)$varcor$Schoolid[1]),2)`) for the intercepts across different classrooms. This suggests that there is variability in the baseline math scores that can be attributed to differences between classrooms before considering time spent on math or school type. The variance associated with the effect of time spent on math `r round(as.numeric(VarCorr(model_3)$Schoolid["timeonmath_c", "timeonmath_c"]),2)` ($SD$ = `r round(sqrt(as.numeric(VarCorr(model_3)$Schoolid["timeonmath_c", "timeonmath_c"])),2)`). This suggests that there is variability in how the effect of time on math on math scores differs across classrooms. Finally, the variance of residuals was `r round(summary(model_3)$sigma^2, 2)` ($SD$ = `r round(sqrt(summary(model_3)$sigma^2), 2)`), indicating that within-classroom variance in math scores cannot be fully explained by the model's fixed effects or the classroom-level random effects. Together, this suggests that multilevel modeling is, indeed, appropriate and necessary to account for the clustering of student scores within classrooms and the variability in the effect of time spent on math across classrooms.The correlation between the random intercepts and slopes for time spent on math within classrooms was estimated to be $r$ = `r round(attr(VarCorr(model_3)$Schoolid, "correlation")[1, 2], 2)`, suggesting a positive relationship between the classroom baseline scores and the effect of time on math.
+
+Taken together, these results suggest that school type, but not time spent on math homework or the interaction between time on math and school type, is a significant predictor of math scores. These findings highlight the importance of considering school-level effects on student performance.

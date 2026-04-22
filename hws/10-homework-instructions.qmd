@@ -50,6 +50,7 @@ library(effectsize)
 library(broom)
 library(kableExtra)
 library(janitor)
+library(performance)
 
 ```
 
@@ -124,6 +125,7 @@ hist(ex1_df$sleep_hours_new)
 
 reduced_model <- lm(sleep_hours_new ~ stress_level + cups_of_coffee, data = ex1_df)
 anova(reduced_model)
+summary(reduced_model)
                                   
 full_model <- lm(sleep_hours_new ~ stress_level + cups_of_coffee + num_pets_new + commute_mins_new, data = ex1_df)
 anova(full_model)
@@ -142,6 +144,8 @@ ex1_df %>%
   theme(legend.position = "none") #we don't need a legend because the X axis is clearly labeled
 
 emmeans(reduced_model, pairwise ~ cups_of_coffee, adjust = "bonferroni")
+
+check_collinearity(reduced_model)
 
 ```
 
@@ -174,12 +178,19 @@ ex2_df <- ex2_df %>%
 ex2_model <- lm(life_sat ~ age_years * hrs_exercise, data = ex2_df)
 summary(ex2_model)
 
+check_collinearity(ex2_model)
+
 ex2_df <- ex2_df %>% 
   mutate(age_c = age_years - mean(age_years),
          ex_c = hrs_exercise - mean(hrs_exercise))
 
 ex2c_model <- lm(life_sat ~ age_c * ex_c, data = ex2_df)
 summary(ex2c_model)
+
+ex2_df %>% 
+  ggplot(aes(x = ex_c, y = life_sat)) +
+  geom_point() +
+  geom_smooth(method = "lm")
 
 ```
 

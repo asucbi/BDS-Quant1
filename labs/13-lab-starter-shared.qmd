@@ -52,12 +52,9 @@ head(nels)
 
 > Question: What are the fixed effects?
 
-
 > Question: What is the random factor?
 
-
 > Question: What changes might you want to make to the data structure?
-
 
 ## Let's make that change to the data.
 
@@ -112,7 +109,6 @@ max_students <- summary_stats$max_students_in_classroom
 
 > Question: Do we want to group mean center or grand mean center?
 
-
 ```{r message= FALSE}
 
 #lots of ways to do this, first get means for each school
@@ -160,11 +156,9 @@ ggplot(nels, aes(x = schooltype, y = mathscore, fill = schooltype)) +
 
 > Question: What do these plots suggest?
 
-
 ## First, we may want to know how much of the variance in `mathscore` is explained by `Schoolid`. We did this last week, but let's get the ICC using the null model.
 
 > Question: What goes into the null model?
-
 
 ```{r message= FALSE}
 
@@ -195,7 +189,6 @@ icc(null)
 
 > Question: How do you interpret the ICC? Should we be concerned about clustering in our data?
 
-
 ## We will now build up from the last model. Fit a model that includes `timeonmath` and `schooltype` (no interaction). Include a random intercept for `Schoolid`.
 
 ```{r message= FALSE}
@@ -206,7 +199,6 @@ summary(model_1)
 ```
 
 > Question: How would you interpret the fixed effects in this model? ...the random effects?
-
 
 ## Let's continue building our model. Fit a model that includes an interaction between `timeonmath` and `schooltype`.
 
@@ -220,7 +212,6 @@ summary(model_2)
 ## Now, we'll use a likelihood ratio test to compare the model with just main effects and the interaction model.
 
 > Question: What method of maximum likelihood estimation should we use here (FIML or REML)? Why?
-
 
 ```{r message= FALSE}
 
@@ -245,7 +236,6 @@ model_performance(model_1)$BIC - model_performance(model_2)$BIC
 ```
 
 > Question: What can we say from the AIC/BIC analysis?
-
 
 ## Using the best fitting model from above, fit a model that adds random slopes for `timeonmath_c`
 
@@ -293,11 +283,9 @@ summary(model_4)
 
 > Question: What happened when you added the random slope for `schooltype`? Why do you think this happened? What should you do?
 
-
 ## We might want to know whether its useful to include a random slope for `timeonmath_c`. To assess this, let's compare the model with only a random intercept (model_2) to a model with a random intercept and random slope for `timeonmath_c` (model_3).
 
 > Question: What method of maximum likelihood estimation should we use here (FIML or REML)? Why?
-
 
 ```{r message= FALSE}
 
@@ -306,7 +294,6 @@ test_likelihoodratio(model_2, model_3)
 ```
 
 > Question: Which is the best fitting model?
-
 
 ## Using the best model, interpret the fixed and random effects.
 
@@ -376,6 +363,4 @@ check_model(model_3)
 
 > Question: How does this look?
 
-
 > Question: Why would we *NOT* want to use these data in a real assessment of the effect of school type on the relation between time spent on math homework and math scores?
-
