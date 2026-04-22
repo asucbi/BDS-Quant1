@@ -12,14 +12,15 @@ In this week's homework, you will be asked to demonstrate your ability to run an
 
 -   Go to [posit.cloud](posit.cloud) and then **navigate to the course workspace** via the left sidebar.
 
-    -   Look for the course workspace called "Statistical Methods Spring 2025"
+    -   Look for the course workspace called "Spring 2026: Statistical Methods"
 
--   Open the project titled **Module 13: Homework** This module contains the starter files that you will use for the lab and for your homework.
+-   Open the project titled **Module 13** This module contains the starter files that you will use for the lab and for your homework.
 
 ## Starter Files
 
 In the Files pane you should see this R Notebook:
 
+-   mod-13-lab-starter.qmd
 -   mod-13-hw-starter.qmd
 
 Open up `mod-13-hw-starter.qmd`.
@@ -78,6 +79,8 @@ The data has 6 columns:
 -   age_mo: infant age, in months
 -   looking_time: time infants spent looking to the screen on each trial, in seconds
 
+You may also want to run `na.omit()` on the data so that you remove participants with missing data. 
+
 ```{r read-data, echo=FALSE, message=FALSE}
 
 mb_oregon <- read_csv("data/mb_oregon.csv") %>% 
@@ -92,7 +95,7 @@ mb_oregon <- mb_oregon %>%
 
 ## Q1: What are the possible fixed factors for this model? What are the possible random factors?
 
-\[answer Q1 here\]
+answer Q1 here
 
 ## Q2: Generate a summary table that shows the mean, standard deviation, and range (i.e., minimum value and maximum value) of looking times for trials that presented IDS and trials that presented ADS.
 
@@ -104,7 +107,7 @@ mb_oregon %>%
             sd_lt = sd(looking_time, na.rm=TRUE),
             min_lt = min(looking_time, na.rm=TRUE),
             max_lt = max(looking_time, na.rm=TRUE)) %>% 
-  kable() 
+  knitr::kable() 
 
 ```
 
@@ -119,7 +122,7 @@ mb_oregon <- mb_oregon %>%
 
 ## Q4: What is the reason we might want to GRAND-mean center rather than group-mean center the age variable?
 
-\[answer Q4 here\]
+answer Q4 here
 
 ## Q5: Generate a raincloud plot to visualize the relation between trial type (IDS vs. ADS) and looking time.
 
@@ -134,7 +137,7 @@ ggplot(mb_oregon, aes(x = trial_type, y = looking_time, fill = trial_type)) +
 
 ## Q6: What does this plot suggest about the relation between trial type and looking time?
 
-\[answer Q6 here\]
+answer Q6 here
 
 ## Q7: Generate a scatterplot with a linear regression line overlayed to visualize the relation between age and looking time.
 
@@ -148,9 +151,9 @@ ggplot(mb_oregon, aes(x = age_c, y = looking_time)) +
 
 ## Q8: What does this plot suggest about the relation between age and looking time?
 
-\[answer Q8 here\]
+answer Q8 here
 
-## Q9: Generate an ICC to determine how much variance in looking time is explained by trial type.
+## Q9: Generate an ICC to determine how much variance in looking time is explained by trial type. Report the ICC value and explain what it means.
 
 ```{r generate ICC , echo=FALSE, message=FALSE}
 
@@ -161,77 +164,94 @@ ICC <- icc(null_mod)
 
 ## Q10: Does this ICC suggest that we should include subjects as a grouping variable? Why or why not?
 
-\[answer Q10 here\]
+answer Q10 here
 
 ## Q11: Fit a model predicting `looking_time` from `trial_type` and `age_mo_centered` (no interaction). Include a random *intercept* for `subid`.
 
 ```{r model_1 , echo=FALSE, message=FALSE}
 
 model_1 <- lmer(looking_time ~ trial_type + age_c + (1|subid), data = mb_oregon)
+summary(model_1)
 
 ```
 
-## Q12: Interpret the model parameters for the fixed effects. How much variance is attributable to the random intercept for subjects? How much variance is left over?
+## Q12: Interpret the model parameters for the fixed effects. 
 
-\[answer Q12 here\]
+answer Q12 here
 
-## Q13: Now, let's test the influence of adding a random slope for trial type. Fit a model predicting `looking_time` from `trial_type` and `age_mo_centered` (no interaction). This time, include a random *intercept* for `subid` and a random *slope* for `trial_type`.
+## Q13: Interpret the random effects. How much variance is attributable to the random intercept for subjects? How much variance is left over?
+
+answer Q13 here
+
+## Q14: Now, let's test the influence of adding a random slope for trial type. Fit a model predicting `looking_time` from `trial_type` and `age_mo_centered` (no interaction). This time, include a random *intercept* for `subid` and a random *slope* for `trial_type`.
 
 ```{r model_2 , echo=FALSE, message=FALSE}
 
 model_2 <- lmer(looking_time ~ trial_type + age_c + (trial_type|subid), data = mb_oregon)
+summary(model_2)
 
 ```
 
-## Q14: Interpret the model parameters for the fixed effects. How much variance is attributable to the random intercept for subjects? ...the random slope for trial type? How much variance is left over?
+## Q15: Interpret the model parameters for the fixed effects. 
 
-\[answer Q14 here\]
+answer Q15 here
 
-## Q15: Can we include a random slope for age? Why or why not?
+## Q16: Interpret the random effects. How much variance is attributable to the random intercept for subjects? ...the random slope for subjects? How much variance is left over?
 
-\[answer Q15 here\]
+answer Q16 here
 
-## Q16: Let's determine whether the random intercept and slope model fits the data better than the model with just a random intercept. To do this, use the `test_likelihoodratio()` function from the `{performance}` package.
+## Q17: Can we include a random slope for age? Why or why not?
+
+answer Q17 here
+
+## Q18: Let's determine whether the random intercept and slope model fits the data better than the model with just a random intercept. To do this, use the `test_likelihoodratio()` function from the `{performance}` package.
 
 ```{r likelihood ratio 1 , echo=FALSE, message=FALSE}
 
-lrt_1 <- test_likelihoodratio(model_1, model_2)
+lrt_1 <- test_likelihoodratio(model_1, model_2, REML = TRUE)
+lrt_1
 
 ```
 
-## Q17: Does the model that includes a random slope for `trial_type` improve model fit over the model with just a random intercept for `subid`? Why or why not?
+## Q19: Does the model that includes a random slope for `trial_type` improve model fit over the model with just a random intercept for `subid`? How do you know?
 
-\[answer Q17 here\]
+answer Q19 here
 
-## Q18: Now, let's determine whether adding an interaction between `trial_type` and `age_mo_centered` improves model fit. Add the interaction term to the better fitting model (based on your likelihood ratio test above).
+## Q20: Now, let's determine whether adding an interaction between `trial_type` and `age_mo_centered` improves model fit. Add the interaction term to the better fitting model (based on your likelihood ratio test above).
 
 ```{r model_3 , echo=FALSE, message=FALSE}
 
 model_3 <- lmer(looking_time ~ trial_type * age_c + (1|subid), data = mb_oregon)
+summary(model_3)
 
 ```
 
-## Q19: Interpret the model parameters for the fixed effects. How much variance is attributable to the random intercept for subjects? How much variance is left over?
+## Q21: Interpret the model parameters for the fixed effects. 
 
-\[answer Q19 here\]
+answer Q21 here
 
-## Q20: Let's determine whether the model with the interaction term fits the data better than the model with just main effects. To do this, use the `test_likelihoodratio()` function from the `{performance}` package.
+## Q22: Interpret the random effects. How much variance is attributable to the random intercept for subjects? How much variance is left over?
+
+answer Q22 here
+
+## Q23: Let's determine whether the model with the interaction term fits the data better than the model with just main effects. To do this, use the `test_likelihoodratio()` function from the `{performance}` package.
 
 ```{r likelihood ratio 2 , echo=FALSE, message=FALSE}
 
-lrt_2 <- test_likelihoodratio(model_1, model_3)
+lrt_2 <- test_likelihoodratio(model_1, model_3, REML = FALSE)
+lrt_2
 
 ```
 
-## Q21: What is the best fitting model?
+## Q24: What is the best fitting model?
 
-\[answer Q21 here\]
+answer Q24 here
 
-## Q22: What are the fixed effects in your final model?
+## Q25: What are the fixed effects in your final model?
 
-\[answer Q22 here\]
+answer Q25 here
 
-## Q23: Generate effect sizes for the overall best fitting model and all of the fixed effects in your best fitting model (hint: you will use the `r2` and `partR2` functions as well as calculating a Cohen's d "by hand").
+## Q26: Generate effect sizes for the overall best fitting model and all of the fixed effects in your best fitting model (hint: you will use the `r2` and `partR2` functions as well as calculating a Cohen's d "by hand").
 
 ```{r effect sizes , echo=FALSE, message=FALSE, eval=FALSE}
 
@@ -246,7 +266,7 @@ partR2(model_1, data = mb_oregon, partvars = c("age_c"), R2_type = "marginal", n
 
 ```
 
-## Q24: Use the `check_model()` function from the `{performance}` package to check the assumptions of the best fitting model. How do these model assumptions look?
+## Q27: Use the `check_model()` function from the `{performance}` package to check the assumptions of the best fitting model. How do these model assumptions look?
 
 ```{r model assumptions , echo=FALSE, message=FALSE, eval=FALSE}
 
@@ -254,9 +274,9 @@ check_model(model_1)
 
 ```
 
-## Q25: Generate an APA Summary for the best fitting model. Make sure to include *all* necessary information (see Module 13 lecture slides and example shared on Canvas).
+## Q28: Generate an APA Summary for the best fitting model. Make sure to include *all* necessary information (see Module 13 lecture slides and example shared on Canvas).
 
-\[answer Q25 here\]
+answer Q28 here
 
 ------------------------------------------------------------------------
 
